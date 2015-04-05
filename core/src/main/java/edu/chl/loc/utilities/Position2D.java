@@ -1,4 +1,4 @@
-package utilities;
+package edu.chl.loc.utilities;
 
 /**
  * Created by Maxim on 15-04-03.

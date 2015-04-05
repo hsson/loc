@@ -1,6 +1,6 @@
-package characters;
+package edu.chl.loc.characters;
 
-import utilities.Position2D;
+import edu.chl.loc.utilities.Position2D;
 
 /**
  * Created by Maxim on 15-04-03.
@@ -39,5 +39,4 @@ public enum Direction {
         Used to display change(delta) in a direction.
      */
     public abstract Position2D getDelta();
-
 }
