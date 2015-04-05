@@ -1,5 +1,6 @@
 package edu.chl.loc.map;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,50 +9,12 @@ import java.util.Map;
  * A general representation of maps.
  *
  * @author Alexander Håkansson
- * @version 1.0.0
+ * @version 1.1.0
  * @since 2015-04-05
  */
 public abstract class AbstractMap {
 
-    private final int sizeX;
-    private final int sizeY;
-
-    private final int nbrOfLayers;
-
-    private Map<Integer, List<ITile>> mapTiles = new HashMap<Integer, List<ITile>>();
-
-    public AbstractMap(final int sizeX, final int sizeY, final int nbrOfLayers) {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
-        this.nbrOfLayers = nbrOfLayers;
-    }
-
-    /**
-     * Returns the size of the map in the x-axis.
-     *
-     * @return Map size in x-axis
-     */
-    public final int getSizeX() {
-        return this.sizeX;
-    }
-
-    /**
-     * Returns the size of the map in the y-axis.
-     *
-     * @return Map size in y-axis
-     */
-    public final int getSizeY() {
-        return this.sizeY;
-    }
-
-    /**
-     * Returns the total amount of layers on the map.
-     *
-     * @return Total amount of layers
-     */
-    public final int getNbrOfLayers() {
-        return this.nbrOfLayers;
-    }
+    private final Map<String, List<ITile>> mapTiles = new HashMap<String, List<ITile>>();
 
     /**
      * Checks if the tile on the specified layer and coordinates is collidable
@@ -63,7 +26,7 @@ public abstract class AbstractMap {
      * @throws java.lang.IllegalArgumentException If the specified tile and layer doesn't exist
      * @return Returns true if the specified tile is collidable, false otherwise
      */
-    public boolean isCollidable(int layer, int x, int y) {
+    public boolean isCollidable(String layer, int x, int y) {
         if (!mapTiles.containsKey(layer)) {
             throw new IllegalArgumentException("The layer specified does not exist");
         }
@@ -87,9 +50,9 @@ public abstract class AbstractMap {
      * @throws java.lang.IllegalArgumentException If the specified tile and layer doesn't exist
      * @return Returns the specified tile
      */
-    public ITile getTile(int layer, int x, int y) {
+    public ITile getTile(String layer, int x, int y) {
         if (!mapTiles.containsKey(layer)) {
-            throw new IllegalArgumentException("The layer specified does not exist");
+            throw new IllegalArgumentException("The layer \"" + layer + "\" does not exist");
         }
 
         for (ITile tile : mapTiles.get(layer)) {
@@ -99,5 +62,57 @@ public abstract class AbstractMap {
         }
 
         throw new IllegalArgumentException("The tile specified at x=" + x +" and y=" + y + ", does not exist");
+    }
+
+    /**
+     * Add a tile to the map on the specified layer
+     *
+     * @param layer The layer on which to place the tile
+     * @param tile The tile to add to the map
+     */
+    public void addTile(String layer, ITile tile) {
+        if (!mapTiles.containsKey(layer)) {
+            mapTiles.put(layer, new ArrayList<ITile>());
+            mapTiles.get(layer).add(tile);
+        } else {
+            mapTiles.get(layer).add(tile);
+        }
+    }
+
+    /**
+     * Get all the tiles on a specified layer
+     *
+     * @param layer The layer to get the tiles from
+     * @return A list of all tiles on the specified layer
+     */
+    public List<ITile> getTilesFromLayer(String layer) {
+        if (!mapTiles.containsKey(layer)) {
+            throw new IllegalArgumentException("The specified layer does not exist");
+        }
+
+        return mapTiles.get(layer);
+    }
+
+    /**
+     * Checks if the specified layer exists in the map.
+     *
+     * @param layer The layer to check
+     * @return Returns true if the layer exists, false otherwise
+     */
+    public boolean layerExists(String layer) {
+        return mapTiles.containsKey(layer);
+    }
+
+    /**
+     * The number of layers in the map
+     *
+     * @return Number of layers in the map
+     */
+    public int getNumberOfLayers() {
+            return mapTiles.keySet().size();
+    }
+
+    public String toString() {
+        return "A map with " + mapTiles.keySet().size() + " layers.";
     }
 }
