@@ -6,7 +6,7 @@ import edu.chl.loc.utilities.Position2D;
  * General representation of player-objects
  *
  * Created by Maxim on 15-04-05.
- * Version 1.0.0
+ * Version 1.1.0
  * @author Maxim
  */
 
@@ -17,7 +17,8 @@ public abstract class AbstractCharacter {
 
     */
     public void move(Direction direction){
-        Position2D tempPos = getPosition().add(direction.getDelta());
+        setDirection(direction);
+        Position2D tempPos = getPosition().add(getDirection().getDelta());
         setPosition(tempPos);
 
     }
