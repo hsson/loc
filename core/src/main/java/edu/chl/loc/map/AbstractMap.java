@@ -1,15 +1,12 @@
 package edu.chl.loc.map;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A general representation of maps.
  *
  * @author Alexander Håkansson
- * @version 1.1.0
+ * @version 1.2.0
  * @since 2015-04-05
  */
 public abstract class AbstractMap {
@@ -101,6 +98,15 @@ public abstract class AbstractMap {
      */
     public boolean layerExists(String layer) {
         return mapTiles.containsKey(layer);
+    }
+
+    /**
+     * Get a set of all the layers on the map.
+     *
+     * @return A set with all layers on the map
+     */
+    public Set<String> getLayers() {
+        return mapTiles.keySet();
     }
 
     /**
