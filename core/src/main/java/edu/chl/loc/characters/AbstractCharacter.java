@@ -71,5 +71,19 @@ public abstract class AbstractCharacter {
      */
     public abstract Direction getDirection();
 
+    /*
+      @returns X coordinate of character's current position
+    */
+    public double getX(){
+        return getPosition().getX();
+    }
+
+    /*
+        @returns Y coordinate of character's current position
+     */
+    public double getY(){
+        return getPosition().getY();
+    }
+
 
 }
