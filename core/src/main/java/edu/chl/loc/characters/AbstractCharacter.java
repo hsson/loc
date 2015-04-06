@@ -13,53 +13,53 @@ import edu.chl.loc.utilities.Position2D;
 public abstract class AbstractCharacter {
 
     /*
-        Move player 1 step in a given direction
+        Move character 1 step in a given direction
 
     */
     public void move(Direction direction){
-        Position2D tempPos = getPlayerPosition().add(direction.getDelta());
-        setPlayerPosition(tempPos);
+        Position2D tempPos = getCharacterPosition().add(direction.getDelta());
+        setCharacterPosition(tempPos);
 
     }
 
     /*
-        Move player 1 step in the position he is currently facing
+        Move character 1 step in the position he is currently facing
     */
     public void move(){
         Direction tempDir = getDirection();
-        Position2D tempPos = getPlayerPosition().add(tempDir.getDelta());
-        setPlayerPosition(tempPos);
+        Position2D tempPos = getCharacterPosition().add(tempDir.getDelta());
+        setCharacterPosition(tempPos);
 
     }
 
     /*
-        Move player in a given change(delta) in X and Y-coordinates
+        Move character in a given change(delta) in X and Y-coordinates
      */
     public void move(double deltaX, double deltaY){
-        Position2D tempPos = getPlayerPosition().add(deltaX, deltaY);
-        setPlayerPosition(tempPos);
+        Position2D tempPos = getCharacterPosition().add(deltaX, deltaY);
+        setCharacterPosition(tempPos);
     }
 
 
 
     /*
-        Get player's current position
+        Get character's current position
         @return current position in Position2D
     */
-    public abstract Position2D getPlayerPosition();
+    public abstract Position2D getCharacterPosition();
 
 
     /*
-        Set a new position to the player / updating player's position
+        Set a new position to the player / updating character's position
     */
-    public abstract void setPlayerPosition(Position2D position);
+    public abstract void setCharacterPosition(Position2D position);
 
 
 	/*
-		Set a new position in form of x- and y-coordinates to the player
+		Set a new position in form of x- and y-coordinates to the character
 		More natural to use setPlayerPosition(Position2D pos)
 	*/
-    public abstract void setPlayerPosition(double x, double y);
+    public abstract void setCharacterPosition(double x, double y);
 
     /*
         Set the current direction to a given one
