@@ -10,7 +10,7 @@ import edu.chl.loc.utilities.Position2D;
  * @author Maxim
  */
 
-public abstract class AbstractPlayer {
+public abstract class AbstractCharacter {
 
     /*
         Move player 1 step in a given direction
