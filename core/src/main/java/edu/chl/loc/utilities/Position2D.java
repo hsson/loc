@@ -17,6 +17,10 @@ public class Position2D {
         this.yCoord = yCoord;
     }
 
+    public Position2D(){
+        this.xCoord = 0;
+        this.yCoord = 0;
+    }
 
     public double getX(){
         return xCoord;
