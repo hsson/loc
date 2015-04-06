@@ -17,8 +17,8 @@ public abstract class AbstractCharacter {
 
     */
     public void move(Direction direction){
-        Position2D tempPos = getCharacterPosition().add(direction.getDelta());
-        setCharacterPosition(tempPos);
+        Position2D tempPos = getPosition().add(direction.getDelta());
+        setPosition(tempPos);
 
     }
 
@@ -27,8 +27,8 @@ public abstract class AbstractCharacter {
     */
     public void move(){
         Direction tempDir = getDirection();
-        Position2D tempPos = getCharacterPosition().add(tempDir.getDelta());
-        setCharacterPosition(tempPos);
+        Position2D tempPos = getPosition().add(tempDir.getDelta());
+        setPosition(tempPos);
 
     }
 
@@ -36,8 +36,8 @@ public abstract class AbstractCharacter {
         Move character in a given change(delta) in X and Y-coordinates
      */
     public void move(double deltaX, double deltaY){
-        Position2D tempPos = getCharacterPosition().add(deltaX, deltaY);
-        setCharacterPosition(tempPos);
+        Position2D tempPos = getPosition().add(deltaX, deltaY);
+        setPosition(tempPos);
     }
 
 
@@ -46,20 +46,20 @@ public abstract class AbstractCharacter {
         Get character's current position
         @return current position in Position2D
     */
-    public abstract Position2D getCharacterPosition();
+    public abstract Position2D getPosition();
 
 
     /*
         Set a new position to the player / updating character's position
     */
-    public abstract void setCharacterPosition(Position2D position);
+    public abstract void setPosition(Position2D position);
 
 
 	/*
 		Set a new position in form of x- and y-coordinates to the character
 		More natural to use setPlayerPosition(Position2D pos)
 	*/
-    public abstract void setCharacterPosition(double x, double y);
+    public abstract void setPosition(double x, double y);
 
     /*
         Set the current direction to a given one
