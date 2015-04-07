@@ -12,8 +12,6 @@ import edu.chl.loc.utilities.Position2D;
 
  */
 public class Player extends AbstractCharacter {
-    private Position2D currentPosition;
-    private Direction currentDirection;
     /*
         Make sure to add an instance of Inventory when the Inventory class is finished
      */
