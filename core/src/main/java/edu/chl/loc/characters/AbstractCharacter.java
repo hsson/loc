@@ -6,16 +6,28 @@ import edu.chl.loc.utilities.Position2D;
  * General representation of player-objects
  *
  * Created by Maxim on 15-04-05.
- * Version 1.1.0
+ * Version 2.0.0
  * @author Maxim
  */
 
 public abstract class AbstractCharacter {
+    private Direction currentDirection;
+    private Position2D currentPosition;
 
-    /*
-        Move character 1 step in a given direction
 
-    */
+    public AbstractCharacter(Position2D pos) {
+        currentPosition = pos;
+        currentDirection = Direction.NORTH; //default direction is North.
+    }
+
+    public AbstractCharacter(Position2D pos, Direction direction) {
+        currentDirection = direction;
+        currentPosition = pos;
+    }
+    /**
+     Move character 1 step in a given direction
+
+     */
     public void move(Direction direction){
         setDirection(direction);
         Position2D tempPos = getPosition().add(getDirection().getDelta());
@@ -23,9 +35,9 @@ public abstract class AbstractCharacter {
 
     }
 
-    /*
-        Move character 1 step in the position he is currently facing
-    */
+    /**
+     Move character 1 step in the position he is currently facing
+     */
     public void move(){
         Direction tempDir = getDirection();
         Position2D tempPos = getPosition().add(tempDir.getDelta());
@@ -33,8 +45,8 @@ public abstract class AbstractCharacter {
 
     }
 
-    /*
-        Move character in a given change(delta) in X and Y-coordinates
+    /**
+     Move character in a given change(delta) in X and Y-coordinates
      */
     public void move(double deltaX, double deltaY){
         Position2D tempPos = getPosition().add(deltaX, deltaY);
@@ -43,44 +55,56 @@ public abstract class AbstractCharacter {
 
 
 
-    /*
-        Get character's current position
-        @return current position in Position2D
-    */
-    public abstract Position2D getPosition();
-
-
-    /*
-        Set a new position to the player / updating character's position
-    */
-    public abstract void setPosition(Position2D position);
-
-
-	/*
-		Set a new position in form of x- and y-coordinates to the character
-		More natural to use setPlayerPosition(Position2D pos)
-	*/
-    public abstract void setPosition(double x, double y);
-
-    /*
-        Set the current direction to a given one
+    /**
+     @return current position in Position2D
      */
-    public abstract void setDirection(Direction direction);
+    public  Position2D getPosition(){
+        return currentPosition;
+    }
 
-    /*
-        @return current direction
+
+    /**
+     * @param position the new position you want to set for the character
+     * Updates current position
      */
-    public abstract Direction getDirection();
+    public void setPosition(Position2D position){
+        currentPosition = position;
+    }
 
-    /*
-      @returns X coordinate of character's current position
-    */
+
+    /**
+     * @param x X-coordinate you want to set in the new position
+     * @param y Y-coordinate you want to set in the new position
+    More natural to use setPlayerPosition(Position2D pos)
+     */
+    public void setPosition(double x, double y){
+        currentPosition = new Position2D(x,y);
+    }
+
+    /**
+     @param direction direction you want to set
+     Set the current direction to a given one
+     */
+    public void setDirection(Direction direction){
+        currentDirection = direction;
+    }
+
+    /**
+     @return current direction
+     */
+    public Direction getDirection(){
+        return currentDirection;
+    }
+
+    /**
+     @return X coordinate of character's current position
+     */
     public double getX(){
         return getPosition().getX();
     }
 
-    /*
-        @returns Y coordinate of character's current position
+    /**
+     @return Y coordinate of character's current position
      */
     public double getY(){
         return getPosition().getY();
