@@ -7,7 +7,7 @@ import edu.chl.loc.utilities.Position2D;
  *
  * Created by Maxim on 15-04-05.
  * @author Maxim
- * Version 1.0.0
+ * Version 2.0.0
  *
 
  */
@@ -18,39 +18,14 @@ public class Player extends AbstractCharacter {
         Make sure to add an instance of Inventory when the Inventory class is finished
      */
 
-    public Player(Position2D pos){
-        currentPosition = pos;
-        currentDirection = Direction.NORTH; //default direction is North.
+    public Player(Position2D pos) {
+        super(pos);
     }
 
-    public Player(Position2D pos, Direction direction){
-        currentDirection = direction;
-        currentPosition = pos;
+    public Player(Position2D pos, Direction direction) {
+        super(pos, direction);
     }
 
-
-    @Override
-    public Position2D getPosition() {
-        return currentPosition;
-    }
-
-    @Override
-    public void setPosition(Position2D position) {
-        currentPosition = position;
-    }
-
-    @Override
-    public void setPosition(double x, double y) {
-        currentPosition = new Position2D(x,y);
-    }
-    @Override
-    public void setDirection(Direction direction){
-        currentDirection = direction;
-
-    }
-    @Override
-    public Direction getDirection(){
-        return currentDirection;
-    }
 }
+
 
