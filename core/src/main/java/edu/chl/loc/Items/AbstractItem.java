@@ -1,6 +1,4 @@
-package edu.chl.loc.Items;
-
-import edu.chl.loc.core.LocMain;
+package edu.chl.loc.items;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package edu.chl.loc.Items;
+package edu.chl.loc.items;
 
 import java.util.HashMap;
 import java.util.List;

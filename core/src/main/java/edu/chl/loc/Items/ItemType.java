@@ -1,4 +1,4 @@
-package edu.chl.loc.Items;
+package edu.chl.loc.items;
 
 /**
  * @author Criticalstone

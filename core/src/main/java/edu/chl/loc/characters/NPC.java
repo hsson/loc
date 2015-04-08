@@ -1,6 +1,6 @@
 package edu.chl.loc.characters;
 
-import edu.chl.loc.Items.Inventory;
+import edu.chl.loc.items.Inventory;
 import edu.chl.loc.utilities.Position2D;
 
 /**
