@@ -9,7 +9,7 @@ import java.util.Map;
  * @author Alexander Karlsson
  * @version 1.0
  */
-public class Inventory {
+public class Inventory implements Cloneable{
     private Map<AbstractItem, Integer> inventory;
 
     /**
@@ -134,5 +134,12 @@ public class Inventory {
     @Override
     public int hashCode(){
         return inventory.hashCode();
+    }
+
+    //TO-DO correct implementation of clone method
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        super.clone();
+        return null;
     }
 }
