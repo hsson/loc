@@ -44,7 +44,7 @@ public abstract class AbstractCharacter {
      * @param name  The name you want AbstractCharacter to have
      * @param inventory The inventory you want AbstractCharacter to have
      */
-    public AbstractCharacter(Position2D pos, String name, Inventory inventory) {
+    public AbstractCharacter(Position2D pos, String name, Inventory inventory) throws CloneNotSupportedException {
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
         this.characterName = name;
@@ -57,7 +57,7 @@ public abstract class AbstractCharacter {
      * @param pos   The position you want AbstractCharacter to have
      * @param name  The name you want AbstractCharacter to have
      */
-    public AbstractCharacter(Position2D pos, String name) {
+    public AbstractCharacter(Position2D pos, String name) throws CloneNotSupportedException {
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
         this.characterName = name;
@@ -157,7 +157,7 @@ public abstract class AbstractCharacter {
         return characterName;
     }
 
-    public void setInventory(Inventory inventory){
+    public void setInventory(Inventory inventory) throws CloneNotSupportedException {
         this.inventory = (Inventory) inventory.clone();
     }
     /*
