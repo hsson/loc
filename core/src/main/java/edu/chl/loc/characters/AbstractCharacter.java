@@ -48,7 +48,7 @@ public abstract class AbstractCharacter {
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
         this.characterName = name;
-        this.inventory = inventory.clone();
+        this.inventory = (Inventory)inventory.clone();
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class AbstractCharacter {
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
         this.characterName = name;
-        this.inventory = inventory.clone();
+        this.inventory = (Inventory)inventory.clone();
     }
     /**
      Move character 1 step in a given direction
@@ -158,7 +158,7 @@ public abstract class AbstractCharacter {
     }
 
     public void setInventory(Inventory inventory){
-        this.inventory = inventory.clone();
+        this.inventory = (Inventory) inventory.clone();
     }
     /*
         public Inventory getInventory(){
