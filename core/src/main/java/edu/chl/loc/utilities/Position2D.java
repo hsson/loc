@@ -4,6 +4,8 @@ package edu.chl.loc.utilities;
  * Created by Maxim on 15-04-03.
  * @author Maxim
  *
+ * Revised by Alexander Håkansson
+ *
  * Class representing the position on a 2D-plane.
  */
 
@@ -31,9 +33,10 @@ public class Position2D {
         return yCoord;
     }
 
-    /*adds given x- and y-coordinates to this Position2D.
-     * returns a new Position2D with the sum of x and y coordinates.
+    /**
+     * Adds given x- and y-coordinates to this Position2D.
      *
+     * returns a new Position2D with the sum of x and y coordinates.
      */
     public Position2D add(double x, double y){
         double tempX = this.getX() + x;
@@ -41,7 +44,8 @@ public class Position2D {
         return new Position2D(tempX, tempY);
     }
 
-    /*adds given the Position2D to this Position2D.
+    /**
+     * Adds given the Position2D to this Position2D.
      *
      * throws IllegalArgumentException if given Position2D == null
      * returns a new Position2D with the sum of x and y coordinates.
@@ -53,6 +57,30 @@ public class Position2D {
         double tempX = this.xCoord + position.getX();
         double tempY = this.yCoord + position.getY();
         return new Position2D(tempX, tempY);
+    }
+
+    /**
+     * Check if the specified object is equal to this Position2D. The
+     * equality if determined by the x and y coordinates of the Position2D.
+     *
+     * @param o The object to compare
+     * @return True if the two position share the same x and y coordinates
+     */
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null) {
+            return false;
+        }
+
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Position2D other = (Position2D) o;
+        return this.xCoord == other.xCoord && this.yCoord == other.yCoord;
     }
 
     public String toString(){
