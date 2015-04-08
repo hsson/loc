@@ -13,16 +13,54 @@ import edu.chl.loc.utilities.Position2D;
 public abstract class AbstractCharacter {
     private Direction currentDirection;
     private Position2D currentPosition;
+    private Inventory inventory;
+    private String characterName;
 
-
+    /**
+     * Creates an abstractCharacter on a given position, with North as default direction, and with an empty inventory
+     * @param pos The position you want AbstractCharacter to have
+     */
     public AbstractCharacter(Position2D pos) {
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
+        inventory = new Inventory();
     }
 
+    /**
+     * Creates an abstractCharacter on a given position, with a given direction and with an empty inventory
+     * @param pos The position you want AbstractCharacter to have
+     * @param direction The direction you want AbstractCharacter to have
+     */
     public AbstractCharacter(Position2D pos, Direction direction) {
         currentDirection = direction;
         currentPosition = pos;
+        inventory = new Inventory();
+    }
+
+    /**
+     * Creates an abstractCharacter on a given position, with North as default direction and with a given inventory
+     * @param pos   The position you want AbstractCharacter to have
+     * @param name  The name you want AbstractCharacter to have
+     * @param inventory The inventory you want AbstractCharacter to have
+     */
+    public AbstractCharacter(Position2D pos, String name, Inventory inventory) {
+        currentPosition = pos;
+        currentDirection = Direction.NORTH; //default direction is North.
+        this.characterName = name;
+        this.inventory = inventory.clone();
+    }
+
+    /**
+     *  /**
+     * Creates an abstractCharacter on a given position and a given name, with North as default direction, and with an empty inventory
+     * @param pos   The position you want AbstractCharacter to have
+     * @param name  The name you want AbstractCharacter to have
+     */
+    public AbstractCharacter(Position2D pos, String name) {
+        currentPosition = pos;
+        currentDirection = Direction.NORTH; //default direction is North.
+        this.characterName = name;
+        this.inventory = inventory.clone();
     }
     /**
      Move character 1 step in a given direction
@@ -110,5 +148,20 @@ public abstract class AbstractCharacter {
         return getPosition().getY();
     }
 
+    public void setName(String name){
+        this.characterName = name;
+    }
 
+    public String getName(){
+        return characterName;
+    }
+
+    public void setInventory(Inventory inventory){
+        this.inventory = inventory.clone();
+    }
+    /*
+        public Inventory getInventory(){
+            return inventory.clone();
+        }
+    */
 }
