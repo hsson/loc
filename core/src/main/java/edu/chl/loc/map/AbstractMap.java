@@ -6,7 +6,7 @@ import java.util.*;
  * A general representation of maps.
  *
  * @author Alexander Håkansson
- * @version 2.0.0
+ * @version 2.1.0
  * @since 2015-04-05
  */
 public abstract class AbstractMap {
@@ -88,6 +88,17 @@ public abstract class AbstractMap {
         }
 
         return mapTiles.get(layer);
+    }
+
+    /**
+     * Adds a new layer with no tiles to the map.
+     *
+     * @param layer The layer to add to the map
+     */
+    public void addLayer(ILayer layer) {
+        if (!mapTiles.containsKey(layer)) {
+            mapTiles.put(layer, new ArrayList<ITile>());
+        }
     }
 
     /**
