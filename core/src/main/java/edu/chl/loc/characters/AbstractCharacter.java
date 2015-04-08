@@ -165,4 +165,20 @@ public abstract class AbstractCharacter {
             return inventory.clone();
         }
     */
+
+    /**
+     *
+     * @param o the object you want to compare with
+     * @return true if characters have same position, false otherwise
+     */
+    public boolean equals(Object o){
+        if(this==o){
+            return true;
+        }else if(o==null || (!this.getClass().equals(o.getClass()))){
+            return false;
+        }else{
+            AbstractCharacter other = (AbstractCharacter)o;
+            return this.getPosition().equals(other.getPosition());
+        }
+    }
 }
