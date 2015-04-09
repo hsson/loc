@@ -44,11 +44,11 @@ public abstract class AbstractCharacter {
      * @param name  The name you want AbstractCharacter to have
      * @param inventory The inventory you want AbstractCharacter to have
      */
-    public AbstractCharacter(Position2D pos, String name, Inventory inventory) throws CloneNotSupportedException {
+    public AbstractCharacter(Position2D pos, String name, Inventory inventory){
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
         this.characterName = name;
-        this.inventory = (Inventory)inventory.clone();
+        this.inventory = inventory.copy();
     }
 
     /**
@@ -57,11 +57,11 @@ public abstract class AbstractCharacter {
      * @param pos   The position you want AbstractCharacter to have
      * @param name  The name you want AbstractCharacter to have
      */
-    public AbstractCharacter(Position2D pos, String name) throws CloneNotSupportedException {
+    public AbstractCharacter(Position2D pos, String name){
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
         this.characterName = name;
-        this.inventory = (Inventory)inventory.clone();
+        this.inventory = inventory.copy();
     }
     /**
      Move character 1 step in a given direction
@@ -157,12 +157,16 @@ public abstract class AbstractCharacter {
         return characterName;
     }
 
-    public void setInventory(Inventory inventory) throws CloneNotSupportedException {
-        this.inventory = (Inventory) inventory.clone();
+    /**
+     * Sets an inventory to this character
+     * @param inventory Inventory you want to set for the character
+     */
+    public void setInventory(Inventory inventory){
+        this.inventory = inventory.copy();
     }
     /*
         public Inventory getInventory(){
-            return inventory.clone();
+            return this.inventory;
         }
     */
 
