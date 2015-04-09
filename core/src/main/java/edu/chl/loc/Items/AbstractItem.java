@@ -11,22 +11,26 @@ import java.util.List;
  */
 public abstract class AbstractItem {
 
-    private List<ItemType> types;
+    private ItemType type;
 
-    /**
-     * @return All the types that has been set to the item
-     */
-    public List<ItemType> getTypes(){
-        return types;
+    public AbstractItem(ItemType type){
+        this.type = type;
     }
 
     /**
-     * Adds a type to the item
+     * @return The type that has been set to the item
+     */
+    public ItemType getType(){
+        return type;
+    }
+
+    /**
+     * sets the type to the item
      *
      * @param type the type that should be added
      */
-    public void addType(ItemType type){
-        types.add(type);
+    public void setType(ItemType type){
+        this.type = type;
     }
 
     /**
@@ -34,9 +38,6 @@ public abstract class AbstractItem {
      *
      * @param type the type that should be added
      */
-    public void removeType(ItemType type){
-        types.remove(type);
-    }
 
     public abstract int getItemID();
 
