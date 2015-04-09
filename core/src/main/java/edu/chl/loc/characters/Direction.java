@@ -15,11 +15,19 @@ public enum Direction {
         public Position2D getDelta(){
             return new Position2D(0.0,1.0);
         }
+        @Override
+    public Direction getOpposite(){
+            return SOUTH;
+        }
     },
     EAST{
         @Override
         public Position2D getDelta(){
             return new Position2D(1.0,0.0);
+        }
+        @Override
+        public Direction getOpposite(){
+            return WEST;
         }
     },
     SOUTH{
@@ -27,11 +35,19 @@ public enum Direction {
         public Position2D getDelta(){
             return new Position2D(0.0,-1.0);
         }
+        @Override
+        public Direction getOpposite(){
+            return NORTH;
+        }
     },
     WEST{
         @Override
         public Position2D getDelta(){
             return new Position2D(-1.0,0.0);
+        }
+        @Override
+        public Direction getOpposite(){
+            return EAST;
         }
     };
     /*
@@ -39,4 +55,5 @@ public enum Direction {
         Used to display change(delta) in a direction.
      */
     public abstract Position2D getDelta();
+    public abstract Direction getOpposite();
 }
