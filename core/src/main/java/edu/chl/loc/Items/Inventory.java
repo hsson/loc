@@ -3,11 +3,13 @@ package edu.chl.loc.items;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Class for handling an inventory of items
  * @author Alexander Karlsson
  * @version 1.0
+ * revised by Maxim Goretskyy
  */
 public class Inventory implements Cloneable{
     private Map<AbstractItem, Integer> inventory;
@@ -35,10 +37,30 @@ public class Inventory implements Cloneable{
     public Inventory(List<AbstractItem> itemList){
         inventory = new HashMap<AbstractItem, Integer>();
         for(AbstractItem item:itemList) {
-            inventory.put(item, 1);
+            inventory.put(item.copy(), 1);
         }
     }
 
+    /**
+     * Copy constructor to construct an identical Inventory without same references to AbstractItems
+     * @param inventory Inventory you want to copy
+     */
+    public Inventory(Inventory inventory){
+        this.inventory = new HashMap<AbstractItem, Integer>(inventory.toMap().size());
+        for(AbstractItem item : inventory.getItems()){
+            this.inventory.put(item.copy(), inventory.getItemAmount(item));
+        }
+
+
+    }
+
+    /**
+     *
+     * @return Set of AbstractItems currently in inventory
+     */
+    public Set<AbstractItem> getItems(){
+        return inventory.keySet();
+    }
     /**
      * Checks if an item exists in the inventory
      * @param item The item to check
@@ -69,9 +91,9 @@ public class Inventory implements Cloneable{
         if(inventory.containsKey(item)){//Check if item already exists in inventory
             int amount = inventory.get(item);
             amount++;
-            inventory.replace(item, amount);//Adds one to the value if the item already exists in inventory
+            inventory.replace(item.copy(), amount);//Adds one to the value if the item already exists in inventory
         }else{
-            inventory.put(item,1);//Place in inventory
+            inventory.put(item.copy(),1);//Place in inventory
         }
     }
 
@@ -137,9 +159,8 @@ public class Inventory implements Cloneable{
     }
 
     //TO-DO correct implementation of clone method
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        super.clone();
-        return null;
+
+    public Inventory copy(){
+        return new Inventory(this);
     }
 }
