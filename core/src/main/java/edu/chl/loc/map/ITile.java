@@ -1,5 +1,7 @@
 package edu.chl.loc.map;
 
+import edu.chl.loc.utilities.Position2D;
+
 /**
  * @author Alexander Håkansson, Kevin Hoogendijk
  * @version 1.0.0
@@ -41,5 +43,18 @@ public interface ITile {
      * @return The position in the y-axis
      */
     public double getY();
+
+    /**
+     * Get the position as a Position2D object
+     * @return the position
+     */
+    public Position2D getPos();
+
+    /**
+     * Two tiles are considered equal if they have the same position
+     * @param o the other tile
+     * @return true if they are equal otherwise false
+     */
+    public boolean equals(Object o);
 
 }

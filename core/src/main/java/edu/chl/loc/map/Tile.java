@@ -81,6 +81,14 @@ public class Tile implements ITile{
         return this.pos.getY();
     }
 
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public Position2D getPos() {
+        return this.pos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
