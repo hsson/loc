@@ -1,5 +1,8 @@
 package edu.chl.loc.map;
 
+import edu.chl.loc.utilities.Position2D;
+import javafx.geometry.Pos;
+
 /**
  * A class representing tiles on the map, this tile has no special ability
  *
@@ -12,8 +15,7 @@ package edu.chl.loc.map;
 public class Tile implements ITile{
 
     private boolean isCollidable = false;
-    private int x;
-    private int y;
+    private Position2D pos;
 
     /**
      * Creates a new tile with the specified coordinates and sets isCollidable
@@ -23,7 +25,7 @@ public class Tile implements ITile{
      * @param y the y coordinate of the tile
      * @param isCollidable if the tile is collidable or not
      */
-    public Tile(int x, int y, boolean isCollidable){
+    public Tile(double x, double y, boolean isCollidable){
         this(x, y);
         this.isCollidable = isCollidable;
     }
@@ -35,9 +37,8 @@ public class Tile implements ITile{
      * @param x the x coordinate of the tile
      * @param y the y coordinate of the tile
      */
-    public Tile(int x, int y){
-        this.x = x;
-        this.y = y;
+    public Tile(double x, double y){
+        pos.add(x, y);
     }
 
     /**
@@ -68,16 +69,16 @@ public class Tile implements ITile{
      * @inheritDoc
      */
     @Override
-    public int getX() {
-        return this.x;
+    public double getX() {
+        return this.pos.getX();
     }
 
     /**
      * @inheritDoc
      */
     @Override
-    public int getY() {
-        return this.y;
+    public double getY() {
+        return this.pos.getY();
     }
 
     @Override
@@ -95,6 +96,6 @@ public class Tile implements ITile{
         }
 
         Tile other = (Tile) o;
-        return this.x == other.x && this.y == other.y;
+        return this.pos.getX() == other.pos.getX() && this.pos.getY() == other.pos.getY();
     }
 }

@@ -33,13 +33,13 @@ public interface ITile {
      *
      * @return The position in the x-axis
      */
-    public int getX();
+    public double getX();
 
     /**
      * Get the y position of the tile
      *
      * @return The position in the y-axis
      */
-    public int getY();
+    public double getY();
 
 }
