@@ -50,10 +50,16 @@ public enum Direction {
             return EAST;
         }
     };
-    /*
-        Returns a Position2D object with delta values.
+    /**
+
         Used to display change(delta) in a direction.
+        @return Position2D object with delta values.
      */
     public abstract Position2D getDelta();
+
+    /**
+     *
+     * @return opposite direction of current direction
+     */
     public abstract Direction getOpposite();
 }
