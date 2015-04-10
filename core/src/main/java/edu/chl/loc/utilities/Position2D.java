@@ -14,21 +14,45 @@ public class Position2D {
     private double xCoord;
     private double yCoord;
 
+    /**
+     * Creates a position2D object with given coordinates
+     * @param xCoord X coordinate you want this position to have
+     * @param yCoord Y coordinate you want this position to have
+     */
     public Position2D(double xCoord, double yCoord){
         this.xCoord = xCoord;
         this.yCoord = yCoord;
     }
 
+    /**
+     * Creates a position2D with default coordinates being (0,0)
+     */
     public Position2D(){
         this.xCoord = 0;
         this.yCoord = 0;
     }
 
+    /**
+     * Constructor used for copying, refer to copy() method.
+     * @param copyPos Position2D you want to copy
+     */
+    public Position2D(Position2D copyPos){
+        this.xCoord = copyPos.getX();
+        this.yCoord = copyPos.getY();
+    }
+
+    /**
+     *
+     * @return X coordinate of this position
+     */
     public double getX(){
         return xCoord;
     }
 
-
+    /**
+     *
+     * @return Y coordinate of this position
+     */
     public double getY(){
         return yCoord;
     }
@@ -36,7 +60,7 @@ public class Position2D {
     /**
      * Adds given x- and y-coordinates to this Position2D.
      *
-     * returns a new Position2D with the sum of x and y coordinates.
+     * @return a new Position2D with the sum of x and y coordinates.
      */
     public Position2D add(double x, double y){
         double tempX = this.getX() + x;
@@ -47,8 +71,8 @@ public class Position2D {
     /**
      * Adds given the Position2D to this Position2D.
      *
-     * throws IllegalArgumentException if given Position2D == null
-     * returns a new Position2D with the sum of x and y coordinates.
+     * @throws IllegalArgumentException if given Position2D == null
+     * @return a new Position2D with the sum of x and y coordinates.
      */
     public Position2D add(Position2D position){
         if(position == null){
@@ -85,5 +109,13 @@ public class Position2D {
 
     public String toString(){
         return "Position of X-Coordinate is" + getX() + ", and Position of Y-Coordinate is " + getY();
+    }
+
+    /**
+     * Copy method to clone a current Position2D
+     * @return Position2D with same values
+     */
+    public Position2D copy(){
+        return new Position2D(this);
     }
 }
