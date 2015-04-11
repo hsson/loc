@@ -38,7 +38,7 @@ public class Tile implements ITile{
      * @param y the y coordinate of the tile
      */
     public Tile(double x, double y){
-        pos.add(x, y);
+        pos = new Position2D(x, y);
     }
 
     /**
