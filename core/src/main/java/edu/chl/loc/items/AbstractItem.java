@@ -1,7 +1,5 @@
 package edu.chl.loc.items;
 
-import java.util.List;
-
 /**
  * A class to represent items in different places
  *
