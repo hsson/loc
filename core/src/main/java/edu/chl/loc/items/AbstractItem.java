@@ -6,21 +6,21 @@ package edu.chl.loc.items;
  * @author Criticalstone
  * @version 1.0.0
  * @since 2015-04-07
- * revised by Maxim Goretskyy
+ * revised by Maxim Goretskyy, Alexander Håkansson
  */
 public abstract class AbstractItem{
 
     private ItemType type;
-    private int itemID;
+    private String itemName;
 
-    public AbstractItem(ItemType type, int itemID){
+    public AbstractItem(ItemType type, String itemName){
         this.type = type;
-        this.itemID = itemID;
+        this.itemName = itemName;
     }
 
     public AbstractItem(AbstractItem item){
         this.type = item.getType();
-        this.itemID = item.getItemID();
+        this.itemName = item.getItemName();
 
     }
     /**
@@ -40,26 +40,20 @@ public abstract class AbstractItem{
     }
 
     /**
-     * removes a type from the item
      *
-     * @param type the type that should be added
+     * @return itemName of this item
      */
-
-    /**
-     *
-     * @return itemID of this item
-     */
-    public int getItemID(){
-        return itemID;
+    public String getItemName(){
+        return itemName;
     }
 
     /**
-     * Sets a given itemID for this item
-     * @param itemID itemID you want to set for this item
+     * Sets a given itemName for this item
+     * @param itemName itemName you want to set for this item
      */
 
-    public void setItemID(int itemID){
-        this.itemID = itemID;
+    public void setItemName(String itemName){
+        this.itemName = itemName;
     }
 
     /**
