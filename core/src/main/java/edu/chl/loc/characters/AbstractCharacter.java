@@ -185,4 +185,7 @@ public abstract class AbstractCharacter {
             return this.getPosition().equals(other.getPosition());
         }
     }
+    /*
+        Fix a method that takes in a position2D and compares it to players position, and returns true or false
+     */
 }
