@@ -121,6 +121,16 @@ public abstract class AbstractCharacter {
     }
 
     /**
+     * Get the next position in the current direction of the character
+     * without actually moving it.
+     *
+     * @return The next position in the character direction
+     */
+    public Position2D getNextPosition() {
+        return new Position2D(currentPosition.add(currentDirection.getDelta()));
+    }
+
+    /**
      @param direction direction you want to set
      Set the current direction to a given one
      */
