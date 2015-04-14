@@ -17,9 +17,13 @@ public class GameState {
     private final Player player;
     private GameMap gameMap;
 
+    //TODO: come up with a better idea to save score
+    private double hec;
+
     public GameState() {
         player = new Player(STARTING_POS);
         gameMap = new GameMap();
+        hec = 0;
     }
 
     /**
@@ -38,5 +42,13 @@ public class GameState {
      */
     public GameMap getGameMap() {
         return this.gameMap;
+    }
+
+    public void addHec(double amount){
+        this.hec += amount;
+    }
+
+    public double getHec(){
+        return this.hec;
     }
 }

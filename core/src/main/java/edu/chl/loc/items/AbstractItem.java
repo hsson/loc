@@ -1,5 +1,8 @@
 package edu.chl.loc.items;
 
+
+import edu.chl.loc.core.GameState;
+
 /**
  * A class to represent items in different places
  *
@@ -62,5 +65,10 @@ public abstract class AbstractItem{
      */
     public abstract AbstractItem copy();
 
-    public abstract void use();
+    /**
+     * If the item is usable this method should be implemented
+     * Whatever the item is supposed to do happens in this method
+     * It has access to the whole game
+     */
+    public abstract void use(GameState state);
 }
