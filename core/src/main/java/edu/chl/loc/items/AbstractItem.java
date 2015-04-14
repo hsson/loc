@@ -61,4 +61,6 @@ public abstract class AbstractItem{
      * @return A copy of abstractItem
      */
     public abstract AbstractItem copy();
+
+    public abstract void use();
 }
