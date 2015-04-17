@@ -2,9 +2,11 @@ package edu.chl.loc.core;
 
 import edu.chl.loc.characters.Direction;
 import edu.chl.loc.characters.Player;
+import edu.chl.loc.items.ItemBeverage;
 import edu.chl.loc.map.*;
 import edu.chl.loc.utilities.Position2D;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -28,9 +30,15 @@ public class TerminalGame {
     }
 
     public void setupGame() {
+        int beerAmount = 8;
+        Random ranGen = new Random();
         GameMap map = gameState.getGameMap();
         ILayer groundLayer = new Layer("ground");
         map.addLayer(new Layer("ground"));
+        //generate beers first
+        for(int i = 0; i<beerAmount; i++){
+            map.addTile(groundLayer, new ItemTile(new ItemBeverage("Prippsblå"), new Position2D(ranGen.nextInt(10),ranGen.nextInt(10))));
+        }
         for (int y = 0; y < boardSize; y++) {
             for (int x = 0; x < boardSize; x++) {
                 map.addTile(groundLayer, new Tile(x, y, Math.random() < 0.05));
@@ -68,6 +76,14 @@ public class TerminalGame {
                     (int) p.getNextPosition().getY()).isCollidable()) {
                 p.move();
             }
+            ITile tempTile = gameState.getGameMap().getTile(new Layer("ground"),(int)p.getX(),(int)p.getY());
+            if(tempTile.hasItem()){ //
+                ItemTile itemTile = (ItemTile)tempTile; //only itemtile can have items
+                                                        //so this will work w/o checking classes
+                itemTile.takeItem().use(gameState);
+
+            }
+
         }
     }
 
@@ -81,7 +97,9 @@ public class TerminalGame {
                         System.out.print("p");
                     } else if (t.isCollidable()) {
                         System.out.print("#");
-                    } else {
+                    } else if(t.hasItem()){
+                        System.out.print("b");
+                    } else{
                         System.out.print(" ");
                     }
                 }
