@@ -115,15 +115,15 @@ public class BottleBeerChug {
 
     /**
      * Returns how long the current chug has been going on
-     * or the final time of the chug in seconds
+     * or the final time of the chug in nanoseconds
      * @return The time elapsed if the chug is still ongoing
      * or the final time if the chug is finished
      */
     public long timeElapsed(){
         if(isFinished()){
-            return (timeFinished-timeStarted)/1000000000l;
+            return (timeFinished-timeStarted);
         }else{
-            return (TimeUtils.nanoTime()- timeStarted)/1000000000l;
+            return (TimeUtils.nanoTime()- timeStarted);
         }
     }
 }
