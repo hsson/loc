@@ -107,6 +107,16 @@ public class BottleBeerChug {
     }
 
     /**
+     * Returns the percentage left of the bottle as a string
+     * @return A string representing the percentage of remaining liquid
+     */
+    public String drinkRemaining(){
+        Float percent = new Float((float)centilitersRemaining/33f);
+        percent = percent * 100;
+        return percent.toString() + "%";
+    }
+
+    /**
      * Returns how long the current chug has been going on
      * or the final time of the chug in nanoseconds
      * @return The time elapsed if the chug is still ongoing
