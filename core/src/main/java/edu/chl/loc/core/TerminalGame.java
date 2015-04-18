@@ -30,7 +30,7 @@ public class TerminalGame {
     }
 
     public void setupGame() {
-        int beerAmount = 8;
+        int beerAmount = 2;
         Random ranGen = new Random();
         GameMap map = gameState.getGameMap();
         ILayer groundLayer = new Layer("ground");
@@ -70,7 +70,9 @@ public class TerminalGame {
                     p.setDirection(Direction.EAST);
                     break;
             }
-
+            System.out.print("\033\143"); //will simulate a terminal buffer, only tested on OSX so far.
+                                            //Comment out the print if it doesn't work
+                                            //MUST RUN INSIDE TERMINAL; NOT IDE CONSOLE
             if (!gameState.getGameMap().getTile(new Layer("ground"),
                     (int) p.getNextPosition().getX(),
                     (int) p.getNextPosition().getY()).isCollidable()) {
@@ -83,6 +85,7 @@ public class TerminalGame {
                 itemTile.takeItem().use(gameState);
 
             }
+
 
         }
     }
