@@ -19,7 +19,7 @@ public class BottleBeerChugController {
     public void keyPressed(int keyPressed){
         switch(keyPressed){
             case Input.Keys.SPACE:
-                if(model.isFirstShakeDone()) {
+                if(!model.isFirstShakeDone()) {
                     model.firstShake();
                 }else{
                     model.endChug();
