@@ -107,26 +107,24 @@ public class BottleBeerChug {
     }
 
     /**
-     * Returns the percentage left of the bottle as a string
-     * @return A string representing the percentage of remaining liquid
+     * Returns the percentage left of the bottle
+     * @return The percentage of remaining liquid
      */
-    public String drinkRemaining(){
-        Float percent = new Float((float)centilitersRemaining/33f);
-        percent = percent * 100;
-        return percent.toString() + "%";
+    public float drinkRemaining(){
+        return(float)centilitersRemaining/33f;
     }
 
     /**
      * Returns how long the current chug has been going on
-     * or the final time of the chug in nanoseconds
+     * or the final time of the chug in seconds
      * @return The time elapsed if the chug is still ongoing
      * or the final time if the chug is finished
      */
     public long timeElapsed(){
         if(isFinished()){
-            return timeFinished-timeStarted;
+            return (timeFinished-timeStarted)/1000000000l;
         }else{
-            return TimeUtils.nanoTime()- timeStarted;
+            return (TimeUtils.nanoTime()- timeStarted)/1000000000l;
         }
     }
 }
