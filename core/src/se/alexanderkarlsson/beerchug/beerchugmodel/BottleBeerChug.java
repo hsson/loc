@@ -6,7 +6,7 @@ import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
 /**
  * Beerchug model for bottle chugs
  * @author Alexander Karlsson
- * @version 1.0
+ * @version 1.0.1
  */
 public class BottleBeerChug {
     private int centilitersRemaining;
@@ -44,7 +44,7 @@ public class BottleBeerChug {
      * @param shakeDirection The direction to shake the beer
      */
     public void shake(ShakeDirection shakeDirection){
-        if(timeElapsed()<0 || lastShake == shakeDirection) {
+        if(!chugStarted() || lastShake == shakeDirection) {
             squirted = true;
         }else if(!squirted){
             lastShake = shakeDirection;
@@ -64,6 +64,14 @@ public class BottleBeerChug {
      */
     public boolean isFinished(){
         return finished;
+    }
+
+    /**
+     * Checks if a chug has started or if the countdown is still ongoing
+     * @return False if the countdown is ongoing, false otherwise
+     */
+    public boolean chugStarted(){
+        return timeElapsed()>0;
     }
 
     /**
