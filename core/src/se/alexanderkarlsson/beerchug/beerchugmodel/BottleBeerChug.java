@@ -62,7 +62,7 @@ public class BottleBeerChug {
     public void shake(ShakeDirection shakeDirection){
         if(!chugStarted() || lastShake == shakeDirection || !firstShakeDone) {
             squirted = true;
-        }else if(!squirted){
+        }else if(!squirted && centilitersRemaining!=0){
             lastShake = shakeDirection;
             centilitersRemaining--;
         }
