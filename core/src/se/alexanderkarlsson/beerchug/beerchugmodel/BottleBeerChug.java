@@ -23,7 +23,7 @@ public class BottleBeerChug {
     public BottleBeerChug(){
         centilitersRemaining = 33;
         lastShake = null;
-        timeStarted = TimeUtils.nanoTime()+3000000000l;//Added time for a three second countdown
+        timeStarted = TimeUtils.nanoTime()+2000000000l;//Added time for a three second countdown
         finished = false;
     }
 
