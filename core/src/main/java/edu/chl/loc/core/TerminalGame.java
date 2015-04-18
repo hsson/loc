@@ -51,22 +51,22 @@ public class TerminalGame {
     public void gameLoop() {
         while (true) {
             drawGame();
-            System.out.println("Move in any direction (u, d, l, r).");
+            System.out.println("Move in any direction (w,a,s,d).");
             System.out.print("> ");
             Player p = gameState.getPlayer();
             switch (scanner.nextLine().toCharArray()[0]) {
-                case 'd':
+                case 's':
                     // down is NORTH because of reversed y-axis
                     p.setDirection(Direction.NORTH);
                     break;
-                case 'u':
+                case 'w':
                     // up is SOUTH because of reversed y-axis
                     p.setDirection(Direction.SOUTH);
                     break;
-                case 'l':
+                case 'a':
                     p.setDirection(Direction.WEST);
                     break;
-                case 'r':
+                case 'd':
                     p.setDirection(Direction.EAST);
                     break;
             }
