@@ -16,6 +16,9 @@ public class BottleBeerChug {
     private boolean finished;
     private boolean squirted;
 
+    /**
+     * Basic constructor which starts and creates a basic 33cl beerchug
+     */
     public BottleBeerChug(){
         centilitersRemaining = 33;
         lastShake = null;
