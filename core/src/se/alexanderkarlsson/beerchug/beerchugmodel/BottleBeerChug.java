@@ -15,6 +15,7 @@ public class BottleBeerChug {
     private long timeFinished;
     private boolean finished;
     private boolean squirted;
+    private boolean firstShakeDone;
 
     /**
      * Basic constructor which starts and creates a basic 33cl beerchug
@@ -39,12 +40,27 @@ public class BottleBeerChug {
     }
 
     /**
+     * Shakes the bottle for the first time, does
+     * nothing if first shake is already done
+     */
+    public void firstShake(){
+        if(!firstShakeDone) {
+            if (chugStarted()) {
+                lastShake = ShakeDirection.LEFT;
+                firstShakeDone = true;
+            } else {
+                squirted = true;
+            }
+        }
+    }
+
+    /**
      * Shakes the bottle during a chug and drinks if done properly,
      * otherwise throws exception
      * @param shakeDirection The direction to shake the beer
      */
     public void shake(ShakeDirection shakeDirection){
-        if(!chugStarted() || lastShake == shakeDirection) {
+        if(!chugStarted() || lastShake == shakeDirection || !firstShakeDone) {
             squirted = true;
         }else if(!squirted){
             lastShake = shakeDirection;
@@ -72,6 +88,14 @@ public class BottleBeerChug {
      */
     public boolean chugStarted(){
         return timeElapsed()>0;
+    }
+
+    /**
+     * Checks if the first shake has been done
+     * @return True if the first shake is done
+     */
+    public boolean isFirstShakeDone(){
+        return firstShakeDone;
     }
 
     /**
