@@ -99,6 +99,14 @@ public class BottleBeerChug {
     }
 
     /**
+     * Checks which shake was done last
+     * @return The last shakes direction
+     */
+    public ShakeDirection getLastShake(){
+        return lastShake;
+    }
+
+    /**
      * Returns how long the current chug has been going on
      * or the final time of the chug in nanoseconds
      * @return The time elapsed if the chug is still ongoing
