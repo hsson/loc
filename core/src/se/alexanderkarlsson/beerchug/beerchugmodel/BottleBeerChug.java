@@ -16,6 +16,7 @@ public class BottleBeerChug {
     private boolean finished;
     private boolean squirted;
     private boolean firstShakeDone;
+    private String disqualifiedReason;
 
     /**
      * Basic constructor which starts and creates a basic 33cl beerchug
@@ -23,7 +24,7 @@ public class BottleBeerChug {
     public BottleBeerChug(){
         centilitersRemaining = 33;
         lastShake = null;
-        timeStarted = TimeUtils.nanoTime()+2000000000l;//Added time for a three second countdown
+        timeStarted = TimeUtils.nanoTime()+2000000000l;//Added time for a two second countdown
         finished = false;
     }
 
@@ -50,6 +51,7 @@ public class BottleBeerChug {
                 firstShakeDone = true;
             } else {
                 squirted = true;
+                disqualifiedReason = "Tjuvstart";
             }
         }
     }
@@ -62,6 +64,7 @@ public class BottleBeerChug {
     public void shake(ShakeDirection shakeDirection){
         if(!chugStarted() || lastShake == shakeDirection || !firstShakeDone) {
             squirted = true;
+            disqualifiedReason = "Spill";
         }else if(!squirted && centilitersRemaining!=0){
             centilitersRemaining--;
         }
@@ -111,6 +114,14 @@ public class BottleBeerChug {
      */
     public float drinkRemaining(){
         return(float)centilitersRemaining/33f;
+    }
+
+    public String getDisqualifiedReason(){
+        if(!squirted){
+            return null;
+        }else{
+            return disqualifiedReason;
+        }
     }
 
     /**
