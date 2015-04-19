@@ -34,7 +34,7 @@ public class BottleBeerChug {
     public void endChug(){
         if(centilitersRemaining != 0){
             squirted = true;
-        }else if(!squirted){
+        }else if(!squirted && !finished){
             finished = true;
             timeFinished = TimeUtils.nanoTime();
         }
