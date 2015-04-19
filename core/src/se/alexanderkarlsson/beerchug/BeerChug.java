@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,6 +22,8 @@ public class BeerChug extends ApplicationAdapter {
 	private BottleBeerChug model;
 	private BottleBeerChugController controller;
 	private Music backgroundMusic;
+	private Sound startSound;
+	private boolean startSoundPlayed;
 	private Texture standingPlayer;
 	private Texture shakingLeftPlayer;
 	private Texture shakingRightPlayer;
@@ -73,6 +76,9 @@ public class BeerChug extends ApplicationAdapter {
 		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("background.mp3"));
 		backgroundMusic.setLooping(true);
 		backgroundMusic.play();
+
+		startSound = Gdx.audio.newSound(Gdx.files.internal("start.wav"));
+		startSoundPlayed = false;
 	}
 
 	@Override
@@ -83,6 +89,11 @@ public class BeerChug extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 
 		controller.update();
+
+		if(model.timeElapsed()>0 && !startSoundPlayed){
+			startSound.play();
+			startSoundPlayed = true;
+		}
 
 		batch.begin();
 
