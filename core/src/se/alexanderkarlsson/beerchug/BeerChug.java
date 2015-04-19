@@ -28,6 +28,8 @@ public class BeerChug extends ApplicationAdapter {
 	private Texture rightKey;
 	private Texture spaceKey;
 	private Texture background;
+	private Texture table;
+	private Texture beerTable;
 	private BitmapFont font;
 	private ProgressBar progressBar;
 	
@@ -48,6 +50,10 @@ public class BeerChug extends ApplicationAdapter {
 		leftKey = new Texture(Gdx.files.internal("leftKey.gif"));
 		rightKey = new Texture(Gdx.files.internal("rightKey.gif"));
 		spaceKey = new Texture(Gdx.files.internal("spaceKey.gif"));
+
+		//Create the table images
+		beerTable = new Texture(Gdx.files.internal("beerTable.png"));
+		table = new Texture(Gdx.files.internal("table.png"));
 
 		//Create the background image
 		background = new Texture(Gdx.files.internal("background.png"));
@@ -99,6 +105,13 @@ public class BeerChug extends ApplicationAdapter {
 			batch.draw(rightKey, (1024/2) + (spaceKey.getWidth()/2),250);
 		} else if (model.getLastShake() == ShakeDirection.RIGHT && model.drinkRemaining()!=0) {
 			batch.draw(leftKey, (1024/2) - ((spaceKey.getWidth()/2)+leftKey.getWidth()),250);
+		}
+
+		//Draw correct table
+		if(!model.isFirstShakeDone() || model.isFinished()){
+			batch.draw(beerTable,(1024/2)-(beerTable.getWidth()/2),10);
+		}else{
+			batch.draw(table,(1024/2)-(table.getWidth()/2),10);
 		}
 
 		//Draw time elapsed and/or contdown
