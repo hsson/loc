@@ -70,7 +70,7 @@ public class TerminalGame {
                     p.setDirection(Direction.EAST);
                     break;
             }
-            System.out.print("\033\143"); //will simulate a terminal buffer, only tested on OSX so far.
+          //  System.out.print("\033\143"); //will simulate a terminal buffer, only tested on OSX so far.
                                             //Comment out the print if it doesn't work
                                             //MUST RUN INSIDE TERMINAL; NOT IDE CONSOLE
             if (!gameState.getGameMap().getTile(new Layer("ground"),
