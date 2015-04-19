@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import se.alexanderkarlsson.beerchug.beerchugcontroller.BottleBeerChugController;
 import se.alexanderkarlsson.beerchug.beerchugmodel.BottleBeerChug;
 import se.alexanderkarlsson.beerchug.utilities.Converter;
@@ -26,7 +27,9 @@ public class BeerChug extends ApplicationAdapter {
 	private Texture leftKey;
 	private Texture rightKey;
 	private Texture spaceKey;
+	private Texture background;
 	private BitmapFont font;
+	private ProgressBar progressBar;
 	
 	@Override
 	public void create () {
@@ -36,18 +39,29 @@ public class BeerChug extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false,1024,576);
 
-		//Create the images for the player and keys
+		//Create the images for the player
 		standingPlayer = new Texture(Gdx.files.internal("drinker.png"));
 		shakingLeftPlayer = new Texture(Gdx.files.internal("drinkerLeft.png"));
 		shakingRightPlayer = new Texture(Gdx.files.internal("drinkerRight.png"));
+
+		//Create the images for the keys
 		leftKey = new Texture(Gdx.files.internal("leftKey.gif"));
 		rightKey = new Texture(Gdx.files.internal("rightKey.gif"));
 		spaceKey = new Texture(Gdx.files.internal("spaceKey.gif"));
 
+		//Create the background image
+		background = new Texture(Gdx.files.internal("background.png"));
+
+		//Instantiate model and connected controller
 		model = new BottleBeerChug();
 		controller = new BottleBeerChugController(model);
 
+		//Create font
 		font = new BitmapFont();
+
+		//progressBar = new ProgressBar(0f, 1.0f, 0.01f, true, new ProgressBar.ProgressBarStyle());
+		//progressBar.setSize(30,300);
+		//progressBar.setPosition(10f,10f);
 
 		//Instantiate and start background music
 		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("background.mp3"));
@@ -61,22 +75,21 @@ public class BeerChug extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			controller.keyPressed(Input.Keys.SPACE);
-		} else if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-			controller.keyPressed(Input.Keys.LEFT);
-		} else if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-			controller.keyPressed(Input.Keys.RIGHT);
-		}
+
+		controller.update();
+
 		batch.begin();
+
+		//Draw backround
+		batch.draw(background,0,0);
 
 		//Draw player
 		if (model.getLastShake() == null || model.isFinished()) {
-			batch.draw(standingPlayer, (1024 / 2) - standingPlayer.getWidth() / 2, 20);
+			batch.draw(standingPlayer, (1024 / 2) - standingPlayer.getWidth() / 2, 40);
 		} else if (model.getLastShake() == ShakeDirection.LEFT) {
-			batch.draw(shakingLeftPlayer, (1024 / 2) - shakingLeftPlayer.getWidth() / 2, 20);
+			batch.draw(shakingLeftPlayer, (1024 / 2) - shakingLeftPlayer.getWidth() / 2, 40);
 		} else if (model.getLastShake() == ShakeDirection.RIGHT) {
-			batch.draw(shakingRightPlayer, (1024 / 2) - shakingRightPlayer.getWidth() / 2, 20);
+			batch.draw(shakingRightPlayer, (1024 / 2) - shakingRightPlayer.getWidth() / 2, 40);
 		}
 
 		//Draw next key
@@ -88,7 +101,7 @@ public class BeerChug extends ApplicationAdapter {
 			batch.draw(leftKey, (1024/2) - ((spaceKey.getWidth()/2)+leftKey.getWidth()),250);
 		}
 
-		//Draw time elapsed
+		//Draw time elapsed and/or contdown
 		if (model.timeElapsed() > 0) {
 			font.draw(batch, Float.toString(Converter.nanoToSeconds(model.timeElapsed())), 0, 560);
 			if (model.timeElapsed() < 1000000000) {
@@ -112,6 +125,8 @@ public class BeerChug extends ApplicationAdapter {
 			model = new BottleBeerChug();
 			controller = new BottleBeerChugController(model);
 		}
+
+		//progressBar.draw(batch,1);
 		batch.end();
 	}
 }
