@@ -62,7 +62,7 @@ public class BottleBeerChug {
      * @param shakeDirection The direction to shake the beer
      */
     public void shake(ShakeDirection shakeDirection){
-        if(!chugStarted() || lastShake == shakeDirection || !firstShakeDone) {
+        if(!chugStarted() || (lastShake == shakeDirection && centilitersRemaining!=0) || !firstShakeDone) {
             squirted = true;
             disqualifiedReason = "Spill";
         }else if(!squirted && centilitersRemaining!=0){
