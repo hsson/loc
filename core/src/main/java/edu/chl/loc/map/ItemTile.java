@@ -42,7 +42,7 @@ public class ItemTile implements ITile {
      * @param xCoord xCoord you want this tile to have
      * @param yCoord yCoord you want this tile to have
      */
-    public ItemTile(AbstractItem item, double xCoord, double yCoord){
+    public ItemTile(AbstractItem item, int xCoord, int yCoord){
         this.item = item.copy();
         currentPosition = new Position2D(xCoord, yCoord);
         isItemSet = true;
