@@ -25,7 +25,7 @@ public class Tile implements ITile{
      * @param y the y coordinate of the tile
      * @param isCollidable if the tile is collidable or not
      */
-    public Tile(double x, double y, boolean isCollidable){
+    public Tile(int x, int y, boolean isCollidable){
         this(x, y);
         this.isCollidable = isCollidable;
     }
@@ -37,7 +37,7 @@ public class Tile implements ITile{
      * @param x the x coordinate of the tile
      * @param y the y coordinate of the tile
      */
-    public Tile(double x, double y){
+    public Tile(int x, int y){
         pos = new Position2D(x, y);
     }
 

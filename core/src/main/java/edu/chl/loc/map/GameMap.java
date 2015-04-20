@@ -70,7 +70,7 @@ public class GameMap extends AbstractMap {
      * @return The NPC at the specified position
      * @throws java.lang.IllegalArgumentException If there is not NPC at the given position
      */
-    public NPC getNPCAtPosition(double x, double y) {
+    public NPC getNPCAtPosition(int x, int y) {
         return getNPCAtPosition(new Position2D(x, y));
     }
 
@@ -97,7 +97,7 @@ public class GameMap extends AbstractMap {
      * @param y The position in the y-axis to check for an NPC
      * @return True if there is any NPC at the given position, false otherwise
      */
-    public boolean npcExistsAtPosition(double x, double y) {
+    public boolean npcExistsAtPosition(int x, int y) {
         return npcExisitsAtPosition(new Position2D(x, y));
     }
 }
