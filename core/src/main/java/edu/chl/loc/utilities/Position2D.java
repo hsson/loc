@@ -11,15 +11,15 @@ package edu.chl.loc.utilities;
 
 
 public class Position2D {
-    private double xCoord;
-    private double yCoord;
+    private int xCoord;
+    private int yCoord;
 
     /**
      * Creates a position2D object with given coordinates
      * @param xCoord X coordinate you want this position to have
      * @param yCoord Y coordinate you want this position to have
      */
-    public Position2D(double xCoord, double yCoord){
+    public Position2D(int xCoord, int yCoord){
         this.xCoord = xCoord;
         this.yCoord = yCoord;
     }
@@ -45,7 +45,7 @@ public class Position2D {
      *
      * @return X coordinate of this position
      */
-    public double getX(){
+    public int getX(){
         return xCoord;
     }
 
@@ -53,7 +53,7 @@ public class Position2D {
      *
      * @return Y coordinate of this position
      */
-    public double getY(){
+    public int getY(){
         return yCoord;
     }
 
@@ -62,9 +62,9 @@ public class Position2D {
      *
      * @return a new Position2D with the sum of x and y coordinates.
      */
-    public Position2D add(double x, double y){
-        double tempX = this.getX() + x;
-        double tempY = this.getY() + y;
+    public Position2D add(int x, int y){
+        int tempX = this.getX() + x;
+        int tempY = this.getY() + y;
         return new Position2D(tempX, tempY);
     }
 
@@ -78,8 +78,8 @@ public class Position2D {
         if(position == null){
             throw new IllegalArgumentException("Can only add positions");
         }
-        double tempX = this.xCoord + position.getX();
-        double tempY = this.yCoord + position.getY();
+        int tempX = this.xCoord + position.getX();
+        int tempY = this.yCoord + position.getY();
         return new Position2D(tempX, tempY);
     }
 

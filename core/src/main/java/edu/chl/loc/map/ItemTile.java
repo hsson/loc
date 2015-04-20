@@ -104,19 +104,23 @@ public class ItemTile implements ITile {
 
     /**
      *
-     * @return the item that is on this tile
+     * @return the copy item that is on this tile
      */
     public AbstractItem getItem(){
-        return this.item;
+
+        return this.item.copy();
     }
 
     /**
      *
-     * @return the item that is on this site AND unsetsItem from this tile.
+     * @return the copy of the item that is on this site AND unsetsItem from this tile.
      */
     public AbstractItem takeItem(){
-        unsetItem();
-        return this.item;
+        if(isItemSet) {
+            unsetItem();
+            return this.item.copy();
+        }
+        return null; //Todo throw own exception later on
     }
 
 }

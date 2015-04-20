@@ -16,6 +16,7 @@ public abstract class AbstractCharacter {
     private Position2D currentPosition;
     private Inventory inventory;
     private String characterName;
+    private final String DEFAULT_NAME = "Emil";
 
     /**
      * Creates an abstractCharacter on a given position, with North as default direction, and with an empty inventory
@@ -25,6 +26,8 @@ public abstract class AbstractCharacter {
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
         inventory = new Inventory();
+        characterName = DEFAULT_NAME;
+
     }
 
     /**
@@ -36,6 +39,7 @@ public abstract class AbstractCharacter {
         currentDirection = direction;
         currentPosition = pos;
         inventory = new Inventory();
+        characterName = DEFAULT_NAME;
     }
 
     /**
