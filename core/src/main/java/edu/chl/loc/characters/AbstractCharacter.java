@@ -91,7 +91,7 @@ public abstract class AbstractCharacter {
     /**
      Move character in a given change(delta) in X and Y-coordinates
      */
-    public void move(double deltaX, double deltaY){
+    public void move(int deltaX, int deltaY){
         Position2D tempPos = getPosition().add(deltaX, deltaY);
         setPosition(tempPos);
     }
