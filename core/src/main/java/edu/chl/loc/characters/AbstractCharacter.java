@@ -120,7 +120,7 @@ public abstract class AbstractCharacter {
      * @param y Y-coordinate you want to set in the new position
     More natural to use setPlayerPosition(Position2D pos)
      */
-    public void setPosition(double x, double y){
+    public void setPosition(int x, int y){
         currentPosition = new Position2D(x,y);
     }
 

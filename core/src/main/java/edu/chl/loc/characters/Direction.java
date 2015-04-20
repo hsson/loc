@@ -13,7 +13,7 @@ public enum Direction {
     NORTH{
         @Override
         public Position2D getDelta(){
-            return new Position2D(0.0,1.0);
+            return new Position2D(0,1);
         }
         @Override
     public Direction getOpposite(){
@@ -23,7 +23,7 @@ public enum Direction {
     EAST{
         @Override
         public Position2D getDelta(){
-            return new Position2D(1.0,0.0);
+            return new Position2D(1, 0);
         }
         @Override
         public Direction getOpposite(){
@@ -33,7 +33,7 @@ public enum Direction {
     SOUTH{
         @Override
         public Position2D getDelta(){
-            return new Position2D(0.0,-1.0);
+            return new Position2D(0, -1);
         }
         @Override
         public Direction getOpposite(){
@@ -43,7 +43,7 @@ public enum Direction {
     WEST{
         @Override
         public Position2D getDelta(){
-            return new Position2D(-1.0,0.0);
+            return new Position2D(-1, 0);
         }
         @Override
         public Direction getOpposite(){
