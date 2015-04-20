@@ -110,7 +110,7 @@ public class BeerChug extends ApplicationAdapter {
 		}
 
 		//Draw next key
-		if ((model.getLastShake() == null || model.isFinished() || model.drinkRemaining() == 0) && model.timeElapsed()>0) {
+		if ((model.getLastShake() == null || (model.drinkRemaining() == 0 && !model.isFinished())) && model.timeElapsed()>0) {
 			batch.draw(spaceKey, (1024/2) - spaceKey.getWidth()/2,250);
 		} else if (model.getLastShake() == ShakeDirection.LEFT && model.drinkRemaining()!=0) {
 			batch.draw(rightKey, (1024/2) + (spaceKey.getWidth()/2),250);
@@ -135,6 +135,11 @@ public class BeerChug extends ApplicationAdapter {
 			font.draw(batch, "Färdiga", 470, 350);
 		}else{
 			font.draw(batch, "Klara", 470, 350);
+		}
+
+		//Draw grade when finished
+		if(model.isFinished()){
+			font.draw(batch, "Betyg: " + model.getGrade(), 470, 350);
 		}
 
 		//Draw potential DQ message
