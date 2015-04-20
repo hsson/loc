@@ -137,4 +137,23 @@ public class BottleBeerChug {
             return (TimeUtils.nanoTime()- timeStarted);
         }
     }
+
+    /**
+     * Returns the correct grade based on your chugtime
+     * @return U if disqualified or time higher than 7 seconds, 5 if
+     * the time is lower than 3 seconds, 4 if the time is lower than
+     * 4 seconds and 3 if the time is lower than 7 seconds.
+     */
+    public char getGrade(){
+        if(finished && !squirted) {
+            if (timeElapsed() < 3000000000l) {
+                return '5';
+            } else if (timeElapsed() < 4000000000l) {
+                return '4';
+            } else if (timeElapsed() < 7000000000l) {
+                return '3';
+            }
+        }
+        return 'U';
+    }
 }
