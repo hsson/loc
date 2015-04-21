@@ -82,7 +82,11 @@ public class TerminalGame {
             if(tempTile.hasItem()){ //
                 ItemTile itemTile = (ItemTile)tempTile; //only itemtile can have items
                                                         //so this will work w/o checking classes
-                itemTile.takeItem().use(gameState);
+                try {
+                    itemTile.takeItem().use(gameState);
+                } catch (EmptyTileException e) {
+                    e.printStackTrace();
+                }
 
             }
 

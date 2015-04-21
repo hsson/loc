@@ -115,12 +115,12 @@ public class ItemTile implements ITile {
      *
      * @return the copy of the item that is on this site AND unsetsItem from this tile.
      */
-    public AbstractItem takeItem(){
+    public AbstractItem takeItem() throws EmptyTileException{
         if(isItemSet) {
             unsetItem();
             return this.item.copy();
         }
-        return null; //Todo throw own exception later on
+        throw new EmptyTileException("No item on this tile"); //Todo throw own exception later on
     }
 
 }
