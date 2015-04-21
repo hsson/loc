@@ -13,17 +13,7 @@ public class ItemTile implements ITile {
     private AbstractItem item;
     private boolean isCollidable; //default value is false
     private Position2D currentPosition;
-    private boolean isItemSet;
-
-    /**
-     *
-     * @param item Item object you want to place on this tile, default Position2D is (0,0)
-     */
-    public ItemTile(AbstractItem item){
-        this.item = item.copy();
-        currentPosition = new Position2D();
-        isItemSet = true;
-    }
+    private boolean isItemSet = true;
 
     /**
      *
@@ -33,7 +23,7 @@ public class ItemTile implements ITile {
     public ItemTile(AbstractItem item, Position2D position){
         this.item = item.copy();
         currentPosition = position.copy();
-        isItemSet = true;
+
     }
 
     /**
@@ -45,7 +35,7 @@ public class ItemTile implements ITile {
     public ItemTile(AbstractItem item, int xCoord, int yCoord){
         this.item = item.copy();
         currentPosition = new Position2D(xCoord, yCoord);
-        isItemSet = true;
+
     }
 
     @Override
