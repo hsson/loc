@@ -56,7 +56,7 @@ public abstract class AbstractCharacter {
     }
 
     /**
-     *  /**
+     *
      * Creates an abstractCharacter on a given position and a given name, with North as default direction, and with an empty inventory
      * @param pos   The position you want AbstractCharacter to have
      * @param name  The name you want AbstractCharacter to have
@@ -178,11 +178,15 @@ public abstract class AbstractCharacter {
     public void setInventory(Inventory inventory){
         this.inventory = inventory.copy();
     }
-    /*
-        public Inventory getInventory(){
-            return this.inventory;
-        }
-    */
+
+    /**
+     * Get players inventory
+     * @return Copy of players inventory
+     */
+    public Inventory getInventory(){
+            return this.inventory.copy();
+    }
+
 
     /**
      *
