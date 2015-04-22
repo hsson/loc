@@ -1,5 +1,7 @@
 package edu.chl.loc.characters;
 
+import edu.chl.loc.characters.utilities.Direction;
+import edu.chl.loc.characters.utilities.Gender;
 import edu.chl.loc.items.Inventory;
 import edu.chl.loc.utilities.Position2D;
 
@@ -18,6 +20,7 @@ public abstract class AbstractCharacter {
     private Inventory inventory;
     private String characterName;
     private final String DEFAULT_NAME = "Emil";
+    private Gender gender = Gender.MALE;
 
     /**
      * Creates an abstractCharacter on a given position, with North as default direction, and with an empty inventory
@@ -57,17 +60,19 @@ public abstract class AbstractCharacter {
     }
 
     /**
-     * Creates an abstractCharacter with a given poistion, direction, name and inventory
+     * Creates an abstractCharacter with a given position, direction, name and inventory
      * @param pos The position to use
      * @param direction The direction to use
      * @param name The name to use
      * @param inventory The inventory to use
      */
-    public AbstractCharacter(Position2D pos, Direction direction, String name, Inventory inventory){
+    public AbstractCharacter(Position2D pos, Direction direction, String name, Inventory inventory, Gender gender){
         this.currentPosition = pos;
         this.currentDirection = direction;
         this.characterName = name;
         this.inventory = new Inventory(inventory);
+        this.gender = gender;
+
     }
 
     /**
@@ -218,7 +223,20 @@ public abstract class AbstractCharacter {
             return this.getPosition().equals(other.getPosition());
         }
     }
-    /*
-        Fix a method that takes in a position2D and compares it to players position, and returns true or false
+
+    /**
+     *
+     * @return Gender of the character
      */
+    public Gender getGender(){
+        return this.gender;
+    }
+
+    /**
+     *
+     * @param gender the gender you want to set for this character
+     */
+    public void setGender(Gender gender){
+        this.gender = gender;
+    }
 }

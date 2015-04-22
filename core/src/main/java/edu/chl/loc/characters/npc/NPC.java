@@ -1,7 +1,7 @@
 package edu.chl.loc.characters.npc;
 
 import edu.chl.loc.characters.AbstractCharacter;
-import edu.chl.loc.characters.Direction;
+import edu.chl.loc.characters.utilities.Direction;
 import edu.chl.loc.items.Inventory;
 import edu.chl.loc.utilities.Position2D;
 
