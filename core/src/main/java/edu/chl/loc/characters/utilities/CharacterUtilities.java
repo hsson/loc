@@ -18,11 +18,20 @@ public class CharacterUtilities {
 
     private static Random randomGen = new Random();
 
+    /**
+     *
+     * @return Randomised Gender
+     */
     public static Gender generateGender(){
         int randomInt = randomGen.nextInt(genderArray.length);
         return genderArray[randomInt];
     }
 
+    /**
+     *
+     * @param gender The gender you want to generate a name for
+     * @return Name for the given gender, if not male or female, returns a random name
+     */
     public static String generateName(Gender gender){
         int randomInt = 0;
         switch(gender){
