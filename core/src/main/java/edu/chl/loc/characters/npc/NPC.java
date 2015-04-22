@@ -1,14 +1,16 @@
-package edu.chl.loc.characters;
+package edu.chl.loc.characters.npc;
 
+import edu.chl.loc.characters.AbstractCharacter;
+import edu.chl.loc.characters.Direction;
 import edu.chl.loc.items.Inventory;
 import edu.chl.loc.utilities.Position2D;
 
 /**
  * Class for non-playable characters
  * @author Alexander Karlsson
- * @version 1.0
+ * @version 1.0.1
  */
-public class NPC extends AbstractCharacter{
+public class NPC extends AbstractCharacter {
     private Inventory inventory;
     //TODO add potential minigame
     //TODO add dialog
