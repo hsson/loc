@@ -1,6 +1,6 @@
 package edu.chl.loc.core;
 
-import edu.chl.loc.characters.Direction;
+import edu.chl.loc.characters.utilities.Direction;
 import edu.chl.loc.characters.Player;
 import edu.chl.loc.items.ItemBeverage;
 import edu.chl.loc.map.*;

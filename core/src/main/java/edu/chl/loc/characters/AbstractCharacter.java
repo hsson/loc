@@ -1,5 +1,6 @@
 package edu.chl.loc.characters;
 
+import edu.chl.loc.characters.utilities.Direction;
 import edu.chl.loc.characters.utilities.Gender;
 import edu.chl.loc.items.Inventory;
 import edu.chl.loc.utilities.Position2D;

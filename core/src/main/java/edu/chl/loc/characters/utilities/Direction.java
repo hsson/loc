@@ -1,4 +1,4 @@
-package edu.chl.loc.characters;
+package edu.chl.loc.characters.utilities;
 
 import edu.chl.loc.utilities.Position2D;
 
