@@ -15,9 +15,11 @@ public class NPC extends AbstractCharacter {
     //TODO add dialog
 
     /**
-     * Creates an NPC with an empty inventory but with a specified position and direction to face
+     * Creates an NPC with a given inventory, direction, name and inventory
      * @param pos The NPC's position
      * @param dir The direction the NPC should face
+     * @param name The name for the NPC
+     * @param inventory The inventory the NPC should use
      */
     protected NPC(Position2D pos, Direction dir, String name, Inventory inventory){
         super(pos, dir, name, inventory);
