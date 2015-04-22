@@ -7,8 +7,9 @@ import edu.chl.loc.utilities.Position2D;
  * General representation of player-objects
  *
  * Created by Maxim on 15-04-05.
- * Version 2.0.0
+ * Version 2.0.1
  * @author Maxim
+ * Revised by Alexander Karlsson
  */
 
 public abstract class AbstractCharacter {
@@ -53,6 +54,20 @@ public abstract class AbstractCharacter {
         currentDirection = Direction.NORTH; //default direction is North.
         this.characterName = name;
         this.inventory = inventory.copy();
+    }
+
+    /**
+     * Creates an abstractCharacter with a given poistion, direction, name and inventory
+     * @param pos The position to use
+     * @param direction The direction to use
+     * @param name The name to use
+     * @param inventory The inventory to use
+     */
+    public AbstractCharacter(Position2D pos, Direction direction, String name, Inventory inventory){
+        this.currentPosition = pos;
+        this.currentDirection = direction;
+        this.characterName = name;
+        this.inventory = new Inventory(inventory);
     }
 
     /**
