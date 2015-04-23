@@ -1,6 +1,6 @@
 package edu.chl.loc.map;
 
-import edu.chl.loc.characters.NPC;
+import edu.chl.loc.characters.npc.NPC;
 import edu.chl.loc.utilities.Position2D;
 
 import java.util.ArrayList;
