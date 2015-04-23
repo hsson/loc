@@ -7,6 +7,8 @@ import edu.chl.loc.utilities.Position2D;
  * Created by maxim on 2015-04-17.
  * @author Maxim Goretskyy
  * Class representing an ItemTile, a Tile with an AbstractItem object on it.
+ *
+ * Revised by Alexander Håkansson
  */
 public class ItemTile implements ITile {
 
@@ -23,18 +25,6 @@ public class ItemTile implements ITile {
     public ItemTile(AbstractItem item, Position2D position){
         this.item = item.copy();
         currentPosition = position.copy();
-
-    }
-
-    /**
-     *
-     * @param item Item object you want to place on this tile
-     * @param xCoord xCoord you want this tile to have
-     * @param yCoord yCoord you want this tile to have
-     */
-    public ItemTile(AbstractItem item, int xCoord, int yCoord){
-        this.item = item.copy();
-        currentPosition = new Position2D(xCoord, yCoord);
 
     }
 
@@ -61,17 +51,7 @@ public class ItemTile implements ITile {
     }
 
     @Override
-    public double getX() {
-        return this.currentPosition.getX();
-    }
-
-    @Override
-    public double getY() {
-        return this.currentPosition.getY();
-    }
-
-    @Override
-    public Position2D getPos() {
+    public Position2D getPosition() {
         return this.currentPosition;
     }
 

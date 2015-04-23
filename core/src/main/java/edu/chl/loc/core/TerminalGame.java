@@ -1,7 +1,7 @@
 package edu.chl.loc.core;
 
-import edu.chl.loc.characters.utilities.Direction;
 import edu.chl.loc.characters.Player;
+import edu.chl.loc.characters.utilities.Direction;
 import edu.chl.loc.items.ItemBeverage;
 import edu.chl.loc.map.*;
 import edu.chl.loc.utilities.Position2D;
@@ -41,11 +41,11 @@ public class TerminalGame {
         }
         for (int y = 0; y < boardSize; y++) {
             for (int x = 0; x < boardSize; x++) {
-                map.addTile(groundLayer, new Tile(x, y, Math.random() < 0.05));
+                map.addTile(groundLayer, new Tile(new Position2D(x, y), Math.random() < 0.05));
             }
         }
         Position2D playerPos = gameState.getPlayer().getPosition();
-        map.getTile(groundLayer, (int) playerPos.getX(), (int) playerPos.getY()).setIsCollidable(false);
+        map.getTile(groundLayer, playerPos).setIsCollidable(false);
     }
 
     public void gameLoop() {
@@ -73,12 +73,10 @@ public class TerminalGame {
             //System.out.print("\033\143"); //will simulate a terminal buffer, only tested on OSX so far.
                                             //Comment out the print if it doesn't work
                                             //MUST RUN INSIDE TERMINAL; NOT IDE CONSOLE
-            if (!gameState.getGameMap().getTile(new Layer("ground"),
-                    (int) p.getNextPosition().getX(),
-                    (int) p.getNextPosition().getY()).isCollidable()) {
+            if (!gameState.getGameMap().getTile(new Layer("ground"), p.getNextPosition()).isCollidable()) {
                 p.move();
             }
-            ITile tempTile = gameState.getGameMap().getTile(new Layer("ground"),(int)p.getX(),(int)p.getY());
+            ITile tempTile = gameState.getGameMap().getTile(new Layer("ground"),p.getPosition());
             if(tempTile.hasItem()){ //
                 ItemTile itemTile = (ItemTile)tempTile; //only itemtile can have items
                                                         //so this will work w/o checking classes
@@ -99,7 +97,7 @@ public class TerminalGame {
         for (int y = 0; y < boardSize; y++) {
             for (int x = 0; x < boardSize; x++) {
                 for (ILayer l : map.getLayers()) {
-                    ITile t = map.getTile(l, x, y);
+                    ITile t = map.getTile(l, new Position2D(x, y));
                     if (gameState.getPlayer().getPosition().equals(new Position2D(x, y))) {
                         System.out.print("p");
                     } else if (t.isCollidable()) {

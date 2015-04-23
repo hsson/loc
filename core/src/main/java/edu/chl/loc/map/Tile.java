@@ -1,7 +1,6 @@
 package edu.chl.loc.map;
 
 import edu.chl.loc.utilities.Position2D;
-import javafx.geometry.Pos;
 
 /**
  * A class representing tiles on the map, this tile has no special ability
@@ -9,7 +8,7 @@ import javafx.geometry.Pos;
  * Revised by Alexander Håkansson
  *
  * @author Kevin Hoogendijk
- * @version 1.0.0
+ * @version 2.0.0
  * @since 2015-04-07
  */
 public class Tile implements ITile{
@@ -21,12 +20,11 @@ public class Tile implements ITile{
      * Creates a new tile with the specified coordinates and sets isCollidable
      * the tile is by default not collidable
      *
-     * @param x the x coordiante of the tile
-     * @param y the y coordinate of the tile
+     * @param position Theposition of the Tile
      * @param isCollidable if the tile is collidable or not
      */
-    public Tile(int x, int y, boolean isCollidable){
-        this(x, y);
+    public Tile(Position2D position, boolean isCollidable){
+        this(position);
         this.isCollidable = isCollidable;
     }
 
@@ -34,11 +32,10 @@ public class Tile implements ITile{
      * Creates a new tile with the specified coordinates
      * the tile is by default not collidable
      *
-     * @param x the x coordinate of the tile
-     * @param y the y coordinate of the tile
+     * @param position The position of the Tile
      */
-    public Tile(int x, int y){
-        pos = new Position2D(x, y);
+    public Tile(Position2D position){
+        pos = position.copy();
     }
 
     /**
@@ -69,23 +66,7 @@ public class Tile implements ITile{
      * @inheritDoc
      */
     @Override
-    public double getX() {
-        return this.pos.getX();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public double getY() {
-        return this.pos.getY();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public Position2D getPos() {
+    public Position2D getPosition() {
         return this.pos;
     }
 
