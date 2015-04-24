@@ -31,24 +31,10 @@ public interface ITile {
     public boolean hasItem();
 
     /**
-     * Get the x position of the tile
-     *
-     * @return The position in the x-axis
-     */
-    public double getX();
-
-    /**
-     * Get the y position of the tile
-     *
-     * @return The position in the y-axis
-     */
-    public double getY();
-
-    /**
      * Get the position as a Position2D object
      * @return the position
      */
-    public Position2D getPos();
+    public Position2D getPosition();
 
     /**
      * Two tiles are considered equal if they have the same position

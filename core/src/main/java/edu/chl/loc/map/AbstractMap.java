@@ -1,5 +1,7 @@
 package edu.chl.loc.map;
 
+import edu.chl.loc.utilities.Position2D;
+
 import java.util.*;
 
 /**
@@ -18,23 +20,22 @@ public abstract class AbstractMap {
      * or not. If the tile can't be found, an exception is thrown.
      *
      * @param layer The layer on which to check
-     * @param x The x coordinate of the tile to check
-     * @param y THe y coordinate of the tile to check
+     * @param position The position of the tile to check
      * @throws java.lang.IllegalArgumentException If the specified tile and layer doesn't exist
      * @return Returns true if the specified tile is collidable, false otherwise
      */
-    public boolean isCollidable(ILayer layer, int x, int y) {
+    public boolean isCollidable(ILayer layer, Position2D position) {
         if (!mapTiles.containsKey(layer)) {
             throw new IllegalArgumentException("The layer specified does not exist");
         }
 
         for (ITile tile : mapTiles.get(layer)) {
-            if (tile.getX() == x && tile.getY() == y) {
+            if (tile.getPosition().equals(position)) {
                 return tile.isCollidable();
             }
         }
 
-        throw new IllegalArgumentException("The tile specified at x=" + x +" and y=" + y + ", does not exist");
+        throw new IllegalArgumentException("The tile specified at " + position + ", does not exist");
     }
 
     /**
@@ -42,23 +43,22 @@ public abstract class AbstractMap {
      * If the tile can't be found, an exception is thrown.
      *
      * @param layer The layer on which to get
-     * @param x The x coordinate of the tile to get
-     * @param y THe y coordinate of the tile to get
+     * @param position The Position of the tile to get
      * @throws java.lang.IllegalArgumentException If the specified tile and layer doesn't exist
      * @return Returns the specified tile
      */
-    public ITile getTile(ILayer layer, int x, int y) {
+    public ITile getTile(ILayer layer, Position2D position) {
         if (!mapTiles.containsKey(layer)) {
             throw new IllegalArgumentException("The layer \"" + layer + "\" does not exist");
         }
 
         for (ITile tile : mapTiles.get(layer)) {
-            if (tile.getX() == x && tile.getY() == y) {
+            if (tile.getPosition().equals(position)) {
                 return tile;
             }
         }
 
-        throw new IllegalArgumentException("The tile specified at x=" + x +" and y=" + y + ", does not exist");
+        throw new IllegalArgumentException("The tile specified at " + position+ ", does not exist");
     }
 
     /**
