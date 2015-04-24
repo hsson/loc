@@ -17,7 +17,6 @@ import edu.chl.loc.utilities.Position2D;
 public abstract class AbstractCharacter {
     private Direction currentDirection;
     private Position2D currentPosition;
-    private Inventory inventory;
     private String characterName;
     private final String DEFAULT_NAME = "Emil";
     private Gender gender = Gender.MALE;
@@ -29,7 +28,6 @@ public abstract class AbstractCharacter {
     public AbstractCharacter(Position2D pos) {
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
-        inventory = new Inventory();
         characterName = DEFAULT_NAME;
 
     }
@@ -42,7 +40,6 @@ public abstract class AbstractCharacter {
     public AbstractCharacter(Position2D pos, Direction direction) {
         currentDirection = direction;
         currentPosition = pos;
-        inventory = new Inventory();
         characterName = DEFAULT_NAME;
     }
 
@@ -56,25 +53,22 @@ public abstract class AbstractCharacter {
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
         this.characterName = name;
-        this.inventory = inventory.copy();
     }
+
 
     /**
      * Creates an abstractCharacter with a given position, direction, name and inventory
      * @param pos The position to use
      * @param direction The direction to use
      * @param name The name to use
-     * @param inventory The inventory to use
      */
-    public AbstractCharacter(Position2D pos, Direction direction, String name, Inventory inventory, Gender gender){
+    public AbstractCharacter(Position2D pos, Direction direction, String name, Gender gender){
         this.currentPosition = pos;
         this.currentDirection = direction;
         this.characterName = name;
-        this.inventory = new Inventory(inventory);
         this.gender = gender;
 
     }
-
     /**
      *
      * Creates an abstractCharacter on a given position and a given name, with North as default direction, and with an empty inventory
@@ -85,7 +79,6 @@ public abstract class AbstractCharacter {
         currentPosition = pos;
         currentDirection = Direction.NORTH; //default direction is North.
         this.characterName = name;
-        this.inventory = inventory.copy();
     }
     /**
      Move character 1 step in a given direction
@@ -189,22 +182,6 @@ public abstract class AbstractCharacter {
 
     public String getName(){
         return characterName;
-    }
-
-    /**
-     * Sets an inventory to this character
-     * @param inventory Inventory you want to set for the character
-     */
-    public void setInventory(Inventory inventory){
-        this.inventory = inventory.copy();
-    }
-
-    /**
-     * Get players inventory
-     * @return Copy of players inventory
-     */
-    public Inventory getInventory(){
-            return this.inventory.copy();
     }
 
 
