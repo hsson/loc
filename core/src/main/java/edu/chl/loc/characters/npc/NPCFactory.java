@@ -13,40 +13,40 @@ import edu.chl.loc.utilities.Position2D;
  */
 public class NPCFactory {
     /**
-     * Creates an NPC with a given position, standard direction (north),
+     * Creates an AbstractNPC with a given position, standard direction (north),
      * empty inventory and random other values
-     * @return A new NPC object with given values and randomized other values
+     * @return A new AbstractNPC object with given values and randomized other values
      */
-    public static NPC createNPC(Position2D position){
+    public static AbstractNPC createNPC(Position2D position){
         Gender gender = CharacterUtilities.generateGender();
         String name = CharacterUtilities.generateName(gender);
-        NPC npc = new NPC(position, Direction.NORTH, name, new Inventory(), gender);
+        AbstractNPC npc = new AbstractNPC(position, Direction.NORTH, name, new Inventory(), gender);
         return npc;
     }
 
     /**
-     * Creates an NPC with given values and randomizes name and gender
-     * @param position The position of the NPC
-     * @param direction The direction of the NPC
+     * Creates an AbstractNPC with given values and randomizes name and gender
+     * @param position The position of the AbstractNPC
+     * @param direction The direction of the AbstractNPC
      * @param inventory The NPCs inventory
-     * @return An NPC with given values and randomized name and gender
+     * @return An AbstractNPC with given values and randomized name and gender
      */
-    public static NPC createNPC(Position2D position, Direction direction, Inventory inventory){
+    public static AbstractNPC createNPC(Position2D position, Direction direction, Inventory inventory){
         Gender gender = CharacterUtilities.generateGender();
         String name = CharacterUtilities.generateName(gender);
-        return new NPC(position,direction,name,inventory,gender);
+        return new AbstractNPC(position,direction,name,inventory,gender);
     }
 
     /**
-     * Creates and returns an NPC with all given values
-     * @param position The position for the NPC
+     * Creates and returns an AbstractNPC with all given values
+     * @param position The position for the AbstractNPC
      * @param direction The NPCs direction
      * @param name The NPCs name
      * @param inventory The NPCs inventory
-     * @param gender The gender of the NPC
+     * @param gender The gender of the AbstractNPC
      * @return A new
      */
-    public static NPC createNPC(Position2D position, Direction direction, String name, Inventory inventory, Gender gender){
-        return new NPC(position, direction, name, inventory, gender);
+    public static AbstractNPC createNPC(Position2D position, Direction direction, String name, Inventory inventory, Gender gender){
+        return new AbstractNPC(position, direction, name, inventory, gender);
     }
 }
