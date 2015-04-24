@@ -10,11 +10,9 @@ import edu.chl.loc.utilities.Position2D;
  *
  * Revised by Alexander Håkansson
  */
-public class ItemTile implements ITile {
+public class ItemTile extends AbstractTile {
 
     private AbstractItem item;
-    private boolean isCollidable; //default value is false
-    private Position2D currentPosition;
     private boolean isItemSet = true;
 
     /**
@@ -23,19 +21,8 @@ public class ItemTile implements ITile {
      * @param position The position you want this tile to have
      */
     public ItemTile(AbstractItem item, Position2D position){
+        super(position);
         this.item = item.copy();
-        currentPosition = position.copy();
-
-    }
-
-    @Override
-    public boolean isCollidable() {
-        return this.isCollidable;
-    }
-
-    @Override
-    public void setIsCollidable(boolean isCollidable) {
-        this.isCollidable = isCollidable;
 
     }
 
@@ -50,18 +37,13 @@ public class ItemTile implements ITile {
         return isItemSet;
     }
 
-    @Override
-    public Position2D getPosition() {
-        return this.currentPosition;
-    }
-
     /**
      *
      * @param pos you want to compare with
      * @return true if the given pos is the same pos as this tile
      */
     public boolean isOverlapping(Position2D pos){
-        return currentPosition.equals(pos);
+        return this.getPosition().equals(pos);
     }
 
     /**
