@@ -14,14 +14,13 @@ public class GameState {
     // The starting position of the player
     public static final Position2D STARTING_POS = new Position2D(0, 0);
 
-    private final Player player;
+    private static final Player player = new Player(STARTING_POS);
     private GameMap gameMap;
 
     //TODO: come up with a better idea to save score
     private double hec;
 
     public GameState() {
-        player = new Player(STARTING_POS);
         gameMap = new GameMap();
         hec = 0;
     }
@@ -31,8 +30,8 @@ public class GameState {
      *
      * @return The player
      */
-    public Player getPlayer() {
-        return this.player;
+    public static Player getPlayer() {
+        return player;
     }
 
     /**

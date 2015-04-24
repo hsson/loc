@@ -5,6 +5,8 @@ import java.util.Random;
 /**
  * Created by maxim on 15-04-22.
  * @author Maxim Goretskyy
+ *
+ * Revised by Alexander Håkansson
  */
 public class CharacterUtilities {
 
@@ -17,6 +19,10 @@ public class CharacterUtilities {
     private static Gender[] genderArray = {Gender.FEMALE, Gender.MALE};
 
     private static Random randomGen = new Random();
+
+    private CharacterUtilities() {
+        // Private constructor for disabling instantiation
+    }
 
     /**
      *
