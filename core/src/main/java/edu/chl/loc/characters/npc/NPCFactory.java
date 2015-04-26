@@ -10,7 +10,7 @@ import edu.chl.loc.utilities.Position2D;
 /**
  * Factory class used for creating NPCs
  * @author Alexander Karlsson
- * @version 1.0
+ * @version 1.1
  */
 public class NPCFactory {
     private static String name = null;
@@ -18,6 +18,7 @@ public class NPCFactory {
     private static Direction direction = null;
     private static Inventory inventory = null;
     private static IMinigame minigame = null;
+    private static Dialog dialog = null;
 
     /**
      * Sets the name of the NPC currently being built
@@ -70,6 +71,14 @@ public class NPCFactory {
     }
 
     /**
+     * Sets the dialog of the NPC being built
+     * @param dialog The dialog of the NPC to create
+     */
+    public static void setDialog(Dialog dialog){
+        NPCFactory.dialog = dialog;
+    }
+
+    /**
      * Checks if the current build has an inventory set
      * @return True if an inventory is set, false otherwise
      */
@@ -107,6 +116,7 @@ public class NPCFactory {
         Direction direction;
         Inventory inventory;
         IMinigame minigame;
+        Dialog dialog;
 
         if(NPCFactory.gender == null){
             gender = CharacterUtilities.generateGender();
@@ -126,18 +136,24 @@ public class NPCFactory {
             direction = NPCFactory.direction;
         }
 
+        if(NPCFactory.dialog == null){
+            dialog = CharacterUtilities.generateDialog();
+        }else{
+            dialog = NPCFactory.dialog;
+        }
+
         if(isInventorySet()){
             inventory = NPCFactory.inventory;
             NPCFactory.reset();
-            return new ItemNPC(position,direction,name,gender);
+            return new ItemNPC(position,direction,name,gender,inventory,dialog);
         }
 
         if(isMinigameSet()){
             minigame = NPCFactory.minigame;
             NPCFactory.reset();
-            return new MinigameNPC(position,direction,name,gender,minigame);
+            return new MinigameNPC(position,direction,name,gender,minigame,dialog);
         }
 
-        return new StandardNPC(position,direction,name,gender);
+        return new StandardNPC(position,direction,name,gender,dialog);
     }
 }
