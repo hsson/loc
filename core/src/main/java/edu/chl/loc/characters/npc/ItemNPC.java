@@ -13,8 +13,9 @@ public class ItemNPC extends AbstractNPC{
     private Inventory inventory;
 
 
-    protected ItemNPC(Position2D pos, Direction dir, String name,  Gender gender) {
-        super(pos, dir, name, gender);
+    protected ItemNPC(Position2D pos, Direction dir, String name,  Gender gender, Inventory inventory, Dialog dialog) {
+        super(pos, dir, name, gender, dialog);
+        this.inventory = inventory;
     }
 
     @Override
