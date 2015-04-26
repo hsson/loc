@@ -22,6 +22,10 @@ public class Player extends AbstractCharacter {
         this.inventory = inventory.copy();
     }
 
+    public Player(Position2D pos){
+        super(pos);
+    }
+
 
     /**
      * Sets an inventory to this character
@@ -38,7 +42,7 @@ public class Player extends AbstractCharacter {
     public Inventory getInventory(){
         return this.inventory.copy();
     }
-
+    
 }
 
 
