@@ -1,4 +1,4 @@
-package edu.chl.loc.map;
+package edu.chl.loc.models.map;
 
 import org.junit.After;
 import org.junit.Assert;

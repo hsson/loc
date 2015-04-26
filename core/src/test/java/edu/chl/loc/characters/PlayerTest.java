@@ -1,7 +1,7 @@
-package edu.chl.loc.characters;
+package edu.chl.loc.models.characters;
 
-import edu.chl.loc.characters.utilities.Direction;
-import edu.chl.loc.utilities.Position2D;
+import edu.chl.loc.models.characters.utilities.Direction;
+import edu.chl.loc.models.utilities.Position2D;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
