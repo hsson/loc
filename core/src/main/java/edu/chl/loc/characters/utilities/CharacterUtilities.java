@@ -1,5 +1,7 @@
 package edu.chl.loc.characters.utilities;
 
+import edu.chl.loc.characters.npc.Dialog;
+
 import java.util.Random;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Random;
  * @author Maxim Goretskyy
  *
  * Revised by Alexander Håkansson
+ * Revised by Alexander Karlsson
  */
 public class CharacterUtilities {
 
@@ -55,6 +58,16 @@ public class CharacterUtilities {
                 }
                 return femaleNames[randomGen.nextInt(femaleNames.length)];
         }
+    }
+
+    /**
+     * Generates a standard dialog with no action
+     * @return A dialog that can be used by any NPC
+     *         that is not important
+     */
+    public static Dialog generateDialog(){
+        //todo: Implement this
+        return null;
     }
 
 
