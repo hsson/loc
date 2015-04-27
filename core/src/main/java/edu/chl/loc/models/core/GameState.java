@@ -1,6 +1,8 @@
 package edu.chl.loc.models.core;
 
 import edu.chl.loc.models.characters.Player;
+import edu.chl.loc.models.characters.utilities.Direction;
+import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.map.GameMap;
 import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.models.utilities.Stats;
@@ -9,13 +11,15 @@ import edu.chl.loc.models.utilities.Stats;
  * @author Alexander Håkansson
  * @version 1.0.0
  * @since 2015-04-12
+ * revised by Maxim Goretskyy
  */
 public class GameState {
 
     // The starting position of the player
     public static final Position2D STARTING_POS = new Position2D(0, 0);
 
-    private static final Player player = new Player(STARTING_POS);
+
+    private static Player player = new Player(STARTING_POS, Direction.NORTH, "Emil", Gender.MALE);
     private GameMap gameMap;
 
     //TODO: come up with a better idea to save score
