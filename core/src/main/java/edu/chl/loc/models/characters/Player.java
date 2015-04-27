@@ -17,15 +17,10 @@ import edu.chl.loc.models.utilities.Position2D;
 public class Player extends AbstractCharacter {
     private Inventory inventory;
 
-    public Player(Position2D pos, Direction direction, String name, Gender gender, Inventory inventory) {
+    public Player(Position2D pos, Direction direction, String name, Gender gender) {
         super(pos, direction, name, gender);
-        this.inventory = inventory.copy();
+        this.inventory = new Inventory();
     }
-
-    public Player(Position2D pos){
-        super(pos);
-    }
-
 
     /**
      * Sets an inventory to this character
@@ -37,12 +32,13 @@ public class Player extends AbstractCharacter {
 
     /**
      * Get players inventory
-     * @return Copy of players inventory
+     * @return Players inventory
      */
     public Inventory getInventory(){
-        return this.inventory.copy();
+        return this.inventory;
+
     }
-    
+
 }
 
 
