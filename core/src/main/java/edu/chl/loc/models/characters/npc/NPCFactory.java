@@ -10,6 +10,7 @@ import edu.chl.loc.models.utilities.Position2D;
 /**
  * Factory class used for creating NPCs
  * @author Alexander Karlsson
+ * @revised by Maxim Goretskyy
  * @version 1.1
  */
 public class NPCFactory {
@@ -20,6 +21,10 @@ public class NPCFactory {
     private static IMinigame minigame = null;
     private static Dialog dialog = null;
 
+    //private constructor to prevent from instantiating
+    private NPCFactory(){
+
+    }
     /**
      * Sets the name of the NPC currently being built
      * @param name The name of the NPC to create
