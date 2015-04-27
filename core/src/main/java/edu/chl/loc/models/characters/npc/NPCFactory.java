@@ -125,7 +125,7 @@ public class NPCFactory {
         }
 
         if(NPCFactory.name == null){
-            name = CharacterUtilities.generateName(NPCFactory.gender);
+            name = CharacterUtilities.generateName(gender);
         }else{
             name = NPCFactory.name;
         }
