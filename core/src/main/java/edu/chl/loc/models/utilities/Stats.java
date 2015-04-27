@@ -10,10 +10,10 @@ import java.util.Map;
  */
 public class Stats {
 
-    private static double hec = 0;
-    private static Map<String, Double> playerStats = new HashMap<String, Double>();
+    private double hec = 0;
+    private Map<String, Double> playerStats = new HashMap<String, Double>();
 
-    public static void addPlayerStat(String key, Double value){
+    public void addPlayerStat(String key, Double value){
         if(playerStats.containsKey(key)){
             double prevValue = playerStats.get(key);
             value = prevValue + value;
@@ -21,15 +21,15 @@ public class Stats {
         playerStats.put(key, value);
     }
 
-    public static double getPlayerStat(String key){
+    public double getPlayerStat(String key){
         return playerStats.get(key);
     }
 
-    public static void addHec(double addition){
+    public void addHec(double addition){
         hec += addition;
     }
 
-    public static double getHec(){
+    public double getHec(){
         return hec;
     }
 }

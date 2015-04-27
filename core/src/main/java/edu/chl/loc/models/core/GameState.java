@@ -3,6 +3,7 @@ package edu.chl.loc.models.core;
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.map.GameMap;
 import edu.chl.loc.models.utilities.Position2D;
+import edu.chl.loc.models.utilities.Stats;
 
 /**
  * @author Alexander Håkansson
@@ -18,11 +19,11 @@ public class GameState {
     private GameMap gameMap;
 
     //TODO: come up with a better idea to save score
-    private double hec;
+    private Stats stats;
 
     public GameState() {
         gameMap = new GameMap();
-        hec = 0;
+        stats = new Stats();
     }
 
     /**
@@ -43,11 +44,19 @@ public class GameState {
         return this.gameMap;
     }
 
+    public void addPlayerStat(String key, double value){
+        stats.addPlayerStat(key, value);
+    }
+
+    public double getPlayerStat(String key){
+        return stats.getPlayerStat(key);
+    }
+
     public void addHec(double amount){
-        this.hec += amount;
+        stats.addHec(amount);
     }
 
     public double getHec(){
-        return this.hec;
+        return stats.getHec();
     }
 }
