@@ -1,6 +1,7 @@
 package edu.chl.loc.models.characters;
 
 import edu.chl.loc.models.characters.utilities.Direction;
+import edu.chl.loc.models.items.Inventory;
 import edu.chl.loc.models.utilities.Position2D;
 import org.junit.After;
 import org.junit.Assert;
@@ -24,8 +25,8 @@ public class PlayerTest {
 
     @Before
     public void testSetup() {
-        player = new Player(new Position2D(4,4));
-        otherPlayer = new Player(new Position2D());
+        player = new Player(new Position2D(4,4), Direction.NORTH, null, null);
+        otherPlayer = new Player(new Position2D(), Direction.NORTH, null, null);
     }
 
     @Test
@@ -36,6 +37,7 @@ public class PlayerTest {
     }
     @Test
     public void testPlayerName(){
+        player.setName("Emil");
         Assert.assertEquals("The player's name should be Emil", "Emil", player.getName());
         player.setName("AnyOtherName");
         Assert.assertEquals("The player's name should be Emil", "AnyOtherName", player.getName());
@@ -57,8 +59,8 @@ public class PlayerTest {
     @Test
     public void testPlayerEquality(){
         //Players are considered the same, if their position is the same.
-        thirdPlayer = new Player(new Position2D(1337, 9000));
-        fourthPlayer= new Player(new Position2D(1337, 9000));
+        thirdPlayer = new Player(new Position2D(1337, 9000), Direction.NORTH, null, null);
+        fourthPlayer= new Player(new Position2D(1337, 9000), Direction.NORTH, null, null);
         Assert.assertEquals("Test equality of two players by their position", fourthPlayer, thirdPlayer);
 
     }
