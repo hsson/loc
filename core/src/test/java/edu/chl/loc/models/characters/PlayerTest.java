@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Revised by Alexander Håkansson
+ *
  * @author  Maxim
  * @version 1.0.0
  * @since 2015-04-11
@@ -29,20 +31,20 @@ public class PlayerTest {
     @Test
     public void testPlayerMovement() {
         player.move();
-        Assert.assertEquals("The players new Y position should be 1 higher", true, player.getY() == 5);
+        Assert.assertEquals("The players new Y position should be 1 higher", new Position2D(4, 5), player.getPosition());
 
     }
     @Test
     public void testPlayerName(){
-        Assert.assertEquals("The player's name should be Emil", true, player.getName().equals("Emil"));
+        Assert.assertEquals("The player's name should be Emil", "Emil", player.getName());
         player.setName("AnyOtherName");
-        Assert.assertEquals("The player's name should be Emil",true,  player.getName().equals("AnyOtherName"));
+        Assert.assertEquals("The player's name should be Emil", "AnyOtherName", player.getName());
     }
 
     @Test
     public void testPlayerDirection(){
         player.setDirection(Direction.EAST);
-        Assert.assertEquals("The player's name should be Emil", true, player.getDirection().equals(Direction.EAST));
+        Assert.assertEquals("The player's name should be Emil", Direction.EAST, player.getDirection());
     }
     @Test
     public void testPlayerMovingOneDirection(){
@@ -50,14 +52,14 @@ public class PlayerTest {
         for(int steps = 0; steps < 10; steps ++){
             otherPlayer.move();
         }
-        Assert.assertEquals("The player's position in Y axis should be - 10", true, otherPlayer.getPosition().equals(new Position2D(0,-10)));
+        Assert.assertEquals("The player's position in Y axis should be - 10", new Position2D(0,-10), otherPlayer.getPosition());
     }
     @Test
     public void testPlayerEquality(){
         //Players are considered the same, if their position is the same.
         thirdPlayer = new Player(new Position2D(1337, 9000));
         fourthPlayer= new Player(new Position2D(1337, 9000));
-        Assert.assertEquals("Test equality of two players by their position", true, thirdPlayer.equals(fourthPlayer));
+        Assert.assertEquals("Test equality of two players by their position", fourthPlayer, thirdPlayer);
 
     }
 

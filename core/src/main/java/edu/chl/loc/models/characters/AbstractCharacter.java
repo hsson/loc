@@ -162,20 +162,6 @@ public abstract class AbstractCharacter {
         return currentDirection;
     }
 
-    /**
-     @return X coordinate of character's current position
-     */
-    public double getX(){
-        return getPosition().getX();
-    }
-
-    /**
-     @return Y coordinate of character's current position
-     */
-    public double getY(){
-        return getPosition().getY();
-    }
-
     public void setName(String name){
         this.characterName = name;
     }
