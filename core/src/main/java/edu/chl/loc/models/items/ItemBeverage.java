@@ -1,6 +1,6 @@
 package edu.chl.loc.models.items;
 
-import edu.chl.loc.models.core.GameState;
+import edu.chl.loc.models.core.GameModel;
 
 /**
  * Created by Maxim on 15-04-14.
@@ -30,7 +30,7 @@ public class ItemBeverage extends AbstractItem{
      * @param state
      */
     @Override
-    public void use(GameState state) {
+    public void use(GameModel state) {
         state.addHec(3);
         System.out.println("You drank a beer");
     }
