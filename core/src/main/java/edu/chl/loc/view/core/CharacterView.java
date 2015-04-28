@@ -6,8 +6,9 @@ import edu.chl.loc.models.characters.AbstractCharacter;
 
 /**
  * Created by maxim on 15-04-28.
+ * @author Maxim Goretskyy
  */
-public class CharacterView {
+public class CharacterView implements IView{
     private AbstractCharacter absCharacter;
     private Texture charTexture;
     private SpriteBatch spriteBatch;
@@ -15,7 +16,7 @@ public class CharacterView {
     public CharacterView(AbstractCharacter absCharacter, Texture texture){
         this.absCharacter = absCharacter;
         this.charTexture = texture;
-        this.spriteBatch = GameView.getSpriteBatch(); //not finished
+        this.spriteBatch = GameView.getSpriteBatch();
 
     }
 
