@@ -16,14 +16,14 @@ import java.util.Scanner;
  */
 public class TerminalGame {
 
-    private final GameState gameState;
+    private final GameModel gameModel;
 
     private final int boardSize = 10;
 
     private Scanner scanner = new Scanner(System.in);
 
     public TerminalGame() {
-        gameState = new GameState();
+        gameModel = new GameModel();
 
         setupGame();
         gameLoop();
@@ -32,7 +32,7 @@ public class TerminalGame {
     public void setupGame() {
         int beerAmount = 2;
         Random ranGen = new Random();
-        GameMap map = gameState.getGameMap();
+        GameMap map = gameModel.getGameMap();
         ILayer groundLayer = new Layer("ground");
         map.addLayer(new Layer("ground"));
         //generate beers first
@@ -44,7 +44,7 @@ public class TerminalGame {
                 map.addTile(groundLayer, new Tile(new Position2D(x, y), Math.random() < 0.05));
             }
         }
-        Position2D playerPos = GameState.getPlayer().getPosition();
+        Position2D playerPos = GameModel.getPlayer().getPosition();
         map.getTile(groundLayer, playerPos).setIsCollidable(false);
     }
 
@@ -53,7 +53,7 @@ public class TerminalGame {
             drawGame();
             System.out.println("Move in any direction (w,a,s,d).");
             System.out.print("> ");
-            Player p = GameState.getPlayer();
+            Player p = GameModel.getPlayer();
             switch (scanner.nextLine().toCharArray()[0]) {
                 case 's':
                     // down is NORTH because of reversed y-axis
@@ -73,15 +73,15 @@ public class TerminalGame {
             //System.out.print("\033\143"); //will simulate a terminal buffer, only tested on OSX so far.
                                             //Comment out the print if it doesn't work
                                             //MUST RUN INSIDE TERMINAL; NOT IDE CONSOLE
-            if (!gameState.getGameMap().getTile(new Layer("ground"), p.getNextPosition()).isCollidable()) {
+            if (!gameModel.getGameMap().getTile(new Layer("ground"), p.getNextPosition()).isCollidable()) {
                 p.move();
             }
-            ITile tempTile = gameState.getGameMap().getTile(new Layer("ground"),p.getPosition());
+            ITile tempTile = gameModel.getGameMap().getTile(new Layer("ground"),p.getPosition());
             if(tempTile.hasItem()){ //
                 ItemTile itemTile = (ItemTile)tempTile; //only itemtile can have items
                                                         //so this will work w/o checking classes
                 try {
-                    itemTile.takeItem().use(gameState);
+                    itemTile.takeItem().use(gameModel);
                 } catch (EmptyTileException e) {
                     e.printStackTrace();
                 }
@@ -93,12 +93,12 @@ public class TerminalGame {
     }
 
     public void drawGame() {
-       GameMap map = gameState.getGameMap();
+       GameMap map = gameModel.getGameMap();
         for (int y = 0; y < boardSize; y++) {
             for (int x = 0; x < boardSize; x++) {
                 for (ILayer l : map.getLayers()) {
                  ITile t = map.getTile(l, new Position2D(x, y));
-                    if (GameState.getPlayer().getPosition().equals(new Position2D(x, y))) {
+                    if (GameModel.getPlayer().getPosition().equals(new Position2D(x, y))) {
                         System.out.print("p");
                     } else if (t.isCollidable()) {
                         System.out.print("#");

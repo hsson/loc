@@ -13,7 +13,7 @@ import edu.chl.loc.models.utilities.Stats;
  * @since 2015-04-12
  * revised by Maxim Goretskyy
  */
-public class GameState {
+public class GameModel {
 
     // The starting position of the player
     public static final Position2D STARTING_POS = new Position2D(0, 0);
@@ -25,7 +25,7 @@ public class GameState {
     //TODO: come up with a better idea to save score
     private Stats stats;
 
-    public GameState() {
+    public GameModel() {
         gameMap = new GameMap();
         stats = new Stats();
     }

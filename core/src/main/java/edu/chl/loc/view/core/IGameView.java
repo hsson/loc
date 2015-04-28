@@ -1,6 +1,7 @@
 package edu.chl.loc.view.core;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import edu.chl.loc.models.core.GameModel;
 
 /**
  * @author Alexander Håkansson
@@ -8,5 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @since 2015-04-28
  */
 public interface IGameView {
+
+    public static final int GRID_SIZE = 32;
+
     public SpriteBatch getSpriteBatch();
+    public GameModel getGameModel();
 }

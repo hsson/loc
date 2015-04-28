@@ -1,7 +1,7 @@
 package edu.chl.loc.models.items;
 
 
-import edu.chl.loc.models.core.GameState;
+import edu.chl.loc.models.core.GameModel;
 
 /**
  * A class to represent items in different places
@@ -70,5 +70,5 @@ public abstract class AbstractItem{
      * Whatever the item is supposed to do happens in this method
      * It has access to the whole game
      */
-    public abstract void use(GameState state);
+    public abstract void use(GameModel state);
 }
