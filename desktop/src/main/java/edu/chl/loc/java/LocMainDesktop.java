@@ -3,7 +3,7 @@ package edu.chl.loc.java;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import edu.chl.loc.models.core.LocMain;
+import edu.chl.loc.LocMain;
 
 public class LocMainDesktop {
 	public static void main (String[] args) {
