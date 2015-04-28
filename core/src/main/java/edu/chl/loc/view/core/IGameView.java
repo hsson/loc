@@ -9,6 +9,9 @@ import edu.chl.loc.models.core.GameModel;
  * @since 2015-04-28
  */
 public interface IGameView {
+
+    public static final int GRID_SIZE = 32;
+
     public SpriteBatch getSpriteBatch();
     public GameModel getGameModel();
 }
