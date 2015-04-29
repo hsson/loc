@@ -7,9 +7,14 @@ import edu.chl.loc.models.core.GameModel;
 /**
  * Top level class for the view of loc
  * @author Alexander Karlsson
- * @version 0.1.2
+ * @version 0.2.0
+ *
+ * Revised by Alexander Håkansson
  */
 public class GameView implements Screen{
+
+    public static final int GRID_SIZE = 32; // Size in pixels of each cell in grid
+
     private static SpriteBatch batch = new SpriteBatch();//Will be used by other views
     private GameModel model;
     private IView playerView;

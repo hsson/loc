@@ -4,12 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.chl.loc.models.characters.AbstractCharacter;
 import edu.chl.loc.view.core.GameView;
-import edu.chl.loc.view.core.IGameView;
 import edu.chl.loc.view.core.IView;
 
 /**
  * Created by maxim on 15-04-28.
  * @author Maxim Goretskyy
+ *
+ * Revised by Alexander Håkansson
  */
 public class CharacterView implements IView {
     private AbstractCharacter absCharacter;
@@ -26,7 +27,7 @@ public class CharacterView implements IView {
 
     public void render(){
         spriteBatch.begin();
-        spriteBatch.draw(charTexture, absCharacter.getPosition().getX() * IGameView.GRID_SIZE, absCharacter.getPosition().getY()*IGameView.GRID_SIZE);
+        spriteBatch.draw(charTexture, absCharacter.getPosition().getX() * GameView.GRID_SIZE, absCharacter.getPosition().getY()*GameView.GRID_SIZE);
         spriteBatch.end();
 
     }
