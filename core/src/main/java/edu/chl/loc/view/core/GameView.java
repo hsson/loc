@@ -32,7 +32,7 @@ public class GameView implements Screen{
      * can share spritebatch with GameView
      * @return The spritebatch
      */
-    protected static SpriteBatch getSpriteBatch() {
+    public static SpriteBatch getSpriteBatch() {
         return GameView.batch;
     }
 
