@@ -3,6 +3,7 @@ package edu.chl.loc.view.characters;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.chl.loc.models.characters.AbstractCharacter;
+import edu.chl.loc.view.core.GameView;
 import edu.chl.loc.view.core.IGameView;
 import edu.chl.loc.view.core.IView;
 
