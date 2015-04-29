@@ -3,11 +3,13 @@ package edu.chl.loc;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.chl.loc.controller.GameController;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.view.core.GameView;
 
+/**
+ * @author Alexander Håkansson
+ */
 public class LocMain extends Game {
 	private float elapsed;
     private float delta;
