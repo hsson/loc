@@ -7,7 +7,7 @@ import edu.chl.loc.models.core.GameModel;
 /**
  * Top level class for the view of loc
  * @author Alexander Karlsson
- * @version 0.1.1
+ * @version 0.1.2
  */
 public class GameView implements Screen{
     private static SpriteBatch batch = new SpriteBatch();//Will be used by other views
@@ -32,7 +32,7 @@ public class GameView implements Screen{
      * can share spritebatch with GameView
      * @return The spritebatch
      */
-    public static SpriteBatch getSpriteBatch() {
+    protected static SpriteBatch getSpriteBatch() {
         return GameView.batch;
     }
 
