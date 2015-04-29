@@ -25,10 +25,7 @@ public class CharacterView implements IView {
 
 
     public void render(){
-        spriteBatch.begin();
-        spriteBatch.draw(charTexture, absCharacter.getPosition().getX() * IGameView.GRID_SIZE, absCharacter.getPosition().getY()*IGameView.GRID_SIZE);
-        spriteBatch.end();
-
+        spriteBatch.draw(charTexture, absCharacter.getPosition().getX() * IGameView.GRID_SIZE,
+                absCharacter.getPosition().getY()*IGameView.GRID_SIZE);
     }
-
 }
