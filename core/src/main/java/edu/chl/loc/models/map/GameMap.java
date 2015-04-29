@@ -60,21 +60,6 @@ public class GameMap extends AbstractMap {
     }
 
     /**
-     * Get the AbstractNPC on the specified position. This only gets the first AbstractNPC
-     * and if there happen to be more than one AbstractNPC on the same position
-     * this will only get one. If no AbstractNPC can be found on the given position,
-     * and exception will be thrown.
-     *
-     * @param x The position in the x-axis of the AbstractNPC to get
-     * @param y The position in the y-axis of the AbstractNPC to get
-     * @return The AbstractNPC at the specified position
-     * @throws java.lang.IllegalArgumentException If there is not AbstractNPC at the given position
-     */
-    public AbstractNPC getNPCAtPosition(int x, int y) {
-        return getNPCAtPosition(new Position2D(x, y));
-    }
-
-    /**
      * Check if there is any AbstractNPC at the given position on the map.
      *
      * @param pos The position to check for an AbstractNPC
@@ -88,16 +73,5 @@ public class GameMap extends AbstractMap {
         }
 
         return false;
-    }
-
-    /**
-     * Check if there is any AbstractNPC at the given position on the map.
-     *
-     * @param x The position in the x-axis to check for an AbstractNPC
-     * @param y The position in the y-axis to check for an AbstractNPC
-     * @return True if there is any AbstractNPC at the given position, false otherwise
-     */
-    public boolean npcExistsAtPosition(int x, int y) {
-        return npcExisitsAtPosition(new Position2D(x, y));
     }
 }
