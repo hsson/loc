@@ -1,19 +1,26 @@
 package edu.chl.loc.controller;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import edu.chl.loc.models.characters.Player;
+import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.core.GameModel;
 
 /**
  * @author Alexander Håkansson
+ * @author Maxim Goretskyy
  * @version 0.1.0
  * @since 2015-04-30
  */
 public class GameController implements InputProcessor {
 
     private final GameModel model;
+    private Player player;
 
     public GameController(GameModel model) {
         this.model = model;
+        this.player = model.getPlayer();
+
     }
 
     @Override
@@ -23,6 +30,25 @@ public class GameController implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
+        switch(keycode){
+            case  Input.Keys.LEFT:
+                player.setDirection(Direction.WEST);
+                break;
+
+            case  Input.Keys.RIGHT:
+                player.setDirection(Direction.EAST);
+                break;
+
+            case  Input.Keys.UP:
+                player.setDirection(Direction.NORTH);
+                break;
+
+            case  Input.Keys.DOWN:
+                player.setDirection(Direction.SOUTH);
+                break;
+        }
+        player.move();
+        updateViews();
         return false;
     }
 
@@ -54,5 +80,10 @@ public class GameController implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    //Todo update views in this method
+    public void updateViews(){
+
     }
 }
