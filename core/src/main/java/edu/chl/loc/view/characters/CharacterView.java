@@ -16,6 +16,11 @@ public class CharacterView implements IView {
     private Texture charTexture;
     private SpriteBatch spriteBatch;
 
+    /**
+     *
+     * @param absCharacter the character you want to view
+     * @param texture The texture you want this character to have
+     */
     public CharacterView(AbstractCharacter absCharacter, Texture texture){
         this.absCharacter = absCharacter;
         this.charTexture = texture;
@@ -23,7 +28,9 @@ public class CharacterView implements IView {
 
     }
 
-
+    /**
+     * Renders the texture of the character and the characters position
+     */
     public void render(){
         spriteBatch.draw(charTexture, absCharacter.getPosition().getX() * IGameView.GRID_SIZE,
                 absCharacter.getPosition().getY()*IGameView.GRID_SIZE);
