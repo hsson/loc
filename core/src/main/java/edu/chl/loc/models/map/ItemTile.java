@@ -65,12 +65,12 @@ public class ItemTile extends AbstractTile {
 
     /**
      *
-     * @return the copy of the item that is on this site AND unsetsItem from this tile.
+     * @return the item that is on this site AND unsetsItem from this tile.
      */
     public AbstractItem takeItem() throws EmptyTileException{
         if(isItemSet) {
             unsetItem();
-            return this.item.copy();
+            return this.item;
         }
         throw new EmptyTileException("No item on this tile"); //Todo throw own exception later on
     }
