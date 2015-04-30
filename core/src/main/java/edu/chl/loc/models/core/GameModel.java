@@ -4,6 +4,7 @@ import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.map.GameMap;
+import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.models.utilities.Stats;
 
@@ -62,5 +63,12 @@ public class GameModel {
 
     public double getHec(){
         return stats.getHec();
+    }
+
+    public void moveCharacter(Position2D nextPos) {
+                                    //todo fix the layer
+        if(!gameMap.isCollidable(new Layer("NonexistableLayerJustFillingOut"), nextPos)){
+            player.move();
+        }
     }
 }

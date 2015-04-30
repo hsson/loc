@@ -39,13 +39,10 @@ public class GameController implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        Position2D nextPos = player.getNextPosition();
-        //if(gameMap.isCollidable(new Layer("NonexistableLayerJustFillingOut"), nextPos))
-        //todo choose a name for players layer where he moves
-        //get tile from next position and see if its collidable with nextPos
-        chooseMovement(keycode);
-        player.move();
-        updateViews();
+
+        chooseDirection(keycode);//sets direction of player depends what you click
+        model.moveCharacter(player.getNextPosition());//sends information about next position to model
+                                                        //model will decide if it can move
         return false;
     }
 
@@ -79,7 +76,7 @@ public class GameController implements InputProcessor {
         return false;
     }
 
-    public void chooseMovement(int keycode){
+    public void chooseDirection(int keycode){
         switch(keycode){
             case  Input.Keys.LEFT:
                 player.setDirection(Direction.WEST);
@@ -98,10 +95,5 @@ public class GameController implements InputProcessor {
                 break;
         }
     }
-    //Todo update views in this method
-    public void updateViews(){
-
-    }
-
 
 }
