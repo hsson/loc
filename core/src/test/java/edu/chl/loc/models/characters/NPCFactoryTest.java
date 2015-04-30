@@ -5,12 +5,11 @@ import edu.chl.loc.models.items.Inventory;
 import edu.chl.loc.models.minigames.IMinigame;
 import edu.chl.loc.models.utilities.Position2D;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-/**
+/**@author Maxim Goretskyy
  * Created by maxim on 15-04-30.
+ *
  */
 public class NPCFactoryTest {
 
