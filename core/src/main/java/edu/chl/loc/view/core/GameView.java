@@ -1,14 +1,20 @@
 package edu.chl.loc.view.core;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.chl.loc.models.core.GameModel;
 
 /**
  * Top level class for the view of loc
  * @author Alexander Karlsson
- * @version 0.1
+ * @version 0.2.0
+ *
+ * Revised by Alexander Håkansson
  */
-public class GameView{
+public class GameView implements Screen{
+
+    public static final int GRID_SIZE = 32; // Size in pixels of each cell in grid
+
     private static SpriteBatch batch = new SpriteBatch();//Will be used by other views
     private GameModel model;
     private IView playerView;
@@ -45,11 +51,45 @@ public class GameView{
 
     /**
      * Renders the world represented in the gamemodel this view represents
+     * @param v A float
      */
-    public void render() {
+    @Override
+    public void render(float v) {
         GameView.batch.begin();
         gameMapView.render();
         playerView.render();
         GameView.batch.end();
+    }
+
+
+    @Override
+    public void resize(int i, int i1) {
+        //TODO implement this shit
+    }
+
+    @Override
+    public void show() {
+        //TODO implement this shit
+    }
+
+    @Override
+    public void hide() {
+        //TODO implement this shit
+    }
+
+    @Override
+    public void pause() {
+        //TODO implement this shit
+    }
+
+    @Override
+    public void resume() {
+        //TODO implement this shit
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        //TODO dispose playerView and gameMapView, interface IView should have dispose method?
     }
 }
