@@ -65,6 +65,13 @@ public class GameModel {
         return stats.getHec();
     }
 
+    /**
+     * Moves character to the given position,
+     * performs checks whether it's okay to walk there, and if player is standing on
+     * a item/minigame tile, if so then it will perform appropriate actions
+     *
+     * @param nextPos Position you want the character to move to
+     */
     public void moveCharacter(Position2D nextPos) {
                                     //todo fix the layer
         if(!gameMap.isCollidable(new Layer("NonexistableLayerJustFillingOut"), nextPos)){
@@ -73,28 +80,33 @@ public class GameModel {
 
         //If player stands on an item, do item's action
         ITile tempTile = getGameMap().getTile(new Layer("NonexistableLayerJustFillingOut"),player.getPosition());
-        if(tempTile.hasItem()){
+        if(tempTile.hasItem()){ //todo discuss to use instanceof later or getClass, will need when we have minigameTile
             ItemTile itemTile = (ItemTile)tempTile; //safe to convert because only itemTile have items
-            AbstractItem absItem = itemTile.getItem();
+            doItemAction(itemTile);
 
-            switch(absItem.getType()){
-                case USE:
-                    try {
-                        itemTile.takeItem().use(this);
-                    } catch (EmptyTileException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case COLLECT:
-                    //do something else when you have collectable item
-                    break;
-                case QUEST:
-                    //do something else with quest item
-                    break;
-            }
-        }//if tile doesn't have an item do something else
+        }//if tile doesn't have an item do something else, check for minigame
     }
 
+    /**
+     * Picks up an item from this itemTile and performs an appropriate action of the item
+     * @param itemTile you want to pick an item from
+     */
 
-
+    private void doItemAction(ItemTile itemTile){
+        switch(itemTile.getItem().getType()){
+            case USE:
+                try {
+                    itemTile.takeItem().use(this);
+                } catch (EmptyTileException e) {
+                    e.printStackTrace(); //for debugging
+                }
+                break;
+            case COLLECT:
+                //do something else when you have collectable item
+                break;
+            case QUEST:
+                //do something else with quest item
+                break;
+        }
+    }
 }
