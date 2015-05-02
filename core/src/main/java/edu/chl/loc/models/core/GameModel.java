@@ -3,8 +3,8 @@ package edu.chl.loc.models.core;
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
-import edu.chl.loc.models.map.GameMap;
-import edu.chl.loc.models.map.Layer;
+import edu.chl.loc.models.items.AbstractItem;
+import edu.chl.loc.models.map.*;
 import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.models.utilities.Stats;
 
@@ -70,5 +70,31 @@ public class GameModel {
         if(!gameMap.isCollidable(new Layer("NonexistableLayerJustFillingOut"), nextPos)){
             player.move();
         }
+
+        //If player stands on an item, do item's action
+        ITile tempTile = getGameMap().getTile(new Layer("NonexistableLayerJustFillingOut"),player.getPosition());
+        if(tempTile.hasItem()){
+            ItemTile itemTile = (ItemTile)tempTile; //safe to convert because only itemTile have items
+            AbstractItem absItem = itemTile.getItem();
+
+            switch(absItem.getType()){
+                case USE:
+                    try {
+                        itemTile.takeItem().use(this);
+                    } catch (EmptyTileException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case COLLECT:
+                    //do something else when you have collectable item
+                    break;
+                case QUEST:
+                    //do something else with quest item
+                    break;
+            }
+        }//if tile doesn't have an item do something else
     }
+
+
+
 }
