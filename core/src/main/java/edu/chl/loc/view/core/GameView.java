@@ -1,8 +1,12 @@
 package edu.chl.loc.view.core;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.view.characters.CharacterView;
+import edu.chl.loc.view.map.GameMapView;
 
 /**
  * Top level class for the view of loc
@@ -15,6 +19,8 @@ public class GameView implements Screen{
 
     public static final int GRID_SIZE = 32; // Size in pixels of each cell in grid
 
+    public static final Texture PLAYER_TEXTURE = new Texture(Gdx.files.internal("player-sheet.png"));
+
     private static SpriteBatch batch = new SpriteBatch();//Will be used by other views
     private GameModel model;
     private IView playerView;
@@ -23,13 +29,11 @@ public class GameView implements Screen{
     /**
      * Basic constructor with all necessary values
      * @param model The loc gamemodel
-     * @param playerView The view representing the player
-     * @param gameMapView The view representing the map with associated NPCs and items
      */
-    public GameView(GameModel model, IView playerView, IView gameMapView){
+    public GameView(GameModel model){
         this.model = model;
-        this.playerView = playerView;
-        this.gameMapView = gameMapView;
+        this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
+        this.gameMapView = new GameMapView(this);
     }
 
     /**

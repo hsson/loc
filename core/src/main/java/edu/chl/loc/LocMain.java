@@ -22,7 +22,7 @@ public class LocMain extends Game {
 	public void create () {
         model = new GameModel();
         controller = new GameController(model);
-        view = new GameView(model, null, null); //TODO: GameView should not take last two input arguments
+        view = new GameView(model);
 
         setScreen(view);
     }
