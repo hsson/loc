@@ -1,6 +1,7 @@
 package edu.chl.loc.models.core;
 
 import edu.chl.loc.models.characters.Player;
+import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.items.AbstractItem;
@@ -93,20 +94,27 @@ public class GameModel {
      */
 
     private void doItemAction(ItemTile itemTile){
-        switch(itemTile.getItem().getType()){
-            case USE:
-                try {
-                    itemTile.takeItem().use(this);
-                } catch (EmptyTileException e) {
-                    e.printStackTrace(); //for debugging
-                }
-                break;
-            case COLLECT:
-                //do something else when you have collectable item
-                break;
-            case QUEST:
-                //do something else with quest item
-                break;
+
+        AbstractItem item;
+
+        try {
+            item = itemTile.takeItem();
+
+            switch(item.getType()){
+                case USE:
+                    item.use(this);
+                    break;
+                case COLLECT:
+                    // Add item to player's inventory
+                    player.getInventory().addItem(item);
+                    break;
+                case QUEST:
+                    // Add item to player's inventory
+                    player.getInventory().addItem(item);
+                    break;
+            }
+        } catch (EmptyTileException e) {
+            // Do nothing
         }
     }
 }
