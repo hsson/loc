@@ -24,7 +24,6 @@ public class GameModel {
     private static Player player = new Player(STARTING_POS, Direction.NORTH, "Emil", Gender.MALE);
     private GameMap gameMap;
 
-    //TODO: come up with a better idea to save score
     private Stats stats;
 
     public GameModel() {
@@ -74,14 +73,17 @@ public class GameModel {
      * @param nextPos Position you want the character to move to
      */
     public void moveCharacter(Position2D nextPos) {
-                                    //todo fix the layer
-        if(!gameMap.isCollidable(new Layer("NonexistableLayerJustFillingOut"), nextPos)){
+
+        // Player will be on the ground layer
+        ILayer groundLayer = new Layer("ground");
+
+        if (!gameMap.isCollidable(groundLayer, nextPos)){
             player.move();
         }
 
         //If player stands on an item, do item's action
-        ITile tempTile = getGameMap().getTile(new Layer("NonexistableLayerJustFillingOut"),player.getPosition());
-        if(tempTile.hasItem()){ //todo discuss to use instanceof later or getClass, will need when we have minigameTile
+        ITile tempTile = getGameMap().getTile(groundLayer, player.getPosition());
+        if (tempTile.hasItem()){ //todo discuss to use instanceof later or getClass, will need when we have minigameTile
             ItemTile itemTile = (ItemTile)tempTile; //safe to convert because only itemTile have items
             doItemAction(itemTile);
 
