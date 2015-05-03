@@ -12,6 +12,7 @@ import edu.chl.loc.view.core.IView;
  * Created by kevin on 15-05-03.
  * @author Kevin Hoogendijk
  *
+ * Revised by Alexander Håkansson
  */
 public class ItemView implements IView {
     private ItemTile itemTile;
@@ -21,10 +22,7 @@ public class ItemView implements IView {
     private SpriteBatch spriteBatch;
 
     /**
-     *
-     * @param absItem the item you want to render
      * @param itemTexture the texture that corresponds to the item
-     * @param position the position at where you want to render it
      */
     public ItemView(ItemTile itemTile, Texture itemTexture){
         this.absItem = itemTile.getItem();
