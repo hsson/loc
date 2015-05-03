@@ -158,9 +158,17 @@ public class Inventory implements Cloneable{
         return inventory.hashCode();
     }
 
-    //TO-DO correct implementation of clone method
+
 
     public Inventory copy(){
         return new Inventory(this);
+    }
+
+    /**
+     * Checks whether this inventory is empty
+     * @return true if inventory is empty
+     */
+    public boolean isEmpty(){
+        return this.inventory.isEmpty();
     }
 }
