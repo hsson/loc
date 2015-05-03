@@ -17,13 +17,18 @@ import edu.chl.loc.models.utilities.Stats;
  */
 public class GameModel {
 
-    // The starting position of the player
+    // Player default values
     public static final Position2D STARTING_POS = new Position2D(0, 0);
+    public static final String PLAYER_DEFAULT_NAME = "Emil";
+    public static final Gender PLAYER_DEFAULT_GENDER = Gender.MALE;
 
 
-    private static Player player = new Player(STARTING_POS, Direction.NORTH, "Emil", Gender.MALE);
+    private static Player player = new Player(STARTING_POS,
+            Direction.NORTH,
+            PLAYER_DEFAULT_NAME,
+            PLAYER_DEFAULT_GENDER);
+
     private GameMap gameMap;
-
     private Stats stats;
 
     public GameModel() {
