@@ -16,11 +16,19 @@ public class ItemNPC extends AbstractNPC{
 
     protected ItemNPC(Position2D pos, Direction dir, String name,  Gender gender, Inventory inventory, Dialog dialog) {
         super(pos, dir, name, gender, dialog);
-        this.inventory = inventory;
+        this.inventory = inventory.copy();
     }
 
     @Override
     protected void doAction() {
         //Todo action to give an item
+    }
+
+    /**
+     *
+     * @return Inventory that this NPC holds
+     */
+    public Inventory getInventory(){
+        return this.inventory;
     }
 }
