@@ -19,7 +19,7 @@ public class CharacterUtilities {
     private static String[] femaleNames ={"Maria", "Anna", "Margareta", "Elisabeth", "Eva", "Kristina", "Birgitta",
                              "Karin", "Marie", "Ingrid", "Christina", "Linnea", "Sofia", "Kerstin", "Helena"};
 
-    private static Gender[] genderArray = {Gender.FEMALE, Gender.MALE};
+    private static Gender[] genderArray = {Gender.FEMALE, Gender.MALE, Gender.OTHER};
 
     private static Random randomGen = new Random();
 
@@ -69,6 +69,4 @@ public class CharacterUtilities {
         //todo: Implement this
         return null;
     }
-
-
 }

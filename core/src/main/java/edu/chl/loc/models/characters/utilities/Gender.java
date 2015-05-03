@@ -5,5 +5,6 @@ package edu.chl.loc.models.characters.utilities;
  */
 public enum Gender {
     FEMALE,
-    MALE
+    MALE,
+    OTHER
 }
