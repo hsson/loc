@@ -27,9 +27,6 @@ public class ItemTile extends AbstractTile {
     }
 
     /**
-     * //Todo Discuss what happens when a player picks an item from a tile.
-     * //Do we "destroy" the tile, or make an item notify the tile and set hasItem to false?
-     * //By "Destroy" - exchange ItemTile to a Tile.
      * @return true if the tile has an item, false if not
      */
     @Override
@@ -72,7 +69,7 @@ public class ItemTile extends AbstractTile {
             unsetItem();
             return this.item;
         }
-        throw new EmptyTileException("No item on this tile"); //Todo throw own exception later on
+        throw new EmptyTileException("No item on this tile");
     }
 
 }
