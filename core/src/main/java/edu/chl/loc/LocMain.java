@@ -24,6 +24,8 @@ public class LocMain extends Game {
         controller = new GameController(model);
         view = new GameView(model);
 
+        Gdx.input.setInputProcessor(controller);
+
         setScreen(view);
     }
 
