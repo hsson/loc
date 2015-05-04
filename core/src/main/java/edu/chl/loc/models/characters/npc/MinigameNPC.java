@@ -14,7 +14,7 @@ public class MinigameNPC extends AbstractNPC{
     private IMinigame minigame;
 
     protected MinigameNPC(Position2D pos, Direction dir, int id, String name, Gender gender, IMinigame minigame, Dialog dialog) {
-        super(pos, dir, name, gender, dialog);
+        super(pos, dir, id, name, gender, dialog);
         this.minigame = minigame;
     }
 
