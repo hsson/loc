@@ -6,23 +6,25 @@ import edu.chl.loc.models.core.GameModel;
  * Created by Maxim on 15-04-14.
  * @author Maxim Goretskyy
  */
-public class ItemBeverage extends AbstractItem{
-
-    public ItemBeverage(String beverageName){
+public class ItemScore extends AbstractItem{
+    
+    private int hec;
+    public ItemScore(String beverageName, int hec){
         super(ItemType.USE, beverageName);
+        this.hec = hec;
     }
 
-    public ItemBeverage(ItemType itemType, String beverageName){
+    public ItemScore(ItemType itemType, String beverageName){
         super(itemType, beverageName);
     }
 
-    public ItemBeverage(ItemBeverage copyBeer){
+    public ItemScore(ItemScore copyBeer){
         super(copyBeer.getType(), copyBeer.getItemName());
     }
 
     @Override
     public AbstractItem copy() {
-        return new ItemBeverage(this);
+        return new ItemScore(this);
     }
 
     /**
@@ -31,7 +33,7 @@ public class ItemBeverage extends AbstractItem{
      */
     @Override
     public void use(GameModel state) {
-        state.addHec(3);
+        state.addHec(hec);
         System.out.println("You drank a beer");
     }
 

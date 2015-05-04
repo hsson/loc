@@ -2,7 +2,7 @@ package edu.chl.loc.models.core;
 
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.utilities.Direction;
-import edu.chl.loc.models.items.ItemBeverage;
+import edu.chl.loc.models.items.ItemScore;
 import edu.chl.loc.models.map.*;
 import edu.chl.loc.models.utilities.Position2D;
 
@@ -37,7 +37,7 @@ public class TerminalGame {
         map.addLayer(new Layer("ground"));
         //generate beers first
         for(int i = 0; i<beerAmount; i++){
-            map.addTile(groundLayer, new ItemTile(new ItemBeverage("Prippsblå"), new Position2D(ranGen.nextInt(10),ranGen.nextInt(10))));
+            map.addTile(groundLayer, new ItemTile(new ItemScore("Prippsblå", 3), new Position2D(ranGen.nextInt(10),ranGen.nextInt(10))));
         }
         for (int y = 0; y < boardSize; y++) {
             for (int x = 0; x < boardSize; x++) {
