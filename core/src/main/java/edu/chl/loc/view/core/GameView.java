@@ -5,6 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.core.GameModel;
@@ -34,6 +37,9 @@ public class GameView implements Screen{
     private Viewport viewport;
     private OrthographicCamera camera;
 
+    private TiledMap tiledMap = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
+    private OrthogonalTiledMapRenderer tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+
     /**
      * Basic constructor with all necessary values
      * @param model The loc gamemodel
@@ -46,6 +52,8 @@ public class GameView implements Screen{
         // Setup camera and viewport
         camera = new OrthographicCamera();
         viewport = new FitViewport(RES_X, RES_Y, camera);
+
+        tiledMapRenderer.render();
     }
 
     /**
@@ -73,6 +81,10 @@ public class GameView implements Screen{
     public void render(float deltaTime) {
 
         camera.update();
+
+        // Tiled map renderer doesn't use sprite batch
+        tiledMapRenderer.setView(camera);
+        tiledMapRenderer.render();
 
         GameView.batch.begin();
         gameMapView.render(deltaTime);
