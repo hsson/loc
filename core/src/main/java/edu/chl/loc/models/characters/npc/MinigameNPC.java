@@ -13,7 +13,7 @@ import edu.chl.loc.models.utilities.Position2D;
 public class MinigameNPC extends AbstractNPC{
     private IMinigame minigame;
 
-    protected MinigameNPC(Position2D pos, Direction dir, String name, Gender gender, IMinigame minigame, Dialog dialog) {
+    protected MinigameNPC(Position2D pos, Direction dir, int id, String name, Gender gender, IMinigame minigame, Dialog dialog) {
         super(pos, dir, name, gender, dialog);
         this.minigame = minigame;
     }

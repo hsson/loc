@@ -13,7 +13,7 @@ import edu.chl.loc.models.utilities.Position2D;
  */
 public abstract class AbstractNPC extends AbstractCharacter {
     private Dialog dialog;
-    private int ID;
+    private int id;
 
     /**
      * Creates an AbstractNPC with a given inventory, direction, name and inventory
@@ -22,16 +22,17 @@ public abstract class AbstractNPC extends AbstractCharacter {
      * @param name The name for the AbstractNPC
      * @param gender The NPCs gender
      */
-    protected AbstractNPC(Position2D pos, Direction dir, String name, Gender gender, Dialog dialog){
+    protected AbstractNPC(Position2D pos, Direction dir, int id, String name, Gender gender, Dialog dialog){
         super(pos, dir, name, gender);
         this.dialog = dialog;
+        this.id = id;
     }
 
 
     protected abstract void doAction();
 
     public int getID() {
-        return ID;
+        return id;
     }
 
     public Dialog getDialog() {

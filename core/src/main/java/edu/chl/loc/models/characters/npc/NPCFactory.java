@@ -14,6 +14,7 @@ import edu.chl.loc.models.utilities.Position2D;
  * @version 1.1
  */
 public class NPCFactory {
+    private static int id = 0;
     private static String name = null;
     private static Gender gender = null;
     private static Direction direction = null;
@@ -116,12 +117,15 @@ public class NPCFactory {
      * @return An NPC with values from set methods and given position
      */
     public static AbstractNPC build(Position2D position){
+        int id;
         Gender gender;
         String name;
         Direction direction;
         Inventory inventory;
         IMinigame minigame;
         Dialog dialog;
+
+        id = NPCFactory.id;
 
         if(NPCFactory.gender == null){
             gender = CharacterUtilities.generateGender();
@@ -150,13 +154,13 @@ public class NPCFactory {
         if(isInventorySet()){
             inventory = NPCFactory.inventory;
             NPCFactory.reset();
-            return new ItemNPC(position,direction,name,gender,inventory,dialog);
+            return new ItemNPC(position,direction,id,name,gender,inventory,dialog);
         }
 
         if(isMinigameSet()){
             minigame = NPCFactory.minigame;
             NPCFactory.reset();
-            return new MinigameNPC(position,direction,name,gender,minigame,dialog);
+            return new MinigameNPC(position,direction,id,name,gender,minigame,dialog);
         }
 
         return new StandardNPC(position,direction,name,gender,dialog);
