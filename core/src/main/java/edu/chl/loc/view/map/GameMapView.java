@@ -13,8 +13,9 @@ import java.util.Set;
 
 /**
  * @author Alexander Håkansson
- * @version 0.2.0
+ * @version 0.3.0
  * @since 2015-04-30
+ * Revised by Alexander Karlsson
  */
 public class GameMapView implements IView {
 
@@ -49,6 +50,13 @@ public class GameMapView implements IView {
         // Render NPCs
         for (CharacterView view : npcViews) {
             view.render();
+        }
+    }
+
+    @Override
+    public void dispose() {
+        for(CharacterView view : npcViews){
+            view.dispose();
         }
     }
 }

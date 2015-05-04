@@ -11,6 +11,7 @@ import edu.chl.loc.view.core.IView;
  * @author Maxim Goretskyy
  *
  * Revised by Alexander Håkansson
+ * Revised by Alexander Karlsson
  */
 public class CharacterView implements IView {
     private AbstractCharacter absCharacter;
@@ -35,5 +36,11 @@ public class CharacterView implements IView {
     public void render(){
         spriteBatch.draw(charTexture, absCharacter.getPosition().getX() * GameView.GRID_SIZE,
                 absCharacter.getPosition().getY() * GameView.GRID_SIZE);
+    }
+
+    @Override
+    public void dispose() {
+        charTexture.dispose();
+        //SpriteBatch is disposed in GameView
     }
 }
