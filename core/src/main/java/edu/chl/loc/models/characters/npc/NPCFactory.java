@@ -26,6 +26,15 @@ public class NPCFactory {
     private NPCFactory(){
 
     }
+
+    /**
+     * Sets the id of the NPC currently being built
+     * @param id The id of the NPC to create
+     */
+    public static void setId(int id){
+        NPCFactory.id = id;
+    }
+
     /**
      * Sets the name of the NPC currently being built
      * @param name The name of the NPC to create
@@ -163,6 +172,6 @@ public class NPCFactory {
             return new MinigameNPC(position,direction,id,name,gender,minigame,dialog);
         }
 
-        return new StandardNPC(position,direction,name,gender,dialog);
+        return new StandardNPC(position,direction,id,name,gender,dialog);
     }
 }
