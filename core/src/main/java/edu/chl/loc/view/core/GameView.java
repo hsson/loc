@@ -14,7 +14,7 @@ import edu.chl.loc.view.map.GameMapView;
 /**
  * Top level class for the view of loc
  * @author Alexander Karlsson
- * @version 0.5.0
+ * @version 0.6.0
  *
  * Revised by Alexander Håkansson
  */
@@ -109,6 +109,8 @@ public class GameView implements Screen{
     @Override
     public void dispose() {
         batch.dispose();
-        //TODO dispose playerView and gameMapView, interface IView should have dispose method?
+        playerView.dispose();
+        gameMapView.dispose();
+        PLAYER_TEXTURE.dispose();
     }
 }
