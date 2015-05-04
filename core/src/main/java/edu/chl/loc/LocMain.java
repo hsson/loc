@@ -3,8 +3,18 @@ package edu.chl.loc;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapLayers;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import edu.chl.loc.controller.GameController;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.map.ILayer;
+import edu.chl.loc.models.map.Layer;
+import edu.chl.loc.models.map.Tile;
+import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.view.core.GameView;
 
 /**
@@ -26,7 +36,33 @@ public class LocMain extends Game {
 
         Gdx.input.setInputProcessor(controller);
 
+        setupGameMap();
+
         setScreen(view);
+    }
+
+    private void setupGameMap() {
+        TiledMap johanneberg = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
+
+        for (MapLayer mapLayer : johanneberg.getLayers()) {
+            TiledMapTileLayer tiledLayer = (TiledMapTileLayer) mapLayer;
+            ILayer layer = new Layer(tiledLayer.getName());
+
+            model.getGameMap().addLayer(layer);
+
+            for (int y = 0; y < tiledLayer.getHeight(); y++) {
+                for (int x = 0; x < tiledLayer.getWidth(); x++) {
+                    boolean collision = false;
+                    if (tiledLayer.getCell(x, y) != null) {
+                        TiledMapTile mapTile = tiledLayer.getCell(x, y).getTile();
+                        if (mapTile != null && mapTile.getProperties().containsKey("collision")) {
+                            collision = mapTile.getProperties().get("collision").equals("true");
+                        }
+                    }
+                    model.getGameMap().addTile(layer, new Tile(new Position2D(x, y), collision));
+                }
+            }
+        }
     }
 
 	@Override
