@@ -2,8 +2,11 @@ package edu.chl.loc.view.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.view.characters.CharacterView;
 import edu.chl.loc.view.map.GameMapView;
@@ -11,13 +14,15 @@ import edu.chl.loc.view.map.GameMapView;
 /**
  * Top level class for the view of loc
  * @author Alexander Karlsson
- * @version 0.2.0
+ * @version 0.5.0
  *
  * Revised by Alexander Håkansson
  */
 public class GameView implements Screen{
 
     public static final int GRID_SIZE = 32; // Size in pixels of each cell in grid
+    public static final int RES_X = 1280; // Resolution of game in x-axis
+    public static final int RES_Y = 720; // Resolution of game in y-axis
 
     public static final Texture PLAYER_TEXTURE = new Texture(Gdx.files.internal("player-sheet.png"));
 
@@ -25,6 +30,9 @@ public class GameView implements Screen{
     private GameModel model;
     private IView playerView;
     private IView gameMapView;
+
+    private Viewport viewport;
+    private OrthographicCamera camera;
 
     /**
      * Basic constructor with all necessary values
@@ -34,6 +42,10 @@ public class GameView implements Screen{
         this.model = model;
         this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
         this.gameMapView = new GameMapView(this);
+
+        // Setup camera and viewport
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(RES_X, RES_Y, camera);
     }
 
     /**
@@ -59,6 +71,9 @@ public class GameView implements Screen{
      */
     @Override
     public void render(float v) {
+
+        camera.update();
+
         GameView.batch.begin();
         gameMapView.render();
         playerView.render();
@@ -67,8 +82,8 @@ public class GameView implements Screen{
 
 
     @Override
-    public void resize(int i, int i1) {
-        //TODO implement this shit
+    public void resize(int width, int height) {
+        viewport.update(width, height);
     }
 
     @Override
