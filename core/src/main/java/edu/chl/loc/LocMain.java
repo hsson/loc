@@ -24,6 +24,7 @@ import java.util.List;
 
 /**
  * @author Alexander Håkansson
+ * Revised by Alexander Karlsson
  */
 public class LocMain extends Game {
 	private float elapsed;
