@@ -67,16 +67,16 @@ public class GameView implements Screen{
 
     /**
      * Renders the world represented in the gamemodel this view represents
-     * @param v A float
+     * @param deltaTime Time since last rendering
      */
     @Override
-    public void render(float v) {
+    public void render(float deltaTime) {
 
         camera.update();
 
         GameView.batch.begin();
-        gameMapView.render();
-        playerView.render();
+        gameMapView.render(deltaTime);
+        playerView.render(deltaTime);
         GameView.batch.end();
     }
 
