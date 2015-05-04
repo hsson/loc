@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import edu.chl.loc.controller.GameController;
+import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.npc.NPCFactory;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.core.GameModel;
@@ -107,7 +108,9 @@ public class LocMain extends Game {
         Position2D position;
         List<List<String>> NPCList = FileUtilities.readFile("NPCs.loc");
         for(List<String> NPCProperty: NPCList){
-            NPCFactory.setId(Integer.parseInt(NPCProperty.get(0)));
+			int id = Integer.parseInt(NPCProperty.get(0));
+            NPCFactory.setId(id);
+			NPCFactory.setDialog(new Dialog(id));
             NPCFactory.setName(NPCProperty.get(1));
             NPCFactory.setGender(Gender.valueOf(NPCProperty.get(2)));
             position = new Position2D(Integer.parseInt(NPCProperty.get(3)),
