@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.view.characters.CharacterView;
 import edu.chl.loc.view.map.GameMapView;
@@ -39,6 +40,8 @@ public class GameView implements Screen{
 
     private TiledMap tiledMap = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
     private OrthogonalTiledMapRenderer tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+
+    private final Player player = GameModel.getPlayer();
 
     /**
      * Basic constructor with all necessary values
@@ -80,7 +83,11 @@ public class GameView implements Screen{
     @Override
     public void render(float deltaTime) {
 
+        camera.position.x = player.getPosition().getX() * GRID_SIZE;
+        camera.position.y = player.getPosition().getY() * GRID_SIZE;
         camera.update();
+
+        batch.setProjectionMatrix(camera.combined);
 
         // Tiled map renderer doesn't use sprite batch
         tiledMapRenderer.setView(camera);
