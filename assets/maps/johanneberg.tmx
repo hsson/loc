@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="left-up" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="grass-tiles" tilewidth="32" tileheight="32">
-  <image source="../tiles/grass-tiles.png" width="96" height="96"/>
+  <image source="tiles/grass-tiles.png" width="96" height="96"/>
  </tileset>
  <tileset firstgid="10" name="stairs" tilewidth="32" tileheight="32">
-  <image source="../tiles/stairs.png" width="32" height="128"/>
+  <image source="tiles/stairs.png" width="32" height="128"/>
  </tileset>
  <tileset firstgid="14" name="stone" tilewidth="32" tileheight="32">
-  <image source="../tiles/stone.png" width="32" height="32"/>
+  <image source="tiles/stone.png" width="32" height="32"/>
   <tile id="0">
    <properties>
     <property name="collidable" value="true"/>
@@ -15,7 +15,7 @@
   </tile>
  </tileset>
  <tileset firstgid="15" name="chalmers" tilewidth="32" tileheight="32">
-  <image source="../tiles/chalmers.png" width="512" height="512"/>
+  <image source="tiles/chalmers.png" width="512" height="512"/>
  </tileset>
  <layer name="ground" width="100" height="100">
   <data encoding="base64">
