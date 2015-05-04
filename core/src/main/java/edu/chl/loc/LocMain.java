@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import edu.chl.loc.controller.GameController;
 import edu.chl.loc.models.characters.npc.Dialog;
+import edu.chl.loc.models.characters.npc.InvalidIdException;
 import edu.chl.loc.models.characters.npc.NPCFactory;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.core.GameModel;
@@ -110,7 +111,12 @@ public class LocMain extends Game {
         for(List<String> NPCProperty: NPCList){
 			int id = Integer.parseInt(NPCProperty.get(0));
             NPCFactory.setId(id);
-			NPCFactory.setDialog(new Dialog(id));
+			try{
+				Dialog dialog = new Dialog(id);
+				NPCFactory.setDialog(dialog);
+			}catch(InvalidIdException e){
+				//NPCFactory automatically generates a random dialog if none is specified in the file
+			}
             NPCFactory.setName(NPCProperty.get(1));
             NPCFactory.setGender(Gender.valueOf(NPCProperty.get(2)));
             position = new Position2D(Integer.parseInt(NPCProperty.get(3)),
