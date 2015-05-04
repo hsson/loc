@@ -79,20 +79,30 @@ public class GameModel {
      */
     public void moveCharacter(Position2D nextPos) {
 
-        // Player will be on the ground layer
-        ILayer groundLayer = new Layer("ground");
+        ILayer collisionLayer = null;
+        ILayer groundLayer = null;
 
-        if (!gameMap.isCollidable(groundLayer, nextPos)){
+        for (ILayer layer : gameMap.getLayers()) {
+            if (layer.getName().equals("ground")) {
+                groundLayer = layer;
+            } else if (layer.getName().equals("collision")) {
+                collisionLayer = layer;
+            }
+        }
+
+        if (gameMap.layerExists(collisionLayer) && !gameMap.isCollidable(collisionLayer, nextPos)){
             player.move();
         }
 
-        //If player stands on an item, do item's action
-        ITile tempTile = getGameMap().getTile(groundLayer, player.getPosition());
-        if (tempTile.hasItem()){ //todo discuss to use instanceof later or getClass, will need when we have minigameTile
-            ItemTile itemTile = (ItemTile)tempTile; //safe to convert because only itemTile have items
-            doItemAction(itemTile);
+        if (gameMap.layerExists(groundLayer)) {
+            //If player stands on an item, do item's action
+            ITile tempTile = getGameMap().getTile(groundLayer, player.getPosition());
+            if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
+                ItemTile itemTile = (ItemTile) tempTile; //safe to convert because only itemTile have items
+                doItemAction(itemTile);
 
-        }//if tile doesn't have an item do something else, check for minigame
+            }//if tile doesn't have an item do something else, check for minigame
+        }
     }
 
     /**

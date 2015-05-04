@@ -11,8 +11,8 @@ import edu.chl.loc.models.utilities.Position2D;
  */
 public class StandardNPC extends AbstractNPC {
 
-    protected StandardNPC(Position2D pos, Direction dir, String name, Gender gender, Dialog dialog) {
-        super(pos, dir, name, gender, dialog);
+    protected StandardNPC(Position2D pos, Direction dir, int id, String name, Gender gender, Dialog dialog) {
+        super(pos, dir, id, name, gender, dialog);
     }
 
     @Override
