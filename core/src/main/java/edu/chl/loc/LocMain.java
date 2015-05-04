@@ -59,7 +59,8 @@ public class LocMain extends Game {
                     if (tiledLayer.getCell(x, y) != null) {
                         TiledMapTile mapTile = tiledLayer.getCell(x, y).getTile();
                         if (mapTile != null && mapTile.getProperties().containsKey("collision")) {
-                            collision = mapTile.getProperties().get("collision").equals("true");
+                            String property = (String) mapTile.getProperties().get("collision");
+                            collision = property.equals("true");
                         }
                     }
                     model.getGameMap().addTile(layer, new Tile(new Position2D(x, y), collision));
