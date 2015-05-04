@@ -13,6 +13,7 @@ import edu.chl.loc.view.core.IView;
  * @author Kevin Hoogendijk
  *
  * Revised by Alexander Håkansson
+ * Revised by Alexander Karlsson
  */
 public class ItemView implements IView {
     private ItemTile itemTile;
@@ -34,8 +35,15 @@ public class ItemView implements IView {
     /**
      * Render the texture of the item at the position of the item
      */
-    public void render() {
+    @Override
+    public void render(float delta) {
         spriteBatch.draw(itemTexture, position.getX() * GameView.GRID_SIZE,
                 position.getY() * GameView.GRID_SIZE);
+    }
+
+    @Override
+    public void dispose() {
+        itemTexture.dispose();
+        //SpriteBatch is disposed through gameview
     }
 }

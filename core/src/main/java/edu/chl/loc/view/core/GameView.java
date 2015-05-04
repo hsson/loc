@@ -5,8 +5,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.view.characters.CharacterView;
 import edu.chl.loc.view.map.GameMapView;
@@ -14,7 +18,7 @@ import edu.chl.loc.view.map.GameMapView;
 /**
  * Top level class for the view of loc
  * @author Alexander Karlsson
- * @version 0.5.0
+ * @version 0.6.0
  *
  * Revised by Alexander Håkansson
  */
@@ -34,6 +38,11 @@ public class GameView implements Screen{
     private Viewport viewport;
     private OrthographicCamera camera;
 
+    private TiledMap tiledMap = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
+    private OrthogonalTiledMapRenderer tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+
+    private final Player player = GameModel.getPlayer();
+
     /**
      * Basic constructor with all necessary values
      * @param model The loc gamemodel
@@ -46,6 +55,8 @@ public class GameView implements Screen{
         // Setup camera and viewport
         camera = new OrthographicCamera();
         viewport = new FitViewport(RES_X, RES_Y, camera);
+
+        tiledMapRenderer.render();
     }
 
     /**
@@ -67,16 +78,24 @@ public class GameView implements Screen{
 
     /**
      * Renders the world represented in the gamemodel this view represents
-     * @param v A float
+     * @param deltaTime Time since last rendering
      */
     @Override
-    public void render(float v) {
+    public void render(float deltaTime) {
 
+        camera.position.x = player.getPosition().getX() * GRID_SIZE;
+        camera.position.y = player.getPosition().getY() * GRID_SIZE;
         camera.update();
 
+        batch.setProjectionMatrix(camera.combined);
+
+        // Tiled map renderer doesn't use sprite batch
+        tiledMapRenderer.setView(camera);
+        tiledMapRenderer.render();
+
         GameView.batch.begin();
-        gameMapView.render();
-        playerView.render();
+        gameMapView.render(deltaTime);
+        playerView.render(deltaTime);
         GameView.batch.end();
     }
 
@@ -109,6 +128,8 @@ public class GameView implements Screen{
     @Override
     public void dispose() {
         batch.dispose();
-        //TODO dispose playerView and gameMapView, interface IView should have dispose method?
+        playerView.dispose();
+        gameMapView.dispose();
+        PLAYER_TEXTURE.dispose();
     }
 }
