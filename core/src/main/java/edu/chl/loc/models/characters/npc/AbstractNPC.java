@@ -12,7 +12,8 @@ import edu.chl.loc.models.utilities.Position2D;
  * @version 1.1.3
  */
 public abstract class AbstractNPC extends AbstractCharacter {
-    Dialog dialog;
+    private Dialog dialog;
+    private int ID;
 
     /**
      * Creates an AbstractNPC with a given inventory, direction, name and inventory
@@ -28,4 +29,12 @@ public abstract class AbstractNPC extends AbstractCharacter {
 
 
     protected abstract void doAction();
+
+    public int getID() {
+        return ID;
+    }
+
+    public Dialog getDialog() {
+        return dialog;
+    }
 }
