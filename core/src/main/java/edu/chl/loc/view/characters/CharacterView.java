@@ -33,7 +33,8 @@ public class CharacterView implements IView {
     /**
      * Renders the texture of the character and the characters position
      */
-    public void render(){
+    @Override
+    public void render(float delta){
         spriteBatch.draw(charTexture, absCharacter.getPosition().getX() * GameView.GRID_SIZE,
                 absCharacter.getPosition().getY() * GameView.GRID_SIZE);
     }

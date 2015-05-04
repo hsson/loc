@@ -45,11 +45,11 @@ public class GameMapView implements IView {
     }
 
     @Override
-    public void render() {
+    public void render(float delta) {
 
         // Render NPCs
         for (CharacterView view : npcViews) {
-            view.render();
+            view.render(delta);
         }
     }
 
