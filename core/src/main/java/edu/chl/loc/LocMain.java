@@ -3,9 +3,22 @@ package edu.chl.loc;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import edu.chl.loc.controller.GameController;
+import edu.chl.loc.models.characters.npc.NPCFactory;
+import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.map.ILayer;
+import edu.chl.loc.models.map.Layer;
+import edu.chl.loc.models.map.Tile;
+import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.view.core.GameView;
+
+import java.util.List;
 
 /**
  * @author Alexander Håkansson
@@ -26,7 +39,34 @@ public class LocMain extends Game {
 
         Gdx.input.setInputProcessor(controller);
 
+        setupGameMap();
+
         setScreen(view);
+    }
+
+    private void setupGameMap() {
+        TiledMap johanneberg = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
+
+        for (MapLayer mapLayer : johanneberg.getLayers()) {
+            TiledMapTileLayer tiledLayer = (TiledMapTileLayer) mapLayer;
+            ILayer layer = new Layer(tiledLayer.getName());
+
+            model.getGameMap().addLayer(layer);
+
+            for (int y = 0; y < tiledLayer.getHeight(); y++) {
+                for (int x = 0; x < tiledLayer.getWidth(); x++) {
+                    boolean collision = false;
+                    if (tiledLayer.getCell(x, y) != null) {
+                        TiledMapTile mapTile = tiledLayer.getCell(x, y).getTile();
+                        if (mapTile != null && mapTile.getProperties().containsKey("collision")) {
+                            String property = (String) mapTile.getProperties().get("collision");
+                            collision = property.equals("true");
+                        }
+                    }
+                    model.getGameMap().addTile(layer, new Tile(new Position2D(x, y), collision));
+                }
+            }
+        }
     }
 
 	@Override
@@ -58,4 +98,24 @@ public class LocMain extends Game {
 	public void dispose () {
         getScreen().dispose();
 	}
+
+    /**
+     * Creates all the NPCs from the textfile NPCs.loc and adds each
+     * of the to the gamemap
+     */
+    private void createNPCsFromFile(){
+        Position2D position;
+        List<List<String>> NPCList = FileUtilities.readFile("NPCs.loc");
+        for(List<String> NPCProperty: NPCList){
+            NPCFactory.setId(Integer.parseInt(NPCProperty.get(0)));
+            NPCFactory.setName(NPCProperty.get(1));
+            NPCFactory.setGender(Gender.valueOf(NPCProperty.get(2)));
+            position = new Position2D(Integer.parseInt(NPCProperty.get(3)),
+                                      Integer.parseInt(NPCProperty.get(4)));
+            //TODO: create Inventory with items that are specified
+            //TODO: check the position of the NPC before creating it
+            //TODO: call this method somewhere before the game is rendered
+            model.getGameMap().addNPC(NPCFactory.build(position));
+        }
+    }
 }
