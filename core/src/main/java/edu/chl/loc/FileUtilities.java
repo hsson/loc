@@ -28,24 +28,22 @@ public class FileUtilities {
         }
         return result;
     }
-
-    public static void printStuff(String[] array){
-        for(int i =0; i<array.length; i++){
-            System.out.println("Line number " + i + " has " + array[i]);
-        }
-    }
-
+    
     private static String[] loadContent(String pathToFile){
-        FileHandle file = Gdx.files.internal(pathToFile);
-        String test = file.readString();
-        String[] result = test.split("\\n");
-        return result;
+        if(Gdx.files.internal(pathToFile).exists()){
+            FileHandle file = Gdx.files.internal(pathToFile);
+            String test = file.readString();
+            String[] result = test.split("\\n");
+            return result;
+        }
+        throw new NullPointerException("File does not exist");
+
     }
 
     private static List<String> removeColons(String textString){
         String[] temp = textString.split(":");
         List<String> result = new ArrayList<String>();
-        for(int i =0; i<temp.length;i++){
+        for(int i =0; i<temp.length;i++){ //copies to a list
             result.add(temp[i]);
         }
         return result;
