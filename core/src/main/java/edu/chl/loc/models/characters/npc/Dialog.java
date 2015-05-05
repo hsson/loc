@@ -1,5 +1,7 @@
 package edu.chl.loc.models.characters.npc;
 
+import edu.chl.loc.FileUtilities;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class Dialog {
      * For proper formatting of this file see additional documentation
      * @param id The id corresponding to a dialog in "Dialogs.loc"
      */
+
     public Dialog(int id){
         List<List<String>> dialogList = FileUtilities.readFile("Dialogs.loc");
         boolean idFound = false;
