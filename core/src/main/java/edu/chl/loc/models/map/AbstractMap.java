@@ -1,5 +1,6 @@
 package edu.chl.loc.models.map;
 
+import edu.chl.loc.models.characters.npc.ItemNPC;
 import edu.chl.loc.models.utilities.Position2D;
 
 import java.util.*;
@@ -131,5 +132,23 @@ public abstract class AbstractMap {
 
     public String toString() {
         return "A map with " + mapTiles.keySet().size() + " layers.";
+    }
+
+    /**
+     *
+     * @param layer you want to get items from
+     * @return List of all ItemTiles on this layer. Throws exception if layer does not exist
+     *
+     */
+    public List<ItemTile> getItemTiles(ILayer layer){
+        List<ITile> temp = getTilesFromLayer(layer);
+        List<ItemTile> result = new ArrayList<ItemTile>();
+
+        for(int i = 0; i<temp.size(); i++){
+            if(temp.get(i).getClass() == ItemTile.class){
+                result.add((ItemTile)temp.get(i));
+            }
+        }
+        return result;
     }
 }
