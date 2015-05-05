@@ -2,6 +2,8 @@ package edu.chl.loc.models.characters.utilities;
 
 import edu.chl.loc.models.characters.npc.Dialog;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -66,8 +68,17 @@ public class CharacterUtilities {
      *         that is not important
      */
     public static Dialog generateDialog(){
-        //todo: Implement this
-        return null;
+        List<List<String>> dialogs = FileUtilities.readFile("Dialogs.loc");
+        List<Integer> randomDialogIds = new ArrayList<Integer>();
+        for(List<String> stringList: dialogs){
+            int id = Integer.parseInt(stringList.get(0));
+            if(id>=9000 && id<=9999){
+                randomDialogIds.add(id);
+            }
+        }
+        Random random = new Random();
+        int index = random.nextInt(randomDialogIds.size()-1);
+        return new Dialog(randomDialogIds.get(index));
     }
 
 }
