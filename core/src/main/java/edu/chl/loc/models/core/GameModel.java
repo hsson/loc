@@ -89,15 +89,23 @@ public class GameModel {
                 collisionLayer = layer;
             }
         }
+        try {
+            if (gameMap.layerExists(collisionLayer) && !gameMap.isCollidable(collisionLayer, nextPos)) {
+                player.move();
+            }
+        }catch(IllegalArgumentException ex){
 
-        if (gameMap.layerExists(collisionLayer) && !gameMap.isCollidable(collisionLayer, nextPos)){
-            player.move();
         }
-
+        ITile tempTile;
         if (gameMap.layerExists(groundLayer)) {
             //If player stands on an item, do item's action
-            ITile tempTile = getGameMap().getTile(groundLayer, player.getPosition());
-            if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
+            try {
+                tempTile = getGameMap().getTile(groundLayer, player.getPosition());
+            }catch(IllegalArgumentException ex){
+                return;
+            }
+
+        if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
                 ItemTile itemTile = (ItemTile) tempTile; //safe to convert because only itemTile have items
                 doItemAction(itemTile);
 
