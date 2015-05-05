@@ -1,3 +1,18 @@
+//File used for declaring dialogs in the game Legend of Chalmers
+//Each row represents a unique dialog, and should have the following syntax
+//
+//id:yes/ok:Message:Message:(More messages)
+//
+//The id should correspond to an NPC declared in NPCs.loc
+//The ids 9000-9999 are independent dialogs used by NPCs that 
+//don't have a specific dialog declared
+//
+//The yes/ok option should be "yes" if the dialog is a yes/no type question
+//or ok if the dialog is a simpler statement where the players only option
+//is ok
+//
+//Comments in this file uses java syntax and blank lines are ignored
+
 9001:ok:Vet du hur många ITare det krävs för att byta en glödlampa?:Inga, det är ett hårdvaruproblem
 9002:ok:Jag går egentligen på GU, men brukar gå runt på Chalmers campus för att känna mig smartare än jag är
 9003:ok:Jag har kuggat så mycket att CSN har dragit in mitt bidrag:Vet du vad man kan äta som är billigare än nudlar?
