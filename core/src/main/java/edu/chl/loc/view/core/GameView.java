@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.characters.Player;
@@ -45,6 +47,8 @@ public class GameView implements Screen{
     private OrthogonalTiledMapRenderer tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
     private final Player player = GameModel.getPlayer();
+
+    private final BitmapFont font = new BitmapFont();
 
     // ground, groundDetail and building layer
     private final int[] bottomLayers = {0, 1, 2};
@@ -93,6 +97,9 @@ public class GameView implements Screen{
         camera.position.y = player.getPosition().getY() * GRID_SIZE;
         camera.update();
 
+        Vector2 viewportOrigo = new Vector2(camera.position.x - viewport.getWorldWidth()/2,
+                camera.position.y + viewport.getWorldHeight()/2);
+
         batch.setProjectionMatrix(camera.combined);
 
         // Tiled map renderer doesn't use sprite batch
@@ -102,6 +109,8 @@ public class GameView implements Screen{
         GameView.batch.begin();
         gameMapView.render(deltaTime);
         playerView.render(deltaTime);
+
+        font.draw(batch, model.getHec() + " hec", viewportOrigo.x + 16, viewportOrigo.y + 16);
         GameView.batch.end();
 
         boolean playerUnder = false;
