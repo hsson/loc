@@ -14,6 +14,7 @@ import edu.chl.loc.view.core.IView;
  *
  * Revised by Alexander Håkansson
  * Revised by Alexander Karlsson
+ * Revised by Maxim Goretskyy
  */
 public class ItemView implements IView {
     private ItemTile itemTile;
