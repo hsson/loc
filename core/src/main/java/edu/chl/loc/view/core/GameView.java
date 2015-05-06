@@ -43,6 +43,9 @@ public class GameView implements Screen{
 
     private final Player player = GameModel.getPlayer();
 
+    private final int[] bottomLayers = {0, 1, 2};
+    private final int[] topLayers = {3};
+
     /**
      * Basic constructor with all necessary values
      * @param model The loc gamemodel
@@ -55,8 +58,6 @@ public class GameView implements Screen{
         // Setup camera and viewport
         camera = new OrthographicCamera();
         viewport = new FitViewport(RES_X, RES_Y, camera);
-
-        tiledMapRenderer.render();
     }
 
     /**
@@ -91,12 +92,13 @@ public class GameView implements Screen{
 
         // Tiled map renderer doesn't use sprite batch
         tiledMapRenderer.setView(camera);
-        tiledMapRenderer.render();
 
+        tiledMapRenderer.render(bottomLayers);
         GameView.batch.begin();
         gameMapView.render(deltaTime);
         playerView.render(deltaTime);
         GameView.batch.end();
+        tiledMapRenderer.render(topLayers);
     }
 
 
