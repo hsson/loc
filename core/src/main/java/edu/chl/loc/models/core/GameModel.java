@@ -89,11 +89,13 @@ public class GameModel {
                 collisionLayer = layer;
             }
         }
-        
+
         if (gameMap.layerExists(collisionLayer) &&
                 (!gameMap.tileExists(collisionLayer, nextPos) ||
                         !gameMap.isCollidable(collisionLayer, nextPos))) {
-            player.move();
+            if (gameMap.tileExists(groundLayer, nextPos)) {
+                player.move();
+            }
         }
 
         ITile tempTile;
