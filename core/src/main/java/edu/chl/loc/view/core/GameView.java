@@ -28,8 +28,8 @@ import edu.chl.loc.view.map.GameMapView;
 public class GameView implements Screen{
 
     public static final int GRID_SIZE = 32; // Size in pixels of each cell in grid
-    public static final int RES_X = 1280; // Resolution of game in x-axis
-    public static final int RES_Y = 720; // Resolution of game in y-axis
+    public static final int RES_X = 1024; // Resolution of game in x-axis
+    public static final int RES_Y = 576; // Resolution of game in y-axis
 
     public static final Texture PLAYER_TEXTURE = new Texture(Gdx.files.internal("player-sheet.png"));
 
