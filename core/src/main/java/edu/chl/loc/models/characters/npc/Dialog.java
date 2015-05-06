@@ -23,7 +23,7 @@ public class Dialog {
      *                  equivalent option
      */
     public Dialog(String[] dialogStrings, boolean yesOption){
-        this.dialogStrings = dialogStrings;
+        this.dialogStrings = (String[])dialogStrings.clone();
         this.yesOption = yesOption;
     }
 
