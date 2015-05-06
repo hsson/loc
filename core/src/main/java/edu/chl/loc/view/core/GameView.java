@@ -43,7 +43,9 @@ public class GameView implements Screen{
 
     private final Player player = GameModel.getPlayer();
 
+    // ground, groundDetail and building layer
     private final int[] bottomLayers = {0, 1, 2};
+    // buildingRoof layer
     private final int[] topLayers = {3};
 
     /**

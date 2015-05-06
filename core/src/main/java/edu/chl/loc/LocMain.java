@@ -59,14 +59,14 @@ public class LocMain extends Game {
             for (int y = 0; y < tiledLayer.getHeight(); y++) {
                 for (int x = 0; x < tiledLayer.getWidth(); x++) {
                     boolean collision = false;
-                    if (tiledLayer.getCell(x, y) != null) {
-                        TiledMapTile mapTile = tiledLayer.getCell(x, y).getTile();
-                        if (mapTile != null && mapTile.getProperties().containsKey("collision")) {
+                    TiledMapTile mapTile;
+                    if (tiledLayer.getCell(x, y) != null && (mapTile = tiledLayer.getCell(x,y).getTile()) != null) {
+                        if (mapTile.getProperties().containsKey("collision")) {
                             String property = (String) mapTile.getProperties().get("collision");
                             collision = property.equals("true");
                         }
+                        model.getGameMap().addTile(layer, new Tile(new Position2D(x, y), collision));
                     }
-                    model.getGameMap().addTile(layer, new Tile(new Position2D(x, y), collision));
                 }
             }
         }
