@@ -25,7 +25,7 @@ public class FileUtilities {
      */
     public static List<List<String>> readFile(String pathToFile){
 
-        String[] temp = loadContent(pathToFile);
+        String[] temp = loadContent("./../assets/" + pathToFile);
 
         List<List<String>> result = new ArrayList<List<String>>();
         for(int i = 0; i<temp.length; i++){
