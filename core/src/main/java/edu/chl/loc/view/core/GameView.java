@@ -110,7 +110,7 @@ public class GameView implements Screen{
         gameMapView.render(deltaTime);
         playerView.render(deltaTime);
 
-        font.draw(batch, model.getHec() + " hec", viewportOrigo.x + 16, viewportOrigo.y + 16);
+        font.draw(batch, model.getHec() + " hec", viewportOrigo.x + 16, viewportOrigo.y - 16);
         GameView.batch.end();
 
         boolean playerUnder = false;
