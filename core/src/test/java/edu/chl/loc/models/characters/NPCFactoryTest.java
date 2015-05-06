@@ -78,4 +78,17 @@ public class NPCFactoryTest {
 
     }
 
+    @Test
+    public void testId(){
+        NPCFactory.setId(1);
+        AbstractNPC firstNPC = NPCFactory.build(new Position2D());
+        NPCFactory.setId(1);
+        AbstractNPC secondNPC = NPCFactory.build(new Position2D());
+        NPCFactory.setId(1);
+        AbstractNPC thirdNPC = NPCFactory.build(new Position2D());
+        Assert.assertEquals("Id should be as given", 1, firstNPC.getID());
+        Assert.assertTrue("Id should be randomized over 4000", secondNPC.getID() >= 4000);
+        Assert.assertFalse("Id should not have same id as previous randomization", secondNPC.getID() == thirdNPC.getID());
+    }
+
 }
