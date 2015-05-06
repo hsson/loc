@@ -34,12 +34,17 @@ public class Dialog {
      * @param path Path to the file
      */
 
-    public Dialog(int id, String path){
+    public Dialog(int id, String path) throws InvalidIdException{
         List<List<String>> dialogList = FileUtilities.readFile(path);
         boolean idFound = false;
         for(int i = 0; i < dialogList.size(); i++){
             List<String> currentList = dialogList.get(i);
-            int readId = Integer.parseInt(currentList.get(0));
+            int readId = 0;
+            try{
+                readId = Integer.parseInt(currentList.get(0));
+            }catch(NumberFormatException e){
+                throw new InvalidIdException();
+            }
             if(readId == id){
                 List<String> newList = new ArrayList<String>(currentList);
                 newList.remove(0);
