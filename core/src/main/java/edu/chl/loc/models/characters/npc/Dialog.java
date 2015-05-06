@@ -61,7 +61,7 @@ public class Dialog {
      * @param dialogStrings
      * @return
      */
-    public Dialog listToDialog(List<String> dialogStrings){
+    private Dialog listToDialog(List<String> dialogStrings){
         String yesString = dialogStrings.get(0);
         boolean yesOption = yesString.equals("yes");
         List<String> strippedList = new ArrayList<String>(dialogStrings);
