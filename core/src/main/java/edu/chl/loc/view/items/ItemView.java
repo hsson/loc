@@ -26,6 +26,7 @@ public class ItemView implements IView {
      * @param itemTexture the texture that corresponds to the item
      */
     public ItemView(ItemTile itemTile, Texture itemTexture){
+        this.itemTile = itemTile;
         this.absItem = itemTile.getItem();
         this.position = itemTile.getPosition();
         this.itemTexture = itemTexture;
@@ -41,6 +42,7 @@ public class ItemView implements IView {
             spriteBatch.draw(itemTexture, position.getX() * GameView.GRID_SIZE,
                     position.getY() * GameView.GRID_SIZE);
         }
+
     }
 
     @Override
