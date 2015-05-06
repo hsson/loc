@@ -53,11 +53,6 @@ public class GameMapView implements IView {
 
     private void createItemViews() {
         itemViews = new HashSet<ItemView>();
-
-        for (ILayer layer : gameModel.getGameMap().getLayers()) {
-            System.out.println(layer.getName());
-        }
-
         ILayer itemLayer = new Layer("items");
 
         if (gameModel.getGameMap().layerExists(itemLayer)) {

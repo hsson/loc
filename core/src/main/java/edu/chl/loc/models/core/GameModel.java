@@ -81,12 +81,15 @@ public class GameModel {
 
         ILayer collisionLayer = null;
         ILayer groundLayer = null;
+        ILayer itemLayer = null;
 
         for (ILayer layer : gameMap.getLayers()) {
             if (layer.getName().equals("ground")) {
                 groundLayer = layer;
             } else if (layer.getName().equals("collision")) {
                 collisionLayer = layer;
+            } else if (layer.getName().equals("items")) {
+                itemLayer = layer;
             }
         }
 
@@ -98,16 +101,11 @@ public class GameModel {
             }
         }
 
-        ITile tempTile;
-        if (gameMap.layerExists(groundLayer)) {
-            //If player stands on an item, do item's action
-            try {
-                tempTile = getGameMap().getTile(groundLayer, player.getPosition());
-            }catch(IllegalArgumentException ex){
-                return;
-            }
+        if (gameMap.layerExists(itemLayer) && gameMap.tileExists(itemLayer, nextPos)) {
 
-        if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
+            ITile tempTile = gameMap.getTile(itemLayer, nextPos);
+
+            if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
                 ItemTile itemTile = (ItemTile) tempTile; //safe to convert because only itemTile have items
                 doItemAction(itemTile);
 
