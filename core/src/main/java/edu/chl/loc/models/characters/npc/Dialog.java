@@ -28,13 +28,14 @@ public class Dialog {
     }
 
     /**
-     * Creates a dialog from an id, the dialog will be created using a file named "Dialogs.log".
+     * Creates a dialog from an id, the dialog will be created using a file with a given path.
      * For proper formatting of this file see additional documentation
-     * @param id The id corresponding to a dialog in "Dialogs.loc"
+     * @param id The id corresponding to a dialog id in the file
+     * @param path Path to the file
      */
 
-    public Dialog(int id){
-        List<List<String>> dialogList = FileUtilities.readFile("Dialogs.loc");
+    public Dialog(int id, String path){
+        List<List<String>> dialogList = FileUtilities.readFile(path);
         boolean idFound = false;
         for(int i = 0; i < dialogList.size(); i++){
             List<String> currentList = dialogList.get(i);

@@ -113,7 +113,7 @@ public class LocMain extends Game {
 			int id = Integer.parseInt(NPCProperty.get(0));
             NPCFactory.setId(id);
 			try{
-				Dialog dialog = new Dialog(id);
+				Dialog dialog = new Dialog(id, "Dialogs.loc");
 				NPCFactory.setDialog(dialog);
 			}catch(InvalidIdException e){
 				//NPCFactory automatically generates a random dialog if none is specified in the file
