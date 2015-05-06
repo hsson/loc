@@ -37,8 +37,10 @@ public class ItemView implements IView {
      */
     @Override
     public void render(float delta) {
-        spriteBatch.draw(itemTexture, position.getX() * GameView.GRID_SIZE,
-                position.getY() * GameView.GRID_SIZE);
+        if(itemTile.hasItem()) {
+            spriteBatch.draw(itemTexture, position.getX() * GameView.GRID_SIZE,
+                    position.getY() * GameView.GRID_SIZE);
+        }
     }
 
     @Override
