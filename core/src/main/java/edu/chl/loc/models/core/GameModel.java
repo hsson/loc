@@ -89,13 +89,13 @@ public class GameModel {
                 collisionLayer = layer;
             }
         }
-        try {
-            if (gameMap.layerExists(collisionLayer) && !gameMap.isCollidable(collisionLayer, nextPos)) {
-                player.move();
-            }
-        }catch(IllegalArgumentException ex){
-
+        
+        if (gameMap.layerExists(collisionLayer) &&
+                (!gameMap.tileExists(collisionLayer, nextPos) ||
+                        !gameMap.isCollidable(collisionLayer, nextPos))) {
+            player.move();
         }
+
         ITile tempTile;
         if (gameMap.layerExists(groundLayer)) {
             //If player stands on an item, do item's action
