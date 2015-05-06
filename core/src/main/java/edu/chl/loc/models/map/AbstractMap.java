@@ -63,6 +63,27 @@ public abstract class AbstractMap {
     }
 
     /**
+     * Check if there exists a tile on the specified layer and position
+     *
+     * @param layer The layer to check
+     * @param position The position to check
+     * @return Return true if the specified tile exists
+     */
+    public boolean tileExists(ILayer layer, Position2D position) {
+        if (!mapTiles.containsKey(layer)) {
+            return false;
+        }
+
+        for (ITile tile : mapTiles.get(layer)) {
+            if (tile.getPosition().equals(position)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Add a tile to the map on the specified layer
      *
      * @param layer The layer on which to place the tile
