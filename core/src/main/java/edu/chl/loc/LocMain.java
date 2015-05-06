@@ -18,6 +18,7 @@ import edu.chl.loc.models.map.ILayer;
 import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.models.map.Tile;
 import edu.chl.loc.models.utilities.Position2D;
+import edu.chl.loc.utilities.FileUtilities;
 import edu.chl.loc.view.core.GameView;
 
 import java.util.List;

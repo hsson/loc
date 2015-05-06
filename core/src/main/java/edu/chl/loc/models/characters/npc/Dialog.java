@@ -1,6 +1,6 @@
 package edu.chl.loc.models.characters.npc;
 
-import edu.chl.loc.FileUtilities;
+import edu.chl.loc.utilities.FileUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
