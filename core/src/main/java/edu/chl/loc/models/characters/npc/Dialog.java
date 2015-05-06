@@ -1,6 +1,6 @@
 package edu.chl.loc.models.characters.npc;
 
-import edu.chl.loc.FileUtilities;
+import edu.chl.loc.utilities.FileUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +28,23 @@ public class Dialog {
     }
 
     /**
-     * Creates a dialog from an id, the dialog will be created using a file named "Dialogs.log".
+     * Creates a dialog from an id, the dialog will be created using a file with a given path.
      * For proper formatting of this file see additional documentation
-     * @param id The id corresponding to a dialog in "Dialogs.loc"
+     * @param id The id corresponding to a dialog id in the file
+     * @param path Path to the file
      */
 
-    public Dialog(int id){
-        List<List<String>> dialogList = FileUtilities.readFile("Dialogs.loc");
+    public Dialog(int id, String path) throws InvalidIdException{
+        List<List<String>> dialogList = FileUtilities.readFile(path);
         boolean idFound = false;
         for(int i = 0; i < dialogList.size(); i++){
             List<String> currentList = dialogList.get(i);
-            int readId = Integer.parseInt(currentList.get(0));
+            int readId = 0;
+            try{
+                readId = Integer.parseInt(currentList.get(0));
+            }catch(NumberFormatException e){
+                throw new InvalidIdException();
+            }
             if(readId == id){
                 List<String> newList = new ArrayList<String>(currentList);
                 newList.remove(0);
