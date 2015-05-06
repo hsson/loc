@@ -80,7 +80,7 @@ public class CharacterUtilities {
         }
         Random random = new Random();
         int index = random.nextInt(randomDialogIds.size()-1);
-        return new Dialog(randomDialogIds.get(index));
+        return new Dialog(randomDialogIds.get(index), "Dialogs.loc");
     }
 
 }
