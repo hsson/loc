@@ -6,12 +6,15 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.map.ITile;
+import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.view.characters.CharacterView;
 import edu.chl.loc.view.map.GameMapView;
 
@@ -100,6 +103,21 @@ public class GameView implements Screen{
         gameMapView.render(deltaTime);
         playerView.render(deltaTime);
         GameView.batch.end();
+
+        boolean playerUnder = false;
+        for (ITile tile : getGameModel().getGameMap().getTilesFromLayer(new Layer("buildingRoof"))) {
+            if (tile.getPosition().equals(player.getPosition())) {
+                playerUnder = true;
+            }
+        }
+
+        TiledMapTileLayer rooflayer = (TiledMapTileLayer) tiledMap.getLayers().get("buildingRoof");
+        if (playerUnder) {
+            rooflayer.setOpacity(0.2f);
+        } else {
+            rooflayer.setOpacity(1.0f);
+        }
+
         tiledMapRenderer.render(topLayers);
     }
 
