@@ -27,6 +27,7 @@ public class ItemNPC extends AbstractNPC{
         // Adds all of this NPC's items to the player
         for (AbstractItem item : inventory.getItems()) {
             GameModel.getPlayer().getInventory().addItem(item);
+            getInventory().removeItem(item); //remove item from NPC
         }
     }
 
