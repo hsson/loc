@@ -1,5 +1,6 @@
-package edu.chl.loc.models.characters.utilities;
+package edu.chl.loc.utilities;
 
+import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.utilities.FileUtilities;
 import edu.chl.loc.models.characters.npc.Dialog;
 
