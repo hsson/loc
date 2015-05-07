@@ -2,6 +2,7 @@ package edu.chl.loc.view.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -19,6 +20,7 @@ import edu.chl.loc.models.map.ITile;
 import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.view.characters.CharacterView;
 import edu.chl.loc.view.map.GameMapView;
+import edu.chl.loc.view.music.Playlist;
 
 /**
  * Top level class for the view of loc
@@ -50,6 +52,12 @@ public class GameView implements Screen{
 
     private final BitmapFont font = new BitmapFont();
 
+    // Music tracks
+    private static final Music musicNyan = Gdx.audio.newMusic(Gdx.files.internal("music/nyan.mp3"));
+    private static final Music musicRickroll = Gdx.audio.newMusic(Gdx.files.internal("music/rickroll.mp3"));
+    private static final Music musicSax = Gdx.audio.newMusic(Gdx.files.internal("music/sax.mp3"));
+    private static final Music musicTrololo = Gdx.audio.newMusic(Gdx.files.internal("music/trololo.mp3"));
+
     // ground, groundDetail and building layer
     private final int[] bottomLayers = {0, 1, 2};
     // buildingRoof layer
@@ -67,6 +75,9 @@ public class GameView implements Screen{
         // Setup camera and viewport
         camera = new OrthographicCamera();
         viewport = new FitViewport(RES_X, RES_Y, camera);
+
+        Playlist gameMusic = new Playlist(true, musicNyan, musicRickroll, musicSax, musicTrololo);
+        gameMusic.play();
     }
 
     /**
