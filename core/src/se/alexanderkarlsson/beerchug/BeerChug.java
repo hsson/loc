@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import se.alexanderkarlsson.beerchug.beerchugcontroller.BottleBeerChugController;
@@ -34,7 +35,10 @@ public class BeerChug extends ApplicationAdapter {
 	private Texture table;
 	private Texture beerTable;
 	private BitmapFont font;
+	private boolean hasBlown;
+	private ParticleEffect kaboom;
 	private ProgressBar progressBar;
+	private Sound explosionSound;
 	
 	@Override
 	public void create () {
@@ -79,6 +83,14 @@ public class BeerChug extends ApplicationAdapter {
 
 		startSound = Gdx.audio.newSound(Gdx.files.internal("start.wav"));
 		startSoundPlayed = false;
+
+		//Instatiate explosion
+		kaboom = new ParticleEffect();
+		kaboom.load(Gdx.files.internal("Kaboom.effect"), Gdx.files.internal(""));
+		kaboom.getEmitters().first().setPosition(512, 165);
+		hasBlown = false;
+
+		explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.wav"));
 	}
 
 	@Override
@@ -145,6 +157,13 @@ public class BeerChug extends ApplicationAdapter {
 		//Draw potential DQ message
 		if(model.isSquirted()){
 			font.draw(batch, model.getDisqualifiedReason(), 470, 400);
+			if(!hasBlown){
+				kaboom.start();
+				hasBlown = true;
+				explosionSound.play();
+			}
+			kaboom.update(Gdx.graphics.getDeltaTime());
+			kaboom.draw(batch);
 		}
 
 		//Draw percentage of drink remaining
@@ -153,6 +172,8 @@ public class BeerChug extends ApplicationAdapter {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
 			model = new BottleBeerChug();
 			controller = new BottleBeerChugController(model);
+			hasBlown = false;
+			kaboom.reset();
 		}
 
 		//progressBar.draw(batch,1);
