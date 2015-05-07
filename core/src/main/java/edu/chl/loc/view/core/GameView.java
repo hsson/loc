@@ -124,21 +124,24 @@ public class GameView implements Screen{
         font.draw(batch, model.getHec() + " hec", viewportOrigo.x + 16, viewportOrigo.y - 16);
         GameView.batch.end();
 
-        boolean playerUnder = false;
-        for (ITile tile : getGameModel().getGameMap().getTilesFromLayer(new Layer("buildingRoof"))) {
-            if (tile.getPosition().equals(player.getPosition())) {
-                playerUnder = true;
-            }
-        }
-
         TiledMapTileLayer rooflayer = (TiledMapTileLayer) tiledMap.getLayers().get("buildingRoof");
-        if (playerUnder) {
+        if (isPlayerUnderRoof()) {
             rooflayer.setOpacity(0.2f);
         } else {
             rooflayer.setOpacity(1.0f);
         }
 
         tiledMapRenderer.render(topLayers);
+    }
+
+    private boolean isPlayerUnderRoof() {
+        for (ITile tile : getGameModel().getGameMap().getTilesFromLayer(new Layer("buildingRoof"))) {
+            if (tile.getPosition().equals(player.getPosition())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
