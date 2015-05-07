@@ -23,7 +23,7 @@ public class FileUtilities {
      * @param pathToFile the path you want to read from, relative to assest (i think and hope)
      * @return List of a List with strings
      */
-    public static List<List<String>> readFile(String pathToFile){
+    public static List<List<String>> readFile(String pathToFile) throws FileNotFoundException {
 
         String[] temp = loadContent("./../assets/" + pathToFile);
 
@@ -38,7 +38,7 @@ public class FileUtilities {
         return result;
     }
 
-    private static String[] loadContent(String pathToFile){
+    private static String[] loadContent(String pathToFile) throws FileNotFoundException {
         String temp1 = load(pathToFile);
 
         String temp2 = temp1.replaceAll("(/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*+/)|(//.*)", ""); //ignores all
@@ -54,18 +54,23 @@ public class FileUtilities {
      * @param filename Filename you want to read
      * @return String of the whole file.
      */
-    private static String load(String filename){
+    private static String load(String filename) throws FileNotFoundException {
 
             File file = new File(filename);
-            try {
-                byte[] bytes = Files.readAllBytes(file.toPath());
-                return new String(bytes,"UTF-8");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(file.exists()) {
+                try {
+                    byte[] bytes = Files.readAllBytes(file.toPath());
+                    return new String(bytes, "UTF-8");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return "";
             }
-            return "";
+
+            throw new FileNotFoundException();
+
 
     }
     private static List<String> removeColons(String textString){//also ignores whitelines
@@ -87,5 +92,4 @@ public class FileUtilities {
         }
         System.out.println("Size of teh list is " + list.size());
     }
-
 }
