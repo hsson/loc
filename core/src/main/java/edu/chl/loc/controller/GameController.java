@@ -41,8 +41,15 @@ public class GameController implements InputProcessor {
     public boolean keyUp(int keycode) {
 
         chooseDirection(keycode);//sets direction of player depends what you click
-        model.moveCharacter(player.getNextPosition());//sends information about next position to model
-                                                        //model will decide if it can move
+        switch(keycode) {
+            case Input.Keys.LEFT:
+            case Input.Keys.RIGHT:
+            case Input.Keys.DOWN:
+            case Input.Keys.UP:
+                model.moveCharacter(player.getNextPosition());//sends information about next position to model
+                return true;
+            //model will decide if it can move
+        }
         return false;
     }
 

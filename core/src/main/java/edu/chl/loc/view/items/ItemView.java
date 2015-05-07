@@ -14,6 +14,7 @@ import edu.chl.loc.view.core.IView;
  *
  * Revised by Alexander Håkansson
  * Revised by Alexander Karlsson
+ * Revised by Maxim Goretskyy
  */
 public class ItemView implements IView {
     private ItemTile itemTile;
@@ -26,6 +27,7 @@ public class ItemView implements IView {
      * @param itemTexture the texture that corresponds to the item
      */
     public ItemView(ItemTile itemTile, Texture itemTexture){
+        this.itemTile = itemTile;
         this.absItem = itemTile.getItem();
         this.position = itemTile.getPosition();
         this.itemTexture = itemTexture;
@@ -37,8 +39,11 @@ public class ItemView implements IView {
      */
     @Override
     public void render(float delta) {
-        spriteBatch.draw(itemTexture, position.getX() * GameView.GRID_SIZE,
-                position.getY() * GameView.GRID_SIZE);
+        if(itemTile.hasItem()) {
+            spriteBatch.draw(itemTexture, position.getX() * GameView.GRID_SIZE,
+                    position.getY() * GameView.GRID_SIZE);
+        }
+
     }
 
     @Override

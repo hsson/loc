@@ -1,6 +1,7 @@
 package edu.chl.loc.models.characters.utilities;
 
-import edu.chl.loc.FileUtilities;
+import edu.chl.loc.models.characters.utilities.Gender;
+import edu.chl.loc.utilities.FileUtilities;
 import edu.chl.loc.models.characters.npc.Dialog;
 
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class CharacterUtilities {
         }
         Random random = new Random();
         int index = random.nextInt(randomDialogIds.size()-1);
-        return new Dialog(randomDialogIds.get(index));
+        return new Dialog(randomDialogIds.get(index), "Dialogs.loc");
     }
 
 }

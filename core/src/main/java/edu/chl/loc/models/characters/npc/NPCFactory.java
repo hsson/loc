@@ -7,6 +7,9 @@ import edu.chl.loc.models.items.Inventory;
 import edu.chl.loc.models.minigames.IMinigame;
 import edu.chl.loc.models.utilities.Position2D;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Factory class used for creating NPCs
  * @author Alexander Karlsson
@@ -21,6 +24,7 @@ public class NPCFactory {
     private static Inventory inventory = null;
     private static IMinigame minigame = null;
     private static Dialog dialog = null;
+    private static List<Integer> setIds = new ArrayList<Integer>();
 
     //private constructor to prevent from instantiating
     private NPCFactory(){
@@ -118,6 +122,7 @@ public class NPCFactory {
         NPCFactory.direction = null;
         NPCFactory.inventory = null;
         NPCFactory.minigame = null;
+        NPCFactory.id = 0;
     }
 
     /**
@@ -134,7 +139,15 @@ public class NPCFactory {
         IMinigame minigame;
         Dialog dialog;
 
-        id = NPCFactory.id;
+        if(NPCFactory.id != 0 && !NPCFactory.setIds.contains(NPCFactory.id)){
+            id = NPCFactory.id;
+        }else{//If the idnumber is taken or unset a free id over 4000 will be chosen
+            id = 4000;
+            while(NPCFactory.setIds.contains(id)){
+                id++;
+            }
+        }
+
 
         if(NPCFactory.gender == null){
             gender = CharacterUtilities.generateGender();
@@ -159,6 +172,8 @@ public class NPCFactory {
         }else{
             dialog = NPCFactory.dialog;
         }
+
+        NPCFactory.setIds.add(id);
 
         if(isInventorySet()){
             inventory = NPCFactory.inventory;

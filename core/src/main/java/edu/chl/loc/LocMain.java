@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -14,10 +15,13 @@ import edu.chl.loc.models.characters.npc.InvalidIdException;
 import edu.chl.loc.models.characters.npc.NPCFactory;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.items.ItemScore;
 import edu.chl.loc.models.map.ILayer;
+import edu.chl.loc.models.map.ItemTile;
 import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.models.map.Tile;
 import edu.chl.loc.models.utilities.Position2D;
+import edu.chl.loc.utilities.FileUtilities;
 import edu.chl.loc.view.core.GameView;
 
 import java.util.List;
@@ -37,12 +41,13 @@ public class LocMain extends Game {
 	@Override
 	public void create () {
         model = new GameModel();
+        setupGameMap();
         controller = new GameController(model);
         view = new GameView(model);
 
         Gdx.input.setInputProcessor(controller);
 
-        setupGameMap();
+
 
         setScreen(view);
     }
@@ -61,13 +66,29 @@ public class LocMain extends Game {
                     boolean collision = false;
                     TiledMapTile mapTile;
                     if (tiledLayer.getCell(x, y) != null && (mapTile = tiledLayer.getCell(x,y).getTile()) != null) {
-                        if (mapTile.getProperties().containsKey("collision")) {
+
+                        if (mapLayer.getName().equals("items")) {
+                            setupItem(layer, mapTile, new Position2D(x, y));
+                            continue;
+                        } else if (mapTile.getProperties().containsKey("collision")) {
                             String property = (String) mapTile.getProperties().get("collision");
                             collision = property.equals("true");
                         }
                         model.getGameMap().addTile(layer, new Tile(new Position2D(x, y), collision));
                     }
                 }
+            }
+        }
+    }
+
+    private void setupItem(ILayer layer, TiledMapTile tile, Position2D position) {
+        MapProperties properties = tile.getProperties();
+
+        if (properties != null && properties.containsKey("type")) {
+            if (properties.get("type").equals("beverage")) {
+                String name = (String) properties.get("name");
+                Integer score = Integer.parseInt((String) properties.get("score"));
+                model.getGameMap().addTile(layer, new ItemTile(new ItemScore(name, score), position));
             }
         }
     }
@@ -113,7 +134,7 @@ public class LocMain extends Game {
 			int id = Integer.parseInt(NPCProperty.get(0));
             NPCFactory.setId(id);
 			try{
-				Dialog dialog = new Dialog(id);
+				Dialog dialog = new Dialog(id, "Dialogs.loc");
 				NPCFactory.setDialog(dialog);
 			}catch(InvalidIdException e){
 				//NPCFactory automatically generates a random dialog if none is specified in the file
