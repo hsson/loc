@@ -1,4 +1,4 @@
-package edu.chl.loc.utilities;
+package edu.chl.loc.models.characters.utilities;
 
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.utilities.FileUtilities;
