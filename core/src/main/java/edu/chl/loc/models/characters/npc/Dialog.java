@@ -2,6 +2,7 @@ package edu.chl.loc.models.characters.npc;
 
 import edu.chl.loc.utilities.FileUtilities;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class Dialog {
      * @param path Path to the file
      */
 
-    public Dialog(int id, String path) throws InvalidIdException{
+    public Dialog(int id, String path) throws InvalidIdException, FileNotFoundException {
         List<List<String>> dialogList = FileUtilities.readFile(path);
         boolean idFound = false;
         for(int i = 0; i < dialogList.size(); i++){
