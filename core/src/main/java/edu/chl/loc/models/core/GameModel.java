@@ -96,7 +96,7 @@ public class GameModel {
         if (gameMap.layerExists(collisionLayer) &&
                 (!gameMap.tileExists(collisionLayer, nextPos) ||
                         !gameMap.isCollidable(collisionLayer, nextPos))) {
-            if (gameMap.tileExists(groundLayer, nextPos)) {
+            if (gameMap.tileExists(groundLayer, nextPos) && !gameMap.npcExisitsAtPosition(nextPos)) {
                 player.move();
             }
         }
