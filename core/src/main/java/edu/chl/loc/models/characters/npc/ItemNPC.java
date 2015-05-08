@@ -22,7 +22,7 @@ public class ItemNPC extends AbstractNPC{
     }
 
     @Override
-    protected void doAction() {
+    public void doAction() {
 
         // Adds all of this NPC's items to the player
         for (AbstractItem item : inventory.getItems()) {

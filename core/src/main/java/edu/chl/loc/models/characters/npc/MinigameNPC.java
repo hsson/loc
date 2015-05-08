@@ -20,7 +20,7 @@ public class MinigameNPC extends AbstractNPC{
 
 
     @Override
-    protected void doAction() {
+    public void doAction() {
         //method to start the minigame
         //Todo method for minigames and minigames
     }

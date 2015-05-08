@@ -29,7 +29,7 @@ public abstract class AbstractNPC extends AbstractCharacter {
     }
 
 
-    protected abstract void doAction();
+    public abstract void doAction();
 
     public int getID() {
         return id;

@@ -16,7 +16,7 @@ public class StandardNPC extends AbstractNPC {
     }
 
     @Override
-    protected void doAction() {
+    public void doAction() {
 
     }
 }
