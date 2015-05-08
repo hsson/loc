@@ -38,8 +38,9 @@ public class ItemNPCTest {
 
     @Test
     public void testDoingAction(){ //giving all of inventory to the player
+        GameModel.getPlayer().getInventory().clear();
         itemNPC.doAction();
-        Assert.assertEquals("itemsNpc should be empty", new Inventory(), itemNPC.getInventory());
+        Assert.assertTrue("itemsNpc should be empty", itemNPC.getInventory().isEmpty());
 
 
     }
@@ -47,9 +48,14 @@ public class ItemNPCTest {
 
     @Test
     public void testReceiveItemfromNPC(){
+        GameModel.getPlayer().getInventory().clear();
+        Assert.assertTrue("Player's inventory should be empty because it was emptied", GameModel.getPlayer().getInventory().isEmpty());
         itemNPC.doAction();
         System.out.println(GameModel.getPlayer().getInventory());
-        Assert.assertFalse("players inv should have an item", GameModel.getPlayer().getInventory().isEmpty());
+        Assert.assertFalse("players inventory should have an item", GameModel.getPlayer().getInventory().isEmpty());
+
+
 
     }
+
 }
