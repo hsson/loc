@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import se.alexanderkarlsson.beerchug.beerchugcontroller.BottleBeerChugController;
 import se.alexanderkarlsson.beerchug.beerchugmodel.BottleBeerChug;
 import se.alexanderkarlsson.beerchug.utilities.Converter;
@@ -37,7 +36,6 @@ public class BeerChug extends ApplicationAdapter {
 	private BitmapFont font;
 	private boolean hasBlown;
 	private ParticleEffect kaboom;
-	private ProgressBar progressBar;
 	private Sound explosionSound;
 	
 	@Override
@@ -72,10 +70,6 @@ public class BeerChug extends ApplicationAdapter {
 		//Create font
 		font = new BitmapFont();
 
-		//progressBar = new ProgressBar(0f, 1.0f, 0.01f, true, new ProgressBar.ProgressBarStyle());
-		//progressBar.setSize(30,300);
-		//progressBar.setPosition(10f,10f);
-
 		//Instantiate and start background music
 		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("background.mp3"));
 		backgroundMusic.setLooping(true);
@@ -93,6 +87,72 @@ public class BeerChug extends ApplicationAdapter {
 		explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.wav"));
 	}
 
+	/**
+	 * Renders appropriate texture for the player
+	 */
+	private void drawPlayer(){
+		if (model.getLastShake() == null || model.isFinished()) {
+			batch.draw(standingPlayer, (1024 / 2) - standingPlayer.getWidth() / 2, 40);
+		} else if (model.getLastShake() == ShakeDirection.LEFT) {
+			batch.draw(shakingLeftPlayer, (1024 / 2) - shakingLeftPlayer.getWidth() / 2, 40);
+		} else if (model.getLastShake() == ShakeDirection.RIGHT) {
+			batch.draw(shakingRightPlayer, (1024 / 2) - shakingRightPlayer.getWidth() / 2, 40);
+		}
+	}
+
+	/**
+	 * Renders appropriate key
+	 */
+	private void drawNextKey(){
+		if ((model.getLastShake() == null || (model.drinkRemaining() == 0 && !model.isFinished())) && model.timeElapsed()>0) {
+			batch.draw(spaceKey, (1024/2) - spaceKey.getWidth()/2,250);
+		} else if (model.getLastShake() == ShakeDirection.LEFT && model.drinkRemaining()!=0) {
+			batch.draw(rightKey, (1024/2) + (spaceKey.getWidth()/2),250);
+		} else if (model.getLastShake() == ShakeDirection.RIGHT && model.drinkRemaining()!=0) {
+			batch.draw(leftKey, (1024/2) - ((spaceKey.getWidth()/2)+leftKey.getWidth()),250);
+		}
+	}
+
+	private void drawTable(){
+		if(!model.isFirstShakeDone() || model.isFinished()){
+			batch.draw(beerTable,(1024/2)-(beerTable.getWidth()/2),10);
+		}else{
+			batch.draw(table,(1024/2)-(table.getWidth()/2),10);
+		}
+	}
+
+	private void drawTimeElapsed(){
+		if (model.timeElapsed() > 0) {
+			font.draw(batch, Float.toString(Converter.nanoToSeconds(model.timeElapsed())), 0, 560);
+			if (model.timeElapsed() < 1000000000) {
+				font.draw(batch, "HÄFV!!!!", 470, 350);
+			}
+		}else if(model.timeElapsed() > -1000000000){
+			font.draw(batch, "Färdiga", 470, 350);
+		}else{
+			font.draw(batch, "Klara", 470, 350);
+		}
+
+	}
+
+	private void drawGrade(){
+		font.draw(batch, "Betyg: " + model.getGrade(), 470, 350);
+	}
+
+	private void drawDQReason(){
+		font.draw(batch, model.getDisqualifiedReason(), 470, 400);
+		if(!hasBlown){
+			kaboom.start();
+			hasBlown = true;
+			explosionSound.play();
+		}
+		kaboom.update(Gdx.graphics.getDeltaTime());
+		kaboom.draw(batch);
+	}
+
+	private void drawDrinkRemaining(){
+		font.draw(batch, Converter.percentToString(model.drinkRemaining()), 0, 500);
+	}
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 0);
@@ -109,66 +169,22 @@ public class BeerChug extends ApplicationAdapter {
 
 		batch.begin();
 
-		//Draw backround
-		batch.draw(background,0,0);
-
-		//Draw player
-		if (model.getLastShake() == null || model.isFinished()) {
-			batch.draw(standingPlayer, (1024 / 2) - standingPlayer.getWidth() / 2, 40);
-		} else if (model.getLastShake() == ShakeDirection.LEFT) {
-			batch.draw(shakingLeftPlayer, (1024 / 2) - shakingLeftPlayer.getWidth() / 2, 40);
-		} else if (model.getLastShake() == ShakeDirection.RIGHT) {
-			batch.draw(shakingRightPlayer, (1024 / 2) - shakingRightPlayer.getWidth() / 2, 40);
-		}
-
-		//Draw next key
-		if ((model.getLastShake() == null || (model.drinkRemaining() == 0 && !model.isFinished())) && model.timeElapsed()>0) {
-			batch.draw(spaceKey, (1024/2) - spaceKey.getWidth()/2,250);
-		} else if (model.getLastShake() == ShakeDirection.LEFT && model.drinkRemaining()!=0) {
-			batch.draw(rightKey, (1024/2) + (spaceKey.getWidth()/2),250);
-		} else if (model.getLastShake() == ShakeDirection.RIGHT && model.drinkRemaining()!=0) {
-			batch.draw(leftKey, (1024/2) - ((spaceKey.getWidth()/2)+leftKey.getWidth()),250);
-		}
-
-		//Draw correct table
-		if(!model.isFirstShakeDone() || model.isFinished()){
-			batch.draw(beerTable,(1024/2)-(beerTable.getWidth()/2),10);
-		}else{
-			batch.draw(table,(1024/2)-(table.getWidth()/2),10);
-		}
-
-		//Draw time elapsed and/or contdown
-		if (model.timeElapsed() > 0) {
-			font.draw(batch, Float.toString(Converter.nanoToSeconds(model.timeElapsed())), 0, 560);
-			if (model.timeElapsed() < 1000000000) {
-				font.draw(batch, "HÄFV!!!!", 470, 350);
-			}
-		}else if(model.timeElapsed() > -1000000000){
-			font.draw(batch, "Färdiga", 470, 350);
-		}else{
-			font.draw(batch, "Klara", 470, 350);
-		}
-
+		batch.draw(background, 0, 0);//Draw background
+		drawPlayer();
+		drawNextKey();
+		drawTable();
+		drawTimeElapsed();
 		//Draw grade when finished
 		if(model.isFinished()){
-			font.draw(batch, "Betyg: " + model.getGrade(), 470, 350);
+			drawGrade();
 		}
-
 		//Draw potential DQ message
 		if(model.isSquirted()){
-			font.draw(batch, model.getDisqualifiedReason(), 470, 400);
-			if(!hasBlown){
-				kaboom.start();
-				hasBlown = true;
-				explosionSound.play();
-			}
-			kaboom.update(Gdx.graphics.getDeltaTime());
-			kaboom.draw(batch);
+			drawDQReason();
 		}
+		drawDrinkRemaining();
 
-		//Draw percentage of drink remaining
-		font.draw(batch, Converter.percentToString(model.drinkRemaining()), 0, 500);
-
+		//Restart if enter is presses (Only used for testing, will be removed)
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
 			model = new BottleBeerChug();
 			controller = new BottleBeerChugController(model);
@@ -176,7 +192,6 @@ public class BeerChug extends ApplicationAdapter {
 			kaboom.reset();
 		}
 
-		//progressBar.draw(batch,1);
 		batch.end();
 	}
 }
