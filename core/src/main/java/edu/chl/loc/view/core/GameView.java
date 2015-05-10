@@ -15,10 +15,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.characters.Player;
+import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.map.ITile;
 import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.view.characters.CharacterView;
+import edu.chl.loc.view.characters.DialogView;
 import edu.chl.loc.view.map.GameMapView;
 import edu.chl.loc.view.music.Playlist;
 
@@ -41,6 +43,8 @@ public class GameView implements Screen{
     private GameModel model;
     private IView playerView;
     private IView gameMapView;
+    //TODO: remove test
+    private IView dialogView;
 
     private Viewport viewport;
     private OrthographicCamera camera;
@@ -69,9 +73,14 @@ public class GameView implements Screen{
      * @param model The loc gamemodel
      */
     public GameView(GameModel model){
+        String[] string = new String[2];
+        string[0] = "ehj";
+        string[1] = "asdf";
         this.model = model;
         this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
+        this.dialogView = new DialogView(new Dialog(string, false));
         this.gameMapView = new GameMapView(this);
+
 
         // Setup camera and viewport
         camera = new OrthographicCamera();
@@ -124,6 +133,7 @@ public class GameView implements Screen{
         }
 
         tiledMapRenderer.render(topLayers);
+        dialogView.render(deltaTime);
     }
 
     private boolean isPlayerUnderRoof() {
