@@ -98,7 +98,7 @@ public class BottleBeerChug {
      * @return False if the countdown is ongoing, false otherwise
      */
     public boolean chugStarted(){
-        return chugStarted();
+        return chugStarted;
     }
 
     /**
