@@ -72,6 +72,7 @@ public abstract class AbstractItem{
      */
     public abstract void use(GameModel state);
 
+    @Override
     public boolean equals(Object o){
         if(o == this){
             return true;
@@ -79,12 +80,16 @@ public abstract class AbstractItem{
         if(o == null){
             return false;
         }
-        if(!o.getClass().equals(this.getClass())){
+        if(o.getClass() != this.getClass()){
             return false;
         }else{
             AbstractItem otherAbs = (AbstractItem)o;
             return otherAbs.getType().equals(this.getType()) &&
                     otherAbs.getItemName().equals(this.getItemName());
         }
+    }
+    @Override
+    public int hashCode(){
+        return 97*89*getItemName().hashCode();
     }
 }
