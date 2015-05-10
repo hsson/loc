@@ -38,4 +38,20 @@ public class TestPosition2D {
         Assert.assertTrue("Testing equality with itself", firstPos.equals(firstPos));
     }
 
+    @Test
+    public void testingAddition(){
+        Position2D thirdPos = new Position2D(5,9);
+        Position2D fourthPos = new Position2D(9, 5);
+        Position2D resultPos = thirdPos.add(fourthPos);
+
+        Assert.assertTrue("ResultingPos should have 14 in x and y axis",
+                resultPos.getX() == 14 && resultPos.getY()==14);
+
+        Position2D fifthPos = new Position2D(-9, 9);
+        Position2D sixthPos = new Position2D(9, 5);
+        Position2D secondResultPos = fifthPos.add(sixthPos);
+        Assert.assertTrue("SecondResultPos should have 0 in x axis and 14 in y axis",
+                secondResultPos.getX()==0 && secondResultPos.getY() == 14);
+    }
+
 }
