@@ -41,6 +41,7 @@ public class BottleBeerChug {
     public void endChug(){
         if(centilitersRemaining != 0){
             squirted = true;
+            disqualifiedReason = "Spill";
         }else if(!squirted && !finished){
             finished = true;
         }
