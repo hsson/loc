@@ -9,7 +9,7 @@ import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
  * @version 1.0.1
  */
 public class BottleBeerChug {
-    private int centilitersRemaining;
+    private float centilitersRemaining;
     private ShakeDirection lastShake;
     private long timeElapsed;
     private boolean finished;
@@ -18,11 +18,13 @@ public class BottleBeerChug {
     private boolean firstShakeDone;
     private String disqualifiedReason;
 
+    private static float STARTING_CENTILITRES = 33f;
+
     /**
      * Basic constructor which starts and creates a basic 33cl beerchug
      */
     public BottleBeerChug(){
-        centilitersRemaining = 33;
+        centilitersRemaining = STARTING_CENTILITRES;
         lastShake = null;
         finished = false;
         timeElapsed = 0;
@@ -120,7 +122,7 @@ public class BottleBeerChug {
      * @return The percentage of remaining liquid
      */
     public float drinkRemaining(){
-        return(float)centilitersRemaining/33f;
+        return(float)centilitersRemaining/STARTING_CENTILITRES;
     }
 
     public String getDisqualifiedReason(){
