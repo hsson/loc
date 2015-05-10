@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
+ * @author Maxim Goretskyy
  * Created by maxim on 15-05-10.
  */
 public class DirectionTest {
