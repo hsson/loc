@@ -11,10 +11,10 @@ import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
 public class BottleBeerChug {
     private int centilitersRemaining;
     private ShakeDirection lastShake;
-    private long timeStarted;
-    private long timeFinished;
+    private long timeElapsed;
     private boolean finished;
     private boolean squirted;
+    private boolean chugStarted;
     private boolean firstShakeDone;
     private String disqualifiedReason;
 
@@ -24,8 +24,15 @@ public class BottleBeerChug {
     public BottleBeerChug(){
         centilitersRemaining = 33;
         lastShake = null;
-        timeStarted = TimeUtils.nanoTime()+2000000000l;//Added time for a two second countdown
         finished = false;
+        timeElapsed = 0;
+    }
+
+    /**
+     * Starts a chug
+     */
+    public void startChug(){
+        chugStarted = true;
     }
 
     /**
@@ -36,7 +43,6 @@ public class BottleBeerChug {
             squirted = true;
         }else if(!squirted && !finished){
             finished = true;
-            timeFinished = TimeUtils.nanoTime();
         }
     }
 
@@ -85,11 +91,11 @@ public class BottleBeerChug {
     }
 
     /**
-     * Checks if a chug has started or if the countdown is still ongoing
+     * Checks if a chug has started
      * @return False if the countdown is ongoing, false otherwise
      */
     public boolean chugStarted(){
-        return timeElapsed()>0;
+        return chugStarted();
     }
 
     /**
@@ -131,10 +137,16 @@ public class BottleBeerChug {
      * or the final time if the chug is finished
      */
     public long timeElapsed(){
-        if(isFinished()){
-            return (timeFinished-timeStarted);
-        }else{
-            return (TimeUtils.nanoTime()- timeStarted);
+        return timeElapsed;
+    }
+
+    /**
+     * Updates the time of the ongoing chug
+     * @param delta The time to add in nanoseconds
+     */
+    public void updateTime(float delta){
+        if (chugStarted) {
+            timeElapsed += delta;
         }
     }
 
