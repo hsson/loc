@@ -11,7 +11,7 @@ import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
 public class BottleBeerChug {
     private float centilitersRemaining;
     private ShakeDirection lastShake;
-    private long timeElapsed;
+    private float timeElapsed;
     private boolean finished;
     private boolean squirted;
     private boolean chugStarted;
@@ -135,17 +135,17 @@ public class BottleBeerChug {
 
     /**
      * Returns how long the current chug has been going on
-     * or the final time of the chug in nanoseconds
+     * or the final time of the chug in seconds
      * @return The time elapsed if the chug is still ongoing
      * or the final time if the chug is finished
      */
-    public long timeElapsed(){
+    public float timeElapsed(){
         return timeElapsed;
     }
 
     /**
      * Updates the time of the ongoing chug
-     * @param delta The time to add in nanoseconds
+     * @param delta The time to add in seconds
      */
     public void updateTime(float delta){
         if (chugStarted) {
@@ -161,11 +161,11 @@ public class BottleBeerChug {
      */
     public char getGrade(){
         if(finished && !squirted) {
-            if (timeElapsed() < 3000000000l) {
+            if (timeElapsed() < 3) {
                 return '5';
-            } else if (timeElapsed() < 4000000000l) {
+            } else if (timeElapsed() < 4) {
                 return '4';
-            } else if (timeElapsed() < 7000000000l) {
+            } else if (timeElapsed() < 7) {
                 return '3';
             }
         }
