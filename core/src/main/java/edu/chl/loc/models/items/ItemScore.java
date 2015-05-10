@@ -26,6 +26,10 @@ public class ItemScore extends AbstractItem{
         this.hec = copyBeer.hec;
     }
 
+    public double getHec(){
+        return this.hec;
+    }
+
     @Override
     public AbstractItem copy() {
         return new ItemScore(this);
