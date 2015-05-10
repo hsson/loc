@@ -90,6 +90,6 @@ public abstract class AbstractItem{
     }
     @Override
     public int hashCode(){
-        return 97*89*getItemName().hashCode();
+        return 97*89*getItemName().hashCode() * getType().hashCode();
     }
 }
