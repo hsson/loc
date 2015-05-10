@@ -71,4 +71,20 @@ public abstract class AbstractItem{
      * It has access to the whole game
      */
     public abstract void use(GameModel state);
+
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        if(o == null){
+            return false;
+        }
+        if(!o.getClass().equals(this.getClass())){
+            return false;
+        }else{
+            AbstractItem otherAbs = (AbstractItem)o;
+            return otherAbs.getType().equals(this.getType()) &&
+                    otherAbs.getItemName().equals(this.getItemName());
+        }
+    }
 }
