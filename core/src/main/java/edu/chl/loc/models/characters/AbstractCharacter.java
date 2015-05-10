@@ -22,41 +22,6 @@ public abstract class AbstractCharacter {
     private Gender gender = Gender.MALE;
 
     /**
-     * Creates an abstractCharacter on a given position, with North as default direction, and with an empty inventory
-     * @param pos The position you want AbstractCharacter to have
-     */
-    public AbstractCharacter(Position2D pos) {
-        currentPosition = pos;
-        currentDirection = Direction.NORTH; //default direction is North.
-        characterName = DEFAULT_NAME;
-
-    }
-
-    /**
-     * Creates an abstractCharacter on a given position, with a given direction and with an empty inventory
-     * @param pos The position you want AbstractCharacter to have
-     * @param direction The direction you want AbstractCharacter to have
-     */
-    public AbstractCharacter(Position2D pos, Direction direction) {
-        currentDirection = direction;
-        currentPosition = pos;
-        characterName = DEFAULT_NAME;
-    }
-
-    /**
-     * Creates an abstractCharacter on a given position, with North as default direction and with a given inventory
-     * @param pos   The position you want AbstractCharacter to have
-     * @param name  The name you want AbstractCharacter to have
-     * @param inventory The inventory you want AbstractCharacter to have
-     */
-    public AbstractCharacter(Position2D pos, String name, Inventory inventory){
-        currentPosition = pos;
-        currentDirection = Direction.NORTH; //default direction is North.
-        this.characterName = name;
-    }
-
-
-    /**
      * Creates an abstractCharacter with a given position, direction, name and inventory
      * @param pos The position to use
      * @param direction The direction to use
@@ -68,17 +33,6 @@ public abstract class AbstractCharacter {
         this.characterName = name;
         this.gender = gender;
 
-    }
-    /**
-     *
-     * Creates an abstractCharacter on a given position and a given name, with North as default direction, and with an empty inventory
-     * @param pos   The position you want AbstractCharacter to have
-     * @param name  The name you want AbstractCharacter to have
-     */
-    public AbstractCharacter(Position2D pos, String name){
-        currentPosition = pos;
-        currentDirection = Direction.NORTH; //default direction is North.
-        this.characterName = name;
     }
     /**
      Move character 1 step in a given direction
@@ -102,16 +56,6 @@ public abstract class AbstractCharacter {
     }
 
     /**
-     Move character in a given change(delta) in X and Y-coordinates
-     */
-    public void move(int deltaX, int deltaY){
-        Position2D tempPos = getPosition().add(deltaX, deltaY);
-        setPosition(tempPos);
-    }
-
-
-
-    /**
      @return current position in Position2D
      */
     public  Position2D getPosition(){
@@ -125,16 +69,6 @@ public abstract class AbstractCharacter {
      */
     public void setPosition(Position2D position){
         currentPosition = position;
-    }
-
-
-    /**
-     * @param x X-coordinate you want to set in the new position
-     * @param y Y-coordinate you want to set in the new position
-    More natural to use setPlayerPosition(Position2D pos)
-     */
-    public void setPosition(int x, int y){
-        currentPosition = new Position2D(x,y);
     }
 
     /**
