@@ -31,4 +31,29 @@ public class ItemScoreTest {
 
         Assert.assertTrue("Model should have 5 hec", model.getHec() == 5);
     }
+
+    @Test
+    public void testingEquals(){
+        ItemScore firstItem = new ItemScore("PrippsBlå", 5);
+        ItemScore secondItem = new ItemScore("PrippsBlå", 7);
+        Assert.assertTrue("Items should be same because they share same name and type", firstItem.equals(secondItem));
+
+        //test letter case-sensitivity
+        ItemScore thirdItem = new ItemScore("Prippsblå", 5);
+        ItemScore fourthItem = new ItemScore("PrippsBlå", 7);
+        Assert.assertFalse("Items shouldn't be same because they have different name", thirdItem.equals(fourthItem));
+
+        //testing different types but same name
+        ItemScore fifthItem= new ItemScore("PrippsBlå", 7);
+        ItemScore sixthItem = new ItemScore("PrippsBlå", 7);
+        fifthItem.setType(ItemType.COLLECT);
+        Assert.assertFalse("Items should not be the same, because of different types", fifthItem.equals(sixthItem));
+
+        //testing null
+        Assert.assertFalse("An item should not be equal with null", sixthItem.equals(null));
+
+        Assert.assertTrue("An item should be equal itself", sixthItem.equals(sixthItem));
+
+
+    }
 }
