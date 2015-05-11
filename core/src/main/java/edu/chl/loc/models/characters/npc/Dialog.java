@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class Dialog {
     private String[] dialogStrings;
+    private String currentString;
+    private int currentStringIndex;
     private boolean yesOption;
 
     /**
@@ -26,6 +28,8 @@ public class Dialog {
     public Dialog(String[] dialogStrings, boolean yesOption){
         this.dialogStrings = (String[])dialogStrings.clone();
         this.yesOption = yesOption;
+        currentStringIndex = 0;
+        currentString = dialogStrings[currentStringIndex];
     }
 
     /**
@@ -59,6 +63,9 @@ public class Dialog {
         if(!idFound){
             throw new InvalidIdException();
         }
+
+        currentStringIndex = 0;
+        currentString = dialogStrings[currentStringIndex];
     }
 
     /**
@@ -83,6 +90,14 @@ public class Dialog {
      */
     public boolean hasYesOption(){
         return yesOption;
+    }
+
+    public void setNextString(){
+        currentString = dialogStrings[currentStringIndex++];
+    }
+
+    public String getCurrentString(){
+        return currentString;
     }
 
     /**

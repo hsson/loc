@@ -3,6 +3,7 @@ package edu.chl.loc.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import edu.chl.loc.models.characters.Player;
+import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.map.GameMap;
@@ -20,6 +21,9 @@ public class GameController implements InputProcessor {
     private final GameModel model;
     private Player player;
     private GameMap gameMap; //todo make gamemap static inside gamemodel?
+
+
+    private Dialog dialog = GameModel.TESTDIALOG;
 
     /**
      *
@@ -48,6 +52,10 @@ public class GameController implements InputProcessor {
             case Input.Keys.UP:
                 model.moveCharacter(player.getNextPosition());//sends information about next position to model
                 return true;
+            case Input.Keys.ENTER:
+                dialog.setNextString();
+                break;
+
             //model will decide if it can move
         }
         return false;

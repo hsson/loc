@@ -3,6 +3,7 @@ package edu.chl.loc.view.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -46,8 +47,8 @@ public class GameView implements Screen{
     //TODO: remove test
     private IView dialogView;
 
-    private Viewport viewport;
-    private OrthographicCamera camera;
+    private static OrthographicCamera camera = new OrthographicCamera();
+    private static Viewport viewport = new FitViewport(RES_X, RES_Y, camera);
 
     private TiledMap tiledMap = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
     private OrthogonalTiledMapRenderer tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
@@ -73,14 +74,13 @@ public class GameView implements Screen{
      * @param model The loc gamemodel
      */
     public GameView(GameModel model){
-        String[] string = new String[2];
-        string[0] = "ehj";
-        string[1] = "asdf";
+        String[] message = new String[2];
+        message[0] = "ehj";
+        message[1] = "asdf";
         this.model = model;
         this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
-        this.dialogView = new DialogView(new Dialog(string, false));
+        this.dialogView = new DialogView(new Dialog(message, false));
         this.gameMapView = new GameMapView(this);
-
 
         // Setup camera and viewport
         camera = new OrthographicCamera();
@@ -88,6 +88,23 @@ public class GameView implements Screen{
 
         Playlist gameMusic = new Playlist(true, true, musicNyan, musicRickroll, musicSax, musicTrololo, marioLevels);
         gameMusic.play();
+    }
+
+    /**
+     * Gives access to the spritebatch so other view classes render methods
+     * can share spritebatch with GameView
+     * @return The spritebatch
+     */
+    public static SpriteBatch getSpriteBatch() {
+        return GameView.batch;
+    }
+
+    public static Viewport getViewport(){
+        return GameView.viewport;
+    }
+
+    public static Camera getCamera(){
+        return GameView.camera;
     }
 
     /**

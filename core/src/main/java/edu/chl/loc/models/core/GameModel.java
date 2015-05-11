@@ -2,6 +2,7 @@ package edu.chl.loc.models.core;
 
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.npc.AbstractNPC;
+import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.items.AbstractItem;
@@ -22,6 +23,9 @@ public class GameModel {
     public static final String PLAYER_DEFAULT_NAME = "Emil";
     public static final Gender PLAYER_DEFAULT_GENDER = Gender.MALE;
 
+    static String[] strings = {"Hej, var hälsad! Hur kan jag hjälpa dig?", "Jag har en lite potion till dig", "You have retrieved a banana potion"};
+
+    public static final Dialog TESTDIALOG = new Dialog(strings, false);
 
     private static Player player = new Player(STARTING_POS,
             Direction.NORTH,
