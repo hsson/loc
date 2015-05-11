@@ -76,7 +76,7 @@ public class GameView implements Screen{
         camera = new OrthographicCamera();
         viewport = new FitViewport(RES_X, RES_Y, camera);
 
-        Playlist gameMusic = new Playlist(true, musicNyan, musicRickroll, musicSax, musicTrololo);
+        Playlist gameMusic = new Playlist(true, true, musicNyan, musicRickroll, musicSax, musicTrololo);
         gameMusic.play();
     }
 

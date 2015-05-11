@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Music;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Alexander Håkansson
@@ -13,17 +14,38 @@ import java.util.List;
 public class Playlist implements Music.OnCompletionListener {
     List<Music> songs;
     private boolean looping;
-    private int amountOfSongs;
+    private boolean random;
     private int currentSong = 0;
+    private Random randomizer = new Random();
 
-    public Playlist(boolean looping, Music... songs) {
+    public Playlist(boolean looping, boolean random, Music... songs) {
         this.looping = looping;
+        this.random = random;
         this.songs = Arrays.asList(songs);
-        amountOfSongs = this.songs.size();
+
+        if (random) {
+            currentSong = randomizer.nextInt(this.songs.size());
+        }
     }
 
+    /**
+     * Set if the playlist should start over once all
+     * songs have been played.
+     *
+     * @param looping Determines if the playlist should loop
+     */
     public void setLooping(boolean looping) {
         this.looping = looping;
+    }
+
+    /**
+     * Set if the playlist should play its songs in a random
+     * order or not.
+     *
+     * @param random Determines if the playlist should be random
+     */
+    public void setRandom(boolean random) {
+        this.random = random;
     }
 
     public void play() {
@@ -34,9 +56,16 @@ public class Playlist implements Music.OnCompletionListener {
 
     @Override
     public void onCompletion(Music music) {
-        currentSong++;
+        if (random) {
+            int lastSong = currentSong;
+            do {
+                currentSong = randomizer.nextInt(songs.size());
+            } while (currentSong == lastSong);
+        } else {
+            currentSong++;
+        }
 
-        if (currentSong == amountOfSongs && looping) {
+        if (currentSong == songs.size() && looping) {
             currentSong = 0;
         }
 
