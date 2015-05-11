@@ -1,9 +1,10 @@
-package edu.chl.loc.models.minigames;
+package edu.chl.loc.minigame;
 
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import edu.chl.loc.models.characters.npc.ItemNPC;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.items.AbstractItem;
-import edu.chl.loc.models.items.Inventory;
 
 /**@author Maxim Goretskyy
  * Created by maxim on 15-05-03.
@@ -75,5 +76,18 @@ public class MinigameCortege implements IMinigame{
     }
 
 
+    @Override
+    public Screen getView() {
+        return null;
+    }
 
+    @Override
+    public InputProcessor getController() {
+        return null;
+    }
+
+    @Override
+    public void setListener(IMinigameListener listener) {
+
+    }
 }
