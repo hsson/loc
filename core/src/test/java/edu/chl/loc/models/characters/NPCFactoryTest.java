@@ -1,5 +1,8 @@
 package edu.chl.loc.models.characters;
 
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
+import edu.chl.loc.minigame.IMinigameListener;
 import edu.chl.loc.models.characters.npc.*;
 import edu.chl.loc.models.items.Inventory;
 import edu.chl.loc.minigame.IMinigame;
@@ -28,6 +31,21 @@ public class NPCFactoryTest {
     public void testBuildMinigameNPC() {
         NPCFactory.setMinigame(new IMinigame() {
             @Override
+            public Screen getView() {
+                return null;
+            }
+
+            @Override
+            public InputProcessor getController() {
+                return null;
+            }
+
+            @Override
+            public void setListener(IMinigameListener listener) {
+
+            }
+
+            @Override
             public int hashCode() {
                 return super.hashCode();
             }
@@ -49,6 +67,21 @@ public class NPCFactoryTest {
 
             NPCFactory.setMinigame(new IMinigame() {
                 @Override
+                public Screen getView() {
+                    return null;
+                }
+
+                @Override
+                public InputProcessor getController() {
+                    return null;
+                }
+
+                @Override
+                public void setListener(IMinigameListener listener) {
+
+                }
+
+                @Override
                 public int hashCode() {
                     return 9;
                 }
@@ -64,6 +97,21 @@ public class NPCFactoryTest {
     @Test
     public void testAddMinigameAndInv(){
         NPCFactory.setMinigame(new IMinigame() {
+            @Override
+            public Screen getView() {
+                return null;
+            }
+
+            @Override
+            public InputProcessor getController() {
+                return null;
+            }
+
+            @Override
+            public void setListener(IMinigameListener listener) {
+
+            }
+
             @Override
             public int hashCode() {
                 return super.hashCode();
