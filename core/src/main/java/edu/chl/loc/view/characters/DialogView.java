@@ -1,5 +1,6 @@
 package edu.chl.loc.view.characters;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -31,6 +32,11 @@ public class DialogView implements IView {
 
     @Override
     public void render(float delta) {
+        Camera camera = GameView.getCamera();
+        Viewport viewport = GameView.getViewport();
+        Vector2 viewportOrigo = new Vector2(camera.position.x - viewport.getWorldWidth()/2,
+                camera.position.y + viewport.getWorldHeight()/2);
+
         //render Frame
         shapeRenderer.setColor(255, 255, 255, 0);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -43,17 +49,40 @@ public class DialogView implements IView {
         Gdx.gl20.glLineWidth(5);
         shapeRenderer.end();
 
+        if(dialog.isLastString() && dialog.hasYesOption()){
+            shapeRenderer.setColor(255, 255, 255, 0);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.rect(GameView.RES_X - 121, 71, 100, 100);
+            shapeRenderer.end();
+
+            shapeRenderer.setColor(0, 0, 0, 0);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            shapeRenderer.rect(GameView.RES_X - 121, 71, 100, 100);
+            Gdx.gl20.glLineWidth(5);
+            shapeRenderer.end();
+
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.triangle(GameView.RES_X - 100, 150 - (dialog.getOptionSelected()?0:1)*40,
+                                    GameView.RES_X - 100, 140 - (dialog.getOptionSelected()?0:1)*40,
+                                    GameView.RES_X - 95, 145 - (dialog.getOptionSelected()?0:1)*40);
+            shapeRenderer.end();
+
+            spriteBatch.begin();
+            font.setColor(Color.BLUE);
+            font.draw(spriteBatch, "YES", viewportOrigo.x + viewport.getWorldWidth() - 80,
+                    viewportOrigo.y - viewport.getWorldHeight() + 150);
+            font.draw(spriteBatch, "NO", viewportOrigo.x + viewport.getWorldWidth() - 80,
+                                         viewportOrigo.y - viewport.getWorldHeight() + 110);
+            spriteBatch.end();
+        }
+
         //render text
-        Camera camera = GameView.getCamera();
-        Viewport viewport = GameView.getViewport();
-        Vector2 viewportOrigo = new Vector2(camera.position.x - viewport.getWorldWidth()/2,
-                camera.position.y + viewport.getWorldHeight()/2);
-
-
         spriteBatch.begin();
         font.setColor(Color.BLACK);
-        font.draw(spriteBatch, dialog.getCurrentString(), viewportOrigo.x + 40, viewportOrigo.y - viewport.getViewportHeight() + 40);
+        font.draw(spriteBatch, dialog.getCurrentString(), viewportOrigo.x + 40, viewportOrigo.y - viewport.getWorldHeight() + 100);
         spriteBatch.end();
+
+
     }
 
     @Override

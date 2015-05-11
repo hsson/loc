@@ -1,5 +1,6 @@
 package edu.chl.loc.models.characters.npc;
 
+import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.utilities.FileUtilities;
 
 import java.io.FileNotFoundException;
@@ -16,6 +17,7 @@ public class Dialog {
     private String currentString;
     private int currentStringIndex;
     private boolean yesOption;
+    private boolean optionSelected = true;
 
     /**
      * Creates a dialog
@@ -83,6 +85,15 @@ public class Dialog {
         String[] dialogArray = strippedList.toArray(new String[0]);
         return new Dialog(dialogArray, yesOption);
     }
+
+    public void setOptionSelected(boolean option){
+        this.optionSelected = option;
+    }
+
+    public boolean getOptionSelected(){
+        return this.optionSelected;
+    }
+
     /**
      * Specifies if this dialog is a yes/no type question or a question with only one option
      * @return True if the dialog has two yes/no type options, false if the dialog only has
@@ -92,12 +103,27 @@ public class Dialog {
         return yesOption;
     }
 
+    /**
+     * Sets the next string to the current
+     */
     public void setNextString(){
-        currentString = dialogStrings[currentStringIndex++];
+        currentString = dialogStrings[++currentStringIndex];
     }
 
+    /**
+     * get the current active string in the dialog
+     * @return the active string
+     */
     public String getCurrentString(){
         return currentString;
+    }
+
+    /**
+     * returns true if the active string is the last one in the dialog
+     * @return
+     */
+    public boolean isLastString(){
+        return currentStringIndex == dialogStrings.length - 1;
     }
 
     /**

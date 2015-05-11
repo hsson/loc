@@ -23,10 +23,6 @@ public class GameModel {
     public static final String PLAYER_DEFAULT_NAME = "Emil";
     public static final Gender PLAYER_DEFAULT_GENDER = Gender.MALE;
 
-    static String[] strings = {"Hej, var hälsad! Hur kan jag hjälpa dig?", "Jag har en lite potion till dig", "You have retrieved a banana potion"};
-
-    public static final Dialog TESTDIALOG = new Dialog(strings, false);
-
     private static Player player = new Player(STARTING_POS,
             Direction.NORTH,
             PLAYER_DEFAULT_NAME,
@@ -34,6 +30,9 @@ public class GameModel {
 
     private GameMap gameMap;
     private Stats stats;
+
+    private Dialog activeDialog;
+    private boolean isDialogActive;
 
     public GameModel() {
         gameMap = new GameMap();
@@ -72,6 +71,22 @@ public class GameModel {
 
     public double getHec(){
         return stats.getHec();
+    }
+
+    public void setActiveDialog(Dialog dialog){
+        this.activeDialog = dialog;
+    }
+
+    public Dialog getActiveDialog(){
+        return this.activeDialog;
+    }
+
+    public boolean isDialogActive(){
+        return this.isDialogActive;
+    }
+
+    public void setIsDialogActive(boolean isDialogActive){
+        this.isDialogActive = isDialogActive;
     }
 
     /**
