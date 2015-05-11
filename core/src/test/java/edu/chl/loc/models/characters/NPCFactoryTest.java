@@ -49,6 +49,7 @@ public class NPCFactoryTest {
             public int hashCode() {
                 return super.hashCode();
             }
+
         });
         AbstractNPC secondNPC = NPCFactory.build(new Position2D(4,4));
         Assert.assertEquals("The created NPC should be a MinigameNPC", secondNPC.getClass(), MinigameNPC.class);
