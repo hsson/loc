@@ -74,12 +74,8 @@ public class GameView implements Screen{
      * @param model The loc gamemodel
      */
     public GameView(GameModel model){
-        String[] message = new String[2];
-        message[0] = "ehj";
-        message[1] = "asdf";
         this.model = model;
         this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
-        this.dialogView = new DialogView(new Dialog(message, false));
         this.gameMapView = new GameMapView(this);
 
         // Setup camera and viewport
@@ -150,7 +146,9 @@ public class GameView implements Screen{
         }
 
         tiledMapRenderer.render(topLayers);
-        dialogView.render(deltaTime);
+        if(model.isDialogActive()) {
+            dialogView.render(deltaTime, GameView.batch);
+        }
     }
 
     private boolean isPlayerUnderRoof() {

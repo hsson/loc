@@ -19,19 +19,16 @@ import edu.chl.loc.view.core.IView;
  */
 public class DialogView implements IView {
     private Dialog dialog;
-    private SpriteBatch spriteBatch;
     private ShapeRenderer shapeRenderer;
     private BitmapFont font;
 
     public DialogView(Dialog dialog){
-        this.dialog = GameModel.TESTDIALOG;
-        this.spriteBatch = GameView.getSpriteBatch();
         this.shapeRenderer = new ShapeRenderer();
         this.font = new BitmapFont();
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta, SpriteBatch spriteBatch) {
         Camera camera = GameView.getCamera();
         Viewport viewport = GameView.getViewport();
         Vector2 viewportOrigo = new Vector2(camera.position.x - viewport.getWorldWidth()/2,
