@@ -16,6 +16,7 @@ public class BottleBeerChug {
     private boolean squirted;
     private boolean chugStarted;
     private boolean firstShakeDone;
+    private boolean countDownHasBegun;
     private String disqualifiedReason;
     private float countDown;
     private boolean countingDown;
@@ -171,6 +172,7 @@ public class BottleBeerChug {
      */
     public void startCountdown(){
         countDown = COUNTDOWN_LENGTH;
+        countDownHasBegun = true;
         countingDown = true;
     }
 
@@ -180,6 +182,14 @@ public class BottleBeerChug {
      */
     public boolean isCountingDown(){
         return countingDown;
+    }
+
+    /**
+     * Checks if the countdown has once been started
+     * @return
+     */
+    public boolean countDownHasBegun(){
+        return countDownHasBegun;
     }
 
     /**
