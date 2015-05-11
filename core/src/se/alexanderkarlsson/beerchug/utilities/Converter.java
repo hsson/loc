@@ -10,8 +10,4 @@ public class Converter {
         float number = percent*100f;
         return (Float.toString(number) + "%");
     }
-
-    public static float nanoToSeconds(long nanoseconds){
-        return (float)nanoseconds/1000000000f;
-    }
 }
