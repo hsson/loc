@@ -148,7 +148,7 @@ public class BottleBeerChug {
      * @param delta The time to add in seconds
      */
     public void updateTime(float delta){
-        if (chugStarted) {
+        if (chugStarted && !finished) {
             timeElapsed += delta;
         }
     }
