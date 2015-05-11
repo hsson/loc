@@ -24,11 +24,10 @@ public class GameUtilities {
      * @return Distance between two positions applying pythagorean theorem,
      *                                      rounds down to closes integer
      */
-    public static int calculateDistance(Position2D startPos, Position2D endPos){
+    public static double calculateDistance(Position2D startPos, Position2D endPos){
         int distanceY = Math.abs(startPos.getY()-endPos.getY());
         int distanceX = Math.abs(startPos.getX() - endPos.getX());
         //Pythagorean theorem
-        int result = (int)(Math.sqrt(distanceX*distanceX + distanceY * distanceY));
-        return result;
+        return (Math.sqrt(distanceX*distanceX + distanceY * distanceY));
     }
 }
