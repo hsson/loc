@@ -1,10 +1,7 @@
-package edu.chl.loc.models.minigame;
+package edu.chl.loc.minigame;
 
-import edu.chl.loc.minigame.IMinigame;
-import edu.chl.loc.minigame.IMinigameHandlerListener;
-import edu.chl.loc.minigame.MinigameHandler;
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Alexander Håkansson
