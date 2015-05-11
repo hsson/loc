@@ -12,6 +12,7 @@ import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
  */
 public class BottleBeerChugController {
     private BottleBeerChug model;
+    private boolean countdownStarted = false;
 
     public BottleBeerChugController(BottleBeerChug model){
         this.model = model;
@@ -22,7 +23,10 @@ public class BottleBeerChugController {
      */
     public void update(){
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            if(!model.isFirstShakeDone()) {
+            if(!countdownStarted){
+                model.startCountdown();
+                countdownStarted = true;
+            }else if(!model.isFirstShakeDone()) {
                 model.firstShake();
             }else{
                 model.endChug();
