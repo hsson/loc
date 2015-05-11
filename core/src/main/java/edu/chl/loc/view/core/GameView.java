@@ -3,6 +3,7 @@ package edu.chl.loc.view.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,10 +16,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.characters.Player;
+import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.map.ITile;
 import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.view.characters.CharacterView;
+import edu.chl.loc.view.characters.DialogView;
 import edu.chl.loc.view.map.GameMapView;
 import edu.chl.loc.view.music.Playlist;
 
@@ -41,9 +44,11 @@ public class GameView implements Screen{
     private GameModel model;
     private IView playerView;
     private IView gameMapView;
+    //TODO: remove test
+    private IView dialogView;
 
-    private Viewport viewport;
-    private OrthographicCamera camera;
+    private static OrthographicCamera camera = new OrthographicCamera();
+    private static Viewport viewport = new FitViewport(RES_X, RES_Y, camera);
 
     private TiledMap tiledMap = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
     private OrthogonalTiledMapRenderer tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
@@ -79,6 +84,23 @@ public class GameView implements Screen{
 
         Playlist gameMusic = new Playlist(true, true, musicNyan, musicRickroll, musicSax, musicTrololo, marioLevels);
         gameMusic.play();
+    }
+
+    /**
+     * Gives access to the spritebatch so other view classes render methods
+     * can share spritebatch with GameView
+     * @return The spritebatch
+     */
+    public static SpriteBatch getSpriteBatch() {
+        return GameView.batch;
+    }
+
+    public static Viewport getViewport(){
+        return GameView.viewport;
+    }
+
+    public static Camera getCamera(){
+        return GameView.camera;
     }
 
     /**
@@ -124,6 +146,9 @@ public class GameView implements Screen{
         }
 
         tiledMapRenderer.render(topLayers);
+        if(model.isDialogActive()) {
+            dialogView.render(deltaTime, GameView.batch);
+        }
     }
 
     private boolean isPlayerUnderRoof() {

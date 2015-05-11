@@ -2,6 +2,7 @@ package edu.chl.loc.models.core;
 
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.npc.AbstractNPC;
+import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.items.AbstractItem;
@@ -22,7 +23,6 @@ public class GameModel {
     public static final String PLAYER_DEFAULT_NAME = "Emil";
     public static final Gender PLAYER_DEFAULT_GENDER = Gender.MALE;
 
-
     private static Player player = new Player(STARTING_POS,
             Direction.NORTH,
             PLAYER_DEFAULT_NAME,
@@ -30,6 +30,9 @@ public class GameModel {
 
     private GameMap gameMap;
     private Stats stats;
+
+    private Dialog activeDialog;
+    private boolean isDialogActive;
 
     public GameModel() {
         gameMap = new GameMap();
@@ -68,6 +71,22 @@ public class GameModel {
 
     public double getHec(){
         return stats.getHec();
+    }
+
+    public void setActiveDialog(Dialog dialog){
+        this.activeDialog = dialog;
+    }
+
+    public Dialog getActiveDialog(){
+        return this.activeDialog;
+    }
+
+    public boolean isDialogActive(){
+        return this.isDialogActive;
+    }
+
+    public void setIsDialogActive(boolean isDialogActive){
+        this.isDialogActive = isDialogActive;
     }
 
     /**

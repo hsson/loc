@@ -3,6 +3,7 @@ package edu.chl.loc.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import edu.chl.loc.models.characters.Player;
+import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.map.GameMap;
@@ -40,17 +41,13 @@ public class GameController implements InputProcessor {
     @Override
     public boolean keyUp(int keycode) {
 
-        chooseDirection(keycode);//sets direction of player depends what you click
-        switch(keycode) {
-            case Input.Keys.LEFT:
-            case Input.Keys.RIGHT:
-            case Input.Keys.DOWN:
-            case Input.Keys.UP:
-                model.moveCharacter(player.getNextPosition());//sends information about next position to model
-                return true;
-            //model will decide if it can move
+        if(model.isDialogActive()) {
+            handleDialog(keycode);
+        }else {
+            moveCharacter(keycode);
         }
-        return false;
+
+        return true;
     }
 
     @Override
@@ -81,6 +78,33 @@ public class GameController implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public void handleDialog(int keycode) {
+        Dialog dialog = model.getActiveDialog();
+        switch (keycode) {
+            case Input.Keys.ENTER:
+                dialog.setNextString();
+                break;
+            case Input.Keys.UP:
+                dialog.setOptionSelected(true);
+                break;
+            case Input.Keys.DOWN:
+                dialog.setOptionSelected(false);
+                break;
+        }
+    }
+
+    public void moveCharacter(int keycode){
+        chooseDirection(keycode);
+        switch(keycode) {
+            case Input.Keys.LEFT:
+            case Input.Keys.RIGHT:
+            case Input.Keys.DOWN:
+            case Input.Keys.UP:
+                model.moveCharacter(player.getNextPosition());//sends information about next position to model
+                break;
+        }
     }
 
     public void chooseDirection(int keycode){
