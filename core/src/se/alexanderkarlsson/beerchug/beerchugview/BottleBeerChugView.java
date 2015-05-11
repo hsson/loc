@@ -16,6 +16,8 @@ import se.alexanderkarlsson.beerchug.beerchugmodel.BottleBeerChug;
 import se.alexanderkarlsson.beerchug.utilities.Converter;
 import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
 
+import java.text.DecimalFormat;
+
 /**
  * View representing a bottle beerchug
  */
@@ -28,6 +30,7 @@ public class BottleBeerChugView implements Screen {
     private Music backgroundMusic;
     private Sound startSound;
     private boolean startSoundPlayed;
+    private boolean hasBegun;
     private Texture standingPlayer;
     private Texture shakingLeftPlayer;
     private Texture shakingRightPlayer;
@@ -107,8 +110,11 @@ public class BottleBeerChugView implements Screen {
      * Renders appropriate key
      */
     private void drawNextKey(){
-        if ((model.getLastShake() == null || (model.drinkRemaining() == 0 && !model.isFinished())) && model.timeElapsed()>0) {
+        if (((model.getLastShake() == null || (model.drinkRemaining() == 0 && !model.isFinished())) && model.timeElapsed()>0) || !model.countDownHasBegun()) {
             batch.draw(spaceKey, (1024/2) - spaceKey.getWidth()/2,250);
+            if(!model.countDownHasBegun()){
+                font.draw(batch, "Tryck space när du är redo", 425, 350);
+            }
         } else if (model.getLastShake() == ShakeDirection.LEFT && model.drinkRemaining()!=0) {
             batch.draw(rightKey, (1024/2) + (spaceKey.getWidth()/2),250);
         } else if (model.getLastShake() == ShakeDirection.RIGHT && model.drinkRemaining()!=0) {
@@ -116,6 +122,9 @@ public class BottleBeerChugView implements Screen {
         }
     }
 
+    /**
+     * Renders a table with or without a beer on it
+     */
     private void drawTable(){
         if(!model.isFirstShakeDone() || model.isFinished()){
             batch.draw(beerTable,(1024/2)-(beerTable.getWidth()/2),10);
@@ -124,26 +133,30 @@ public class BottleBeerChugView implements Screen {
         }
     }
 
+    /**
+     * Renders the time elapsed
+     */
     private void drawTimeElapsed(){
-        if (model.timeElapsed() > 0) {
-            font.draw(batch, Float.toString(Converter.nanoToSeconds(model.timeElapsed())), 0, 560);
-            if (model.timeElapsed() < 1000000000) {
-                font.draw(batch, "HÄFV!!!!", 470, 350);
-            }
-        }else if(model.timeElapsed() > -1000000000){
-            font.draw(batch, "Färdiga", 470, 350);
-        }else{
-            font.draw(batch, "Klara", 470, 350);
-        }
-
+        DecimalFormat df = new DecimalFormat("0.00");
+        String timeElapsed = df.format(model.timeElapsed());
+        font.draw(batch, timeElapsed, 480, 400);
     }
 
+    /**
+     * Renders the grade of the chug
+     */
     private void drawGrade(){
         font.draw(batch, "Betyg: " + model.getGrade(), 470, 350);
     }
 
+    /**
+     * Renders the reason for DQ, if any and renders explosion
+     * effect with sound
+     */
     private void drawDQReason(){
-        font.draw(batch, model.getDisqualifiedReason(), 470, 400);
+        if(model.isSquirted()) {
+            font.draw(batch, model.getDisqualifiedReason(), 470, 380);
+        }
         if(!hasBlown){
             kaboom.start();
             hasBlown = true;
@@ -153,9 +166,29 @@ public class BottleBeerChugView implements Screen {
         kaboom.draw(batch);
     }
 
+    /**
+     * Renders the amount of drink remaining
+     */
     private void drawDrinkRemaining(){
         font.draw(batch, Converter.percentToString(model.drinkRemaining()), 0, 500);
     }
+
+    /**
+     * Renders a countdown if the model has one ongoing
+     */
+    private void drawCountdown(){
+        if(model.isCountingDown()){
+            if(model.getCountDown() > 1){
+                font.draw(batch, "Klara", 470, 350);
+            }else if(model.getCountDown() > 0){
+                font.draw(batch, "Färdiga", 470, 350);
+            }else{
+                font.draw(batch, "HÄFV!!!", 470, 350);
+            }
+        }
+    }
+
+
 
     @Override
     public void render (float v) {
@@ -165,6 +198,7 @@ public class BottleBeerChugView implements Screen {
         batch.setProjectionMatrix(camera.combined);
 
         controller.update();
+        model.updateTime(Gdx.graphics.getDeltaTime());
 
         if(model.timeElapsed()>0 && !startSoundPlayed){
             startSound.play();
@@ -177,16 +211,27 @@ public class BottleBeerChugView implements Screen {
         drawPlayer();
         drawNextKey();
         drawTable();
-        drawTimeElapsed();
+        drawDrinkRemaining();
+
+        //Draw the time if the chug is ongoing
+        if(model.chugStarted()) {
+            drawTimeElapsed();
+        }
+
+        //Draw the countdown if it is ongoing
+        if(model.isCountingDown()){
+            drawCountdown();
+        }
+
         //Draw grade when finished
         if(model.isFinished()){
             drawGrade();
         }
+
         //Draw potential DQ message
         if(model.isSquirted()){
             drawDQReason();
         }
-        drawDrinkRemaining();
 
         //Restart if enter is presses (Only used for testing, will be removed)
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
