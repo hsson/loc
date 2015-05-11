@@ -6,7 +6,7 @@ import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
 /**
  * Beerchug model for bottle chugs
  * @author Alexander Karlsson
- * @version 1.0.1
+ * @version 1.3.3.7
  */
 public class BottleBeerChug {
     private float centilitersRemaining;
@@ -17,8 +17,11 @@ public class BottleBeerChug {
     private boolean chugStarted;
     private boolean firstShakeDone;
     private String disqualifiedReason;
+    private float countDown;
+    private boolean countingDown;
 
-    private static float STARTING_CENTILITRES = 33f;
+    private static final long STARTING_CENTILITRES = 33l;
+    private static final float COUNTDOWN_LENGTH = 2.0f;
 
     /**
      * Basic constructor which starts and creates a basic 33cl beerchug
@@ -144,13 +147,47 @@ public class BottleBeerChug {
     }
 
     /**
-     * Updates the time of the ongoing chug
+     * Updates the time of the ongoing chug and the countdown
      * @param delta The time to add in seconds
      */
     public void updateTime(float delta){
         if (chugStarted && !finished) {
             timeElapsed += delta;
         }
+        if(countingDown) {
+            countDown -= delta;
+            if (countDown < 0) {
+                startChug();
+            }
+            if(countDown < -1){
+                countingDown = false;
+            }
+        }
+    }
+
+    /**
+     * Starts the countdown, should be called before startchug. The countdown will count
+     * from it's length to minus 1 second before stopping
+     */
+    public void startCountdown(){
+        countDown = COUNTDOWN_LENGTH;
+        countingDown = true;
+    }
+
+    /**
+     * Checks if the countdown is ongoing
+     * @return If the countdown is ongoing
+     */
+    public boolean isCountingDown(){
+        return countingDown;
+    }
+
+    /**
+     * Returns the current countdown
+     * @return Current countdown
+     */
+    public float getCountDown(){
+        return countDown;
     }
 
     /**
