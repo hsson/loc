@@ -81,15 +81,6 @@ public class GameView implements Screen{
     }
 
     /**
-     * Gives access to the spritebatch so other view classes render methods
-     * can share spritebatch with GameView
-     * @return The spritebatch
-     */
-    public static SpriteBatch getSpriteBatch() {
-        return GameView.batch;
-    }
-
-    /**
      * Returns the gamemodel this view represents
      * @return The gamemodel
      */
@@ -118,8 +109,8 @@ public class GameView implements Screen{
 
         tiledMapRenderer.render(bottomLayers);
         GameView.batch.begin();
-        gameMapView.render(deltaTime);
-        playerView.render(deltaTime);
+        gameMapView.render(deltaTime, GameView.batch);
+        playerView.render(deltaTime, GameView.batch);
 
         font.draw(batch, model.getHec() + " hec", viewportOrigo.x + 16, viewportOrigo.y - 16);
         GameView.batch.end();
