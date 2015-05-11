@@ -35,15 +35,6 @@ public class ItemTile extends AbstractTile {
     }
 
     /**
-     *
-     * @param pos you want to compare with
-     * @return true if the given pos is the same pos as this tile
-     */
-    public boolean isOverlapping(Position2D pos){
-        return this.getPosition().equals(pos);
-    }
-
-    /**
      * Sets isItemSet, used when removing an item.
      * Temporary solution so far.
      */
