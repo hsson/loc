@@ -2,6 +2,8 @@ package edu.chl.loc.models.utilities;
 
 /**@author Maxim Goretskyy
  * Created by maxim on 15-05-03.
+ *
+ * Revised by Alexander Håkansson
  */
 
 /**
