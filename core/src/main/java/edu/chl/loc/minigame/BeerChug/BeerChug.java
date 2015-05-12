@@ -18,26 +18,22 @@ import java.util.List;
  */
 public class BeerChug implements IMinigame, PropertyChangeListener {
     private BottleBeerChug model;
-    private BottleBeerChugView view;
-    private InputProcessor controller;
     List<IMinigameListener> listenerList;
 
     public BeerChug(){
         model = new BottleBeerChug();
-        view = new BottleBeerChugView(model);
-        controller = new BottleBeerChugController(model);
         listenerList = new ArrayList<IMinigameListener>();
         model.addPropertyChangeListener(this);
     }
 
     @Override
     public Screen getView() {
-        return view;
+        return new BottleBeerChugView(model);
     }
 
     @Override
     public InputProcessor getController() {
-        return controller;
+        return new BottleBeerChugController(model);
     }
 
     @Override
