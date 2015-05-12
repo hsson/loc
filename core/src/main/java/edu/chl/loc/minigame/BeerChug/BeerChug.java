@@ -59,6 +59,7 @@ public class BeerChug implements IMinigame, PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if(evt.getPropertyName().equals("gameFinished")){
+            view.dispose();
             this.gameFinished();
         }
     }
