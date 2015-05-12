@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import edu.chl.loc.controller.GameController;
 import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.minigame.IMinigameHandlerListener;
+import edu.chl.loc.minigame.MinigameHandler;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.npc.InvalidIdException;
 import edu.chl.loc.models.characters.npc.NPCFactory;
@@ -51,7 +52,8 @@ public class LocMain extends Game implements IMinigameHandlerListener {
         createNPCsFromFile();
         controller = new GameController(model);
         view = new GameView(model);
-
+        MinigameHandler handler = MinigameHandler.getInstance();
+        handler.registerListener(this);
         Gdx.input.setInputProcessor(controller);
 
 
