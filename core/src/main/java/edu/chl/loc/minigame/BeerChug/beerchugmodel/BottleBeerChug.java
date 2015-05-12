@@ -3,6 +3,9 @@ package edu.chl.loc.minigame.BeerChug.beerchugmodel;
 
 import edu.chl.loc.minigame.BeerChug.utilities.ShakeDirection;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 /**
  * Beerchug model for bottle chugs
  * @author Alexander Karlsson
@@ -20,6 +23,7 @@ public class BottleBeerChug {
     private String disqualifiedReason;
     private float countDown;
     private boolean countingDown;
+    private PropertyChangeSupport pcs;
 
     private static final long STARTING_CENTILITRES = 33l;
     private static final float COUNTDOWN_LENGTH = 2.0f;
@@ -32,6 +36,7 @@ public class BottleBeerChug {
         lastShake = null;
         finished = false;
         timeElapsed = 0;
+        pcs = new PropertyChangeSupport(this);
     }
 
     /**
@@ -217,5 +222,14 @@ public class BottleBeerChug {
             }
         }
         return 'U';
+    }
+
+    /**
+     * Adds a listener to this BeerChug, will be notified when the game
+     * is over
+     * @param listener The listener
+     */
+    public void addPropertyChangeListener(PropertyChangeListener listener){
+        pcs.addPropertyChangeListener(listener);
     }
 }
