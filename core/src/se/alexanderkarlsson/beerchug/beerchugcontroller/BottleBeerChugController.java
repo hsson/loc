@@ -2,6 +2,7 @@ package se.alexanderkarlsson.beerchug.beerchugcontroller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import se.alexanderkarlsson.beerchug.beerchugmodel.BottleBeerChug;
 import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
 
@@ -10,7 +11,7 @@ import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
  * @author Alexander Karlsson
  * @version 1.1
  */
-public class BottleBeerChugController {
+public class BottleBeerChugController implements InputProcessor{
     private BottleBeerChug model;
     private boolean countdownStarted = false;
 
@@ -18,11 +19,9 @@ public class BottleBeerChugController {
         this.model = model;
     }
 
-    /**
-     * Checks if any key has been pushed and updates the model accordingly
-     */
-    public void update(){
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+    @Override
+    public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.SPACE) {
             if(!countdownStarted){
                 model.startCountdown();
                 countdownStarted = true;
@@ -31,10 +30,46 @@ public class BottleBeerChugController {
             }else{
                 model.endChug();
             }
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+        } else if (keycode == Input.Keys.LEFT) {
             model.shake(ShakeDirection.LEFT);
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+        } else if (keycode == Input.Keys.RIGHT) {
             model.shake(ShakeDirection.RIGHT);
         }
+        return true;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 }
