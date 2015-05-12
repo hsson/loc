@@ -10,4 +10,5 @@ public interface IMinigame {
     public Screen getView();
     public InputProcessor getController();
     public void setListener(IMinigameListener listener);
+    public char getGrade();
 }
