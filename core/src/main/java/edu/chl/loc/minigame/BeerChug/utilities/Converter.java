@@ -1,4 +1,4 @@
-package se.alexanderkarlsson.beerchug.utilities;
+package edu.chl.loc.minigame.BeerChug.utilities;
 
 /**
  * Class for basic conversions between numbers and strings

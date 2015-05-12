@@ -1,7 +1,7 @@
-package se.alexanderkarlsson.beerchug.beerchugmodel;
+package edu.chl.loc.minigame.BeerChug.beerchugmodel;
 
-import com.badlogic.gdx.utils.TimeUtils;
-import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
+
+import edu.chl.loc.minigame.BeerChug.utilities.ShakeDirection;
 
 /**
  * Beerchug model for bottle chugs

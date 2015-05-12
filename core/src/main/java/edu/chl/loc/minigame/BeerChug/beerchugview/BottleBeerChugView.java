@@ -1,4 +1,4 @@
-package se.alexanderkarlsson.beerchug.beerchugview;
+package edu.chl.loc.minigame.BeerChug.beerchugview;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,10 +11,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import se.alexanderkarlsson.beerchug.beerchugcontroller.BottleBeerChugController;
-import se.alexanderkarlsson.beerchug.beerchugmodel.BottleBeerChug;
-import se.alexanderkarlsson.beerchug.utilities.Converter;
-import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
+import edu.chl.loc.minigame.BeerChug.beerchugmodel.BottleBeerChug;
+import edu.chl.loc.minigame.BeerChug.utilities.Converter;
+import edu.chl.loc.minigame.BeerChug.utilities.ShakeDirection;
 
 import java.text.DecimalFormat;
 

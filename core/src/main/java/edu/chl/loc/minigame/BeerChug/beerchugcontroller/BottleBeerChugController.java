@@ -1,10 +1,10 @@
-package se.alexanderkarlsson.beerchug.beerchugcontroller;
+package edu.chl.loc.minigame.BeerChug.beerchugcontroller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import se.alexanderkarlsson.beerchug.beerchugmodel.BottleBeerChug;
-import se.alexanderkarlsson.beerchug.utilities.ShakeDirection;
+import edu.chl.loc.minigame.BeerChug.beerchugmodel.BottleBeerChug;
+import edu.chl.loc.minigame.BeerChug.utilities.ShakeDirection;
 
 /**
  * Controller to be used with the BottleBeerChug class
