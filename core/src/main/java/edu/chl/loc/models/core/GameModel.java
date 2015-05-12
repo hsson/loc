@@ -112,24 +112,38 @@ public class GameModel {
             }
         }
 
-        if (gameMap.layerExists(collisionLayer) &&
-                (!gameMap.tileExists(collisionLayer, nextPos) ||
-                        !gameMap.isCollidable(collisionLayer, nextPos))) {
-            if (gameMap.tileExists(groundLayer, nextPos) && !gameMap.npcExisitsAtPosition(nextPos)) {
-                player.move();
-            }
+        if (shouldPlayerMove(collisionLayer, groundLayer, nextPos)) {
+            player.move();
+            // Pickup item if one exists
+            pickupItem(itemLayer, nextPos);
         }
+    }
 
-        if (gameMap.layerExists(itemLayer) && gameMap.tileExists(itemLayer, nextPos)) {
+    public void pickupItem(ILayer itemLayer, Position2D nextPlayerPos) {
+        if (gameMap.layerExists(itemLayer) && gameMap.tileExists(itemLayer, nextPlayerPos)) {
 
-            ITile tempTile = gameMap.getTile(itemLayer, nextPos);
+            ITile tempTile = gameMap.getTile(itemLayer, nextPlayerPos);
 
             if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
                 ItemTile itemTile = (ItemTile) tempTile; //safe to convert because only itemTile have items
                 doItemAction(itemTile);
-
-            }//if tile doesn't have an item do something else, check for minigame
+            }
         }
+    }
+
+    public boolean shouldPlayerMove(ILayer collisionLayer, ILayer groundLayer, Position2D playerNextPos) {
+        // Check collision with map
+        if (gameMap.layerExists(collisionLayer) &&
+                !(gameMap.tileExists(collisionLayer, playerNextPos) &&
+                        gameMap.isCollidable(collisionLayer, playerNextPos))) {
+            // Check so player don't move outside map or collide with NPC
+            if (gameMap.tileExists(groundLayer, playerNextPos) && !gameMap.npcExisitsAtPosition(playerNextPos)) {
+                // Safe to move
+                return true;
+            }
+        }
+        // Player can't move
+        return false;
     }
 
     /**
