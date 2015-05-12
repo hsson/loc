@@ -123,6 +123,7 @@ public class NPCFactory {
         NPCFactory.inventory = null;
         NPCFactory.minigame = null;
         NPCFactory.id = 0;
+        NPCFactory.dialog = null;
     }
 
     /**
