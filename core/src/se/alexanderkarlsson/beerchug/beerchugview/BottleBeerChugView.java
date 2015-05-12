@@ -28,7 +28,6 @@ public class BottleBeerChugView implements Screen {
     private SpriteBatch batch;
     private OrthographicCamera camera;
     private BottleBeerChug model;
-    private BottleBeerChugController controller;
     private Music backgroundMusic;
     private Sound startSound;
     private boolean startSoundPlayed;
@@ -95,7 +94,6 @@ public class BottleBeerChugView implements Screen {
 
         //Instantiate model and connected controller
         this.model = model;
-        controller = new BottleBeerChugController(model);
 
         //Create font
         font = new BitmapFont();
@@ -221,7 +219,6 @@ public class BottleBeerChugView implements Screen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
-        controller.update();
         model.updateTime(Gdx.graphics.getDeltaTime());
 
         if(model.timeElapsed()>0 && !startSoundPlayed){
@@ -255,14 +252,6 @@ public class BottleBeerChugView implements Screen {
         //Draw potential DQ message
         if(model.isSquirted()){
             drawDQReason();
-        }
-
-        //Restart if enter is presses (Only used for testing, will be removed)
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-            model = new BottleBeerChug();
-            controller = new BottleBeerChugController(model);
-            hasBlown = false;
-            kaboom.reset();
         }
 
         batch.end();
