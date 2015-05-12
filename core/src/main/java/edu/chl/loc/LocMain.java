@@ -2,6 +2,8 @@ package edu.chl.loc;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
@@ -11,6 +13,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import edu.chl.loc.controller.GameController;
+import edu.chl.loc.minigame.IMinigame;
+import edu.chl.loc.minigame.IMinigameHandlerListener;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.npc.InvalidIdException;
 import edu.chl.loc.models.characters.npc.NPCFactory;
@@ -32,7 +36,7 @@ import java.util.List;
  * @author Alexander Håkansson
  * Revised by Alexander Karlsson
  */
-public class LocMain extends Game {
+public class LocMain extends Game implements IMinigameHandlerListener {
 	private float elapsed;
     private float delta;
 
@@ -160,5 +164,21 @@ public class LocMain extends Game {
             //TODO: call this method somewhere before the game is rendered
             model.getGameMap().addNPC(NPCFactory.build(position));
         }
+    }
+
+    @Override
+    public void minigameFinished() {
+        this.view = new GameView(model);
+        Gdx.input.setInputProcessor(controller);
+        setScreen(this.view);
+    }
+
+    @Override
+    public void startMinigame(IMinigame minigame) {
+        InputProcessor controller = minigame.getController();
+        Screen view = minigame.getView();
+        Gdx.input.setInputProcessor(controller);
+        setScreen(view);
+        this.view.dispose();
     }
 }
