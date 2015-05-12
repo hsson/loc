@@ -86,7 +86,7 @@ public class CharacterUtilities {
             }
         }
         Random random = new Random();
-        int index = random.nextInt(randomDialogIds.size()-1);
+        int index = random.nextInt(randomDialogIds.size());
         try {
             return new Dialog(randomDialogIds.get(index), "Dialogs.loc");
         } catch (FileNotFoundException e) {
