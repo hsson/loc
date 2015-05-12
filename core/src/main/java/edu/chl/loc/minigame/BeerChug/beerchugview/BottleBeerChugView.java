@@ -107,7 +107,7 @@ public class BottleBeerChugView implements Screen {
 
         //Instatiate explosion
         kaboom = new ParticleEffect();
-        kaboom.load(Gdx.files.internal("beerChug/Kaboom.effect"), new TextureAtlas(), "");
+        kaboom.load(Gdx.files.internal("beerChug/Kaboom.effect"), Gdx.files.internal("beerChug/"));
         kaboom.getEmitters().first().setPosition(EXPLOTION_X_POS, EXPLOTION_Y_POS);
         hasBlown = false;
 
