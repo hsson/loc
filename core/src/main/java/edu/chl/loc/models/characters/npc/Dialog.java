@@ -126,6 +126,10 @@ public class Dialog {
         return currentStringIndex == dialogStrings.length - 1;
     }
 
+    public void resetDialog(){
+        this.currentStringIndex = 0;
+        this.currentString = dialogStrings[0];
+    }
     /**
      * Gets the strings in the dialog in an array.
      * @return The array with strings. The last string in the dialog is last in the array

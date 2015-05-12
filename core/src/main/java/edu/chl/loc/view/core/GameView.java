@@ -147,6 +147,7 @@ public class GameView implements Screen{
 
         tiledMapRenderer.render(topLayers);
         if(model.isDialogActive()) {
+            dialogView = new DialogView(model.getActiveDialog());
             dialogView.render(deltaTime, GameView.batch);
         }
     }

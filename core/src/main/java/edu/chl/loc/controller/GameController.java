@@ -3,6 +3,7 @@ package edu.chl.loc.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import edu.chl.loc.models.characters.Player;
+import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.core.GameModel;
@@ -21,6 +22,8 @@ public class GameController implements InputProcessor {
     private final GameModel model;
     private Player player;
     private GameMap gameMap; //todo make gamemap static inside gamemodel?
+    private static final String[] NOTHING_TO_INTERACT_WITH_STRING = {"Sorry but there is nothing here to interact with", "Or you are just stupid"};
+    private static final Dialog NOTHING_TO_INTERACT_WITH_DIALOG = new Dialog(NOTHING_TO_INTERACT_WITH_STRING, false);
 
     /**
      *
@@ -30,7 +33,7 @@ public class GameController implements InputProcessor {
         this.model = model;
         this.player = model.getPlayer();
         this.gameMap = model.getGameMap();
-
+        System.out.println(NOTHING_TO_INTERACT_WITH_DIALOG == null);
     }
 
     @Override
@@ -41,9 +44,9 @@ public class GameController implements InputProcessor {
     @Override
     public boolean keyUp(int keycode) {
 
-        if(model.isDialogActive()) {
+        if (model.isDialogActive()) {
             handleDialog(keycode);
-        }else {
+        } else {
             moveCharacter(keycode);
         }
 
@@ -82,16 +85,25 @@ public class GameController implements InputProcessor {
 
     public void handleDialog(int keycode) {
         Dialog dialog = model.getActiveDialog();
-        switch (keycode) {
-            case Input.Keys.ENTER:
-                dialog.setNextString();
-                break;
-            case Input.Keys.UP:
-                dialog.setOptionSelected(true);
-                break;
-            case Input.Keys.DOWN:
-                dialog.setOptionSelected(false);
-                break;
+        if(dialog.isLastString()){
+            switch (keycode) {
+                case Input.Keys.ENTER:
+                    model.setIsDialogActive(false);
+                    dialog.resetDialog();
+                    break;
+                case Input.Keys.UP:
+                    dialog.setOptionSelected(true);
+                    break;
+                case Input.Keys.DOWN:
+                    dialog.setOptionSelected(false);
+                    break;
+            }
+        } else {
+            switch (keycode) {
+                case Input.Keys.ENTER:
+                    dialog.setNextString();
+                    break;
+            }
         }
     }
 
@@ -103,6 +115,18 @@ public class GameController implements InputProcessor {
             case Input.Keys.DOWN:
             case Input.Keys.UP:
                 model.moveCharacter(player.getNextPosition());//sends information about next position to model
+                break;
+            case Input.Keys.ENTER:
+                try{
+                    AbstractNPC npc = gameMap.getNPCAtPosition(player.getNextPosition());
+                    npc.setDirection(player.getDirection().getOpposite());
+                    model.setActiveDialog(npc.getDialog());
+                    model.setIsDialogActive(true);
+                }catch(IllegalArgumentException e){
+                    model.setActiveDialog(NOTHING_TO_INTERACT_WITH_DIALOG);
+                    model.setIsDialogActive(true);
+                }
+
                 break;
         }
     }
