@@ -1,6 +1,9 @@
 package edu.chl.loc.utilities;
 
 
+import edu.chl.loc.minigame.BeerChug.BeerChug;
+import edu.chl.loc.minigame.IMinigame;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +14,7 @@ import java.util.List;
 
 /**
  * @author Maxim Goretskyy
+ * Revised by Alexander Karlsson
  */
 public class FileUtilities {
 
@@ -36,6 +40,20 @@ public class FileUtilities {
 
         }
         return result;
+    }
+
+    /**
+     * Returns a minigame based on id, for list of mingames id's see additional documentation
+     * @param id The id
+     * @return A minigame corresponding to the given id
+     * @throws IllegalArgumentException If the id does not match a minigame
+     */
+    public static IMinigame idToMinigame(int id) throws IllegalArgumentException{
+        if(id == 2000){
+            return new BeerChug();
+        }else{
+            throw new IllegalArgumentException("No such minigame id");
+        }
     }
 
     private static String[] loadContent(String pathToFile) throws FileNotFoundException {
