@@ -188,6 +188,7 @@ public class NPCFactory {
             return new MinigameNPC(position,direction,id,name,gender,minigame,dialog);
         }
 
+        NPCFactory.reset();
         return new StandardNPC(position,direction,id,name,gender,dialog);
     }
 }
