@@ -27,6 +27,7 @@ public class BeerChug implements IMinigame, PropertyChangeListener {
         view = new BottleBeerChugView(model);
         controller = new BottleBeerChugController(model);
         listenerList = new ArrayList<IMinigameListener>();
+        model.addPropertyChangeListener(this);
     }
 
     @Override

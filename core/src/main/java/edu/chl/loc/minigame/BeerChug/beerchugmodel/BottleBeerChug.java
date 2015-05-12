@@ -236,7 +236,6 @@ public class BottleBeerChug {
     /**
      * Adds a listener to this BeerChug, will be notified when the game
      * is over
-     * @param listener The listener
      */
     public void addPropertyChangeListener(PropertyChangeListener listener){
         pcs.addPropertyChangeListener(listener);
