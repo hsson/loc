@@ -74,21 +74,21 @@ public class BottleBeerChugView implements Screen {
         camera.setToOrtho(false,SCREEN_WIDTH,SCREEN_HEIGHT);
 
         //Create the images for the player
-        standingPlayer = new Texture(Gdx.files.internal("drinker.png"));
-        shakingLeftPlayer = new Texture(Gdx.files.internal("drinkerLeft.png"));
-        shakingRightPlayer = new Texture(Gdx.files.internal("drinkerRight.png"));
+        standingPlayer = new Texture(Gdx.files.internal("beerChug/drinker.png"));
+        shakingLeftPlayer = new Texture(Gdx.files.internal("beerChug/drinkerLeft.png"));
+        shakingRightPlayer = new Texture(Gdx.files.internal("beerChug/drinkerRight.png"));
 
         //Create the images for the keys
-        leftKey = new Texture(Gdx.files.internal("leftKey.gif"));
-        rightKey = new Texture(Gdx.files.internal("rightKey.gif"));
-        spaceKey = new Texture(Gdx.files.internal("spaceKey.gif"));
+        leftKey = new Texture(Gdx.files.internal("beerChug/leftKey.gif"));
+        rightKey = new Texture(Gdx.files.internal("beerChug/rightKey.gif"));
+        spaceKey = new Texture(Gdx.files.internal("beerChug/spaceKey.gif"));
 
         //Create the table images
-        beerTable = new Texture(Gdx.files.internal("beerTable.png"));
-        table = new Texture(Gdx.files.internal("table.png"));
+        beerTable = new Texture(Gdx.files.internal("beerChug/beerTable.png"));
+        table = new Texture(Gdx.files.internal("beerChug/table.png"));
 
         //Create the background image
-        background = new Texture(Gdx.files.internal("background.png"));
+        background = new Texture(Gdx.files.internal("beerChug/background.png"));
 
         //Instantiate model and connected controller
         this.model = model;
@@ -97,20 +97,20 @@ public class BottleBeerChugView implements Screen {
         font = new BitmapFont();
 
         //Instantiate and start background music
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("background.mp3"));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("beerChug/background.mp3"));
         backgroundMusic.setLooping(true);
         backgroundMusic.play();
 
-        startSound = Gdx.audio.newSound(Gdx.files.internal("start.wav"));
+        startSound = Gdx.audio.newSound(Gdx.files.internal("beerChug/start.wav"));
         startSoundPlayed = false;
 
         //Instatiate explosion
         kaboom = new ParticleEffect();
-        kaboom.load(Gdx.files.internal("Kaboom.effect"), Gdx.files.internal(""));
+        kaboom.load(Gdx.files.internal("beerChug/Kaboom.effect"), Gdx.files.internal(""));
         kaboom.getEmitters().first().setPosition(EXPLOTION_X_POS, EXPLOTION_Y_POS);
         hasBlown = false;
 
-        explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.wav"));
+        explosionSound = Gdx.audio.newSound(Gdx.files.internal("beerChug/explosion.wav"));
     }
 
     /**
