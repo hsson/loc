@@ -23,10 +23,12 @@ public class BottleBeerChug {
     private String disqualifiedReason;
     private float countDown;
     private boolean countingDown;
+    private float endCountDown;
     private PropertyChangeSupport pcs;
 
     private static final long STARTING_CENTILITRES = 33l;
     private static final float COUNTDOWN_LENGTH = 2.0f;
+    private static final float END_COUNTDOWN_LENGTH = 2.0f;
 
     /**
      * Basic constructor which starts and creates a basic 33cl beerchug
@@ -36,6 +38,7 @@ public class BottleBeerChug {
         lastShake = null;
         finished = false;
         timeElapsed = 0;
+        endCountDown = 0;
         pcs = new PropertyChangeSupport(this);
     }
 
@@ -168,6 +171,12 @@ public class BottleBeerChug {
             if(countDown < -1){
                 countingDown = false;
             }
+        }
+        if(finished || squirted){
+            endCountDown += delta;
+        }
+        if(endCountDown > END_COUNTDOWN_LENGTH){
+            pcs.firePropertyChange("gameFinished",null,null);
         }
     }
 
