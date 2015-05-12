@@ -8,13 +8,15 @@ import edu.chl.loc.minigame.BeerChug.beerchugview.BottleBeerChugView;
 import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.minigame.IMinigameListener;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Main class for BeerChug minigame
  */
-public class BeerChug implements IMinigame {
+public class BeerChug implements IMinigame, PropertyChangeListener {
     private BottleBeerChug model;
     private BottleBeerChugView view;
     private InputProcessor controller;
@@ -45,5 +47,18 @@ public class BeerChug implements IMinigame {
     @Override
     public char getGrade() {
         return model.getGrade();
+    }
+
+    private void gameFinished(){
+        for(IMinigameListener listener : listenerList){
+            listener.minigameFinished(this);
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getPropertyName().equals("gameFinished")){
+            this.gameFinished();
+        }
     }
 }
