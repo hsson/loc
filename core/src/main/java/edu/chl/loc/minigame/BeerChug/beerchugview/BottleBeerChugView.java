@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.chl.loc.minigame.BeerChug.beerchugmodel.BottleBeerChug;
 import edu.chl.loc.minigame.BeerChug.utilities.Converter;
 import edu.chl.loc.minigame.BeerChug.utilities.ShakeDirection;
@@ -106,7 +107,7 @@ public class BottleBeerChugView implements Screen {
 
         //Instatiate explosion
         kaboom = new ParticleEffect();
-        kaboom.load(Gdx.files.internal("beerChug/Kaboom.effect"), Gdx.files.internal(""));
+        kaboom.load(Gdx.files.internal("beerChug/Kaboom.effect"), new TextureAtlas(), "");
         kaboom.getEmitters().first().setPosition(EXPLOTION_X_POS, EXPLOTION_Y_POS);
         hasBlown = false;
 
