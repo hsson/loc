@@ -1,6 +1,5 @@
 package edu.chl.loc.minigame.BeerChug.beerchugcontroller;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import edu.chl.loc.minigame.BeerChug.beerchugmodel.BottleBeerChug;
