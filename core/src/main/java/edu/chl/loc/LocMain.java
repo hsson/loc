@@ -161,6 +161,13 @@ public class LocMain extends Game implements IMinigameHandlerListener {
             NPCFactory.setGender(Gender.valueOf(NPCProperty.get(2)));
             position = new Position2D(Integer.parseInt(NPCProperty.get(3)),
                                       Integer.parseInt(NPCProperty.get(4)));
+            if(id>=2000 && id<=2999){
+                try{
+                    NPCFactory.setMinigame(FileUtilities.idToMinigame(id));
+                }catch(IllegalArgumentException e){
+                    //If no minigame matches the id no minigame will be set
+                }
+            }
             //TODO: create Inventory with items that are specified
             //TODO: check the position of the NPC before creating it
             //TODO: call this method somewhere before the game is rendered
