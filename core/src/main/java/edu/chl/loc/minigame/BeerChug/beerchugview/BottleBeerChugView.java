@@ -217,7 +217,7 @@ public class BottleBeerChugView implements Screen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
-        model.updateTime(Gdx.graphics.getDeltaTime());
+        model.update(Gdx.graphics.getDeltaTime());
 
         if(model.timeElapsed()>0 && !startSoundPlayed){
             startSound.play();

@@ -153,10 +153,10 @@ public class BottleBeerChug {
     }
 
     /**
-     * Updates the time of the ongoing chug and the countdown
+     * Updates the progress in the beerchug
      * @param delta The time to add in seconds
      */
-    public void updateTime(float delta){
+    public void update(float delta){
         if (chugStarted && !finished) {
             timeElapsed += delta;
         }
