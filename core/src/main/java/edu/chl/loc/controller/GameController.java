@@ -87,6 +87,7 @@ public class GameController implements InputProcessor {
         Dialog dialog = model.getActiveDialog();
         if(dialog.isLastString()){
             switch (keycode) {
+                case Input.Keys.SPACE:
                 case Input.Keys.ENTER:
                     model.setIsDialogActive(false);
                     dialog.resetDialog();
@@ -108,6 +109,7 @@ public class GameController implements InputProcessor {
             }
         } else {
             switch (keycode) {
+                case Input.Keys.SPACE:
                 case Input.Keys.ENTER:
                     dialog.setNextString();
                     break;
@@ -118,12 +120,17 @@ public class GameController implements InputProcessor {
     public void moveCharacter(int keycode){
         chooseDirection(keycode);
         switch(keycode) {
+            case Input.Keys.A:
+            case Input.Keys.D:
+            case Input.Keys.S:
+            case Input.Keys.W:
             case Input.Keys.LEFT:
             case Input.Keys.RIGHT:
             case Input.Keys.DOWN:
             case Input.Keys.UP:
                 model.moveCharacter(player.getNextPosition());//sends information about next position to model
                 break;
+            case Input.Keys.SPACE:
             case Input.Keys.ENTER:
                 try{
                     AbstractNPC npc = gameMap.getNPCAtPosition(player.getNextPosition());
@@ -141,18 +148,19 @@ public class GameController implements InputProcessor {
 
     public void chooseDirection(int keycode){
         switch(keycode){
+            case  Input.Keys.A:
             case  Input.Keys.LEFT:
                 player.setDirection(Direction.WEST);
                 break;
-
+            case  Input.Keys.D:
             case  Input.Keys.RIGHT:
                 player.setDirection(Direction.EAST);
                 break;
-
+            case  Input.Keys.W:
             case  Input.Keys.UP:
                 player.setDirection(Direction.NORTH);
                 break;
-
+            case  Input.Keys.S:
             case  Input.Keys.DOWN:
                 player.setDirection(Direction.SOUTH);
                 break;

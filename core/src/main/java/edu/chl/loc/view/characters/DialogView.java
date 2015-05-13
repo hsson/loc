@@ -40,13 +40,15 @@ public class DialogView implements IView {
 
     @Override
     public void render(float delta, SpriteBatch spriteBatch) {
+        Viewport viewport =  GameView.getViewport();
         Matrix4 oldProjMatrix = spriteBatch.getProjectionMatrix();
         spriteBatch.setProjectionMatrix(shapeRenderer.getProjectionMatrix());               //Set the projection matrix
                                                             // to the same to be able to use the same coordinate systems
         renderDialogFrame();
         if(dialog.isLastString() && dialog.hasYesOption()){
-            yesNoRect = new Rectangle(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7,
-                                      Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/5);
+            yesNoRect  = new Rectangle(viewport.getWorldHeight()-viewport.getWorldWidth()/5, 100, 100, 100);
+            //yesNoRect = new Rectangle(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7,
+              //                        Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/5);
             renderYesNoFrame();
             renderPointer();
             renderYesNoText(spriteBatch);
