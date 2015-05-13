@@ -2,6 +2,8 @@ package edu.chl.loc;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
@@ -11,6 +13,9 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import edu.chl.loc.controller.GameController;
+import edu.chl.loc.minigame.IMinigame;
+import edu.chl.loc.minigame.IMinigameHandlerListener;
+import edu.chl.loc.minigame.MinigameHandler;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.npc.InvalidIdException;
 import edu.chl.loc.models.characters.npc.NPCFactory;
@@ -32,7 +37,7 @@ import java.util.List;
  * @author Alexander Håkansson
  * Revised by Alexander Karlsson
  */
-public class LocMain extends Game {
+public class LocMain extends Game implements IMinigameHandlerListener {
 	private float elapsed;
     private float delta;
 
@@ -47,7 +52,8 @@ public class LocMain extends Game {
         createNPCsFromFile();
         controller = new GameController(model);
         view = new GameView(model);
-
+        MinigameHandler handler = MinigameHandler.getInstance();
+        handler.registerListener(this);
         Gdx.input.setInputProcessor(controller);
 
 
@@ -155,10 +161,31 @@ public class LocMain extends Game {
             NPCFactory.setGender(Gender.valueOf(NPCProperty.get(2)));
             position = new Position2D(Integer.parseInt(NPCProperty.get(3)),
                                       Integer.parseInt(NPCProperty.get(4)));
+            if(id>=2000 && id<=2999){
+                try{
+                    NPCFactory.setMinigame(FileUtilities.idToMinigame(id));
+                }catch(IllegalArgumentException e){
+                    //If no minigame matches the id no minigame will be set
+                }
+            }
             //TODO: create Inventory with items that are specified
             //TODO: check the position of the NPC before creating it
             //TODO: call this method somewhere before the game is rendered
             model.getGameMap().addNPC(NPCFactory.build(position));
         }
+    }
+
+    @Override
+    public void minigameFinished() {
+        Gdx.input.setInputProcessor(controller);
+        setScreen(this.view);
+    }
+
+    @Override
+    public void startMinigame(IMinigame minigame) {
+        InputProcessor controller = minigame.getController();
+        Screen view = minigame.getView();
+        Gdx.input.setInputProcessor(controller);
+        setScreen(view);
     }
 }

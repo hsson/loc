@@ -66,6 +66,8 @@ public class GameView implements Screen{
     private static final Music musicTrololo = Gdx.audio.newMusic(Gdx.files.internal("music/trololo.mp3"));
     private static final Music marioLevels = Gdx.audio.newMusic(Gdx.files.internal("music/marioLevels.mp3"));
 
+    private Playlist gameMusic;
+
     // ground, groundDetail and building layer
     private final int[] bottomLayers = {0, 1, 2};
     // buildingRoof layer
@@ -80,8 +82,11 @@ public class GameView implements Screen{
         this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
         this.gameMapView = new GameMapView(this);
 
-        Playlist gameMusic = new Playlist(true, true, musicNyan, musicRickroll, musicSax, musicTrololo, marioLevels);
-        gameMusic.play();
+        // Setup camera and viewport
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(RES_X, RES_Y, camera);
+
+        this.gameMusic = new Playlist(true, true, musicNyan, musicRickroll, musicSax, musicTrololo, marioLevels);
     }
 
     /**
@@ -170,12 +175,12 @@ public class GameView implements Screen{
 
     @Override
     public void show() {
-        //TODO implement this shit
+        gameMusic.play();
     }
 
     @Override
     public void hide() {
-        //TODO implement this shit
+        gameMusic.stop();
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Set;
  * @version 1.0.0
  * @since 2015-05-11
  */
-public class MinigameHandler {
+public class MinigameHandler implements IMinigameListener{
 
     private static MinigameHandler instance = null;
 

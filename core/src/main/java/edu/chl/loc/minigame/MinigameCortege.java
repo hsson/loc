@@ -90,4 +90,14 @@ public class MinigameCortege implements IMinigame{
     public void setListener(IMinigameListener listener) {
 
     }
+
+    @Override
+    public char getGrade() {
+        return 0;
+    }
+
+    @Override
+    public void reset() {
+
+    }
 }

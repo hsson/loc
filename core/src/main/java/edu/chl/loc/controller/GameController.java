@@ -89,6 +89,10 @@ public class GameController implements InputProcessor {
                 case Input.Keys.ENTER:
                     model.setIsDialogActive(false);
                     dialog.resetDialog();
+                    if(dialog.getOptionSelected()){
+                        AbstractNPC npc = gameMap.getNPCAtPosition(player.getNextPosition());
+                        npc.doAction();
+                    }
                     break;
                 case Input.Keys.UP:
                     dialog.setOptionSelected(true);
