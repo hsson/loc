@@ -11,4 +11,5 @@ public interface IMinigame {
     public InputProcessor getController();
     public void setListener(IMinigameListener listener);
     public char getGrade();
+    public void reset();
 }

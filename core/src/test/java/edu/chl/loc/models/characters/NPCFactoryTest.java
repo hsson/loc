@@ -51,6 +51,11 @@ public class NPCFactoryTest {
             }
 
             @Override
+            public void reset() {
+
+            }
+
+            @Override
             public int hashCode() {
                 return super.hashCode();
             }
@@ -93,6 +98,11 @@ public class NPCFactoryTest {
                 }
 
                 @Override
+                public void reset() {
+
+                }
+
+                @Override
                 public int hashCode() {
                     return 9;
                 }
@@ -126,6 +136,11 @@ public class NPCFactoryTest {
             @Override
             public char getGrade() {
                 return 0;
+            }
+
+            @Override
+            public void reset() {
+
             }
 
             @Override

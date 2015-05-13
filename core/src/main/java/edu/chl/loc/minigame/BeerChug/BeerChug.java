@@ -48,6 +48,11 @@ public class BeerChug implements IMinigame, PropertyChangeListener {
         return model.getGrade();
     }
 
+    @Override
+    public void reset() {
+
+    }
+
     private void gameFinished(){
         for(IMinigameListener listener : listenerList){
             listener.minigameFinished();

@@ -95,4 +95,9 @@ public class MinigameCortege implements IMinigame{
     public char getGrade() {
         return 0;
     }
+
+    @Override
+    public void reset() {
+
+    }
 }
