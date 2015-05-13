@@ -12,7 +12,7 @@ import org.junit.Test;
 
 /**@author Maxim Goretskyy
  * Created by maxim on 15-04-30.
- *
+ * Revised by Alexander Karlsson
  */
 public class NPCFactoryTest {
 
@@ -42,6 +42,16 @@ public class NPCFactoryTest {
 
             @Override
             public void setListener(IMinigameListener listener) {
+
+            }
+
+            @Override
+            public char getGrade() {
+                return 0;
+            }
+
+            @Override
+            public void reset() {
 
             }
 
@@ -83,6 +93,16 @@ public class NPCFactoryTest {
                 }
 
                 @Override
+                public char getGrade() {
+                    return 0;
+                }
+
+                @Override
+                public void reset() {
+
+                }
+
+                @Override
                 public int hashCode() {
                     return 9;
                 }
@@ -110,6 +130,16 @@ public class NPCFactoryTest {
 
             @Override
             public void setListener(IMinigameListener listener) {
+
+            }
+
+            @Override
+            public char getGrade() {
+                return 0;
+            }
+
+            @Override
+            public void reset() {
 
             }
 

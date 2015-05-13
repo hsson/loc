@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.characters.Player;
@@ -31,6 +32,7 @@ import edu.chl.loc.view.music.Playlist;
  * @version 0.6.0
  *
  * Revised by Alexander Håkansson
+ * Revised by Kevin Hoogendijk
  */
 public class GameView implements Screen{
 
@@ -44,8 +46,9 @@ public class GameView implements Screen{
     private GameModel model;
     private IView playerView;
     private IView gameMapView;
-    //TODO: remove test
-    private IView dialogView;
+    private DialogView dialogView;
+
+    private Dialog lastDialog;
 
     private static OrthographicCamera camera = new OrthographicCamera();
     private static Viewport viewport = new FitViewport(RES_X, RES_Y, camera);
@@ -64,6 +67,8 @@ public class GameView implements Screen{
     private static final Music musicTrololo = Gdx.audio.newMusic(Gdx.files.internal("music/trololo.mp3"));
     private static final Music marioLevels = Gdx.audio.newMusic(Gdx.files.internal("music/marioLevels.mp3"));
 
+    private Playlist gameMusic;
+
     // ground, groundDetail and building layer
     private final int[] bottomLayers = {0, 1, 2};
     // buildingRoof layer
@@ -77,13 +82,13 @@ public class GameView implements Screen{
         this.model = model;
         this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
         this.gameMapView = new GameMapView(this);
+        this.dialogView = new DialogView();
 
         // Setup camera and viewport
         camera = new OrthographicCamera();
         viewport = new FitViewport(RES_X, RES_Y, camera);
 
-        Playlist gameMusic = new Playlist(true, true, musicNyan, musicRickroll, musicSax, musicTrololo, marioLevels);
-        gameMusic.play();
+        this.gameMusic = new Playlist(true, true, musicNyan, musicRickroll, musicSax, musicTrololo, marioLevels);
     }
 
     /**
@@ -146,8 +151,8 @@ public class GameView implements Screen{
         }
 
         tiledMapRenderer.render(topLayers);
-        if(model.isDialogActive()) {
-            dialogView = new DialogView(model.getActiveDialog());
+        if(model.isDialogActive()){
+            dialogView.setDialog(model.getActiveDialog());
             dialogView.render(deltaTime, GameView.batch);
         }
     }
@@ -170,12 +175,12 @@ public class GameView implements Screen{
 
     @Override
     public void show() {
-        //TODO implement this shit
+        gameMusic.play();
     }
 
     @Override
     public void hide() {
-        //TODO implement this shit
+        gameMusic.stop();
     }
 
     @Override

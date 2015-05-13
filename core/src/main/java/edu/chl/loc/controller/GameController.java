@@ -14,6 +14,7 @@ import edu.chl.loc.models.utilities.Position2D;
 /**
  * @author Alexander Håkansson
  * @author Maxim Goretskyy
+ * @author Kevin Hoogendijk
  * @version 0.1.0
  * @since 2015-04-30
  */
@@ -38,19 +39,18 @@ public class GameController implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {// assuming smooth movement will be here?
-        return false;
+        if (model.isDialogActive()) {
+            handleDialog(keycode);
+        }else{
+            moveCharacter(keycode);
+        }
+        return true;
     }
+
 
     @Override
     public boolean keyUp(int keycode) {
-
-        if (model.isDialogActive()) {
-            handleDialog(keycode);
-        } else {
-            moveCharacter(keycode);
-        }
-
-        return true;
+        return false;
     }
 
     @Override
@@ -90,6 +90,14 @@ public class GameController implements InputProcessor {
                 case Input.Keys.ENTER:
                     model.setIsDialogActive(false);
                     dialog.resetDialog();
+                    if(dialog.getOptionSelected()){
+                        try {
+                            AbstractNPC npc = gameMap.getNPCAtPosition(player.getNextPosition());
+                            npc.doAction();
+                        }catch(IllegalArgumentException e){
+                            //Do nothing if no npc is present
+                        }
+                    }
                     break;
                 case Input.Keys.UP:
                     dialog.setOptionSelected(true);
