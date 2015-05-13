@@ -15,6 +15,7 @@ import edu.chl.loc.models.utilities.Stats;
  * @version 1.0.0
  * @since 2015-04-12
  * revised by Maxim Goretskyy
+ * Revised by Kevin Hoogendijk
  */
 public class GameModel {
 

@@ -1,5 +1,6 @@
 package edu.chl.loc.models.characters.npc;
 
+import com.badlogic.gdx.utils.Timer;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.utilities.FileUtilities;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * Class for handling an NPCs dialog
  * @author Alexander Karlsson
  * @version 1.1
+ * Revised by Kevin Hoogendijk
  */
 public class Dialog {
     private String[] dialogStrings;
