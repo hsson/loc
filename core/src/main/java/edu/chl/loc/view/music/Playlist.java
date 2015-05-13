@@ -54,6 +54,10 @@ public class Playlist implements Music.OnCompletionListener {
         song.play();
     }
 
+    public void stop(){
+        songs.get(currentSong).stop();
+    }
+
     @Override
     public void onCompletion(Music music) {
         if (random) {
