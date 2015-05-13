@@ -24,6 +24,7 @@ public class MinigameNPC extends AbstractNPC{
      */
     @Override
     public void doAction() {
+        minigame.reset();
         MinigameHandler handler = MinigameHandler.getInstance();
         handler.startMinigame(minigame);
     }
