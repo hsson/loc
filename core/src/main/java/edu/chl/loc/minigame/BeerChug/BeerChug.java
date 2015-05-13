@@ -50,7 +50,7 @@ public class BeerChug implements IMinigame, PropertyChangeListener {
 
     @Override
     public void reset() {
-
+        this.model = new BottleBeerChug();
     }
 
     private void gameFinished(){
