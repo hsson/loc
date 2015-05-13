@@ -44,11 +44,9 @@ public class DialogView implements IView {
         Matrix4 oldProjMatrix = spriteBatch.getProjectionMatrix();
         spriteBatch.setProjectionMatrix(shapeRenderer.getProjectionMatrix());               //Set the projection matrix
                                                             // to the same to be able to use the same coordinate systems
-        renderDialogFrame();
+        renderDialogFrame(viewport);
         if(dialog.isLastString() && dialog.hasYesOption()){
-            yesNoRect  = new Rectangle(viewport.getWorldHeight()-viewport.getWorldWidth()/5, 100, 100, 100);
-            //yesNoRect = new Rectangle(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7,
-              //                        Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/5);
+            yesNoRect  = new Rectangle(viewport.getWorldWidth() - viewport.getWorldWidth()/5, viewport.getWorldHeight()/5, 100, 100);
             renderYesNoFrame();
             renderPointer();
             renderYesNoText(spriteBatch);
@@ -57,15 +55,15 @@ public class DialogView implements IView {
         spriteBatch.setProjectionMatrix(oldProjMatrix);
     }
 
-    public void renderDialogFrame(){
+    public void renderDialogFrame(Viewport viewport){
         shapeRenderer.setColor(255, 255, 255, 0);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.rect(10, 10, Gdx.graphics.getWidth() - 21, Gdx.graphics.getHeight() / 5);
+        shapeRenderer.rect(10, 10, viewport.getWorldWidth() - 21, viewport.getWorldHeight() / 5);
         shapeRenderer.end();
 
         shapeRenderer.setColor(0, 0, 0, 0);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(10, 10, Gdx.graphics.getWidth() - 21, Gdx.graphics.getHeight() / 5);
+        shapeRenderer.rect(10, 10, viewport.getWorldWidth() - 21, viewport.getWorldHeight() / 5);
         Gdx.gl20.glLineWidth(5);
         shapeRenderer.end();
     }

@@ -21,6 +21,10 @@ public class Stats {
         playerStats.put(key, value);
     }
 
+    public Map<String, Double> getPlayerStats(){
+        return new HashMap<String, Double>(playerStats);
+    }
+
     public double getPlayerStat(String key){
         return playerStats.get(key);
     }
