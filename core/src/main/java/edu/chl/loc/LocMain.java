@@ -177,7 +177,6 @@ public class LocMain extends Game implements IMinigameHandlerListener {
 
     @Override
     public void minigameFinished() {
-        this.view = new GameView(model);
         Gdx.input.setInputProcessor(controller);
         setScreen(this.view);
     }
@@ -188,6 +187,5 @@ public class LocMain extends Game implements IMinigameHandlerListener {
         Screen view = minigame.getView();
         Gdx.input.setInputProcessor(controller);
         setScreen(view);
-        this.view.dispose();
     }
 }
