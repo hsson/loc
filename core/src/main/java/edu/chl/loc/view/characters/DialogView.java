@@ -14,6 +14,7 @@ import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.view.core.GameView;
 import edu.chl.loc.view.core.IView;
+import edu.chl.loc.view.utilities.RenderUtilities;
 
 import java.awt.geom.Rectangle2D;
 
@@ -44,41 +45,18 @@ public class DialogView implements IView {
         Matrix4 oldProjMatrix = spriteBatch.getProjectionMatrix();
         spriteBatch.setProjectionMatrix(shapeRenderer.getProjectionMatrix());               //Set the projection matrix
                                                             // to the same to be able to use the same coordinate systems
-        renderDialogFrame(viewport);
+        //render the dialog frame
+        RenderUtilities.renderRectangle(10, 10, viewport.getWorldWidth() - 21, viewport.getWorldHeight() / 5, shapeRenderer);
+
+        //if the dialog is active, render it and all its components
         if(dialog.isLastString() && dialog.hasYesOption()){
             yesNoRect  = new Rectangle(viewport.getWorldWidth() - viewport.getWorldWidth()/5, viewport.getWorldHeight()/5, 100, 100);
-            renderYesNoFrame();
+            RenderUtilities.renderRectangle(yesNoRect.x, yesNoRect.y, yesNoRect.width, yesNoRect.height, shapeRenderer);
             renderPointer();
             renderYesNoText(spriteBatch);
         }
         renderDialogText(spriteBatch);
         spriteBatch.setProjectionMatrix(oldProjMatrix);
-    }
-
-    public void renderDialogFrame(Viewport viewport){
-        shapeRenderer.setColor(255, 255, 255, 0);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.rect(10, 10, viewport.getWorldWidth() - 21, viewport.getWorldHeight() / 5);
-        shapeRenderer.end();
-
-        shapeRenderer.setColor(0, 0, 0, 0);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(10, 10, viewport.getWorldWidth() - 21, viewport.getWorldHeight() / 5);
-        Gdx.gl20.glLineWidth(5);
-        shapeRenderer.end();
-    }
-
-    public void renderYesNoFrame(){
-        shapeRenderer.setColor(255, 255, 255, 0);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.rect(yesNoRect.x, yesNoRect.y, yesNoRect.width, yesNoRect.height);
-        shapeRenderer.end();
-
-        shapeRenderer.setColor(0, 0, 0, 0);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(yesNoRect.x, yesNoRect.y, yesNoRect.width, yesNoRect.height);
-        Gdx.gl20.glLineWidth(5);
-        shapeRenderer.end();
     }
 
     public void renderYesNoText(SpriteBatch spriteBatch){
@@ -113,9 +91,5 @@ public class DialogView implements IView {
 
     public void setDialog(Dialog dialog){
         this.dialog = dialog;
-    }
-
-    public void penis(){
-        System.out.println("lol");
     }
 }
