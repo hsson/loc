@@ -97,10 +97,9 @@ public class BottleBeerChugView implements Screen {
         //Create font
         font = new BitmapFont();
 
-        //Instantiate and start background music
+        //Instantiate background music
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("beerChug/background.mp3"));
         backgroundMusic.setLooping(true);
-        backgroundMusic.play();
 
         startSound = Gdx.audio.newSound(Gdx.files.internal("beerChug/start.wav"));
         startSoundPlayed = false;
@@ -258,7 +257,7 @@ public class BottleBeerChugView implements Screen {
 
     @Override
     public void show() {
-
+        backgroundMusic.play();
     }
 
     @Override
@@ -278,7 +277,7 @@ public class BottleBeerChugView implements Screen {
 
     @Override
     public void hide() {
-
+        backgroundMusic.pause();
     }
 
     @Override
