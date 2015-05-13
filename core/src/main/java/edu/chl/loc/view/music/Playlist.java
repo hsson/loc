@@ -8,8 +8,9 @@ import java.util.Random;
 
 /**
  * @author Alexander Håkansson
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2015-05-07
+ * Revised by Alexander Karlsson
  */
 public class Playlist implements Music.OnCompletionListener {
     List<Music> songs;
@@ -54,6 +55,9 @@ public class Playlist implements Music.OnCompletionListener {
         song.play();
     }
 
+    /**
+     * Stops the music
+     */
     public void stop(){
         songs.get(currentSong).stop();
     }
