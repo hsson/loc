@@ -38,19 +38,18 @@ public class GameController implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {// assuming smooth movement will be here?
-        return false;
+        if (model.isDialogActive()) {
+            handleDialog(keycode);
+        }else{
+            moveCharacter(keycode);
+        }
+        return true;
     }
+
 
     @Override
     public boolean keyUp(int keycode) {
-
-        if (model.isDialogActive()) {
-            handleDialog(keycode);
-        } else {
-            moveCharacter(keycode);
-        }
-
-        return true;
+        return false;
     }
 
     @Override
