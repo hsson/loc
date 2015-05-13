@@ -32,6 +32,7 @@ import edu.chl.loc.view.music.Playlist;
  * @version 0.6.0
  *
  * Revised by Alexander Håkansson
+ * Revised by Kevin Hoogendijk
  */
 public class GameView implements Screen{
 
@@ -45,7 +46,7 @@ public class GameView implements Screen{
     private GameModel model;
     private IView playerView;
     private IView gameMapView;
-    private IView dialogView;
+    private DialogView dialogView;
 
     private Dialog lastDialog;
 
@@ -81,6 +82,7 @@ public class GameView implements Screen{
         this.model = model;
         this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
         this.gameMapView = new GameMapView(this);
+        this.dialogView = new DialogView();
 
         // Setup camera and viewport
         camera = new OrthographicCamera();
@@ -150,9 +152,7 @@ public class GameView implements Screen{
 
         tiledMapRenderer.render(topLayers);
         if(model.isDialogActive()){
-            if(!model.getActiveDialog().equals(lastDialog)){
-                dialogView = new DialogView(model.getActiveDialog());
-            }
+            dialogView.setDialog(model.getActiveDialog());
             dialogView.render(deltaTime, GameView.batch);
         }
     }

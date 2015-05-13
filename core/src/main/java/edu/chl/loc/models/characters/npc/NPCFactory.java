@@ -15,6 +15,7 @@ import java.util.List;
  * @author Alexander Karlsson
  * @revised by Maxim Goretskyy
  * @version 1.1
+ * Revised by Kevin Hoogendijk
  */
 public class NPCFactory {
     private static int id = 0;

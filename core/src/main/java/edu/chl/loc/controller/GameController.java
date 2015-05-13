@@ -14,6 +14,7 @@ import edu.chl.loc.models.utilities.Position2D;
 /**
  * @author Alexander Håkansson
  * @author Maxim Goretskyy
+ * @author Kevin Hoogendijk
  * @version 0.1.0
  * @since 2015-04-30
  */
