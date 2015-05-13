@@ -50,7 +50,7 @@ public class BeerChug implements IMinigame, PropertyChangeListener {
 
     private void gameFinished(){
         for(IMinigameListener listener : listenerList){
-            listener.minigameFinished(this);
+            listener.minigameFinished();
         }
     }
 
