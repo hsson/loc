@@ -199,5 +199,6 @@ public class GameView implements Screen{
         playerView.dispose();
         gameMapView.dispose();
         PLAYER_TEXTURE.dispose();
+        dialogView.dispose();
     }
 }
