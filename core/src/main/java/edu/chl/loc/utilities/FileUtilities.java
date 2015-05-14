@@ -3,6 +3,7 @@ package edu.chl.loc.utilities;
 
 import edu.chl.loc.minigame.BeerChug.BeerChug;
 import edu.chl.loc.minigame.IMinigame;
+import edu.chl.loc.minigame.cortege.Cortege;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,9 +52,13 @@ public class FileUtilities {
     public static IMinigame idToMinigame(int id) throws IllegalArgumentException{
         if(id == 2000){
             return new BeerChug();
-        }else{
-            throw new IllegalArgumentException("No such minigame id");
+        }else if(id == 2002) {
+            return new Cortege();
         }
+            else{
+                throw new IllegalArgumentException("No such minigame id");
+            }
+
     }
 
     private static String[] loadContent(String pathToFile) throws FileNotFoundException {
