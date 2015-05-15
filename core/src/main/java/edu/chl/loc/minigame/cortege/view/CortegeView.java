@@ -42,7 +42,7 @@ public class CortegeView implements Screen {
                 new Texture(Gdx.files.internal("cortege/saw.png")),
                 new Texture(Gdx.files.internal("cortege/screwer.png"))
         };
-        toolBoxImage = new Texture(Gdx.files.internal("cortege/toolbox.jpg"));
+        toolBoxImage = new Texture(Gdx.files.internal("cortege/toolbox.png"));
         poopImage = new Texture(Gdx.files.internal("cortege/poop.png"));
 
         //load music
