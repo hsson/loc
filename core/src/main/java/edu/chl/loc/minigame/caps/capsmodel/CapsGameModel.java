@@ -1,5 +1,7 @@
 package edu.chl.loc.minigame.caps.capsmodel;
 
+import edu.chl.loc.minigame.caps.capsmodel.utilities.CapNotThrownException;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
