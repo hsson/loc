@@ -71,6 +71,35 @@ public class CapsGameModel {
         return aimPosition > cupPosition - 0.05f && aimPosition < cupPosition +0.05f;
     }
 
+    /**
+     * Gets the current position of the aim
+     * @return The current position of the aim
+     */
+    public float getAimPosition(){
+        return aimPosition;
+    }
+
+    /**
+     * Gets the position of the cup
+     * @return The position of the cup
+     */
+    public float getCupPosition(){
+        return cupPosition;
+    }
+
+    /**
+     * Gets the current level
+     * @return The current level
+     */
+    public int getLevel(){
+        return level;
+    }
+
+    /**
+     * Adds a listener to this caps game, the listener will be notified when
+     * the game is over
+     * @param pcl The listener
+     */
     public void addPropertyChangeListener(PropertyChangeListener pcl){
         pcs.addPropertyChangeListener(pcl);
     }
