@@ -165,8 +165,9 @@ public class BottleBeerChug {
         }
         if(countingDown) {
             countDown -= delta;
-            if (countDown < 0) {
+            if (countDown < 0 && !chugStarted) {
                 startChug();
+                timeElapsed = -countDown;
             }
             if(countDown < -1){
                 countingDown = false;
