@@ -70,6 +70,7 @@ public class BottleBeerChug {
             if (chugStarted()) {
                 lastShake = ShakeDirection.LEFT;
                 firstShakeDone = true;
+                centilitersRemaining--;
             } else {
                 squirted = true;
                 disqualifiedReason = "Tjuvstart";
