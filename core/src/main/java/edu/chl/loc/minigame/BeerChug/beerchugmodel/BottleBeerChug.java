@@ -12,7 +12,7 @@ import java.beans.PropertyChangeSupport;
  * @version 1.3.3.7
  */
 public class BottleBeerChug {
-    private float centilitersRemaining;
+    private long centilitersRemaining;
     private ShakeDirection lastShake;
     private float timeElapsed;
     private boolean finished;
