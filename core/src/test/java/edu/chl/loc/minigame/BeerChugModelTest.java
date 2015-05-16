@@ -8,7 +8,7 @@ import org.junit.Test;
 /**
  * Tests the BeerChug model class
  * @author Alexander Karlsson
- * @version 1.0
+ * @version 1.0.1
  */
 public class BeerChugModelTest {
 
@@ -40,6 +40,9 @@ public class BeerChugModelTest {
         Assert.assertTrue("There should bo no reason for disqualification", model.getDisqualifiedReason() == null);
         model.shake(model.getLastShake());
         Assert.assertFalse("Shaking empty bottle should not effect DQ", model.isSquirted());
+        Assert.assertFalse("Chug should not have ended", model.isFinished());
+        Assert.assertTrue("Drink remaining should be 0",
+                model.drinkRemaining()<0+ERROR_MARGIN && model.drinkRemaining()>0-ERROR_MARGIN);
         model.endChug();
         Assert.assertTrue("Chug should have ended", model.isFinished());
         Assert.assertTrue("Time should be around 33.01 seconds",
