@@ -96,6 +96,14 @@ public class CapsGameModel {
     }
 
     /**
+     * Checks if the cap is thrown
+     * @return True if the cap is thrown, false otherwise
+     */
+    public boolean isCapThrown(){
+        return capThrown;
+    }
+
+    /**
      * Adds a listener to this caps game, the listener will be notified when
      * the game is over
      * @param pcl The listener
