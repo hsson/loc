@@ -29,7 +29,7 @@ public class CapsGameView implements Screen {
 
         //Instantiate textures
         this.crossHair = new Texture(Gdx.files.internal("caps/aim.png"));
-        this.beerCup = new Texture(Gdx.files.internal("caps/beerCup"));
+        this.beerCup = new Texture(Gdx.files.internal("caps/beerCup.png"));
 
         //Instantiate spritebatch
         this.batch = new SpriteBatch();
