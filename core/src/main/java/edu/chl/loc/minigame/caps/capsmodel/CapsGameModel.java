@@ -129,18 +129,18 @@ public class CapsGameModel {
      */
     private void updateAim(float deltaTime){
         if(!moveAimBackwards){
-            if(aimPosition + deltaTime * (float)level > 1.0f){
+            if(aimPosition + deltaTime * Math.sqrt(level) > 1.0f){
                 aimPosition = 1.0f;
                 moveAimBackwards = true;
             }else {
-                aimPosition += deltaTime * (float)level;
+                aimPosition += deltaTime * Math.sqrt(level);
             }
         }else{
-            if(aimPosition - deltaTime * (float)level < 0f){
+            if(aimPosition - deltaTime * Math.sqrt(level) < 0f){
                 aimPosition=0;
                 moveAimBackwards = false;
             }else {
-                aimPosition -= deltaTime * (float) level;
+                aimPosition -= deltaTime * Math.sqrt(level);
             }
         }
     }
