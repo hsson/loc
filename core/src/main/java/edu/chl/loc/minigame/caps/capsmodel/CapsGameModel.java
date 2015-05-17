@@ -41,7 +41,7 @@ public class CapsGameModel {
                 if(wasHit()){
                     goToNextLevel();
                 }else{
-                    this.endGame();
+                    gameOver();
                 }
             }
         }
@@ -167,9 +167,9 @@ public class CapsGameModel {
     }
 
     /**
-     * Ends the game
+     * Notifies listener that game is over
      */
-    private void endGame(){
+    private void gameOver(){
         pcs.firePropertyChange("gameFinished", null, null);
     }
 }
