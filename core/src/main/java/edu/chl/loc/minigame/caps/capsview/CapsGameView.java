@@ -149,7 +149,6 @@ public class CapsGameView implements Screen {
         yValue *= SCREEN_HEIGHT;
         yValue += THROW_HEIGHT;
 
-        System.out.println("" + xValue + " " + yValue);
         batch.draw(cap, (float)xValue-cap.getWidth()/2, (float)yValue-cap.getHeight()/2);
     }
 }
