@@ -41,7 +41,7 @@ public class CapsGameModel {
                 if(wasHit()){
                     goToNextLevel();
                 }else{
-                    endGame();
+                    this.endGame();
                 }
             }
         }
@@ -133,7 +133,7 @@ public class CapsGameModel {
                 aimPosition = 1.0f;
                 moveAimBackwards = true;
             }else {
-                aimPosition += deltaTime * (float) level;
+                aimPosition += deltaTime * (float)level;
             }
         }else{
             if(aimPosition - deltaTime * (float)level < 0f){
@@ -149,7 +149,7 @@ public class CapsGameModel {
      * Takes the game to the next level
      */
     private void goToNextLevel(){
-        level = level++;
+        level++;
         cupPosition = getNewCupPosition();
         aimPosition = 0;
         capThrown = false;
@@ -170,6 +170,6 @@ public class CapsGameModel {
      * Ends the game
      */
     private void endGame(){
-        pcs.firePropertyChange("gameFinished",null,null);
+        pcs.firePropertyChange("gameFinished", null, null);
     }
 }
