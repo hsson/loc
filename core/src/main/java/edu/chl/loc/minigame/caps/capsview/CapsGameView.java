@@ -92,9 +92,9 @@ public class CapsGameView implements Screen {
 
     private void drawCrossHair(){
         //Calculate x value
-        float xValue = (camera.viewportWidth * model.getCupPosition()) - crossHair.getWidth()/2;
+        float xValue = (camera.viewportWidth * model.getAimPosition()) - crossHair.getWidth()/2;
         //Middle of crosshair should be on top of the beercup
-        float yValue = (float)BEER_CUP_Y_POS + beerCup.getWidth() - crossHair.getHeight()/2;
+        float yValue = (float)BEER_CUP_Y_POS + beerCup.getHeight() - crossHair.getHeight()/2;
 
         batch.draw(crossHair, xValue, yValue);
     }
