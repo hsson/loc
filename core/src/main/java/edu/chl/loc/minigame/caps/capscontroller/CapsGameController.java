@@ -16,7 +16,7 @@ public class CapsGameController implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        if(keycode == Input.Keys.SPACE && model.isCapThrown()){
+        if(keycode == Input.Keys.SPACE && !model.isCapThrown()){
             model.throwCap(3.0f);
             return true;
         }
