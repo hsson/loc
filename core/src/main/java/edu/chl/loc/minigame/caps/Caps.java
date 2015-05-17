@@ -24,6 +24,7 @@ public class Caps implements IMinigame, PropertyChangeListener{
 
     public Caps(){
         this.model = new CapsGameModel();
+        model.addPropertyChangeListener(this);
         this.listenerList = new ArrayList<IMinigameListener>();
     }
 
