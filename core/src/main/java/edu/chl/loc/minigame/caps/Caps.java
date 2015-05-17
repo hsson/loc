@@ -4,6 +4,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.minigame.IMinigameListener;
+import edu.chl.loc.minigame.MinigameHandler;
 import edu.chl.loc.minigame.caps.capscontroller.CapsGameController;
 import edu.chl.loc.minigame.caps.capsmodel.CapsGameModel;
 import edu.chl.loc.minigame.caps.capsview.CapsGameView;
@@ -26,6 +27,7 @@ public class Caps implements IMinigame, PropertyChangeListener{
         this.model = new CapsGameModel();
         model.addPropertyChangeListener(this);
         this.listenerList = new ArrayList<IMinigameListener>();
+        this.setListener(MinigameHandler.getInstance());
     }
 
     @Override
