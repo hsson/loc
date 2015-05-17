@@ -59,7 +59,6 @@ public class CapsGameView implements Screen {
 
         batch.begin();
         drawCup();
-        drawCrossHair();
         if(model.isCapThrown()){
             if(!renderThrow){
                 this.lastThrowTime = TimeUtils.millis();
@@ -68,6 +67,8 @@ public class CapsGameView implements Screen {
             float timePassed = TimeUtils.millis() - lastThrowTime;
             timePassed = timePassed/1000f;//Convert to seconds
             drawCapThrow(timePassed, model.getAimPosition());
+        }else{
+            drawCrossHair();
         }
         batch.end();
 
