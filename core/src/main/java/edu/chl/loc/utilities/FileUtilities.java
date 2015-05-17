@@ -3,6 +3,7 @@ package edu.chl.loc.utilities;
 
 import edu.chl.loc.minigame.BeerChug.BeerChug;
 import edu.chl.loc.minigame.IMinigame;
+import edu.chl.loc.minigame.caps.Caps;
 import edu.chl.loc.minigame.cortege.Cortege;
 
 import java.io.File;
@@ -52,10 +53,11 @@ public class FileUtilities {
     public static IMinigame idToMinigame(int id) throws IllegalArgumentException{
         if(id == 2000){
             return new BeerChug();
-        }else if(id == 2002) {
+        }else if(id == 2001){
+            return new Caps();
+        } else if(id == 2002) {
             return new Cortege();
-        }
-            else{
+        }else{
                 throw new IllegalArgumentException("No such minigame id");
             }
 
