@@ -53,6 +53,7 @@ public class Caps implements IMinigame, PropertyChangeListener{
     @Override
     public void reset() {
         this.model = new CapsGameModel();
+        this.model.addPropertyChangeListener(this);
     }
 
     @Override
