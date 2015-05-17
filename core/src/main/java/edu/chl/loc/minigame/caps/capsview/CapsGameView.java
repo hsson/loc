@@ -121,10 +121,10 @@ public class CapsGameView implements Screen {
 
     /**
      * Draws a cap in the air, the cap is always thrown with a 45 degree
-     * angle with varying volcity. The cap will move for 1.5 seconds, and
+     * angle with varying velocity. The cap will move for 1.5 seconds and
      * the speed in the air is not physically realistic. No compensation
      * for air resistance or any other forces apart from gravity are made.
-     * The trajectory will be realistic in a slow motion vaccum in Sweden.
+     * The trajectory would be realistic in a time warping vaccum in Sweden.
      * @param timePassed The time passed since the cap was thrown
      * @param distance The total distance the cap should travel in
      *                 screen width percent
@@ -140,10 +140,10 @@ public class CapsGameView implements Screen {
         }
 
         //This is physics
-        double yValue = xValue*Math.tan(45.0)-
-                (GRAVITATIONAL_CONSTANT*xValue*xValue)/
-                        (2.0*(velocity*Math.cos(45.0))*
-                                (velocity*Math.cos(45.0)));
+        double yValue = (xValue*Math.tan(45.0*(Math.PI/180f))-
+                ((GRAVITATIONAL_CONSTANT*xValue*xValue)/
+                        (2.0*(velocity*Math.cos(45.0*(Math.PI/180f)))*
+                                (velocity*Math.cos(45.0*(Math.PI/180f))))));
 
         xValue *= SCREEN_WIDTH;
         yValue *= SCREEN_HEIGHT;
