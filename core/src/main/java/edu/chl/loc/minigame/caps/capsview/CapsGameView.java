@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.TimeUtils;
 import edu.chl.loc.minigame.caps.capsmodel.CapsGameModel;
 
 /**
@@ -17,12 +18,18 @@ public class CapsGameView implements Screen {
     private CapsGameModel model;
     private Texture crossHair;
     private Texture beerCup;
+    private Texture cap;
     private SpriteBatch batch;
     private OrthographicCamera camera;
+    private long lastThrowTime;
+    private boolean renderThrow;
 
     private static final int SCREEN_WIDTH = 1024;
     private static final int SCREEN_HEIGHT = 576;
     private static final int BEER_CUP_Y_POS = 20;
+    private static final float CAP_FLIGHT_TIME = 1.5f;
+    private static final float GRAVITATIONAL_CONSTANT = 9.82f;
+    private static final int THROW_HEIGHT = 100;
 
     public CapsGameView(CapsGameModel model){
         this.model = model;
@@ -30,6 +37,7 @@ public class CapsGameView implements Screen {
         //Instantiate textures
         this.crossHair = new Texture(Gdx.files.internal("caps/aim.png"));
         this.beerCup = new Texture(Gdx.files.internal("caps/beerCup.png"));
+        this.cap = new Texture(Gdx.files.internal("caps/cap.png"));
 
         //Instantiate spritebatch
         this.batch = new SpriteBatch();
@@ -46,10 +54,22 @@ public class CapsGameView implements Screen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         model.update(Gdx.graphics.getDeltaTime());
+        if(renderThrow && !model.isCapThrown()){
+            renderThrow = false;
+        }
 
         batch.begin();
         drawCup();
         drawCrossHair();
+        if(model.isCapThrown()){
+            if(!renderThrow){
+                this.lastThrowTime = TimeUtils.millis();
+                renderThrow = true;
+            }
+            float timePassed = TimeUtils.millis() - lastThrowTime;
+            timePassed = timePassed/1000f;//Convert to seconds
+            drawCapThrow(timePassed, model.getAimPosition());
+        }
         batch.end();
 
     }
@@ -97,5 +117,39 @@ public class CapsGameView implements Screen {
         float yValue = (float)BEER_CUP_Y_POS + beerCup.getHeight() - crossHair.getHeight()/2;
 
         batch.draw(crossHair, xValue, yValue);
+    }
+
+    /**
+     * Draws a cap in the air, the cap is always thrown with a 45 degree
+     * angle with varying volcity. The cap will move for 1.5 seconds, and
+     * the speed in the air is not physically realistic. No compensation
+     * for air resistance or any other forces apart from gravity are made.
+     * The trajectory will be realistic in a slow motion vaccum in Sweden.
+     * @param timePassed The time passed since the cap was thrown
+     * @param distance The total distance the cap should travel in
+     *                 screen width percent
+     */
+    private void drawCapThrow(float timePassed, float distance){
+        double velocity = Math.sqrt(distance * GRAVITATIONAL_CONSTANT);
+        double xValue;
+
+        if(timePassed < CAP_FLIGHT_TIME) {
+            xValue = distance * (timePassed / CAP_FLIGHT_TIME);
+        }else{
+            xValue = distance;
+        }
+
+        //This is physics
+        double yValue = xValue*Math.tan(45.0)-
+                (GRAVITATIONAL_CONSTANT*xValue*xValue)/
+                        (2.0*(velocity*Math.cos(45.0))*
+                                (velocity*Math.cos(45.0)));
+
+        xValue *= SCREEN_WIDTH;
+        yValue *= SCREEN_HEIGHT;
+        yValue += THROW_HEIGHT;
+
+        System.out.println("" + xValue + " " + yValue);
+        batch.draw(cap, (float)xValue-cap.getWidth()/2, (float)yValue-cap.getHeight()/2);
     }
 }
