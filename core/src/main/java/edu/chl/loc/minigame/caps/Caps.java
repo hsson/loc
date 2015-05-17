@@ -29,7 +29,7 @@ public class Caps implements IMinigame, PropertyChangeListener{
 
     @Override
     public Screen getView() {
-        return new CapsGameView(model)
+        return new CapsGameView(model);
     }
 
     @Override
