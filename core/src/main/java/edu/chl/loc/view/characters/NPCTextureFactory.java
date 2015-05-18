@@ -14,6 +14,7 @@ public class NPCTextureFactory {
 
     private static final Texture defaultNPCTexture = new Texture(Gdx.files.internal("player-sheet.png"));
     private static final Texture minigameNPCTexture = new Texture(Gdx.files.internal("minigameNPC.png"));
+    private static final Texture poyaTexture = new Texture(Gdx.files.internal("poya.png"));
 
     private NPCTextureFactory() {
         // No construction allowed
@@ -24,7 +25,9 @@ public class NPCTextureFactory {
         // This could determine which texture to return
         // based on attributes of the NPC. Such as the name.
 
-        if (npc.getClass() == MinigameNPC.class) {
+        if (npc.getName().toLowerCase().trim().equals("poya")) {
+            return poyaTexture;
+        } else if (npc.getClass() == MinigameNPC.class) {
             return minigameNPCTexture;
         }
 
