@@ -24,6 +24,7 @@ import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.view.characters.CharacterView;
 import edu.chl.loc.view.characters.DialogView;
 import edu.chl.loc.view.map.GameMapView;
+import edu.chl.loc.view.menu.GameMenuView;
 import edu.chl.loc.view.music.Playlist;
 
 /**
@@ -47,6 +48,7 @@ public class GameView implements Screen{
     private IView playerView;
     private IView gameMapView;
     private DialogView dialogView;
+    private GameMenuView gameMenuView;
 
     private Dialog lastDialog;
 
@@ -83,6 +85,7 @@ public class GameView implements Screen{
         this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
         this.gameMapView = new GameMapView(this);
         this.dialogView = new DialogView();
+        this.gameMenuView = new GameMenuView(model.getGameMenu());
 
         // Setup camera and viewport
         camera = new OrthographicCamera();
@@ -154,6 +157,10 @@ public class GameView implements Screen{
         if(model.isDialogActive()){
             dialogView.setDialog(model.getActiveDialog());
             dialogView.render(deltaTime, GameView.batch);
+        }
+
+        if (model.getGameMenu().isMenuOpen()) {
+            gameMenuView.render(deltaTime, batch);
         }
     }
 

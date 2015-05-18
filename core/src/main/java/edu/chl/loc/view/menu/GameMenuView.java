@@ -36,11 +36,11 @@ public class GameMenuView implements IView {
         batch.setProjectionMatrix(shapeRenderer.getProjectionMatrix());
         Viewport viewport = GameView.getViewport();
 
-        int menuWidth = viewport.getViewportWidth() / 5;
-        int menuHeight = viewport.getViewportHeight() / 2;
+        float menuWidth = viewport.getWorldWidth() / 5;
+        float menuHeight = viewport.getWorldHeight() / 2;
 
-        int xPos = (viewport.getViewportWidth() / 6) * 4;
-        int yPos = (viewport.getViewportHeight() / 6) * 5;
+        float xPos = (viewport.getWorldWidth() / 4) * 3;
+        float yPos = (viewport.getWorldHeight() / 5) * 2;
 
         RenderUtilities.renderRectangle(xPos, yPos, menuWidth, menuHeight, shapeRenderer);
 
