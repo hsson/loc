@@ -49,7 +49,7 @@ public class GameModel {
     }
 
     private void setupGameMenu() {
-        gameMenu.addMenuOption(new StatsOption());
+        gameMenu.addMenuOption(new StatsOption(this));
         gameMenu.addMenuOption(new ExitOption());
     }
 
