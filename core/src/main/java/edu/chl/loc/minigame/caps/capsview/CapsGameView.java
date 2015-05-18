@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.TimeUtils;
 import edu.chl.loc.minigame.caps.capsmodel.CapsGameModel;
@@ -20,6 +21,7 @@ public class CapsGameView implements Screen {
     private Texture beerCup;
     private Texture cap;
     private SpriteBatch batch;
+    private BitmapFont font;
     private OrthographicCamera camera;
     private long lastThrowTime;
     private boolean renderThrow;
@@ -30,6 +32,8 @@ public class CapsGameView implements Screen {
     private static final float CAP_FLIGHT_TIME = 1.5f;
     private static final float GRAVITATIONAL_CONSTANT = 9.82f;
     private static final float THROWING_ANGLE = 45.0f*((float)Math.PI/180f);
+    private static final int LEVEL_TEXT_X_POS = 475;
+    private static final int LEVEL_TEXT_Y_POS = 300;
 
     public CapsGameView(CapsGameModel model){
         this.model = model;
@@ -39,8 +43,9 @@ public class CapsGameView implements Screen {
         this.beerCup = new Texture(Gdx.files.internal("caps/beerCup.png"));
         this.cap = new Texture(Gdx.files.internal("caps/cap.png"));
 
-        //Instantiate spritebatch
+        //Instantiate spritebatch and font
         this.batch = new SpriteBatch();
+        this.font = new BitmapFont();
 
         //Instantiate and set up camera
         this.camera = new OrthographicCamera();
@@ -60,6 +65,7 @@ public class CapsGameView implements Screen {
 
         batch.begin();
         drawCup();
+        drawLevel();
         if(model.isCapThrown()){
             if(!renderThrow){
                 this.lastThrowTime = TimeUtils.millis();
@@ -105,12 +111,18 @@ public class CapsGameView implements Screen {
 
     }
 
+    /**
+     * Draws the cup
+     */
     private void drawCup(){
         //Calculate x value
         float xValue = (camera.viewportWidth * model.getCupPosition()) - beerCup.getWidth()/2;
         batch.draw(beerCup, xValue, BEER_CUP_Y_POS);
     }
 
+    /**
+     * Draws the crosshair
+     */
     private void drawCrossHair(){
         //Calculate x value
         float xValue = (camera.viewportWidth * model.getAimPosition()) - crossHair.getWidth()/2;
@@ -118,6 +130,14 @@ public class CapsGameView implements Screen {
         float yValue = getThrowHeight() - crossHair.getHeight()/2;
 
         batch.draw(crossHair, xValue, yValue);
+    }
+
+    /**
+     * Draws the games current level
+     */
+    private void drawLevel(){
+        String textToDraw = "Nivå: " + model.getLevel();
+        font.draw(batch, textToDraw, LEVEL_TEXT_X_POS, LEVEL_TEXT_Y_POS);
     }
 
     /**
