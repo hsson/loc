@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.menu.GameMenu;
 import edu.chl.loc.models.menu.IMenuOption;
@@ -27,7 +28,7 @@ public class GameMenuView implements IView {
     private ShapeRenderer shapeRenderer;
     private BitmapFont font;
 
-    private int textYOffset = 64;
+    private int textYOffset = 32;
 
     public GameMenuView(GameMenu menu) {
         this.gameMenu = menu;
@@ -44,7 +45,7 @@ public class GameMenuView implements IView {
         List<IMenuOption> options = gameMenu.getMenuOptions();
 
         float menuWidth = viewport.getWorldWidth() / 5;
-        float menuHeight = textYOffset * options.size();
+        float menuHeight = textYOffset * options.size() + textYOffset;
 
         float xPos = (viewport.getWorldWidth() / 4) * 3;
         float yPos = (viewport.getWorldHeight() / 5) * 2;
@@ -59,12 +60,32 @@ public class GameMenuView implements IView {
 
         for (IMenuOption option : options) {
             int index = options.indexOf(option);
-            font.draw(batch, option.getName(), textX, textY + textYOffset * index);
+            font.draw(batch, option.getName(), textX, textY - textYOffset * index);
         }
         batch.end();
 
+        renderPointer(textX, textY, gameMenu.getSelectedIndex());
 
         batch.setProjectionMatrix(oldProjMatrix);
+    }
+
+    private void renderPointer(float xStart, float yStart, int selectedindex) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLACK);
+
+        Vector2 v1 = new Vector2(0, 0);
+        Vector2 v2 = new Vector2(0, 6);
+        Vector2 v3 = new Vector2(6, 3);
+
+        float xOffset = xStart - 10;
+        float yOffset = yStart - textYOffset * selectedindex - 10;
+
+
+        shapeRenderer.triangle(xOffset + v1.x, yOffset + v1.y,
+                xOffset + v2.x, yOffset + v2.y,
+                xOffset + v3.x, yOffset + v3.y);
+
+        shapeRenderer.end();
     }
 
     @Override
