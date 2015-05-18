@@ -175,9 +175,11 @@ public class GameController implements InputProcessor {
                     AbstractNPC npc = gameMap.getNPCAtPosition(player.getNextPosition());
                     npc.setDirection(player.getDirection().getOpposite());
                     model.setActiveDialog(npc.getDialog());
+                    model.setActiveSpeakerName(npc.getName());
                     model.setIsDialogActive(true);
                 }catch(IllegalArgumentException e){
                     model.setActiveDialog(NOTHING_TO_INTERACT_WITH_DIALOG);
+                    model.setActiveSpeakerName("");
                     model.setIsDialogActive(true);
                 }
                 break;

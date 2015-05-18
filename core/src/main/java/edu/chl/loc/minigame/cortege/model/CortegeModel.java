@@ -35,6 +35,9 @@ public class CortegeModel{
 
     private long lastDropTime;
     private boolean isPlaying;
+    private boolean isMoving = false;
+    private float velocity = 16f;
+    private boolean movingRight = true;
 
     private Iterator<Tool> iterTool;
 
@@ -50,6 +53,27 @@ public class CortegeModel{
 
 
     }
+
+    public void setIsMoving(boolean moving) {
+        this.isMoving = moving;
+    }
+
+    public void updatePosition(float delta) {
+        if (isPlaying && isMoving) {
+            if (movingRight) {
+                toolBox.x += velocity;
+            } else {
+                toolBox.x -= velocity;
+            }
+
+            if (toolBox.x < minimalX) {
+                toolBox.x = minimalX;
+            } else if (toolBox.x > maximalX) {
+                toolBox.x = maximalX;
+            }
+        }
+    }
+
     private void spawnItem(){
 
         Tool tempTool;
@@ -78,6 +102,8 @@ public class CortegeModel{
 
         }
         if(isPlaying) {
+
+            updatePosition(deltatime);
 
 
             if (System.nanoTime() - lastDropTime > 1000000000) {
@@ -108,21 +134,11 @@ public class CortegeModel{
     }
 
     public void moveLeft(){
-        if(isPlaying){
-            toolBox.x -= 30;
-            if (toolBox.x < minimalX) {
-                toolBox.x = minimalX;
-            }
-        }
+        movingRight = false;
     }
 
     public void moveRight(){
-        if(isPlaying) {
-            toolBox.x += 30;
-            if (toolBox.x > maximalX) {
-                toolBox.x = maximalX;
-            }
-        }
+        movingRight = true;
     }
     public int getScore(){
         return score;
@@ -161,9 +177,9 @@ public class CortegeModel{
 
     public char getGrade(){
         int score = getScore();
-        if(score >= 300){
+        if(score >= 230){
             return '5';
-        }else if(score >= 200){
+        }else if(score >= 175){
             return '4';
         }else if(score >= 100){
             return '3';

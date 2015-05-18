@@ -27,6 +27,7 @@ public class CapsGameView implements Screen {
     private OrthographicCamera camera;
     private long lastThrowTime;
     private boolean renderThrow;
+    private boolean increasingDrunkness;
 
     private static final int SCREEN_WIDTH = 1024;
     private static final int SCREEN_HEIGHT = 576;
@@ -35,7 +36,7 @@ public class CapsGameView implements Screen {
     private static final float GRAVITATIONAL_CONSTANT = 9.82f;
     private static final float THROWING_ANGLE = 45.0f*((float)Math.PI/180f);
     private static final int LEVEL_TEXT_X_POS = 475;
-    private static final int LEVEL_TEXT_Y_POS = 300;
+    private static final int LEVEL_TEXT_Y_POS = 550;
 
     public CapsGameView(CapsGameModel model){
         this.model = model;
@@ -57,8 +58,11 @@ public class CapsGameView implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 0);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if(model.getLevel()>=3) {
+            drunkenShaking(Gdx.graphics.getDeltaTime(),model.getLevel()>=5);
+        }
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         model.update(Gdx.graphics.getDeltaTime());
@@ -193,6 +197,8 @@ public class CapsGameView implements Screen {
             }else{
                 font.setColor(Color.RED);
                 font.draw(batch,"Miss",LEVEL_TEXT_X_POS,LEVEL_TEXT_Y_POS-30);
+                font.setColor(color);
+                font.draw(batch,"Betyg: " + model.getGrade(),LEVEL_TEXT_X_POS,LEVEL_TEXT_Y_POS-60);
             }
         }
         font.setColor(color);
@@ -204,5 +210,25 @@ public class CapsGameView implements Screen {
      */
     private float getThrowHeight(){
         return BEER_CUP_Y_POS + beerCup.getHeight();
+    }
+
+    private void drunkenShaking(float deltaTime, boolean rotate){
+        if(increasingDrunkness){
+            camera.zoom -= deltaTime/10;
+            if(rotate) {
+                camera.rotate(deltaTime * model.getLevel());
+            }
+            if(camera.zoom < 0.9){
+                increasingDrunkness = false;
+            }
+        }else{
+            camera.zoom += deltaTime/10;
+            if(rotate) {
+                camera.rotate(-deltaTime * model.getLevel());
+            }
+            if(camera.zoom > 1.0){
+                increasingDrunkness = true;
+            }
+        }
     }
 }

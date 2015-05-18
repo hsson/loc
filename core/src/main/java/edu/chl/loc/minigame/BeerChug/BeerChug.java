@@ -16,6 +16,8 @@ import java.util.List;
 
 /**
  * Main class for BeerChug minigame
+ * @author Alexander Karlsson
+ * @version 1.0
  */
 public class BeerChug implements IMinigame, PropertyChangeListener {
     private BottleBeerChug model;
@@ -44,8 +46,17 @@ public class BeerChug implements IMinigame, PropertyChangeListener {
     }
 
     @Override
-    public char getGrade() {
-        return model.getGrade();
+    public double getScore() {
+        switch(model.getGrade()){
+            case '5':
+                return 15;
+            case '4':
+                return 10;
+            case '3':
+                return 5;
+            default:
+                return 0;
+        }
     }
 
     @Override
@@ -56,7 +67,7 @@ public class BeerChug implements IMinigame, PropertyChangeListener {
 
     private void gameFinished(){
         for(IMinigameListener listener : listenerList){
-            listener.minigameFinished();
+            listener.minigameFinished(this);
         }
     }
 
@@ -65,5 +76,9 @@ public class BeerChug implements IMinigame, PropertyChangeListener {
         if(evt.getPropertyName().equals("gameFinished")){
             this.gameFinished();
         }
+    }
+
+    public String getName(){
+        return "Beerchug";
     }
 }

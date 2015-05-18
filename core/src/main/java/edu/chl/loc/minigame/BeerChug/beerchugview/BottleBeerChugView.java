@@ -212,7 +212,7 @@ public class BottleBeerChugView implements Screen {
 
     @Override
     public void render (float v) {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 0);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);

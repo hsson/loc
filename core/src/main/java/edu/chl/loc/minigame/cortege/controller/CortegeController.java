@@ -18,9 +18,11 @@ public class CortegeController implements InputProcessor{
     public boolean keyDown(int keycode) {
         switch(keycode){
             case Input.Keys.LEFT:
+                model.setIsMoving(true);
                 model.moveLeft();
                 break;
             case Input.Keys.RIGHT:
+                model.setIsMoving(true);
                 model.moveRight();
                 break;
         }
@@ -29,7 +31,8 @@ public class CortegeController implements InputProcessor{
 
     @Override
     public boolean keyUp(int i) {
-        return false;
+        model.setIsMoving(false);
+        return true;
     }
 
     @Override
@@ -54,12 +57,7 @@ public class CortegeController implements InputProcessor{
 
     @Override
     public boolean mouseMoved(int i, int i1) {
-        if(model.isPlaying()) { // only move according to mouse when game is still playing
-            int tempX = i - 64 / 2;
-            if (tempX >= 0 && tempX <= 1024 - 64)
-                model.getToolBox().x = i - 64 / 2;
-        }
-        return true;
+        return false;
     }
 
     @Override

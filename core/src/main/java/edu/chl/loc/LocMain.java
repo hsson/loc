@@ -19,6 +19,7 @@ import edu.chl.loc.minigame.MinigameHandler;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.npc.InvalidIdException;
 import edu.chl.loc.models.characters.npc.NPCFactory;
+import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.items.ItemScore;
@@ -168,6 +169,7 @@ public class LocMain extends Game implements IMinigameHandlerListener {
                     //If no minigame matches the id no minigame will be set
                 }
             }
+            NPCFactory.setDirection(Direction.valueOf(NPCProperty.get(5)));
             //TODO: create Inventory with items that are specified
             //TODO: check the position of the NPC before creating it
             //TODO: call this method somewhere before the game is rendered
@@ -176,11 +178,12 @@ public class LocMain extends Game implements IMinigameHandlerListener {
     }
 
     @Override
-    public void minigameFinished() {
-        Screen minigame = getScreen();
+    public void minigameFinished(IMinigame minigame) {
+        model.addMinigameStat(minigame.getName(), minigame.getScore());
+        Screen screen = getScreen();
         Gdx.input.setInputProcessor(controller);
         setScreen(this.view);
-        minigame.dispose();
+        screen.dispose();
     }
 
     @Override

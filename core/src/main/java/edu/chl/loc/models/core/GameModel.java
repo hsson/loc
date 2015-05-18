@@ -41,6 +41,7 @@ public class GameModel {
     private Dialog activeDialog;
     private boolean isDialogActive;
     private boolean isStatsActive;
+    private String activeSpeakerName = "";
 
     private final GameMenu gameMenu;
 
@@ -96,8 +97,12 @@ public class GameModel {
         return this.stats;
     }
 
-    public StatsWindow getStatsWindow(){
+    public StatsWindow getStatsWindow() {
         return this.statsWindow;
+    }
+
+    public void addMinigameStat(String key, double value){
+        stats.addMinigameStat(key, value);
     }
 
     public void addHec(double amount){
@@ -132,8 +137,16 @@ public class GameModel {
     }
 
     public void setIsStatsActive(boolean isStatsActive) {
-        stats.setPlayerStat("Seconds played", (double)((new Date().getTime()-STARTTIME)/1000));
+        stats.setPlayerStat("Seconds played", (double) ((new Date().getTime() - STARTTIME) / 1000));
         this.isStatsActive = isStatsActive;
+    }
+
+    public String getActiveSpeakerName() {
+        return activeSpeakerName;
+    }
+
+    public void setActiveSpeakerName(String activeSpeakerName) {
+        this.activeSpeakerName = activeSpeakerName;
     }
 
     /**

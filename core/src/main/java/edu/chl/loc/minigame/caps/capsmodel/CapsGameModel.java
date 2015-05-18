@@ -148,14 +148,14 @@ public class CapsGameModel {
                 aimPosition = 1.0f;
                 moveAimBackwards = true;
             }else {
-                aimPosition += deltaTime * Math.sqrt(level);
+                aimPosition += (deltaTime * Math.sqrt(level))/2;
             }
         }else{
             if(aimPosition - deltaTime * Math.sqrt(level) < 0f){
                 aimPosition=0;
                 moveAimBackwards = false;
             }else {
-                aimPosition -= deltaTime * Math.sqrt(level);
+                aimPosition -= (deltaTime * Math.sqrt(level))/2;
             }
         }
     }

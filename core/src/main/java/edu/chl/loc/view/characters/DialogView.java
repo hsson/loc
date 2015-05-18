@@ -26,6 +26,7 @@ public class DialogView implements IView {
     private Dialog dialog;
     private ShapeRenderer shapeRenderer;
     private BitmapFont font;
+    private String npcName = "";
 
     private Rectangle yesNoRect;
 
@@ -79,7 +80,8 @@ public class DialogView implements IView {
     public void renderDialogText(SpriteBatch spriteBatch){
         spriteBatch.begin();
         font.setColor(Color.BLACK);
-        font.draw(spriteBatch, dialog.getCurrentString(), 40, 100);
+        font.setMarkupEnabled(true);
+        font.draw(spriteBatch, "[#0000FF]" + npcName + ": [#000000]" + dialog.getCurrentString(), 40, 100);
         spriteBatch.end();
     }
 
@@ -89,7 +91,8 @@ public class DialogView implements IView {
         font.dispose();
     }
 
-    public void setDialog(Dialog dialog){
+    public void setDialog(Dialog dialog, String npcName){
         this.dialog = dialog;
+        this.npcName = npcName;
     }
 }
