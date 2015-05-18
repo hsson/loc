@@ -2,6 +2,7 @@ package edu.chl.loc.minigame.caps.capsview;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -171,6 +172,27 @@ public class CapsGameView implements Screen {
         yValue += getThrowHeight();
 
         batch.draw(cap, (float)xValue-cap.getWidth()/2, (float)yValue-cap.getHeight()/2);
+
+        if(timePassed >= CAP_FLIGHT_TIME){
+            drawHitOrMiss();
+        }
+    }
+
+    /**
+     * Draws if the throw was a hit or miss, if a throw has not been made does nothing.
+     */
+    public void drawHitOrMiss(){
+        Color color = font.getColor();
+        if(model.isCapThrown()){
+            if(model.wasHit()){
+                font.setColor(Color.GREEN);
+                font.draw(batch,"Träff",LEVEL_TEXT_X_POS,LEVEL_TEXT_Y_POS-30);
+            }else{
+                font.setColor(Color.RED);
+                font.draw(batch,"Miss",LEVEL_TEXT_X_POS,LEVEL_TEXT_Y_POS-30);
+            }
+        }
+        font.setColor(color);
     }
 
     /**
