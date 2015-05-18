@@ -21,6 +21,7 @@ public class CapsGameView implements Screen {
     private Texture crossHair;
     private Texture beerCup;
     private Texture cap;
+    private Texture background;
     private SpriteBatch batch;
     private BitmapFont font;
     private OrthographicCamera camera;
@@ -43,6 +44,7 @@ public class CapsGameView implements Screen {
         this.crossHair = new Texture(Gdx.files.internal("caps/aim.png"));
         this.beerCup = new Texture(Gdx.files.internal("caps/beerCup.png"));
         this.cap = new Texture(Gdx.files.internal("caps/cap.png"));
+        this.background = new Texture(Gdx.files.internal("caps/background.png"));
 
         //Instantiate spritebatch and font
         this.batch = new SpriteBatch();
@@ -65,6 +67,7 @@ public class CapsGameView implements Screen {
         }
 
         batch.begin();
+        batch.draw(background,0,0,camera.viewportWidth,camera.viewportHeight);
         drawCup();
         drawLevel();
         if(model.isCapThrown()){
