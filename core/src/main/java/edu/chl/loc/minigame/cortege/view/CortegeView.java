@@ -61,6 +61,7 @@ public class CortegeView implements Screen {
 
         // tell the camera to update its matrices.
         camera.update();
+        batch.setProjectionMatrix(camera.combined);
 
         game.updatingGame(Gdx.graphics.getDeltaTime());
 
