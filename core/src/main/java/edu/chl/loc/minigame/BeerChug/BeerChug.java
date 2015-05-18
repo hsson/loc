@@ -16,6 +16,8 @@ import java.util.List;
 
 /**
  * Main class for BeerChug minigame
+ * @author Alexander Karlsson
+ * @version 1.0
  */
 public class BeerChug implements IMinigame, PropertyChangeListener {
     private BottleBeerChug model;
