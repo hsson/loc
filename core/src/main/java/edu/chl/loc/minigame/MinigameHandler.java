@@ -40,9 +40,9 @@ public class MinigameHandler implements IMinigameListener{
         }
     }
 
-    public void minigameFinished() {
+    public void minigameFinished(IMinigame minigame) {
         for (IMinigameHandlerListener listener : listeners) {
-            listener.minigameFinished();
+            listener.minigameFinished(minigame);
         }
     }
 
