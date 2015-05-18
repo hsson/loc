@@ -38,8 +38,12 @@ public class Stats {
     }
 
     public void addMinigameStat(String key, Double value){
+        double temp;
         if(playerStats.containsKey(key)){
-            playerStats.replace(key, value);
+            temp = playerStats.get(key);
+            if(temp > value){
+                value = temp;
+            }
         }
         playerStats.put(key, value);
     }
