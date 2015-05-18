@@ -9,6 +9,7 @@ import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.map.GameMap;
 import edu.chl.loc.models.map.Layer;
+import edu.chl.loc.models.menu.GameMenu;
 import edu.chl.loc.models.utilities.Position2D;
 
 /**
@@ -38,10 +39,13 @@ public class GameController implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {// assuming smooth movement will be here?
-        if (model.isDialogActive()) {
-            handleDialog(keycode);
-        }else{
-            moveCharacter(keycode);
+        handleMenu(keycode);
+        if (!model.getGameMenu().isMenuOpen()) {
+            if (model.isDialogActive()) {
+                handleDialog(keycode);
+            } else {
+                moveCharacter(keycode);
+            }
         }
         return true;
     }
@@ -116,6 +120,25 @@ public class GameController implements InputProcessor {
         }
     }
 
+    private void handleMenu(int keycode) {
+        GameMenu menu = model.getGameMenu();
+        if (keycode == Input.Keys.ESCAPE) {
+            menu.toggleOpen();
+        } else if (menu.isMenuOpen()) {
+            switch (keycode) {
+                case Input.Keys.UP:
+                    menu.decSelection();
+                    break;
+                case Input.Keys.DOWN:
+                    menu.incSelection();
+                    break;
+                case Input.Keys.ENTER:
+                    menu.getSelectedOption().choose();
+                    break;
+            }
+        }
+    }
+
     public void moveCharacter(int keycode){
         chooseDirection(keycode);
         switch(keycode) {
@@ -165,5 +188,4 @@ public class GameController implements InputProcessor {
                 break;
         }
     }
-
 }
