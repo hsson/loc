@@ -282,7 +282,6 @@ public class BottleBeerChugView implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
         backgroundMusic.dispose();
         startSound.dispose();
         standingPlayer.dispose();
