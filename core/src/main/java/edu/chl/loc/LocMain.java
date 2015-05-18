@@ -177,8 +177,10 @@ public class LocMain extends Game implements IMinigameHandlerListener {
 
     @Override
     public void minigameFinished() {
+        Screen minigame = getScreen();
         Gdx.input.setInputProcessor(controller);
         setScreen(this.view);
+        minigame.dispose();
     }
 
     @Override

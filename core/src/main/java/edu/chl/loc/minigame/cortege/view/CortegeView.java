@@ -126,7 +126,6 @@ public class CortegeView implements Screen {
             toolsImages[i].dispose();
         }
         backgroundTexture.dispose();
-        batch.dispose();
     }
 
     public Texture decideTexture(Tool tool){
