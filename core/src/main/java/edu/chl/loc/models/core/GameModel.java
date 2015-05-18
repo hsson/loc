@@ -7,6 +7,8 @@ import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.items.AbstractItem;
 import edu.chl.loc.models.map.*;
+import edu.chl.loc.models.menu.ExitOption;
+import edu.chl.loc.models.menu.GameMenu;
 import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.models.utilities.Stats;
 
@@ -35,9 +37,22 @@ public class GameModel {
     private Dialog activeDialog;
     private boolean isDialogActive;
 
+    private final GameMenu gameMenu;
+
     public GameModel() {
         gameMap = new GameMap();
         stats = new Stats();
+
+        gameMenu = new GameMenu();
+        setupGameMenu();
+    }
+
+    private void setupGameMenu() {
+        gameMenu.addMenuOption(new ExitOption());
+    }
+
+    public GameMenu getGameMenu() {
+        return this.gameMenu;
     }
 
     /**

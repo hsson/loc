@@ -1,5 +1,7 @@
 package edu.chl.loc.minigame.BeerChug.utilities;
 
+import java.text.DecimalFormat;
+
 /**
  * Class for basic conversions between numbers and strings
  * @author Alexander Karlsson
@@ -7,7 +9,8 @@ package edu.chl.loc.minigame.BeerChug.utilities;
  */
 public class Converter {
     public static String percentToString(float percent){
+        DecimalFormat format = new DecimalFormat("0.00 '%'");
         float number = percent*100f;
-        return (Float.toString(number) + "%");
+        return format.format(number);
     }
 }
