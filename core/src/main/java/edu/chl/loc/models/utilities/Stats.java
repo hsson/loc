@@ -36,4 +36,11 @@ public class Stats {
     public double getHec(){
         return hec;
     }
+
+    public void addMinigameStat(String key, Double value){
+        if(playerStats.containsKey(key)){
+            playerStats.replace(key, value);
+        }
+        playerStats.put(key, value);
+    }
 }
