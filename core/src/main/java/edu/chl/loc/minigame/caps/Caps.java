@@ -46,8 +46,17 @@ public class Caps implements IMinigame, PropertyChangeListener{
     }
 
     @Override
-    public char getGrade() {
-        return model.getGrade();
+    public double getScore() {
+        switch(model.getGrade()){
+            case '5':
+                return 15;
+            case '4':
+                return 10;
+            case '3':
+                return 5;
+            default:
+                return 0;
+        }
     }
 
     @Override
@@ -60,8 +69,12 @@ public class Caps implements IMinigame, PropertyChangeListener{
     public void propertyChange(PropertyChangeEvent evt) {
         if(evt.getPropertyName().equals("gameFinished")){
             for(IMinigameListener listener : listenerList){
-                listener.minigameFinished();
+                listener.minigameFinished(this);
             }
         }
+    }
+
+    public String getName(){
+        return "Caps";
     }
 }

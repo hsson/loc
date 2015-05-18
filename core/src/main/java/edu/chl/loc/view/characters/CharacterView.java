@@ -61,7 +61,11 @@ public class CharacterView implements IView {
         stateTime += delta;
 
         currentAnimation = animations.get(absCharacter.getDirection());
-        currentFrame = currentAnimation.getKeyFrame(stateTime, true);
+        if (absCharacter.isMoving()) {
+            currentFrame = currentAnimation.getKeyFrame(stateTime, true);
+        } else {
+            currentFrame = currentAnimation.getKeyFrame(0);
+        }
 
         batch.draw(currentFrame, absCharacter.getPosition().getX() * GameView.GRID_SIZE,
                 absCharacter.getPosition().getY() * GameView.GRID_SIZE);

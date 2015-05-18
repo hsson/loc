@@ -11,7 +11,7 @@ import edu.chl.loc.models.utilities.Position2D;
  * Created by Maxim on 15-04-05.
  * Version 2.0.1
  * @author Maxim
- * Revised by Alexander Karlsson
+ * Revised by Alexander Karlsson, Alexander Håkansson
  */
 
 public abstract class AbstractCharacter {
@@ -20,6 +20,7 @@ public abstract class AbstractCharacter {
     private String characterName;
     private final String DEFAULT_NAME = "Emil";
     private Gender gender = Gender.MALE;
+    private boolean isMoving = false;
 
     /**
      * Creates an abstractCharacter with a given position, direction, name and inventory
@@ -53,6 +54,14 @@ public abstract class AbstractCharacter {
         Position2D tempPos = getPosition().add(tempDir.getDelta());
         setPosition(tempPos);
 
+    }
+
+    public boolean isMoving() {
+        return this.isMoving;
+    }
+
+    public void setIsMoving(boolean moving) {
+        this.isMoving = moving;
     }
 
     /**

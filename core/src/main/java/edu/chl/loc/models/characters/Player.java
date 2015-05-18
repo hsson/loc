@@ -8,6 +8,8 @@ import edu.chl.loc.models.utilities.Position2D;
 /**
  * Class representing the player
  *
+ * Revised by Alexander Håkansson
+ *
  * Created by Maxim on 15-04-05.
  * @author Maxim
  * Version 2.0.0
@@ -20,6 +22,9 @@ public class Player extends AbstractCharacter {
     public Player(Position2D pos, Direction direction, String name, Gender gender) {
         super(pos, direction, name, gender);
         this.inventory = new Inventory();
+
+        // TODO: Remove debug code when smooth movement is implemented
+        setIsMoving(true);
     }
 
     /**

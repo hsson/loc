@@ -84,6 +84,10 @@ public class GameModel {
         return stats.getPlayerStat(key);
     }
 
+    public void addMinigameStat(String key, double value){
+        stats.addMinigameStat(key, value);
+    }
+
     public void addHec(double amount){
         stats.addHec(amount);
     }

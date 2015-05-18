@@ -46,13 +46,18 @@ public class NPCFactoryTest {
             }
 
             @Override
-            public char getGrade() {
+            public double getScore() {
                 return 0;
             }
 
             @Override
             public void reset() {
 
+            }
+
+            @Override
+            public String getName() {
+                return null;
             }
 
             @Override
@@ -93,13 +98,18 @@ public class NPCFactoryTest {
                 }
 
                 @Override
-                public char getGrade() {
+                public double getScore() {
                     return 0;
                 }
 
                 @Override
                 public void reset() {
 
+                }
+
+                @Override
+                public String getName() {
+                    return null;
                 }
 
                 @Override
@@ -134,13 +144,18 @@ public class NPCFactoryTest {
             }
 
             @Override
-            public char getGrade() {
+            public double getScore() {
                 return 0;
             }
 
             @Override
             public void reset() {
 
+            }
+
+            @Override
+            public String getName() {
+                return null;
             }
 
             @Override
