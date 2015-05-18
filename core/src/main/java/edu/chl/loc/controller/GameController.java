@@ -34,7 +34,6 @@ public class GameController implements InputProcessor {
         this.model = model;
         this.player = model.getPlayer();
         this.gameMap = model.getGameMap();
-        System.out.println(NOTHING_TO_INTERACT_WITH_DIALOG == null);
     }
 
     @Override
