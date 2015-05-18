@@ -3,6 +3,7 @@ package edu.chl.loc.view.characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import edu.chl.loc.models.characters.npc.AbstractNPC;
+import edu.chl.loc.models.characters.npc.MinigameNPC;
 
 /**
  * @author Alexander Håkansson
@@ -12,6 +13,7 @@ import edu.chl.loc.models.characters.npc.AbstractNPC;
 public class NPCTextureFactory {
 
     private static final Texture defaultNPCTexture = new Texture(Gdx.files.internal("player-sheet.png"));
+    private static final Texture minigameNPCTexture = new Texture(Gdx.files.internal("minigameNPC.png"));
 
     private NPCTextureFactory() {
         // No construction allowed
@@ -21,6 +23,10 @@ public class NPCTextureFactory {
 
         // This could determine which texture to return
         // based on attributes of the NPC. Such as the name.
+
+        if (npc.getClass() == MinigameNPC.class) {
+            return minigameNPCTexture;
+        }
 
         return defaultNPCTexture;
     }
