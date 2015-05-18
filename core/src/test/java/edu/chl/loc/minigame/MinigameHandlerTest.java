@@ -3,6 +3,8 @@ package edu.chl.loc.minigame;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.swing.*;
+
 /**
  * @author Alexander Håkansson
  * @version 1.0.0
@@ -21,7 +23,7 @@ public class MinigameHandlerTest {
         MinigameHandler handler = MinigameHandler.getInstance();
         handler.registerListener(new IMinigameHandlerListener() {
             @Override
-            public void minigameFinished() {
+            public void minigameFinished(IMinigame minigame) {
                 Assert.assertTrue(true);
             }
 
@@ -29,7 +31,7 @@ public class MinigameHandlerTest {
             public void startMinigame(IMinigame minigame) {
             }
         });
-        handler.minigameFinished();
+        handler.minigameFinished(null);
     }
 
     @Test
@@ -37,7 +39,7 @@ public class MinigameHandlerTest {
         MinigameHandler handler = MinigameHandler.getInstance();
         handler.registerListener(new IMinigameHandlerListener() {
             @Override
-            public void minigameFinished() {
+            public void minigameFinished(IMinigame minigame) {
             }
 
             @Override
