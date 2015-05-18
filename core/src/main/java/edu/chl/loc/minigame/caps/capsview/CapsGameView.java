@@ -58,7 +58,7 @@ public class CapsGameView implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 0);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if(model.getLevel()>=3) {
             drunkenShaking(Gdx.graphics.getDeltaTime(),model.getLevel()>=5);
@@ -197,6 +197,8 @@ public class CapsGameView implements Screen {
             }else{
                 font.setColor(Color.RED);
                 font.draw(batch,"Miss",LEVEL_TEXT_X_POS,LEVEL_TEXT_Y_POS-30);
+                font.setColor(color);
+                font.draw(batch,"Betyg: " + model.getGrade(),LEVEL_TEXT_X_POS,LEVEL_TEXT_Y_POS-60);
             }
         }
         font.setColor(color);
