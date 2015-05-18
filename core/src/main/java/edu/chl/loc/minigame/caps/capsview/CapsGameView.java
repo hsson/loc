@@ -29,6 +29,7 @@ public class CapsGameView implements Screen {
     private static final int BEER_CUP_Y_POS = 20;
     private static final float CAP_FLIGHT_TIME = 1.5f;
     private static final float GRAVITATIONAL_CONSTANT = 9.82f;
+    private static final float THROWING_ANGLE = 45.0f*((float)Math.PI/180f);
 
     public CapsGameView(CapsGameModel model){
         this.model = model;
@@ -140,10 +141,10 @@ public class CapsGameView implements Screen {
         }
 
         //This is physics
-        double yValue = (xValue*Math.tan(45.0*(Math.PI/180f))-
+        double yValue = (xValue*Math.tan(THROWING_ANGLE)-
                 ((GRAVITATIONAL_CONSTANT*xValue*xValue)/
-                        (2.0*(velocity*Math.cos(45.0*(Math.PI/180f)))*
-                                (velocity*Math.cos(45.0*(Math.PI/180f))))));
+                        (2.0*(velocity*Math.cos(THROWING_ANGLE))*
+                                (velocity*Math.cos(THROWING_ANGLE)))));
 
         xValue *= SCREEN_WIDTH;
         yValue *= SCREEN_HEIGHT;
