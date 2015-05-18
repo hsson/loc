@@ -1,11 +1,12 @@
-package edu.chl.loc.models.utilities;
+package edu.chl.loc.models.core;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Kevin Hoogendijk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2015-04-26
  */
 public class Stats {
@@ -19,10 +20,15 @@ public class Stats {
             value = prevValue + value;
         }
         playerStats.put(key, value);
+        System.out.println(playerStats.size());
     }
 
     public Map<String, Double> getPlayerStats(){
         return new HashMap<String, Double>(playerStats);
+    }
+
+    public Set<String> getKeySet(){
+        return playerStats.keySet();
     }
 
     public double getPlayerStat(String key){

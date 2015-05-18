@@ -15,6 +15,14 @@ public class RenderUtilities {
 
     }
 
+    /**
+     * Renders a frame for displaying text on. The text box is white and has a black border
+     * @param x the x position of the frame
+     * @param y the y position of the frame
+     * @param width the width of the frame
+     * @param height the height of the frame
+     * @param shapeRenderer the shaperenderer that is used by the frame
+     */
     public static void renderRectangle(float x, float y, float width, float height, ShapeRenderer shapeRenderer){
         shapeRenderer.setColor(255,255,255,0);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);

@@ -7,6 +7,7 @@ import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.core.StatsWindow;
 import edu.chl.loc.models.map.GameMap;
 import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.models.menu.GameMenu;
@@ -39,13 +40,14 @@ public class GameController implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {// assuming smooth movement will be here?
-        handleMenu(keycode);
-        if (!model.getGameMenu().isMenuOpen()) {
-            if (model.isDialogActive()) {
-                handleDialog(keycode);
-            } else {
-                moveCharacter(keycode);
-            }
+        if(model.getGameMenu().isMenuOpen()) {
+            handleMenu(keycode);
+        } else if (model.isDialogActive()) {
+            handleDialog(keycode);
+        } else if (model.isStatsActive()) {
+            handleStats(keycode);
+        } else {
+            handleCharacter(keycode);
         }
         return true;
     }
@@ -122,24 +124,39 @@ public class GameController implements InputProcessor {
 
     private void handleMenu(int keycode) {
         GameMenu menu = model.getGameMenu();
-        if (keycode == Input.Keys.ESCAPE) {
-            menu.toggleOpen();
-        } else if (menu.isMenuOpen()) {
-            switch (keycode) {
-                case Input.Keys.UP:
-                    menu.decSelection();
-                    break;
-                case Input.Keys.DOWN:
-                    menu.incSelection();
-                    break;
-                case Input.Keys.ENTER:
-                    menu.getSelectedOption().choose();
-                    break;
-            }
+        switch (keycode) {
+            case Input.Keys.UP:
+                menu.decSelection();
+                break;
+            case Input.Keys.DOWN:
+                menu.incSelection();
+                break;
+            case Input.Keys.ENTER:
+                menu.getSelectedOption().choose();
+                break;
         }
     }
 
-    public void moveCharacter(int keycode){
+    public void handleStats(int keycode){
+        StatsWindow statsWindow = model.getStatsWindow();
+        switch (keycode){
+            case Input.Keys.ENTER:
+            case Input.Keys.SPACE:
+                model.setIsStatsActive(false);
+                break;
+            case Input.Keys.W:
+            case Input.Keys.UP:
+                statsWindow.scrollUp();
+                break;
+            case Input.Keys.S:
+            case Input.Keys.DOWN:
+                statsWindow.scrollDown();
+                break;
+        }
+    }
+
+    public void handleCharacter(int keycode){
+        GameMenu menu = model.getGameMenu();
         chooseDirection(keycode);
         switch(keycode) {
             case Input.Keys.A:
@@ -163,7 +180,9 @@ public class GameController implements InputProcessor {
                     model.setActiveDialog(NOTHING_TO_INTERACT_WITH_DIALOG);
                     model.setIsDialogActive(true);
                 }
-
+                break;
+            case Input.Keys.ESCAPE:
+                menu.toggleOpen();
                 break;
         }
     }
@@ -172,18 +191,22 @@ public class GameController implements InputProcessor {
         switch(keycode){
             case  Input.Keys.A:
             case  Input.Keys.LEFT:
+                if(player.getDirection()!=Direction.WEST){ model.addPlayerStat("Times turned", 1.0); }
                 player.setDirection(Direction.WEST);
                 break;
             case  Input.Keys.D:
             case  Input.Keys.RIGHT:
+                if(player.getDirection()!=Direction.EAST){ model.addPlayerStat("Times turned", 1.0); }
                 player.setDirection(Direction.EAST);
                 break;
             case  Input.Keys.W:
             case  Input.Keys.UP:
+                if(player.getDirection()!=Direction.NORTH){ model.addPlayerStat("Times turned", 1.0); }
                 player.setDirection(Direction.NORTH);
                 break;
             case  Input.Keys.S:
             case  Input.Keys.DOWN:
+                if(player.getDirection()!=Direction.SOUTH){ model.addPlayerStat("Times turned", 1.0); }
                 player.setDirection(Direction.SOUTH);
                 break;
         }

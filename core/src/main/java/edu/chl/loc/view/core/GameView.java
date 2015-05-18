@@ -13,7 +13,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.characters.Player;
@@ -30,7 +29,7 @@ import edu.chl.loc.view.music.Playlist;
 /**
  * Top level class for the view of loc
  * @author Alexander Karlsson
- * @version 0.6.0
+ * @version 1.0.0
  *
  * Revised by Alexander Håkansson
  * Revised by Kevin Hoogendijk
@@ -49,6 +48,7 @@ public class GameView implements Screen{
     private IView gameMapView;
     private DialogView dialogView;
     private GameMenuView gameMenuView;
+    private StatsView statsView;
 
     private Dialog lastDialog;
 
@@ -86,6 +86,7 @@ public class GameView implements Screen{
         this.gameMapView = new GameMapView(this);
         this.dialogView = new DialogView();
         this.gameMenuView = new GameMenuView(model.getGameMenu());
+        this.statsView = new StatsView(model.getStatsWindow());
 
         // Setup camera and viewport
         camera = new OrthographicCamera();
@@ -162,6 +163,11 @@ public class GameView implements Screen{
         if (model.getGameMenu().isMenuOpen()) {
             gameMenuView.render(deltaTime, batch);
         }
+
+        if(model.isStatsActive()){
+            statsView.render(deltaTime, batch);
+        }
+
     }
 
     private boolean isPlayerUnderRoof() {
@@ -207,5 +213,6 @@ public class GameView implements Screen{
         gameMapView.dispose();
         PLAYER_TEXTURE.dispose();
         dialogView.dispose();
+        statsView.dispose();
     }
 }
