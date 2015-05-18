@@ -45,6 +45,10 @@ public class GameMenu {
         return this.selectedIndex;
     }
 
+    public List<IMenuOption> getMenuOptions() {
+        return this.menuOptions;
+    }
+
     public IMenuOption getSelectedOption() {
         return menuOptions.get(selectedIndex);
     }

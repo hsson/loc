@@ -7,4 +7,5 @@ package edu.chl.loc.models.menu;
  */
 public interface IMenuOption {
     void choose();
+    String getName();
 }
