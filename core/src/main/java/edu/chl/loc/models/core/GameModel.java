@@ -37,6 +37,7 @@ public class GameModel {
 
     private Dialog activeDialog;
     private boolean isDialogActive;
+    private String activeSpeakerName = "";
 
     private final GameMenu gameMenu;
 
@@ -105,6 +106,14 @@ public class GameModel {
 
     public void setIsDialogActive(boolean isDialogActive){
         this.isDialogActive = isDialogActive;
+    }
+
+    public String getActiveSpeakerName() {
+        return activeSpeakerName;
+    }
+
+    public void setActiveSpeakerName(String activeSpeakerName) {
+        this.activeSpeakerName = activeSpeakerName;
     }
 
     /**
