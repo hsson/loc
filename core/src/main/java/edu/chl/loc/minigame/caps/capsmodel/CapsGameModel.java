@@ -113,6 +113,21 @@ public class CapsGameModel {
     }
 
     /**
+     * Gets the proper grade
+     * @return A grade
+     */
+    public char getGrade(){
+        if(level > 9){
+            return '5';
+        }else if(level > 6){
+            return '4';
+        }else if(level > 3){
+            return '3';
+        }
+        return 'U';
+    }
+
+    /**
      * Updates the countdown time
      * @param deltaTime The time passed in seconds since last update
      */

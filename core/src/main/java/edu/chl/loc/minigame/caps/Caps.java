@@ -47,7 +47,7 @@ public class Caps implements IMinigame, PropertyChangeListener{
 
     @Override
     public char getGrade() {
-        return 'U';
+        return model.getGrade();
     }
 
     @Override
