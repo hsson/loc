@@ -9,6 +9,7 @@ import edu.chl.loc.models.items.AbstractItem;
 import edu.chl.loc.models.map.*;
 import edu.chl.loc.models.menu.ExitOption;
 import edu.chl.loc.models.menu.GameMenu;
+import edu.chl.loc.models.menu.StatsOption;
 import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.models.utilities.Stats;
 
@@ -48,6 +49,7 @@ public class GameModel {
     }
 
     private void setupGameMenu() {
+        gameMenu.addMenuOption(new StatsOption());
         gameMenu.addMenuOption(new ExitOption());
     }
 
