@@ -6,6 +6,6 @@ package edu.chl.loc.minigame;
  * @since 2015-05-11
  */
 public interface IMinigameHandlerListener {
-    public void minigameFinished();
+    public void minigameFinished(IMinigame minigame);
     public void startMinigame(IMinigame minigame);
 }
