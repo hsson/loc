@@ -10,6 +10,7 @@ public interface IMinigame {
     public Screen getView();
     public InputProcessor getController();
     public void setListener(IMinigameListener listener);
-    public char getGrade();
+    public double getScore();
     public void reset();
+    public String getName();
 }
