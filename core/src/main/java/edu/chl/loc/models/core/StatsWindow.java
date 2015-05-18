@@ -20,7 +20,7 @@ public class StatsWindow {
     }
 
     public void scrollUp() {
-        if (scrollIndex >= 0) {
+        if (scrollIndex > 0) {
             this.scrollIndex--;
         }
     }

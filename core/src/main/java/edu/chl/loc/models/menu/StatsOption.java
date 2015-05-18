@@ -17,7 +17,7 @@ public class StatsOption implements IMenuOption {
 
     @Override
     public void choose() {
-        // TODO: Open stats here
+        model.setIsStatsActive(true);
         model.getGameMenu().closeMenu();
         System.out.println("Opens stats");
     }

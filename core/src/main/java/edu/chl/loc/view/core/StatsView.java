@@ -31,7 +31,6 @@ public class StatsView implements IView{
         this.shapeRenderer = new ShapeRenderer();
         this.font = new BitmapFont();
         font.setColor(Color.BLACK);
-        System.out.println(stats.getKeySet().size());;
     }
 
     @Override
@@ -40,16 +39,23 @@ public class StatsView implements IView{
         batch.setProjectionMatrix(shapeRenderer.getProjectionMatrix());
         Viewport viewport = GameView.getViewport();
         Rectangle frame = new Rectangle(10, viewport.getWorldHeight() - 10, viewport.getWorldWidth() * 0.4f, -viewport.getWorldHeight() * 0.7f);
+        String[] activeLabels = new String[5];
+        String[] activeValues = new String[5];
 
         RenderUtilities.renderRectangle(frame.getX(), frame.getY(), frame.getWidth(), frame.getHeight(), shapeRenderer);
 
         String[] keySet = stats.getKeySet().toArray(new String[0]);
         int scrllIndx = statsWindow.getScrollIndex();
 
+        for(int i = scrllIndx; i < keySet.length && i < 5+scrllIndx; i++){
+            activeLabels[i-scrllIndx] = keySet[i];
+            activeValues[i-scrllIndx] = Double.toString(stats.getPlayerStat(keySet[i]));
+        }
+
         batch.begin();
-        for(int i = scrllIndx; i < scrllIndx + (stats.getKeySet().size() < 5 ? stats.getKeySet().size() : 5); i++){
-            font.draw(batch, keySet[i] + ":", frame.getX() + frame.getWidth()/7, frame.getY() + frame.getHeight()/7 + i*(frame.getHeight()/7));
-            font.draw(batch, Double.toString(stats.getPlayerStat(keySet[i])), frame.getX() + 3 * (frame.getWidth()/7), frame.getY()  + frame.getHeight()/7 + i*(frame.getHeight()/7));
+        for(int i = 0; i < keySet.length && i < 5; i++) {
+            font.draw(batch, activeLabels[i], frame.getX() + frame.getWidth() / 7, frame.getY() + frame.getHeight() / 7 + i * (frame.getHeight() / 7));
+            font.draw(batch, activeValues[i], frame.getX() + 3 * (frame.getWidth() / 7), frame.getY() + frame.getHeight() / 7 + i * (frame.getHeight() / 7));
         }
         batch.end();
 

@@ -20,7 +20,10 @@ public class Stats {
             value = prevValue + value;
         }
         playerStats.put(key, value);
-        System.out.println(playerStats.size());
+    }
+
+    public void setPlayerStat(String key, Double value){
+        playerStats.put(key, value);
     }
 
     public Map<String, Double> getPlayerStats(){
