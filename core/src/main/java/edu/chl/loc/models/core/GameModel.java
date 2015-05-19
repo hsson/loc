@@ -21,7 +21,7 @@ import java.util.Map;
  * revised by Maxim Goretskyy
  * Revised by Kevin Hoogendijk
  */
-public class GameModel {
+public class GameModel implements IGameWonListener {
 
     // Player default values
     public static final Position2D STARTING_POS = new Position2D(0, 0);
@@ -238,4 +238,8 @@ public class GameModel {
         }
     }
 
+    @Override
+    public void gameWon() {
+        // TODO: Game won
+    }
 }

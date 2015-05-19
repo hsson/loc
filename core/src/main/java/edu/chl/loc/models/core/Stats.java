@@ -1,6 +1,7 @@
 package edu.chl.loc.models.core;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ public class Stats {
 
     private double hec = 0;
     private Map<String, Double> playerStats = new HashMap<String, Double>();
+    private Set<IGameWonListener> listeners = new HashSet<IGameWonListener>();
 
     public void addPlayerStat(String key, Double value){
         if(playerStats.containsKey(key)){
@@ -20,6 +22,19 @@ public class Stats {
             value = prevValue + value;
         }
         playerStats.put(key, value);
+    }
+
+    // TODO: Check for game won
+    public void addGameWonListener(IGameWonListener listener) {
+        if (listener != null) {
+            listeners.add(listener);
+        }
+    }
+
+    private void gameWon() {
+        for (IGameWonListener l : listeners) {
+            l.gameWon();
+        }
     }
 
     public void setPlayerStat(String key, Double value){
