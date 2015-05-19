@@ -28,6 +28,7 @@ public class CapsGameView implements Screen {
     private long lastThrowTime;
     private boolean renderThrow;
     private boolean increasingDrunkness;
+    private boolean blurry;
 
     private static final int SCREEN_WIDTH = 1024;
     private static final int SCREEN_HEIGHT = 576;
@@ -60,9 +61,15 @@ public class CapsGameView implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         if(model.getLevel()>=3) {
             drunkenShaking(Gdx.graphics.getDeltaTime(),model.getLevel()>=5);
         }
+
+        if(model.getLevel()>=7 && !blurry){
+            setDrunkBlur(true);
+        }
+
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         model.update(Gdx.graphics.getDeltaTime());
@@ -212,6 +219,11 @@ public class CapsGameView implements Screen {
         return BEER_CUP_Y_POS + beerCup.getHeight();
     }
 
+    /**
+     * Shakes and optionally rotates the screen, how much shake is applied depends on the level
+     * @param deltaTime Time passed since last render
+     * @param rotate True if the screen should rotate, false otherwise
+     */
     private void drunkenShaking(float deltaTime, boolean rotate){
         if(increasingDrunkness){
             camera.zoom -= deltaTime/10;
@@ -229,6 +241,25 @@ public class CapsGameView implements Screen {
             if(camera.zoom > 1.0){
                 increasingDrunkness = true;
             }
+        }
+    }
+
+    /**
+     * Blurs the screen or unblurs the screen
+     * @param value Blurs the screen if true, false otherwise
+     */
+    private void setDrunkBlur(boolean value){
+        blurry = value;
+        if(value){
+            background = new Texture(Gdx.files.internal("caps/backgroundDrunk.png"));
+            beerCup = new Texture(Gdx.files.internal("caps/beerCupDrunk.png"));
+            crossHair = new Texture(Gdx.files.internal("caps/aimDrunk.png"));
+            cap = new Texture(Gdx.files.internal("caps/capDrunk.png"));
+        }else{
+            background = new Texture(Gdx.files.internal("caps/background.png"));
+            beerCup = new Texture(Gdx.files.internal("caps/beerCup.png"));
+            crossHair = new Texture(Gdx.files.internal("caps/aim.png"));
+            cap = new Texture(Gdx.files.internal("caps/capDrunk.png"));
         }
     }
 }
