@@ -2,6 +2,7 @@ package edu.chl.loc.models.characters;
 
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.items.Inventory;
+import edu.chl.loc.models.items.ItemScore;
 import edu.chl.loc.models.utilities.Position2D;
 import org.junit.After;
 import org.junit.Assert;
@@ -40,13 +41,13 @@ public class PlayerTest {
         player.setName("Emil");
         Assert.assertEquals("The player's name should be Emil", "Emil", player.getName());
         player.setName("AnyOtherName");
-        Assert.assertEquals("The player's name should be Emil", "AnyOtherName", player.getName());
+        Assert.assertEquals("The player's name should be AnyOtherName", "AnyOtherName", player.getName());
     }
 
     @Test
     public void testPlayerDirection(){
         player.setDirection(Direction.EAST);
-        Assert.assertEquals("The player's name should be Emil", Direction.EAST, player.getDirection());
+        Assert.assertEquals("The player's direction should be east", Direction.EAST, player.getDirection());
     }
     @Test
     public void testPlayerMovingOneDirection(){
@@ -63,6 +64,14 @@ public class PlayerTest {
         fourthPlayer= new Player(new Position2D(1337, 9000), Direction.NORTH, null, null);
         Assert.assertEquals("Test equality of two players by their position", fourthPlayer, thirdPlayer);
 
+    }
+    @Test
+    public void testSetInventory(){
+        Player player = new Player(new Position2D(1337, 9000), Direction.NORTH, null, null);
+        Inventory inv = new Inventory();
+        inv.addItem(new ItemScore("PrippsBlå",3));
+        player.setInventory(inv);
+        Assert.assertFalse("Player's inv should not be empty", player.getInventory().isEmpty());
     }
 
 

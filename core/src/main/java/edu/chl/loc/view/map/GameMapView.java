@@ -1,6 +1,7 @@
 package edu.chl.loc.view.map;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.items.AbstractItem;
@@ -67,16 +68,16 @@ public class GameMapView implements IView {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta, SpriteBatch batch) {
 
         // Render NPCs
         for (CharacterView view : npcViews) {
-            view.render(delta);
+            view.render(delta, batch);
         }
 
         // Render items
         for (ItemView view : itemViews) {
-            view.render(delta);
+            view.render(delta, batch);
         }
     }
 

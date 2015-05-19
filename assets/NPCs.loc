@@ -1,4 +1,11 @@
-1:Kritt:male:10:10
-2:Öisarn:male:11:10
-3:Crash:male:12:10
-4:Maxim:male:13:10
+1:Kritt:MALE:10:10:SOUTH:
+2:Öisarn:MALE:11:10:SOUTH:
+3:Crash:MALE:12:10:SOUTH:
+4:Maxim:MALE:13:10:SOUTH:
+5:Vladimir:MALE:20:20:SOUTH:
+6:Ica Stig:MALE:21:20:SOUTH:
+7:Olga:FEMALE:22:20:SOUTH:
+8:Poya:MALE:23:20:SOUTH:
+2000:Häfvkungen:MALE:3:3:SOUTH:
+2001:Capsmannen:MALE:5:5:SOUTH:
+2002:Cortégemästaren:MALE:4:4:SOUTH:

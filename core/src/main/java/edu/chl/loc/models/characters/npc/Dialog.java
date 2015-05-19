@@ -1,7 +1,10 @@
 package edu.chl.loc.models.characters.npc;
 
+import com.badlogic.gdx.utils.Timer;
+import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.utilities.FileUtilities;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +12,14 @@ import java.util.List;
  * Class for handling an NPCs dialog
  * @author Alexander Karlsson
  * @version 1.1
+ * Revised by Kevin Hoogendijk
  */
 public class Dialog {
     private String[] dialogStrings;
+    private String currentString;
+    private int currentStringIndex;
     private boolean yesOption;
+    private boolean optionSelected = true;
 
     /**
      * Creates a dialog
@@ -25,6 +32,8 @@ public class Dialog {
     public Dialog(String[] dialogStrings, boolean yesOption){
         this.dialogStrings = (String[])dialogStrings.clone();
         this.yesOption = yesOption;
+        currentStringIndex = 0;
+        currentString = dialogStrings[currentStringIndex];
     }
 
     /**
@@ -34,7 +43,7 @@ public class Dialog {
      * @param path Path to the file
      */
 
-    public Dialog(int id, String path) throws InvalidIdException{
+    public Dialog(int id, String path) throws InvalidIdException, FileNotFoundException {
         List<List<String>> dialogList = FileUtilities.readFile(path);
         boolean idFound = false;
         for(int i = 0; i < dialogList.size(); i++){
@@ -58,6 +67,9 @@ public class Dialog {
         if(!idFound){
             throw new InvalidIdException();
         }
+
+        currentStringIndex = 0;
+        currentString = dialogStrings[currentStringIndex];
     }
 
     /**
@@ -75,6 +87,15 @@ public class Dialog {
         String[] dialogArray = strippedList.toArray(new String[0]);
         return new Dialog(dialogArray, yesOption);
     }
+
+    public void setOptionSelected(boolean option){
+        this.optionSelected = option;
+    }
+
+    public boolean getOptionSelected(){
+        return this.optionSelected;
+    }
+
     /**
      * Specifies if this dialog is a yes/no type question or a question with only one option
      * @return True if the dialog has two yes/no type options, false if the dialog only has
@@ -84,6 +105,33 @@ public class Dialog {
         return yesOption;
     }
 
+    /**
+     * Sets the next string to the current
+     */
+    public void setNextString(){
+        currentString = dialogStrings[++currentStringIndex];
+    }
+
+    /**
+     * get the current active string in the dialog
+     * @return the active string
+     */
+    public String getCurrentString(){
+        return currentString;
+    }
+
+    /**
+     * returns true if the active string is the last one in the dialog
+     * @return
+     */
+    public boolean isLastString(){
+        return currentStringIndex == dialogStrings.length - 1;
+    }
+
+    public void resetDialog(){
+        this.currentStringIndex = 0;
+        this.currentString = dialogStrings[0];
+    }
     /**
      * Gets the strings in the dialog in an array.
      * @return The array with strings. The last string in the dialog is last in the array

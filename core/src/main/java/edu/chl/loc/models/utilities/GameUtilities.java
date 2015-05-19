@@ -2,6 +2,8 @@ package edu.chl.loc.models.utilities;
 
 /**@author Maxim Goretskyy
  * Created by maxim on 15-05-03.
+ *
+ * Revised by Alexander Håkansson
  */
 
 /**
@@ -24,11 +26,10 @@ public class GameUtilities {
      * @return Distance between two positions applying pythagorean theorem,
      *                                      rounds down to closes integer
      */
-    public static int calculateDistance(Position2D startPos, Position2D endPos){
+    public static double calculateDistance(Position2D startPos, Position2D endPos){
         int distanceY = Math.abs(startPos.getY()-endPos.getY());
         int distanceX = Math.abs(startPos.getX() - endPos.getX());
         //Pythagorean theorem
-        int result = (int)(Math.sqrt(distanceX*distanceX + distanceY * distanceY));
-        return result;
+        return (Math.sqrt(distanceX*distanceX + distanceY * distanceY));
     }
 }

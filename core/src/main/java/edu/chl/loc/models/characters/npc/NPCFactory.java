@@ -4,7 +4,7 @@ import edu.chl.loc.models.characters.utilities.CharacterUtilities;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.items.Inventory;
-import edu.chl.loc.models.minigames.IMinigame;
+import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.models.utilities.Position2D;
 
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import java.util.List;
  * @author Alexander Karlsson
  * @revised by Maxim Goretskyy
  * @version 1.1
+ * Revised by Kevin Hoogendijk
  */
 public class NPCFactory {
     private static int id = 0;
@@ -123,6 +124,7 @@ public class NPCFactory {
         NPCFactory.inventory = null;
         NPCFactory.minigame = null;
         NPCFactory.id = 0;
+        NPCFactory.dialog = null;
     }
 
     /**
@@ -187,6 +189,7 @@ public class NPCFactory {
             return new MinigameNPC(position,direction,id,name,gender,minigame,dialog);
         }
 
+        NPCFactory.reset();
         return new StandardNPC(position,direction,id,name,gender,dialog);
     }
 }

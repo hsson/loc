@@ -21,7 +21,6 @@ public class ItemView implements IView {
     private AbstractItem absItem;
     private Position2D position;
     private Texture itemTexture;
-    private SpriteBatch spriteBatch;
 
     /**
      * @param itemTexture the texture that corresponds to the item
@@ -31,16 +30,15 @@ public class ItemView implements IView {
         this.absItem = itemTile.getItem();
         this.position = itemTile.getPosition();
         this.itemTexture = itemTexture;
-        this.spriteBatch = GameView.getSpriteBatch();
     }
 
     /**
      * Render the texture of the item at the position of the item
      */
     @Override
-    public void render(float delta) {
+    public void render(float delta, SpriteBatch batch) {
         if(itemTile.hasItem()) {
-            spriteBatch.draw(itemTexture, position.getX() * GameView.GRID_SIZE,
+            batch.draw(itemTexture, position.getX() * GameView.GRID_SIZE,
                     position.getY() * GameView.GRID_SIZE);
         }
 

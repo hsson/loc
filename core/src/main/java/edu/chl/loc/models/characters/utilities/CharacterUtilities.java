@@ -4,6 +4,7 @@ import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.utilities.FileUtilities;
 import edu.chl.loc.models.characters.npc.Dialog;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,6 +27,7 @@ public class CharacterUtilities {
     private static Gender[] genderArray = {Gender.FEMALE, Gender.MALE, Gender.OTHER};
 
     private static Random randomGen = new Random();
+    private static final String[] DUMMYDIALOG = {"hej"};
 
     private CharacterUtilities() {
         // Private constructor for disabling instantiation
@@ -70,7 +72,12 @@ public class CharacterUtilities {
      *         that is not important
      */
     public static Dialog generateDialog(){
-        List<List<String>> dialogs = FileUtilities.readFile("Dialogs.loc");
+        List<List<String>> dialogs = null;
+        try {
+            dialogs = FileUtilities.readFile("Dialogs.loc");
+        } catch (FileNotFoundException e) {
+            return new Dialog(DUMMYDIALOG, false);
+        }
         List<Integer> randomDialogIds = new ArrayList<Integer>();
         for(List<String> stringList: dialogs){
             int id = Integer.parseInt(stringList.get(0));
@@ -79,8 +86,12 @@ public class CharacterUtilities {
             }
         }
         Random random = new Random();
-        int index = random.nextInt(randomDialogIds.size()-1);
-        return new Dialog(randomDialogIds.get(index), "Dialogs.loc");
+        int index = random.nextInt(randomDialogIds.size());
+        try {
+            return new Dialog(randomDialogIds.get(index), "Dialogs.loc");
+        } catch (FileNotFoundException e) {
+            return new Dialog(DUMMYDIALOG, false);
+        }
     }
 
 }

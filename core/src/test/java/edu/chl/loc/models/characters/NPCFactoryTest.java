@@ -1,15 +1,18 @@
 package edu.chl.loc.models.characters;
 
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
+import edu.chl.loc.minigame.IMinigameListener;
 import edu.chl.loc.models.characters.npc.*;
 import edu.chl.loc.models.items.Inventory;
-import edu.chl.loc.models.minigames.IMinigame;
+import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.models.utilities.Position2D;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**@author Maxim Goretskyy
  * Created by maxim on 15-04-30.
- *
+ * Revised by Alexander Karlsson
  */
 public class NPCFactoryTest {
 
@@ -28,9 +31,40 @@ public class NPCFactoryTest {
     public void testBuildMinigameNPC() {
         NPCFactory.setMinigame(new IMinigame() {
             @Override
+            public Screen getView() {
+                return null;
+            }
+
+            @Override
+            public InputProcessor getController() {
+                return null;
+            }
+
+            @Override
+            public void setListener(IMinigameListener listener) {
+
+            }
+
+            @Override
+            public char getGrade() {
+                return  'U';
+            }
+
+            @Override
+            public void reset() {
+
+            }
+
+            @Override
+            public String getName() {
+                return null;
+            }
+
+            @Override
             public int hashCode() {
                 return super.hashCode();
             }
+
         });
         AbstractNPC secondNPC = NPCFactory.build(new Position2D(4,4));
         Assert.assertEquals("The created NPC should be a MinigameNPC", secondNPC.getClass(), MinigameNPC.class);
@@ -49,6 +83,36 @@ public class NPCFactoryTest {
 
             NPCFactory.setMinigame(new IMinigame() {
                 @Override
+                public Screen getView() {
+                    return null;
+                }
+
+                @Override
+                public InputProcessor getController() {
+                    return null;
+                }
+
+                @Override
+                public void setListener(IMinigameListener listener) {
+
+                }
+
+                @Override
+                public char getGrade() {
+                    return  'U';
+                }
+
+                @Override
+                public void reset() {
+
+                }
+
+                @Override
+                public String getName() {
+                    return null;
+                }
+
+                @Override
                 public int hashCode() {
                     return 9;
                 }
@@ -64,6 +128,36 @@ public class NPCFactoryTest {
     @Test
     public void testAddMinigameAndInv(){
         NPCFactory.setMinigame(new IMinigame() {
+            @Override
+            public Screen getView() {
+                return null;
+            }
+
+            @Override
+            public InputProcessor getController() {
+                return null;
+            }
+
+            @Override
+            public void setListener(IMinigameListener listener) {
+
+            }
+
+            @Override
+            public char getGrade() {
+                return  'U';
+            }
+
+            @Override
+            public void reset() {
+
+            }
+
+            @Override
+            public String getName() {
+                return null;
+            }
+
             @Override
             public int hashCode() {
                 return super.hashCode();

@@ -41,7 +41,6 @@ public class CharacterView implements IView {
     public CharacterView(AbstractCharacter absCharacter, Texture texture){
         this.absCharacter = absCharacter;
         this.charTexture = texture;
-        this.spriteBatch = GameView.getSpriteBatch();
 
         setupAnimations();
     }
@@ -58,13 +57,17 @@ public class CharacterView implements IView {
     }
 
     @Override
-    public void render(float delta){
+    public void render(float delta, SpriteBatch batch){
         stateTime += delta;
 
         currentAnimation = animations.get(absCharacter.getDirection());
-        currentFrame = currentAnimation.getKeyFrame(stateTime, true);
+        if (absCharacter.isMoving()) {
+            currentFrame = currentAnimation.getKeyFrame(stateTime, true);
+        } else {
+            currentFrame = currentAnimation.getKeyFrame(0);
+        }
 
-        spriteBatch.draw(currentFrame, absCharacter.getPosition().getX() * GameView.GRID_SIZE,
+        batch.draw(currentFrame, absCharacter.getPosition().getX() * GameView.GRID_SIZE,
                 absCharacter.getPosition().getY() * GameView.GRID_SIZE);
     }
 

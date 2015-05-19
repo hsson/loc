@@ -1,5 +1,7 @@
 package edu.chl.loc.view.core;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * @author Alexander Håkansson
  * @version 1.1.1
@@ -7,6 +9,6 @@ package edu.chl.loc.view.core;
  * Revised by Alexander Karlsson
  */
 public interface IView {
-    public void render(float delta);
+    public void render(float delta, SpriteBatch batch);
     public void dispose();
 }

@@ -56,18 +56,6 @@ public class Position2D {
     public int getY(){
         return yCoord;
     }
-
-    /**
-     * Adds given x- and y-coordinates to this Position2D.
-     *
-     * @return a new Position2D with the sum of x and y coordinates.
-     */
-    public Position2D add(int x, int y){
-        int tempX = this.getX() + x;
-        int tempY = this.getY() + y;
-        return new Position2D(tempX, tempY);
-    }
-
     /**
      * Adds given the Position2D to this Position2D.
      *

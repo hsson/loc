@@ -1,27 +1,37 @@
 package edu.chl.loc.models.core;
 
+import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.models.characters.Player;
-import edu.chl.loc.models.characters.npc.AbstractNPC;
+import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.items.AbstractItem;
 import edu.chl.loc.models.map.*;
+import edu.chl.loc.models.menu.ExitOption;
+import edu.chl.loc.models.menu.GameMenu;
+import edu.chl.loc.models.menu.StatsOption;
 import edu.chl.loc.models.utilities.Position2D;
-import edu.chl.loc.models.utilities.Stats;
+
+import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Alexander Håkansson
  * @version 1.0.0
  * @since 2015-04-12
  * revised by Maxim Goretskyy
+ * Revised by Kevin Hoogendijk
  */
-public class GameModel {
+public class GameModel implements IGameWonListener {
 
     // Player default values
     public static final Position2D STARTING_POS = new Position2D(0, 0);
     public static final String PLAYER_DEFAULT_NAME = "Emil";
     public static final Gender PLAYER_DEFAULT_GENDER = Gender.MALE;
+    public static final long STARTTIME = new Date().getTime();
 
+    private static final String[] GAME_WON_TEXT = {"Du vann spelet... Hurra..."};
+    private static final Dialog GAME_WON_DIALOG = new Dialog(GAME_WON_TEXT, false);
 
     private static Player player = new Player(STARTING_POS,
             Direction.NORTH,
@@ -30,10 +40,32 @@ public class GameModel {
 
     private GameMap gameMap;
     private Stats stats;
+    private StatsWindow statsWindow;
+
+    private Dialog activeDialog;
+    private boolean isDialogActive;
+    private boolean isStatsActive;
+    private String activeSpeakerName = "";
+
+    private final GameMenu gameMenu;
 
     public GameModel() {
-        gameMap = new GameMap();
-        stats = new Stats();
+        this.gameMap = new GameMap();
+        this.stats = new Stats();
+        this.stats.addGameWonListener(this);
+        this.statsWindow = new StatsWindow(stats);
+
+        gameMenu = new GameMenu();
+        setupGameMenu();
+    }
+
+    private void setupGameMenu() {
+        gameMenu.addMenuOption(new StatsOption(this));
+        gameMenu.addMenuOption(new ExitOption());
+    }
+
+    public GameMenu getGameMenu() {
+        return this.gameMenu;
     }
 
     /**
@@ -58,8 +90,24 @@ public class GameModel {
         stats.addPlayerStat(key, value);
     }
 
-    public double getPlayerStat(String key){
+    public Object getPlayerStat(String key){
         return stats.getPlayerStat(key);
+    }
+
+    public Map<String, Object> getAllPlayerStats(){
+        return stats.getPlayerStats();
+    }
+
+    public Stats getStats(){
+        return this.stats;
+    }
+
+    public StatsWindow getStatsWindow() {
+        return this.statsWindow;
+    }
+
+    public void addMinigameStat(IMinigame minigame){
+        stats.addMinigameScore(minigame);
     }
 
     public void addHec(double amount){
@@ -68,6 +116,48 @@ public class GameModel {
 
     public double getHec(){
         return stats.getHec();
+    }
+
+    public void setActiveDialog(Dialog dialog){
+        this.activeDialog = dialog;
+    }
+
+    public Dialog getActiveDialog(){
+        return this.activeDialog;
+    }
+
+    public boolean isDialogActive(){
+        return this.isDialogActive;
+    }
+
+    public void setIsDialogActive(boolean isDialogActive){
+        if(isDialogActive){
+            Integer timesSpoken = (Integer) stats.getPlayerStat("Times spoken");
+            if (timesSpoken == null) {
+                timesSpoken = 1;
+            } else {
+                timesSpoken++;
+            }
+            stats.addPlayerStat("Times spoken", timesSpoken);
+        }
+        this.isDialogActive = isDialogActive;
+    }
+
+    public boolean isStatsActive() {
+        return isStatsActive;
+    }
+
+    public void setIsStatsActive(boolean isStatsActive) {
+        stats.addPlayerStat("Seconds played", (int) ((new Date().getTime() - STARTTIME) / 1000));
+        this.isStatsActive = isStatsActive;
+    }
+
+    public String getActiveSpeakerName() {
+        return activeSpeakerName;
+    }
+
+    public void setActiveSpeakerName(String activeSpeakerName) {
+        this.activeSpeakerName = activeSpeakerName;
     }
 
     /**
@@ -93,24 +183,52 @@ public class GameModel {
             }
         }
 
-        if (gameMap.layerExists(collisionLayer) &&
-                (!gameMap.tileExists(collisionLayer, nextPos) ||
-                        !gameMap.isCollidable(collisionLayer, nextPos))) {
-            if (gameMap.tileExists(groundLayer, nextPos)) {
-                player.move();
-            }
+        if (shouldPlayerMove(collisionLayer, groundLayer, nextPos)) {
+            player.move();
+            incStepsTaken();
+            // Pickup item if one exists
+            pickupItem(itemLayer, nextPos);
+        }
+    }
+
+    private void incStepsTaken() {
+
+        Integer stepsTaken = (Integer) stats.getPlayerStat("Steps taken");
+        if (stepsTaken == null) {
+            stepsTaken = 1;
+        } else {
+            stepsTaken++;
         }
 
-        if (gameMap.layerExists(itemLayer) && gameMap.tileExists(itemLayer, nextPos)) {
+        stats.addPlayerStat("Steps taken", stepsTaken);
+    }
 
-            ITile tempTile = gameMap.getTile(itemLayer, nextPos);
+    public void pickupItem(ILayer itemLayer, Position2D nextPlayerPos) {
+        if (gameMap.layerExists(itemLayer) && gameMap.tileExists(itemLayer, nextPlayerPos)) {
+
+            ITile tempTile = gameMap.getTile(itemLayer, nextPlayerPos);
 
             if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
                 ItemTile itemTile = (ItemTile) tempTile; //safe to convert because only itemTile have items
                 doItemAction(itemTile);
-
-            }//if tile doesn't have an item do something else, check for minigame
+                stats.addPlayerStat("Items picked up", 1.0);
+            }
         }
+    }
+
+    public boolean shouldPlayerMove(ILayer collisionLayer, ILayer groundLayer, Position2D playerNextPos) {
+        // Check collision with map
+        if (gameMap.layerExists(collisionLayer) &&
+                !(gameMap.tileExists(collisionLayer, playerNextPos) &&
+                        gameMap.isCollidable(collisionLayer, playerNextPos))) {
+            // Check so player don't move outside map or collide with NPC
+            if (gameMap.tileExists(groundLayer, playerNextPos) && !gameMap.npcExisitsAtPosition(playerNextPos)) {
+                // Safe to move
+                return true;
+            }
+        }
+        // Player can't move
+        return false;
     }
 
     /**
@@ -141,5 +259,12 @@ public class GameModel {
         } catch (EmptyTileException e) {
             // Do nothing
         }
+    }
+
+    @Override
+    public void gameWon() {
+        setActiveSpeakerName("SPELET");
+        setActiveDialog(GAME_WON_DIALOG);
+        setIsDialogActive(true);
     }
 }

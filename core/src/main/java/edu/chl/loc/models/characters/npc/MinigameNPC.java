@@ -1,8 +1,9 @@
 package edu.chl.loc.models.characters.npc;
 
+import edu.chl.loc.minigame.MinigameHandler;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
-import edu.chl.loc.models.minigames.IMinigame;
+import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.models.utilities.Position2D;
 
 /**
@@ -18,11 +19,14 @@ public class MinigameNPC extends AbstractNPC{
         this.minigame = minigame;
     }
 
-
+    /**
+     * Starts this NPCs minigame
+     */
     @Override
-    protected void doAction() {
-        //method to start the minigame
-        //Todo method for minigames and minigames
+    public void doAction() {
+        minigame.reset();
+        MinigameHandler handler = MinigameHandler.getInstance();
+        handler.startMinigame(minigame);
     }
 
 }

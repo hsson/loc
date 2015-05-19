@@ -32,6 +32,12 @@
 				<version>1.2.0</version>
 			</dependency>
 
+			<dependency>
+				<groupId>com.badlogicgames.gdx</groupId>
+				<artifactId>gdx-tools</artifactId>
+				<version>1.2.0</version>
+			</dependency>
+
 			<!-- android-specific dependencies -->
 			<dependency>
 				<groupId>com.badlogicgames.gdx</groupId>

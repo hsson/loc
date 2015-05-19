@@ -1,6 +1,11 @@
 package edu.chl.loc.utilities;
 
 
+import edu.chl.loc.minigame.BeerChug.BeerChug;
+import edu.chl.loc.minigame.IMinigame;
+import edu.chl.loc.minigame.caps.Caps;
+import edu.chl.loc.minigame.cortege.Cortege;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +16,7 @@ import java.util.List;
 
 /**
  * @author Maxim Goretskyy
+ * Revised by Alexander Karlsson
  */
 public class FileUtilities {
 
@@ -23,7 +29,7 @@ public class FileUtilities {
      * @param pathToFile the path you want to read from, relative to assest (i think and hope)
      * @return List of a List with strings
      */
-    public static List<List<String>> readFile(String pathToFile){
+    public static List<List<String>> readFile(String pathToFile) throws FileNotFoundException {
 
         String[] temp = loadContent("./../assets/" + pathToFile);
 
@@ -38,7 +44,26 @@ public class FileUtilities {
         return result;
     }
 
-    private static String[] loadContent(String pathToFile){
+    /**
+     * Returns a minigame based on id, for list of mingames id's see additional documentation
+     * @param id The id
+     * @return A minigame corresponding to the given id
+     * @throws IllegalArgumentException If the id does not match a minigame
+     */
+    public static IMinigame idToMinigame(int id) throws IllegalArgumentException{
+        if(id == 2000){
+            return new BeerChug();
+        }else if(id == 2001){
+            return new Caps();
+        } else if(id == 2002) {
+            return new Cortege();
+        }else{
+                throw new IllegalArgumentException("No such minigame id");
+            }
+
+    }
+
+    private static String[] loadContent(String pathToFile) throws FileNotFoundException {
         String temp1 = load(pathToFile);
 
         String temp2 = temp1.replaceAll("(/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*+/)|(//.*)", ""); //ignores all
@@ -54,18 +79,23 @@ public class FileUtilities {
      * @param filename Filename you want to read
      * @return String of the whole file.
      */
-    private static String load(String filename){
+    private static String load(String filename) throws FileNotFoundException {
 
             File file = new File(filename);
-            try {
-                byte[] bytes = Files.readAllBytes(file.toPath());
-                return new String(bytes,"UTF-8");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(file.exists()) {
+                try {
+                    byte[] bytes = Files.readAllBytes(file.toPath());
+                    return new String(bytes, "UTF-8");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return "";
             }
-            return "";
+
+            throw new FileNotFoundException();
+
 
     }
     private static List<String> removeColons(String textString){//also ignores whitelines
@@ -87,5 +117,4 @@ public class FileUtilities {
         }
         System.out.println("Size of teh list is " + list.size());
     }
-
 }
