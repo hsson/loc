@@ -86,11 +86,11 @@ public class GameModel implements IGameWonListener {
         stats.addPlayerStat(key, value);
     }
 
-    public double getPlayerStat(String key){
+    public Object getPlayerStat(String key){
         return stats.getPlayerStat(key);
     }
 
-    public Map<String, Double> getAllPlayerStats(){
+    public Map<String, Object> getAllPlayerStats(){
         return stats.getPlayerStats();
     }
 

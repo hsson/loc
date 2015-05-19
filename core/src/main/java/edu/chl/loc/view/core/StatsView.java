@@ -49,7 +49,7 @@ public class StatsView implements IView{
 
         for(int i = scrllIndx; i < keySet.length && i < 5+scrllIndx; i++){
             activeLabels[i-scrllIndx] = keySet[i];
-            activeValues[i-scrllIndx] = Double.toString(stats.getPlayerStat(keySet[i]));
+            activeValues[i-scrllIndx] = stats.getPlayerStat(keySet[i]).toString();
         }
 
         batch.begin();

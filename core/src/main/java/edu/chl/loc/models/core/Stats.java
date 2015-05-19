@@ -15,14 +15,10 @@ import java.util.Set;
 public class Stats {
 
     private double hec = 0;
-    private Map<String, Double> playerStats = new HashMap<String, Double>();
+    private Map<String, Object> playerStats = new HashMap<String, Object>();
     private Set<IGameWonListener> listeners = new HashSet<IGameWonListener>();
 
-    public void addPlayerStat(String key, Double value){
-        if(playerStats.containsKey(key)){
-            double prevValue = playerStats.get(key);
-            value = prevValue + value;
-        }
+    public void addPlayerStat(String key, Object value){
         playerStats.put(key, value);
     }
 
@@ -43,15 +39,15 @@ public class Stats {
         playerStats.put(key, value);
     }
 
-    public Map<String, Double> getPlayerStats(){
-        return new HashMap<String, Double>(playerStats);
+    public Map<String, Object> getPlayerStats(){
+        return new HashMap<String, Object>(playerStats);
     }
 
     public Set<String> getKeySet(){
         return playerStats.keySet();
     }
 
-    public double getPlayerStat(String key){
+    public Object getPlayerStat(String key){
         return playerStats.get(key);
     }
 
