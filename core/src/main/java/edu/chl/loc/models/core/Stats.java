@@ -60,7 +60,24 @@ public class Stats {
     }
 
     public void addMinigameScore(IMinigame minigame){
-        // TODO: Fix adding
+        String name = minigame.getName();
+        char grade = minigame.getGrade();
+        double score = gradeToScore(grade);
+        double oldScore = 0;
+        char oldGrade = 'U';
+
+        if (playerStats.containsKey(name)) {
+            oldGrade = (Character) playerStats.get(name);
+            oldScore = gradeToScore(oldGrade);
+        }
+
+        double diff = score - oldScore;
+        if (diff > 0) {
+            addPlayerStat(name, grade);
+            addHec(diff);
+        } else if (grade == 'U' && oldGrade == 'U') {
+            addPlayerStat(name, grade);
+        }
     }
 
     public double gradeToScore(char grade) {
