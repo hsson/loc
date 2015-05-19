@@ -35,10 +35,6 @@ public class Stats {
         }
     }
 
-    public void setPlayerStat(String key, Double value){
-        playerStats.put(key, value);
-    }
-
     public Map<String, Object> getPlayerStats(){
         return new HashMap<String, Object>(playerStats);
     }
@@ -48,7 +44,11 @@ public class Stats {
     }
 
     public Object getPlayerStat(String key){
-        return playerStats.get(key);
+        if (playerStats.containsKey(key)) {
+            return playerStats.get(key);
+        } else {
+            return null;
+        }
     }
 
     public void addHec(double addition){

@@ -128,7 +128,13 @@ public class GameModel implements IGameWonListener {
 
     public void setIsDialogActive(boolean isDialogActive){
         if(isDialogActive){
-            stats.addPlayerStat("Times spoken", 1.0);
+            Integer timesSpoken = (Integer) stats.getPlayerStat("Times spoken");
+            if (timesSpoken == null) {
+                timesSpoken = 1;
+            } else {
+                timesSpoken++;
+            }
+            stats.addPlayerStat("Times spoken", timesSpoken);
         }
         this.isDialogActive = isDialogActive;
     }
@@ -138,7 +144,7 @@ public class GameModel implements IGameWonListener {
     }
 
     public void setIsStatsActive(boolean isStatsActive) {
-        stats.setPlayerStat("Seconds played", (double) ((new Date().getTime() - STARTTIME) / 1000));
+        stats.addPlayerStat("Seconds played", (int) ((new Date().getTime() - STARTTIME) / 1000));
         this.isStatsActive = isStatsActive;
     }
 
