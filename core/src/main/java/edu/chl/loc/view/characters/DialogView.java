@@ -81,7 +81,11 @@ public class DialogView implements IView {
         spriteBatch.begin();
         font.setColor(Color.BLACK);
         font.setMarkupEnabled(true);
-        font.draw(spriteBatch, "[#0000FF]" + npcName + ": [#000000]" + dialog.getCurrentString(), 40, 100);
+        String name = "";
+        if (npcName != null && !npcName.trim().equals("")) {
+            name = "[#0000FF]" + npcName + ": [#000000]";
+        }
+        font.draw(spriteBatch, name + dialog.getCurrentString(), 40, 100);
         spriteBatch.end();
     }
 
