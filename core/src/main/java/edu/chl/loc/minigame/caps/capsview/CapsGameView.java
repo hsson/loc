@@ -123,7 +123,11 @@ public class CapsGameView implements Screen {
 
     @Override
     public void dispose() {
-
+        crossHair.dispose();
+        beerCup.dispose();
+        cap.dispose();
+        background.dispose();
+        font.dispose();
     }
 
     /**
