@@ -2,6 +2,7 @@ package edu.chl.loc.minigame.caps.capsview;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,6 +30,7 @@ public class CapsGameView implements Screen {
     private boolean renderThrow;
     private boolean increasingDrunkness;
     private boolean blurry;
+    private Music backgroundMusic;
 
     private static final int SCREEN_WIDTH = 1024;
     private static final int SCREEN_HEIGHT = 576;
@@ -55,6 +57,11 @@ public class CapsGameView implements Screen {
         //Instantiate and set up camera
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false,SCREEN_WIDTH,SCREEN_HEIGHT);
+
+        //Instantiate music
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("caps/background.mp3"));
+        backgroundMusic.setLooping(true);
+
     }
 
     @Override
@@ -103,12 +110,12 @@ public class CapsGameView implements Screen {
 
     @Override
     public void show() {
-
+        backgroundMusic.play();
     }
 
     @Override
     public void hide() {
-
+        backgroundMusic.stop();
     }
 
     @Override
@@ -123,7 +130,11 @@ public class CapsGameView implements Screen {
 
     @Override
     public void dispose() {
-
+        crossHair.dispose();
+        beerCup.dispose();
+        cap.dispose();
+        background.dispose();
+        font.dispose();
     }
 
     /**
@@ -131,8 +142,8 @@ public class CapsGameView implements Screen {
      */
     private void drawCup(){
         //Calculate x value
-        float xValue = (camera.viewportWidth * model.getCupPosition()) - beerCup.getWidth()/2;
-        batch.draw(beerCup, xValue, BEER_CUP_Y_POS);
+        float xValue = (camera.viewportWidth * model.getCupPosition()) - (camera.viewportWidth/10)/2;
+        batch.draw(beerCup, xValue, BEER_CUP_Y_POS, camera.viewportWidth/10, beerCup.getHeight());
     }
 
     /**
