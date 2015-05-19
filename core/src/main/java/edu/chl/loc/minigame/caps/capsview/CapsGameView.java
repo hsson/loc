@@ -135,8 +135,8 @@ public class CapsGameView implements Screen {
      */
     private void drawCup(){
         //Calculate x value
-        float xValue = (camera.viewportWidth * model.getCupPosition()) - beerCup.getWidth()/2;
-        batch.draw(beerCup, xValue, BEER_CUP_Y_POS);
+        float xValue = (camera.viewportWidth * model.getCupPosition()) - (camera.viewportWidth/10)/2;
+        batch.draw(beerCup, xValue, BEER_CUP_Y_POS, camera.viewportWidth/10, beerCup.getHeight());
     }
 
     /**
