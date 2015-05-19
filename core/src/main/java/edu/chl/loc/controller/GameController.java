@@ -140,6 +140,7 @@ public class GameController implements InputProcessor {
     public void handleStats(int keycode){
         StatsWindow statsWindow = model.getStatsWindow();
         switch (keycode){
+            case Input.Keys.ESCAPE:
             case Input.Keys.ENTER:
             case Input.Keys.SPACE:
                 model.setIsStatsActive(false);
