@@ -46,17 +46,8 @@ public class BeerChug implements IMinigame, PropertyChangeListener {
     }
 
     @Override
-    public double getScore() {
-        switch(model.getGrade()){
-            case '5':
-                return 15;
-            case '4':
-                return 10;
-            case '3':
-                return 5;
-            default:
-                return 0;
-        }
+    public char getGrade() {
+        return model.getGrade();
     }
 
     @Override

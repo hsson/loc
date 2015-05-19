@@ -179,7 +179,7 @@ public class LocMain extends Game implements IMinigameHandlerListener {
 
     @Override
     public void minigameFinished(IMinigame minigame) {
-        model.addMinigameStat(minigame.getName(), minigame.getScore());
+        model.addMinigameStat(minigame);
         Screen screen = getScreen();
         Gdx.input.setInputProcessor(controller);
         setScreen(this.view);

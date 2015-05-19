@@ -15,18 +15,15 @@ import java.util.Set;
 public class Stats {
 
     private double hec = 0;
-    private Map<String, Double> playerStats = new HashMap<String, Double>();
+    private Map<String, Object> playerStats = new HashMap<String, Object>();
     private Set<IGameWonListener> listeners = new HashSet<IGameWonListener>();
 
-    public void addPlayerStat(String key, Double value){
-        if(playerStats.containsKey(key)){
-            double prevValue = playerStats.get(key);
-            value = prevValue + value;
-        }
+    private static final double GAME_WON_LIMIT = 300.0;
+
+    public void addPlayerStat(String key, Object value){
         playerStats.put(key, value);
     }
 
-    // TODO: Check for game won
     public void addGameWonListener(IGameWonListener listener) {
         if (listener != null) {
             listeners.add(listener);
@@ -39,39 +36,53 @@ public class Stats {
         }
     }
 
-    public void setPlayerStat(String key, Double value){
-        playerStats.put(key, value);
-    }
-
-    public Map<String, Double> getPlayerStats(){
-        return new HashMap<String, Double>(playerStats);
+    public Map<String, Object> getPlayerStats(){
+        return new HashMap<String, Object>(playerStats);
     }
 
     public Set<String> getKeySet(){
         return playerStats.keySet();
     }
 
-    public double getPlayerStat(String key){
-        return playerStats.get(key);
+    public Object getPlayerStat(String key){
+        if (playerStats.containsKey(key)) {
+            return playerStats.get(key);
+        } else {
+            return null;
+        }
     }
 
     public void addHec(double addition){
         hec += addition;
+
+        if (hec >= GAME_WON_LIMIT) {
+            gameWon();
+        }
     }
 
     public double getHec(){
         return hec;
     }
 
-    public void addMinigameStat(String key, Double value){
-        double temp;
-        if(playerStats.containsKey(key)){
-            temp = playerStats.get(key);
-            if(temp > value){
-                value = temp;
-            }
+    public void addMinigameScore(IMinigame minigame){
+        String name = minigame.getName();
+        char grade = minigame.getGrade();
+        double score = gradeToScore(grade);
+        double oldScore = 0;
+        char oldGrade = 'U';
+
+        if (playerStats.containsKey(name)) {
+            oldGrade = (Character) playerStats.get(name);
+            oldScore = gradeToScore(oldGrade);
         }
-        playerStats.put(key, value);
+
+        double diff = score - oldScore;
+        if (diff > 0) {
+            addPlayerStat(name, grade);
+            addHec(diff);
+        } else if (grade == 'U' && oldGrade == 'U') {
+            addPlayerStat(name, grade);
+        }
     }
 
     public double gradeToScore(char grade) {

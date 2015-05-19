@@ -189,26 +189,36 @@ public class GameController implements InputProcessor {
         }
     }
 
+    private void addTimesTurned() {
+        Double timesTurned = (Double) model.getStats().getPlayerStat("Times turned");
+        if (timesTurned == null) {
+            timesTurned = 1.0;
+        } else {
+            timesTurned++;
+        }
+        model.addPlayerStat("Times turned", timesTurned);
+    }
+
     public void chooseDirection(int keycode){
         switch(keycode){
             case  Input.Keys.A:
             case  Input.Keys.LEFT:
-                if(player.getDirection()!=Direction.WEST){ model.addPlayerStat("Times turned", 1.0); }
+                if (player.getDirection() != Direction.WEST){ addTimesTurned(); }
                 player.setDirection(Direction.WEST);
                 break;
             case  Input.Keys.D:
             case  Input.Keys.RIGHT:
-                if(player.getDirection()!=Direction.EAST){ model.addPlayerStat("Times turned", 1.0); }
+                if(player.getDirection()!=Direction.EAST){addTimesTurned(); }
                 player.setDirection(Direction.EAST);
                 break;
             case  Input.Keys.W:
             case  Input.Keys.UP:
-                if(player.getDirection()!=Direction.NORTH){ model.addPlayerStat("Times turned", 1.0); }
+                if(player.getDirection()!=Direction.NORTH){ addTimesTurned(); }
                 player.setDirection(Direction.NORTH);
                 break;
             case  Input.Keys.S:
             case  Input.Keys.DOWN:
-                if(player.getDirection()!=Direction.SOUTH){ model.addPlayerStat("Times turned", 1.0); }
+                if(player.getDirection()!=Direction.SOUTH){ addTimesTurned(); }
                 player.setDirection(Direction.SOUTH);
                 break;
         }

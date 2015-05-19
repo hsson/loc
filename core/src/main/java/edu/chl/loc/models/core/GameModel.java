@@ -1,5 +1,6 @@
 package edu.chl.loc.models.core;
 
+import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
@@ -29,6 +30,9 @@ public class GameModel implements IGameWonListener {
     public static final Gender PLAYER_DEFAULT_GENDER = Gender.MALE;
     public static final long STARTTIME = new Date().getTime();
 
+    private static final String[] GAME_WON_TEXT = {"Du vann spelet... Hurra..."};
+    private static final Dialog GAME_WON_DIALOG = new Dialog(GAME_WON_TEXT, false);
+
     private static Player player = new Player(STARTING_POS,
             Direction.NORTH,
             PLAYER_DEFAULT_NAME,
@@ -48,6 +52,7 @@ public class GameModel implements IGameWonListener {
     public GameModel() {
         this.gameMap = new GameMap();
         this.stats = new Stats();
+        this.stats.addGameWonListener(this);
         this.statsWindow = new StatsWindow(stats);
 
         gameMenu = new GameMenu();
@@ -85,11 +90,11 @@ public class GameModel implements IGameWonListener {
         stats.addPlayerStat(key, value);
     }
 
-    public double getPlayerStat(String key){
+    public Object getPlayerStat(String key){
         return stats.getPlayerStat(key);
     }
 
-    public Map<String, Double> getAllPlayerStats(){
+    public Map<String, Object> getAllPlayerStats(){
         return stats.getPlayerStats();
     }
 
@@ -101,8 +106,8 @@ public class GameModel implements IGameWonListener {
         return this.statsWindow;
     }
 
-    public void addMinigameStat(String key, double value){
-        stats.addMinigameStat(key, value);
+    public void addMinigameStat(IMinigame minigame){
+        stats.addMinigameScore(minigame);
     }
 
     public void addHec(double amount){
@@ -127,7 +132,13 @@ public class GameModel implements IGameWonListener {
 
     public void setIsDialogActive(boolean isDialogActive){
         if(isDialogActive){
-            stats.addPlayerStat("Times spoken", 1.0);
+            Integer timesSpoken = (Integer) stats.getPlayerStat("Times spoken");
+            if (timesSpoken == null) {
+                timesSpoken = 1;
+            } else {
+                timesSpoken++;
+            }
+            stats.addPlayerStat("Times spoken", timesSpoken);
         }
         this.isDialogActive = isDialogActive;
     }
@@ -137,7 +148,7 @@ public class GameModel implements IGameWonListener {
     }
 
     public void setIsStatsActive(boolean isStatsActive) {
-        stats.setPlayerStat("Seconds played", (double) ((new Date().getTime() - STARTTIME) / 1000));
+        stats.addPlayerStat("Seconds played", (int) ((new Date().getTime() - STARTTIME) / 1000));
         this.isStatsActive = isStatsActive;
     }
 
@@ -174,10 +185,22 @@ public class GameModel implements IGameWonListener {
 
         if (shouldPlayerMove(collisionLayer, groundLayer, nextPos)) {
             player.move();
-            stats.addPlayerStat("Steps taken", 1.0);
+            incStepsTaken();
             // Pickup item if one exists
             pickupItem(itemLayer, nextPos);
         }
+    }
+
+    private void incStepsTaken() {
+
+        Integer stepsTaken = (Integer) stats.getPlayerStat("Steps taken");
+        if (stepsTaken == null) {
+            stepsTaken = 1;
+        } else {
+            stepsTaken++;
+        }
+
+        stats.addPlayerStat("Steps taken", stepsTaken);
     }
 
     public void pickupItem(ILayer itemLayer, Position2D nextPlayerPos) {
@@ -240,6 +263,8 @@ public class GameModel implements IGameWonListener {
 
     @Override
     public void gameWon() {
-        // TODO: Game won
+        setActiveSpeakerName("SPELET");
+        setActiveDialog(GAME_WON_DIALOG);
+        setIsDialogActive(true);
     }
 }

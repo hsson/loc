@@ -46,8 +46,8 @@ public class NPCFactoryTest {
             }
 
             @Override
-            public double getScore() {
-                return 0;
+            public char getGrade() {
+                return  'U';
             }
 
             @Override
@@ -98,8 +98,8 @@ public class NPCFactoryTest {
                 }
 
                 @Override
-                public double getScore() {
-                    return 0;
+                public char getGrade() {
+                    return  'U';
                 }
 
                 @Override
@@ -144,8 +144,8 @@ public class NPCFactoryTest {
             }
 
             @Override
-            public double getScore() {
-                return 0;
+            public char getGrade() {
+                return  'U';
             }
 
             @Override
