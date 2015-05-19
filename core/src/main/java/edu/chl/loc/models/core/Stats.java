@@ -1,5 +1,7 @@
 package edu.chl.loc.models.core;
 
+import edu.chl.loc.minigame.IMinigame;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -70,5 +72,20 @@ public class Stats {
             }
         }
         playerStats.put(key, value);
+    }
+
+    public double gradeToScore(char grade) {
+        switch (grade) {
+            case 'U':
+                return 0.0;
+            case '3':
+                return 5.0;
+            case '4':
+                return 10.0;
+            case '5':
+                return 15.0;
+            default:
+                return 0.0;
+        }
     }
 }
