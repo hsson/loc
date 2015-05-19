@@ -1,7 +1,6 @@
 package edu.chl.loc.models.core;
 
 import edu.chl.loc.models.characters.Player;
-import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
@@ -11,7 +10,9 @@ import edu.chl.loc.models.menu.ExitOption;
 import edu.chl.loc.models.menu.GameMenu;
 import edu.chl.loc.models.menu.StatsOption;
 import edu.chl.loc.models.utilities.Position2D;
-import edu.chl.loc.models.utilities.Stats;
+
+import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Alexander Håkansson
@@ -26,6 +27,7 @@ public class GameModel {
     public static final Position2D STARTING_POS = new Position2D(0, 0);
     public static final String PLAYER_DEFAULT_NAME = "Emil";
     public static final Gender PLAYER_DEFAULT_GENDER = Gender.MALE;
+    public static final long STARTTIME = new Date().getTime();
 
     private static Player player = new Player(STARTING_POS,
             Direction.NORTH,
@@ -34,16 +36,19 @@ public class GameModel {
 
     private GameMap gameMap;
     private Stats stats;
+    private StatsWindow statsWindow;
 
     private Dialog activeDialog;
     private boolean isDialogActive;
+    private boolean isStatsActive;
     private String activeSpeakerName = "";
 
     private final GameMenu gameMenu;
 
     public GameModel() {
-        gameMap = new GameMap();
-        stats = new Stats();
+        this.gameMap = new GameMap();
+        this.stats = new Stats();
+        this.statsWindow = new StatsWindow(stats);
 
         gameMenu = new GameMenu();
         setupGameMenu();
@@ -84,6 +89,18 @@ public class GameModel {
         return stats.getPlayerStat(key);
     }
 
+    public Map<String, Double> getAllPlayerStats(){
+        return stats.getPlayerStats();
+    }
+
+    public Stats getStats(){
+        return this.stats;
+    }
+
+    public StatsWindow getStatsWindow() {
+        return this.statsWindow;
+    }
+
     public void addMinigameStat(String key, double value){
         stats.addMinigameStat(key, value);
     }
@@ -109,7 +126,19 @@ public class GameModel {
     }
 
     public void setIsDialogActive(boolean isDialogActive){
+        if(isDialogActive){
+            stats.addPlayerStat("Times spoken", 1.0);
+        }
         this.isDialogActive = isDialogActive;
+    }
+
+    public boolean isStatsActive() {
+        return isStatsActive;
+    }
+
+    public void setIsStatsActive(boolean isStatsActive) {
+        stats.setPlayerStat("Seconds played", (double) ((new Date().getTime() - STARTTIME) / 1000));
+        this.isStatsActive = isStatsActive;
     }
 
     public String getActiveSpeakerName() {
@@ -145,6 +174,7 @@ public class GameModel {
 
         if (shouldPlayerMove(collisionLayer, groundLayer, nextPos)) {
             player.move();
+            stats.addPlayerStat("Steps taken", 1.0);
             // Pickup item if one exists
             pickupItem(itemLayer, nextPos);
         }
@@ -158,6 +188,7 @@ public class GameModel {
             if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
                 ItemTile itemTile = (ItemTile) tempTile; //safe to convert because only itemTile have items
                 doItemAction(itemTile);
+                stats.addPlayerStat("Items picked up", 1.0);
             }
         }
     }
@@ -206,4 +237,5 @@ public class GameModel {
             // Do nothing
         }
     }
+
 }

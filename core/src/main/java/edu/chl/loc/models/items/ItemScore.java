@@ -38,6 +38,7 @@ public class ItemScore extends AbstractItem{
     @Override
     public void use(GameModel state) {
         state.addHec(hec);
+        state.addPlayerStat("Score", 1.0);
         System.out.println("You drank a " + getItemName());
     }
 
