@@ -63,15 +63,8 @@ public class Stats {
         return hec;
     }
 
-    public void addMinigameStat(String key, Double value){
-        double temp;
-        if(playerStats.containsKey(key)){
-            temp = playerStats.get(key);
-            if(temp > value){
-                value = temp;
-            }
-        }
-        playerStats.put(key, value);
+    public void addMinigameScore(IMinigame minigame){
+        // TODO: Fix adding
     }
 
     public double gradeToScore(char grade) {

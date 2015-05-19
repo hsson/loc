@@ -1,5 +1,6 @@
 package edu.chl.loc.models.core;
 
+import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
@@ -101,8 +102,8 @@ public class GameModel implements IGameWonListener {
         return this.statsWindow;
     }
 
-    public void addMinigameStat(String key, double value){
-        stats.addMinigameStat(key, value);
+    public void addMinigameStat(IMinigame minigame){
+        stats.addMinigameScore(minigame);
     }
 
     public void addHec(double amount){
