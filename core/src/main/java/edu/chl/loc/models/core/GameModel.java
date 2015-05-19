@@ -181,10 +181,22 @@ public class GameModel implements IGameWonListener {
 
         if (shouldPlayerMove(collisionLayer, groundLayer, nextPos)) {
             player.move();
-            stats.addPlayerStat("Steps taken", 1.0);
+            incStepsTaken();
             // Pickup item if one exists
             pickupItem(itemLayer, nextPos);
         }
+    }
+
+    private void incStepsTaken() {
+
+        Integer stepsTaken = (Integer) stats.getPlayerStat("Steps taken");
+        if (stepsTaken == null) {
+            stepsTaken = 1;
+        } else {
+            stepsTaken++;
+        }
+
+        stats.addPlayerStat("Steps taken", stepsTaken);
     }
 
     public void pickupItem(ILayer itemLayer, Position2D nextPlayerPos) {
