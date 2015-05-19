@@ -66,10 +66,10 @@ public class FileUtilities {
     private static String[] loadContent(String pathToFile) throws FileNotFoundException {
         String temp1 = load(pathToFile);
 
-        String temp2 = temp1.replaceAll("(/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*+/)|(//.*)", ""); //ignores all
+        String temp2 = temp1.replaceAll("(/\\*([^*]|[\\r\\n?|\\n]|(\\*+([^*/]|[\\r\\n?|\\n])))*\\*+/)|(//.*)", ""); //ignores all
                                                                                         //java-styled comments
         String temp3 = temp2.replaceAll("^\\s+$", ""); // replaces all white lines with an empty string, like null
-        String[] result = temp3.split("\\n"); //Strip every row
+        String[] result = temp3.split("\\r\\n?|\\n"); //Strip every row
         return result;
 
     }
