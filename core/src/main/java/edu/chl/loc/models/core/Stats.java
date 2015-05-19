@@ -18,11 +18,12 @@ public class Stats {
     private Map<String, Object> playerStats = new HashMap<String, Object>();
     private Set<IGameWonListener> listeners = new HashSet<IGameWonListener>();
 
+    private static final double GAME_WON_LIMIT = 300.0;
+
     public void addPlayerStat(String key, Object value){
         playerStats.put(key, value);
     }
 
-    // TODO: Check for game won
     public void addGameWonListener(IGameWonListener listener) {
         if (listener != null) {
             listeners.add(listener);
@@ -53,6 +54,10 @@ public class Stats {
 
     public void addHec(double addition){
         hec += addition;
+
+        if (hec >= GAME_WON_LIMIT) {
+            gameWon();
+        }
     }
 
     public double getHec(){
