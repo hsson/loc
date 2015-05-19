@@ -30,6 +30,9 @@ public class GameModel implements IGameWonListener {
     public static final Gender PLAYER_DEFAULT_GENDER = Gender.MALE;
     public static final long STARTTIME = new Date().getTime();
 
+    private static final String[] GAME_WON_TEXT = {"Du vann spelet... Hurra..."};
+    private static final Dialog GAME_WON_DIALOG = new Dialog(GAME_WON_TEXT, false);
+
     private static Player player = new Player(STARTING_POS,
             Direction.NORTH,
             PLAYER_DEFAULT_NAME,
@@ -49,6 +52,7 @@ public class GameModel implements IGameWonListener {
     public GameModel() {
         this.gameMap = new GameMap();
         this.stats = new Stats();
+        this.stats.addGameWonListener(this);
         this.statsWindow = new StatsWindow(stats);
 
         gameMenu = new GameMenu();
@@ -259,6 +263,8 @@ public class GameModel implements IGameWonListener {
 
     @Override
     public void gameWon() {
-        // TODO: Game won
+        setActiveSpeakerName("SPELET");
+        setActiveDialog(GAME_WON_DIALOG);
+        setIsDialogActive(true);
     }
 }
