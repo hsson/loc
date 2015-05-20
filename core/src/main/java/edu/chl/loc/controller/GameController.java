@@ -25,7 +25,7 @@ public class GameController implements InputProcessor {
     private final GameModel model;
     private Player player;
     private GameMap gameMap; //todo make gamemap static inside gamemodel?
-    private static final String[] NOTHING_TO_INTERACT_WITH_STRING = {"Sorry but there is nothing here to interact with", "Or you are just stupid"};
+    private static final String[] NOTHING_TO_INTERACT_WITH_STRING = {"Är du go i huvvet eller?", "Här finns det inget du kan prata med"};
     private static final Dialog NOTHING_TO_INTERACT_WITH_DIALOG = new Dialog(NOTHING_TO_INTERACT_WITH_STRING, false);
 
     /**
