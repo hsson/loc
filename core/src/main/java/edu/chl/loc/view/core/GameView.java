@@ -144,7 +144,7 @@ public class GameView implements Screen{
         gameMapView.render(deltaTime, GameView.batch);
         playerView.render(deltaTime, GameView.batch);
 
-        font.draw(batch, model.getHec() + " hec", viewportOrigo.x + 16, viewportOrigo.y - 16);
+        font.draw(batch, model.getHec() + " HP", viewportOrigo.x + 16, viewportOrigo.y - 16);
         GameView.batch.end();
 
         TiledMapTileLayer rooflayer = (TiledMapTileLayer) tiledMap.getLayers().get("buildingRoof");
