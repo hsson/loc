@@ -63,8 +63,8 @@ public class DialogView implements IView {
     public void renderYesNoText(SpriteBatch spriteBatch){
         spriteBatch.begin();
         font.setColor(Color.BLUE);
-        font.draw(spriteBatch, "YES", yesNoRect.getX() + yesNoRect.getWidth() / 2, yesNoRect.getY() + yesNoRect.getHeight() * 0.6f);
-        font.draw(spriteBatch, "NO", yesNoRect.getX() + yesNoRect.getWidth() / 2, yesNoRect.getY() + yesNoRect.getHeight() * 0.3f);
+        font.draw(spriteBatch, "JA", yesNoRect.getX() + yesNoRect.getWidth() / 2, yesNoRect.getY() + yesNoRect.getHeight() * 0.6f);
+        font.draw(spriteBatch, "NEJ", yesNoRect.getX() + yesNoRect.getWidth() / 2, yesNoRect.getY() + yesNoRect.getHeight() * 0.3f);
         spriteBatch.end();
     }
 
