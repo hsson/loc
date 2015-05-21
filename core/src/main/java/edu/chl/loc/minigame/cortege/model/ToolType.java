@@ -1,4 +1,4 @@
-package edu.chl.loc.minigame.cortege.utilities;
+package edu.chl.loc.minigame.cortege.model;
 
 /**
  * Created by maxim on 15-05-14.

@@ -11,16 +11,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import edu.chl.loc.controller.GameController;
 import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.minigame.IMinigameHandlerListener;
 import edu.chl.loc.minigame.MinigameHandler;
-import edu.chl.loc.models.characters.npc.Dialog;
-import edu.chl.loc.models.characters.npc.InvalidIdException;
-import edu.chl.loc.models.characters.npc.NPCFactory;
-import edu.chl.loc.models.characters.utilities.Direction;
-import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.items.ItemScore;
 import edu.chl.loc.models.map.ILayer;
@@ -28,11 +22,8 @@ import edu.chl.loc.models.map.ItemTile;
 import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.models.map.Tile;
 import edu.chl.loc.models.utilities.Position2D;
-import edu.chl.loc.utilities.FileUtilities;
+import edu.chl.loc.utilities.SetupUtilities;
 import edu.chl.loc.view.core.GameView;
-
-import java.io.FileNotFoundException;
-import java.util.List;
 
 /**
  * @author Alexander Håkansson
@@ -50,7 +41,7 @@ public class LocMain extends Game implements IMinigameHandlerListener {
 	public void create () {
         model = new GameModel();
         setupGameMap();
-        createNPCsFromFile();
+        createNPCs();
         controller = new GameController(model);
         view = new GameView(model);
         MinigameHandler handler = MinigameHandler.getInstance();
@@ -137,44 +128,8 @@ public class LocMain extends Game implements IMinigameHandlerListener {
      * Creates all the NPCs from the textfile NPCs.loc and adds each
      * of the to the gamemap
      */
-    private void createNPCsFromFile(){
-        Position2D position;
-        List<List<String>> NPCList = null;
-        try {
-            NPCList = FileUtilities.readFile("NPCs.loc");
-        } catch (FileNotFoundException e) {
-            System.err.println("Could not start game, non existent file");
-            System.exit(1);
-
-        }
-        for(List<String> NPCProperty: NPCList){
-			int id = Integer.parseInt(NPCProperty.get(0));
-            NPCFactory.setId(id);
-			try{
-				Dialog dialog = new Dialog(id, "Dialogs.loc");
-				NPCFactory.setDialog(dialog);
-			}catch(InvalidIdException e){
-				//NPCFactory automatically generates a random dialog if none is specified in the file
-			}catch(FileNotFoundException ex){
-                //NPCFactory automatically generates a random dialog if none is specified in the file
-            }
-            NPCFactory.setName(NPCProperty.get(1));
-            NPCFactory.setGender(Gender.valueOf(NPCProperty.get(2)));
-            position = new Position2D(Integer.parseInt(NPCProperty.get(3)),
-                                      Integer.parseInt(NPCProperty.get(4)));
-            if(id>=2000 && id<=2999){
-                try{
-                    NPCFactory.setMinigame(FileUtilities.idToMinigame(id));
-                }catch(IllegalArgumentException e){
-                    //If no minigame matches the id no minigame will be set
-                }
-            }
-            NPCFactory.setDirection(Direction.valueOf(NPCProperty.get(5)));
-            //TODO: create Inventory with items that are specified
-            //TODO: check the position of the NPC before creating it
-            //TODO: call this method somewhere before the game is rendered
-            model.getGameMap().addNPC(NPCFactory.build(position));
-        }
+    private void createNPCs(){
+        model.getGameMap().addNPC(SetupUtilities.createNPCsFromFile());
     }
 
     @Override

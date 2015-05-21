@@ -6,12 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.core.Stats;
 import edu.chl.loc.models.core.StatsWindow;
-import edu.chl.loc.view.core.GameView;
-import edu.chl.loc.view.core.IView;
 import edu.chl.loc.view.utilities.RenderUtilities;
 
 /**
@@ -24,6 +21,11 @@ public class StatsView implements IView{
     private StatsWindow statsWindow;
     private ShapeRenderer shapeRenderer;
     private BitmapFont font;
+
+    private static final int WINDOW_MARGIN = 10;
+    private static final float WINDOW_WIDTH = 0.4f;
+    private static final float WINDOW_HEIGHT = 0.7f;
+
 
     public StatsView(StatsWindow statsWindow){
         this.statsWindow = statsWindow;
@@ -38,7 +40,7 @@ public class StatsView implements IView{
         Matrix4 oldProjMatrix = batch.getProjectionMatrix();
         batch.setProjectionMatrix(shapeRenderer.getProjectionMatrix());
         Viewport viewport = GameView.getViewport();
-        Rectangle frame = new Rectangle(10, viewport.getWorldHeight() - 10, viewport.getWorldWidth() * 0.4f, -viewport.getWorldHeight() * 0.7f);
+        Rectangle frame = new Rectangle(WINDOW_MARGIN, viewport.getWorldHeight() - WINDOW_MARGIN, viewport.getWorldWidth() * WINDOW_WIDTH, -viewport.getWorldHeight() * WINDOW_HEIGHT);
         String[] activeLabels = new String[5];
         String[] activeValues = new String[5];
 
