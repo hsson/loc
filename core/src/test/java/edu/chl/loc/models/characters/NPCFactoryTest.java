@@ -60,11 +60,6 @@ public class NPCFactoryTest {
                 return null;
             }
 
-            @Override
-            public int hashCode() {
-                return super.hashCode();
-            }
-
         });
         AbstractNPC secondNPC = NPCFactory.build(new Position2D(4,4));
         Assert.assertEquals("The created NPC should be a MinigameNPC", secondNPC.getClass(), MinigameNPC.class);
@@ -111,11 +106,6 @@ public class NPCFactoryTest {
                 public String getName() {
                     return null;
                 }
-
-                @Override
-                public int hashCode() {
-                    return 9;
-                }
             });
         }catch(CannotSetThisValueException ex){
             NPCFactory.reset();
@@ -156,11 +146,6 @@ public class NPCFactoryTest {
             @Override
             public String getName() {
                 return null;
-            }
-
-            @Override
-            public int hashCode() {
-                return super.hashCode();
             }
         });
         try {
