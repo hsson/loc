@@ -35,8 +35,8 @@ public class Tool extends Rectangle {
             return false;
         }
         Tool temp = (Tool)o;
-        return temp.getType() == this.getType() && temp.getX() == this.getX() &&
-                temp.getY() == this.getY();
+        return temp.getType() == this.getType() && Math.abs(temp.getX()-this.getX()) < 0.0000001 &&
+                Math.abs(temp.getY() - this.getY()) < 0.0000001;
     }
 
     @Override
