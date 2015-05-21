@@ -1,7 +1,5 @@
 package edu.chl.loc.minigame.cortege.model;
 
-import edu.chl.loc.minigame.cortege.utilities.ToolType;
-
 import java.awt.*;
 
 /**
