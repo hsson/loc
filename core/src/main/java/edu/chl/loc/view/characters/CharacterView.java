@@ -21,8 +21,6 @@ import java.util.Map;
 public class CharacterView implements IView {
     private AbstractCharacter absCharacter;
     private Texture charTexture;
-    private SpriteBatch spriteBatch;
-
     private static final int CELL_W = 32;
     private static final int CELL_H = 64;
 

@@ -50,8 +50,6 @@ public class GameView implements Screen{
     private GameMenuView gameMenuView;
     private StatsView statsView;
 
-    private Dialog lastDialog;
-
     private static OrthographicCamera camera = new OrthographicCamera();
     private static Viewport viewport = new FitViewport(RES_X, RES_Y, camera);
 
