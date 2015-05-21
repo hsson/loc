@@ -11,7 +11,7 @@ import java.util.Set;
  * @version 1.0
  * revised by Maxim Goretskyy
  */
-public class Inventory implements Cloneable{
+public class Inventory{
     private Map<AbstractItem, Integer> inventory;
 
     /**
