@@ -18,7 +18,6 @@ import edu.chl.loc.view.core.IView;
  */
 public class ItemView implements IView {
     private ItemTile itemTile;
-    private AbstractItem absItem;
     private Position2D position;
     private Texture itemTexture;
 
@@ -27,7 +26,6 @@ public class ItemView implements IView {
      */
     public ItemView(ItemTile itemTile, Texture itemTexture){
         this.itemTile = itemTile;
-        this.absItem = itemTile.getItem();
         this.position = itemTile.getPosition();
         this.itemTexture = itemTexture;
     }
