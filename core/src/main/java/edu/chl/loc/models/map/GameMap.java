@@ -30,6 +30,12 @@ public class GameMap extends AbstractMap {
         }
     }
 
+    public void addNPC(List<AbstractNPC> npcList){
+        for(AbstractNPC npc: npcList){
+            addNPC(npc);
+        }
+    }
+
     /**
      * Get a list of all the NPCs on the map.
      *
