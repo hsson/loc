@@ -14,17 +14,17 @@ import java.util.Random;
 public class CortegeModel{
 
     private int score;
-    private final int plusPoint = 5;
-    private final int minusPoint = 7;
+    private final static int plusPoint = 5;
+    private final static int minusPoint = 7;
     private PropertyChangeSupport pcs;
 
-    private final int maximalX = 1024-64;
-    private final int minimalX = 0;
-    private final int spawnY = 576;
-    private final int toolWidth = 64;
-    private final int toolHeight = 64;
+    private final static int maximalX = 1024-64;
+    private final static int minimalX = 0;
+    private final static int spawnY = 576;
+    private final static int toolWidth = 64;
+    private final static int toolHeight = 64;
     private final long MAX_TIME_PER_ROUND; //1 minute in milliseconds
-    private final Random randomGenerator = new Random();
+    private final static Random randomGenerator = new Random();
 
     private List<Tool> toolsList = new ArrayList<Tool>();
     private Rectangle toolBox = new Rectangle();
@@ -60,15 +60,15 @@ public class CortegeModel{
     public void updatePosition(float delta) {
         if (isPlaying && isMoving) {
             if (movingRight) {
-                toolBox.x += velocity;
+                toolBox.translate((int)(toolBox.getX() + velocity),(int)(toolBox.getY()));
             } else {
-                toolBox.x -= velocity;
+                toolBox.translate((int)(toolBox.getX() - velocity),(int)(toolBox.getY()));
             }
 
-            if (toolBox.x < minimalX) {
-                toolBox.x = minimalX;
-            } else if (toolBox.x > maximalX) {
-                toolBox.x = maximalX;
+            if (toolBox.getX() < minimalX) {
+                toolBox.translate(minimalX,(int)(toolBox.getY()));
+            } else if (toolBox.getX() > maximalX) {
+                toolBox.translate(maximalX,(int)(toolBox.getY()));
             }
         }
     }
@@ -81,10 +81,9 @@ public class CortegeModel{
         }else{
             tempTool = new Tool(ToolType.POOP);
         }
-        tempTool.x = randomGenerator.nextInt(maximalX+1);
-        tempTool.y = spawnY; //Spawn from top
-        tempTool.width = toolWidth;
-        tempTool.height = toolHeight;
+        tempTool.translate(randomGenerator.nextInt(maximalX + 1), spawnY);
+        tempTool.grow(toolHeight, toolWidth);
+
         toolsList.add(tempTool);
 
         //time since last dropped item
@@ -114,8 +113,9 @@ public class CortegeModel{
             iterTool = toolsList.iterator();
             while (iterTool.hasNext()) {
                 Tool tool = iterTool.next();
-                tool.y -= 200 * deltatime;
-                if (tool.y + 64 < 0) {
+                tool.translate((int)(tool.getX()),(int)(tool.getY()-200 * deltatime));
+
+                if (tool.getY() + 64 < 0) {
                     iterTool.remove();
                 }
                 //if not poop, and you pick it, then you get points
