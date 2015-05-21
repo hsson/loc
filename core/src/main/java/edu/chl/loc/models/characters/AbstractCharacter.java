@@ -17,7 +17,7 @@ public abstract class AbstractCharacter {
     private Direction currentDirection;
     private Position2D currentPosition;
     private String characterName;
-    private final String DEFAULT_NAME = "Emil";
+    private final static String DEFAULT_NAME = "Emil";
     private Gender gender = Gender.MALE;
     private boolean isMoving = false;
 
@@ -129,6 +129,10 @@ public abstract class AbstractCharacter {
         }
     }
 
+    @Override
+    public int hashCode(){
+        return 491*499*this.getPosition().hashCode();
+    }
     /**
      *
      * @return Gender of the character
