@@ -60,15 +60,16 @@ public class CortegeModel{
     public void updatePosition(float delta) {
         if (isPlaying && isMoving) {
             if (movingRight) {
-                toolBox.translate((int)(toolBox.getX() + velocity),(int)(toolBox.getY()));
+                toolBox.x += velocity;
             } else {
-                toolBox.translate((int)(toolBox.getX() - velocity),(int)(toolBox.getY()));
+                toolBox.x -= velocity;
+
             }
 
             if (toolBox.getX() < minimalX) {
-                toolBox.translate(minimalX,(int)(toolBox.getY()));
+                toolBox.x = minimalX;
             } else if (toolBox.getX() > maximalX) {
-                toolBox.translate(maximalX,(int)(toolBox.getY()));
+                toolBox.x = maximalX;
             }
         }
     }
@@ -81,9 +82,10 @@ public class CortegeModel{
         }else{
             tempTool = new Tool(ToolType.POOP);
         }
-        tempTool.translate(randomGenerator.nextInt(maximalX + 1), spawnY);
-        tempTool.grow(toolHeight, toolWidth);
-
+        tempTool.x = randomGenerator.nextInt(maximalX+1);
+        tempTool.y = spawnY; //Spawn from top
+        tempTool.width = toolWidth;
+        tempTool.height = toolHeight;
         toolsList.add(tempTool);
 
         //time since last dropped item
@@ -113,8 +115,7 @@ public class CortegeModel{
             iterTool = toolsList.iterator();
             while (iterTool.hasNext()) {
                 Tool tool = iterTool.next();
-                tool.translate((int)(tool.getX()),(int)(tool.getY()-200 * deltatime));
-
+                tool.y -= 200 * deltatime;
                 if (tool.getY() + 64 < 0) {
                     iterTool.remove();
                 }
