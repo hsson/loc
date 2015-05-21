@@ -20,13 +20,14 @@ public class CortegeController implements InputProcessor{
             case Input.Keys.LEFT:
                 model.setIsMoving(true);
                 model.moveLeft();
-                break;
+                return true;
             case Input.Keys.RIGHT:
                 model.setIsMoving(true);
                 model.moveRight();
-                break;
+                return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     @Override
