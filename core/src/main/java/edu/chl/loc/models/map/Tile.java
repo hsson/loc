@@ -60,4 +60,9 @@ public class Tile extends AbstractTile{
         Tile other = (Tile) o;
         return this.getPosition().equals(other.getPosition());
     }
+
+    @Override
+    public int hashCode(){
+        return 104761 + getPosition().hashCode() * 13;
+    }
 }

@@ -95,6 +95,11 @@ public class Position2D {
         return this.xCoord == other.xCoord && this.yCoord == other.yCoord;
     }
 
+    @Override
+    public int hashCode(){
+        return 104759 + xCoord * 17 + yCoord *47;
+    }
+
     public String toString(){
         return "Position of X-Coordinate is" + getX() + ", and Position of Y-Coordinate is " + getY();
     }
