@@ -135,6 +135,6 @@ public class Dialog {
      * @return The array with strings. The last string in the dialog is last in the array
      */
     public String[] getDialogStrings(){
-        return dialogStrings;
+        return dialogStrings.clone();
     }
 }
