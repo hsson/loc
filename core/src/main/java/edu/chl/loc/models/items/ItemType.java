@@ -1,7 +1,7 @@
 package edu.chl.loc.models.items;
 
 /**
- * @author Criticalstone
+ * @author Kevin Hoogendijk
  * @version 1.0.0
  * @since 2015-04-07
  */
