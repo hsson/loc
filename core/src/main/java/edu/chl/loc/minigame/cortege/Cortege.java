@@ -21,8 +21,6 @@ import java.util.List;
  */
 public class Cortege implements IMinigame, PropertyChangeListener {
     private CortegeModel model;
-    private CortegeController controller;
-    private CortegeView view;
     List<IMinigameListener> listenerList;
 
     public Cortege(){
