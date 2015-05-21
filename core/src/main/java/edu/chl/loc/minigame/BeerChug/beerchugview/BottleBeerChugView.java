@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import edu.chl.loc.minigame.BeerChug.beerchugmodel.BottleBeerChug;
 import edu.chl.loc.minigame.BeerChug.utilities.Converter;
 import edu.chl.loc.minigame.BeerChug.utilities.ShakeDirection;

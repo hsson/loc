@@ -1,6 +1,5 @@
 package edu.chl.loc.models.map;
 
-import edu.chl.loc.models.characters.npc.ItemNPC;
 import edu.chl.loc.models.utilities.Position2D;
 
 import java.util.*;
