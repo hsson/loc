@@ -39,15 +39,14 @@ public class GameController implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {// assuming smooth movement will be here?
         if(model.getGameMenu().isMenuOpen()) {
-            handleMenu(keycode);
+            return handleMenu(keycode);
         } else if (model.isDialogActive()) {
-            handleDialog(keycode);
+            return handleDialog(keycode);
         } else if (model.isStatsActive()) {
-            handleStats(keycode);
+            return handleStats(keycode);
         } else {
-            handleCharacter(keycode);
+            return handleCharacter(keycode);
         }
-        return true;
     }
 
 
@@ -86,7 +85,7 @@ public class GameController implements InputProcessor {
         return false;
     }
 
-    public void handleDialog(int keycode) {
+    public boolean handleDialog(int keycode) {
         Dialog dialog = model.getActiveDialog();
         if(dialog.isLastString()){
             switch (keycode) {
@@ -102,59 +101,67 @@ public class GameController implements InputProcessor {
                             //Do nothing if no npc is present
                         }
                     }
-                    break;
+                    return true;
                 case Input.Keys.UP:
                     dialog.setOptionSelected(true);
-                    break;
+                    return true;
                 case Input.Keys.DOWN:
                     dialog.setOptionSelected(false);
-                    break;
+                    return true;
+                default:
+                    return false;
             }
         } else {
             switch (keycode) {
                 case Input.Keys.SPACE:
                 case Input.Keys.ENTER:
                     dialog.setNextString();
-                    break;
+                    return true;
+                default:
+                    return false;
             }
         }
     }
 
-    private void handleMenu(int keycode) {
+    private boolean handleMenu(int keycode) {
         GameMenu menu = model.getGameMenu();
         switch (keycode) {
             case Input.Keys.UP:
                 menu.decSelection();
-                break;
+                return true;
             case Input.Keys.DOWN:
                 menu.incSelection();
-                break;
+                return true;
             case Input.Keys.ENTER:
                 menu.getSelectedOption().choose();
-                break;
+                return true;
+            default:
+                return false;
         }
     }
 
-    public void handleStats(int keycode){
+    public boolean handleStats(int keycode){
         StatsWindow statsWindow = model.getStatsWindow();
         switch (keycode){
             case Input.Keys.ESCAPE:
             case Input.Keys.ENTER:
             case Input.Keys.SPACE:
                 model.setIsStatsActive(false);
-                break;
+                return true;
             case Input.Keys.W:
             case Input.Keys.UP:
                 statsWindow.scrollUp();
-                break;
+                return true;
             case Input.Keys.S:
             case Input.Keys.DOWN:
                 statsWindow.scrollDown();
-                break;
+                return true;
+            default:
+                return false;
         }
     }
 
-    public void handleCharacter(int keycode){
+    public boolean handleCharacter(int keycode){
         GameMenu menu = model.getGameMenu();
         chooseDirection(keycode);
         switch(keycode) {
@@ -167,7 +174,7 @@ public class GameController implements InputProcessor {
             case Input.Keys.DOWN:
             case Input.Keys.UP:
                 model.moveCharacter(player.getNextPosition());//sends information about next position to model
-                break;
+                return true;
             case Input.Keys.SPACE:
             case Input.Keys.ENTER:
                 try{
@@ -181,10 +188,12 @@ public class GameController implements InputProcessor {
                     model.setActiveSpeakerName("");
                     model.setIsDialogActive(true);
                 }
-                break;
+                return true;
             case Input.Keys.ESCAPE:
                 menu.toggleOpen();
-                break;
+                return true;
+            default:
+                return false;
         }
     }
 
