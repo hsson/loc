@@ -9,9 +9,7 @@ import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.core.StatsWindow;
 import edu.chl.loc.models.map.GameMap;
-import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.models.menu.GameMenu;
-import edu.chl.loc.models.utilities.Position2D;
 
 /**
  * @author Alexander Håkansson

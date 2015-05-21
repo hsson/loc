@@ -1,22 +1,16 @@
 package edu.chl.loc.view.characters;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.characters.npc.Dialog;
-import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.view.core.GameView;
 import edu.chl.loc.view.core.IView;
 import edu.chl.loc.view.utilities.RenderUtilities;
-
-import java.awt.geom.Rectangle2D;
 
 /**
  * @author Kevin Hoogendijk
