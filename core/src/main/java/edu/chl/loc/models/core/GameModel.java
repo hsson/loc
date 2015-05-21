@@ -248,9 +248,6 @@ public class GameModel implements IGameWonListener {
                     item.use(this);
                     break;
                 case COLLECT:
-                    // Add item to player's inventory
-                    player.getInventory().addItem(item);
-                    break;
                 case QUEST:
                     // Add item to player's inventory
                     player.getInventory().addItem(item);
