@@ -151,9 +151,9 @@ public class CapsGameView implements Screen {
      */
     private void drawCrossHair(){
         //Calculate x value
-        float xValue = (camera.viewportWidth * model.getAimPosition()) - crossHair.getWidth()/2;
+        float xValue = (camera.viewportWidth * model.getAimPosition()) - (float)crossHair.getWidth()/2.0f;
         //Middle of crosshair should be on top of the beercup
-        float yValue = getThrowHeight() - crossHair.getHeight()/2;
+        float yValue = getThrowHeight() - (float)crossHair.getHeight()/2.0f;
 
         batch.draw(crossHair, xValue, yValue);
     }
@@ -196,7 +196,7 @@ public class CapsGameView implements Screen {
         yValue *= SCREEN_HEIGHT;
         yValue += getThrowHeight();
 
-        batch.draw(cap, (float)xValue-cap.getWidth()/2, (float)yValue-cap.getHeight()/2);
+        batch.draw(cap, (float)xValue-(float)cap.getWidth()/2.0f, (float)yValue-(float)cap.getHeight()/2.0f);
 
         if(timePassed >= CAP_FLIGHT_TIME){
             drawHitOrMiss();
