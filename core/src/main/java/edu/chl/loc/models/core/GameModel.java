@@ -132,7 +132,7 @@ public class GameModel implements IGameWonListener {
 
     public void setIsDialogActive(boolean isDialogActive){
         if(isDialogActive){
-            Integer timesSpoken = (Integer) stats.getPlayerStat("Times spoken");
+            Integer timesSpoken = (Integer) stats.getPlayerStat("Antal samtal");
             if (timesSpoken == null) {
                 timesSpoken = 1;
             } else {
@@ -193,7 +193,7 @@ public class GameModel implements IGameWonListener {
 
     private void incStepsTaken() {
 
-        Integer stepsTaken = (Integer) stats.getPlayerStat("Steps taken");
+        Integer stepsTaken = (Integer) stats.getPlayerStat("Antal steg");
         if (stepsTaken == null) {
             stepsTaken = 1;
         } else {
