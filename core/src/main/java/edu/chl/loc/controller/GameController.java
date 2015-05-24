@@ -198,7 +198,7 @@ public class GameController implements InputProcessor {
     }
 
     private void addTimesTurned() {
-        Double timesTurned = (Double) model.getStats().getPlayerStat("Times turned");
+        Double timesTurned = (Double) model.getStats().getPlayerStat("Antal svängningar");
         if (timesTurned == null) {
             timesTurned = 1.0;
         } else {
