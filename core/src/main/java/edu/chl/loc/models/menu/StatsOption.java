@@ -24,6 +24,6 @@ public class StatsOption implements IMenuOption {
 
     @Override
     public String getName() {
-        return "Statistics";
+        return "Statistik";
     }
 }

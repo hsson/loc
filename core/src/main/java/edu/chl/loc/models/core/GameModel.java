@@ -138,7 +138,7 @@ public class GameModel implements IGameWonListener {
             } else {
                 timesSpoken++;
             }
-            stats.addPlayerStat("Times spoken", timesSpoken);
+            stats.addPlayerStat("Antal samtal", timesSpoken);
         }
         this.isDialogActive = isDialogActive;
     }
@@ -148,7 +148,7 @@ public class GameModel implements IGameWonListener {
     }
 
     public void setIsStatsActive(boolean isStatsActive) {
-        stats.addPlayerStat("Seconds played", (int) ((new Date().getTime() - STARTTIME) / 1000));
+        stats.addPlayerStat("Sekunder spelat", (int) ((new Date().getTime() - STARTTIME) / 1000));
         this.isStatsActive = isStatsActive;
     }
 
@@ -200,7 +200,7 @@ public class GameModel implements IGameWonListener {
             stepsTaken++;
         }
 
-        stats.addPlayerStat("Steps taken", stepsTaken);
+        stats.addPlayerStat("Antal steg", stepsTaken);
     }
 
     public void pickupItem(ILayer itemLayer, Position2D nextPlayerPos) {
@@ -211,7 +211,7 @@ public class GameModel implements IGameWonListener {
             if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
                 ItemTile itemTile = (ItemTile) tempTile; //safe to convert because only itemTile have items
                 doItemAction(itemTile);
-                stats.addPlayerStat("Items picked up", 1.0);
+                stats.addPlayerStat("Plockade föremål", 1.0);
             }
         }
     }

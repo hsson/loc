@@ -204,7 +204,7 @@ public class GameController implements InputProcessor {
         } else {
             timesTurned++;
         }
-        model.addPlayerStat("Times turned", timesTurned);
+        model.addPlayerStat("Antal svängningar", timesTurned);
     }
 
     public void chooseDirection(int keycode){
