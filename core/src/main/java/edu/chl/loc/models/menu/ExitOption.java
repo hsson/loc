@@ -14,6 +14,6 @@ public class ExitOption implements IMenuOption {
 
     @Override
     public String getName() {
-        return "Exit";
+        return "Avsluta";
     }
 }
