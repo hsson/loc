@@ -37,6 +37,7 @@ public class CortegeModel{
     private boolean isMoving = false;
     private float velocity = 16f;
     private boolean movingRight = true;
+    private long currentTime;
 
     private Iterator<Tool> iterTool;
 
@@ -47,6 +48,7 @@ public class CortegeModel{
         toolBox.y = 20;
         score = 0;
         MAX_TIME_PER_ROUND = System.currentTimeMillis() + 60000; //1 minute in milliseconds
+        currentTime = System.currentTimeMillis();
         spawnItem();
         isPlaying= true;
 
@@ -77,7 +79,7 @@ public class CortegeModel{
     private void spawnItem(){
 
         Tool tempTool;
-        if(Math.random() < 0.8){ //80% chance to spawn a tool
+        if(Math.random() < 0.7){ //70% chance to spawn a tool
             tempTool = new Tool(toolTypes[randomGenerator.nextInt(toolTypes.length)]);
         }else{
             tempTool = new Tool(ToolType.POOP);
@@ -94,9 +96,10 @@ public class CortegeModel{
 
 
     public void updatingGame(float deltatime){
-        if(System.currentTimeMillis()> MAX_TIME_PER_ROUND){ //after 1 minute pause game
+        currentTime = System.currentTimeMillis();//updating current time
+        if(currentTime> MAX_TIME_PER_ROUND){ //after 1 minute pause game
             stop();
-            if(System.currentTimeMillis() > MAX_TIME_PER_ROUND + 2000) { //show score for 2 seconds
+            if(currentTime > MAX_TIME_PER_ROUND + 3000) { //show score for 2 seconds
                 close();
             }
 
@@ -186,7 +189,13 @@ public class CortegeModel{
         }
         return 'U';
     }
+    public double getTimeLeft(){
+        if(isPlaying()){ //update time if you are playing
+            return (MAX_TIME_PER_ROUND - currentTime)/1000;
+        }
+        return 0; //if you arent playing the timer is at 0
 
+    }
     /**
      * Adds a listener to this Cortege, will be notified when the game
      * is over

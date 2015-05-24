@@ -69,6 +69,7 @@ public class CortegeView implements Screen {
         batch.draw(backgroundTexture, 0, 0); //draw background picture in fullscreen
 
         font.draw(batch, "Poäng: " + game.getScore(), 0, 560); //show score in corner
+        font.draw(batch, "Tid Kvar: " + game.getTimeLeft(), 0, 530);
 
 
         batch.draw(toolBoxImage, game.getToolBox().x, game.getToolBox().y); //draw toolbox
