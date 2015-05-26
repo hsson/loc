@@ -1,11 +1,21 @@
 package edu.chl.loc.utilities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.npc.InvalidIdException;
 import edu.chl.loc.models.characters.npc.NPCFactory;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
+import edu.chl.loc.models.items.ItemScore;
+import edu.chl.loc.models.map.*;
+import edu.chl.loc.models.menu.GameMenu;
 import edu.chl.loc.models.utilities.Position2D;
 
 import java.io.FileNotFoundException;
@@ -64,6 +74,51 @@ public class SetupUtilities {
             builtNpcs.add(NPCFactory.build(position));
         }
         return builtNpcs;
+    }
+
+    public static GameMap setupGameMap(String pathToTmxFile) {
+        TiledMap johanneberg = new TmxMapLoader().load(Gdx.files.internal(pathToTmxFile).path());
+        GameMap map = new GameMap();
+
+        for (MapLayer mapLayer : johanneberg.getLayers()) {
+            TiledMapTileLayer tiledLayer = (TiledMapTileLayer) mapLayer;
+            ILayer layer = new Layer(tiledLayer.getName());
+
+            map.addLayer(layer);
+
+            for (int y = 0; y < tiledLayer.getHeight(); y++) {
+                for (int x = 0; x < tiledLayer.getWidth(); x++) {
+                    boolean collision = false;
+                    TiledMapTile mapTile;
+                    if (tiledLayer.getCell(x, y) != null && (mapTile = tiledLayer.getCell(x,y).getTile()) != null) {
+
+                        if (mapLayer.getName().equals("items")) {
+                            setupItem(layer, mapTile, new Position2D(x, y), map);
+                            continue;
+                        } else if (mapTile.getProperties().containsKey("collision")) {
+                            String property = (String) mapTile.getProperties().get("collision");
+                            collision = property.equals("true");
+                        }
+                        map.addTile(layer, new Tile(new Position2D(x, y), collision));
+                    }
+                }
+            }
+
+        }
+
+        return map;
+    }
+
+    public static void setupItem(ILayer layer, TiledMapTile tile, Position2D position, GameMap map) {
+        MapProperties properties = tile.getProperties();
+
+        if (properties != null && properties.containsKey("type")) {
+            if (properties.get("type").equals("beverage")) {
+                String name = (String) properties.get("name");
+                Integer score = Integer.parseInt((String) properties.get("score"));
+                map.addTile(layer, new ItemTile(new ItemScore(name, score), position));
+            }
+        }
     }
 
 
