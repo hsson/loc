@@ -25,6 +25,8 @@ import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.utilities.SetupUtilities;
 import edu.chl.loc.view.core.GameView;
 
+import java.util.Set;
+
 /**
  * @author Alexander Håkansson
  * Revised by Alexander Karlsson
@@ -40,7 +42,7 @@ public class LocMain extends Game implements IMinigameHandlerListener {
 	@Override
 	public void create () {
         model = new GameModel();
-        setupGameMap();
+        model.setGameMap(SetupUtilities.setupGameMap("maps/johanneberg.tmx"));
         createNPCs();
         controller = new GameController(model);
         view = new GameView(model);
@@ -51,47 +53,6 @@ public class LocMain extends Game implements IMinigameHandlerListener {
 
 
         setScreen(view);
-    }
-
-    private void setupGameMap() {
-        TiledMap johanneberg = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
-
-        for (MapLayer mapLayer : johanneberg.getLayers()) {
-            TiledMapTileLayer tiledLayer = (TiledMapTileLayer) mapLayer;
-            ILayer layer = new Layer(tiledLayer.getName());
-
-            model.getGameMap().addLayer(layer);
-
-            for (int y = 0; y < tiledLayer.getHeight(); y++) {
-                for (int x = 0; x < tiledLayer.getWidth(); x++) {
-                    boolean collision = false;
-                    TiledMapTile mapTile;
-                    if (tiledLayer.getCell(x, y) != null && (mapTile = tiledLayer.getCell(x,y).getTile()) != null) {
-
-                        if (mapLayer.getName().equals("items")) {
-                            setupItem(layer, mapTile, new Position2D(x, y));
-                            continue;
-                        } else if (mapTile.getProperties().containsKey("collision")) {
-                            String property = (String) mapTile.getProperties().get("collision");
-                            collision = property.equals("true");
-                        }
-                        model.getGameMap().addTile(layer, new Tile(new Position2D(x, y), collision));
-                    }
-                }
-            }
-        }
-    }
-
-    private void setupItem(ILayer layer, TiledMapTile tile, Position2D position) {
-        MapProperties properties = tile.getProperties();
-
-        if (properties != null && properties.containsKey("type")) {
-            if (properties.get("type").equals("beverage")) {
-                String name = (String) properties.get("name");
-                Integer score = Integer.parseInt((String) properties.get("score"));
-                model.getGameMap().addTile(layer, new ItemTile(new ItemScore(name, score), position));
-            }
-        }
     }
 
 	@Override

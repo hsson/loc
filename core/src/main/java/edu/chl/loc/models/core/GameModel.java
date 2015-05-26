@@ -86,6 +86,10 @@ public class GameModel implements IGameWonListener {
         return this.gameMap;
     }
 
+    public void setGameMap(GameMap map){
+        this.gameMap = map;
+    }
+
     public void addPlayerStat(String key, double value){
         stats.addPlayerStat(key, value);
     }
