@@ -14,7 +14,7 @@ import java.util.List;
  * Factory class used for creating NPCs
  * @author Alexander Karlsson
  * @revised by Maxim Goretskyy
- * @version 1.1
+ * @version 1.2
  * Revised by Kevin Hoogendijk
  */
 public class NPCFactory {
@@ -22,7 +22,8 @@ public class NPCFactory {
     private static String name = null;
     private static Gender gender = null;
     private static Direction direction = null;
-    private static Inventory inventory = null;
+    private static Inventory npcInventory = null;
+    private static Inventory playerInventory = null;
     private static IMinigame minigame = null;
     private static Dialog dialog = null;
     private static List<Integer> setIds = new ArrayList<Integer>();
@@ -66,14 +67,16 @@ public class NPCFactory {
 
     /**
      * Sets the inventory of the NPC being built
-     * @param inventory The inventory of the NPC being built
+     * @param npcInventory The inventory of the NPC being built
+     * @param playerInventory The inventory of the player associated with this NPC
      * @throws CannotSetThisValueException If the current build already has a minigame set a inventory cant be set
      */
-    public static void setInventory(Inventory inventory) throws CannotSetThisValueException{
+    public static void setInventory(Inventory npcInventory, Inventory playerInventory) throws CannotSetThisValueException{
         if(NPCFactory.isMinigameSet()){
             throw new CannotSetThisValueException("Cannot set inventory when minigame is set");
         }else{
-            NPCFactory.inventory = inventory;
+            NPCFactory.npcInventory = npcInventory;
+            NPCFactory.playerInventory = playerInventory;
         }
     }
 
@@ -103,7 +106,7 @@ public class NPCFactory {
      * @return True if an inventory is set, false otherwise
      */
     public static boolean isInventorySet(){
-        return NPCFactory.inventory != null;
+        return NPCFactory.npcInventory != null;
     }
 
     /**
@@ -121,7 +124,8 @@ public class NPCFactory {
         NPCFactory.name = null;
         NPCFactory.gender = null;
         NPCFactory.direction = null;
-        NPCFactory.inventory = null;
+        NPCFactory.npcInventory = null;
+        NPCFactory.playerInventory = null;
         NPCFactory.minigame = null;
         NPCFactory.id = 0;
         NPCFactory.dialog = null;
@@ -137,7 +141,8 @@ public class NPCFactory {
         Gender gender;
         String name;
         Direction direction;
-        Inventory inventory;
+        Inventory npcInventory;
+        Inventory playerInventory;
         IMinigame minigame;
         Dialog dialog;
 
@@ -178,9 +183,10 @@ public class NPCFactory {
         NPCFactory.setIds.add(id);
 
         if(isInventorySet()){
-            inventory = NPCFactory.inventory;
+            npcInventory = NPCFactory.npcInventory;
+            playerInventory = NPCFactory.playerInventory;
             NPCFactory.reset();
-            return new ItemNPC(position,direction,id,name,gender,inventory,dialog);
+            return new ItemNPC(position,direction,id,name,gender,npcInventory,dialog,playerInventory);
         }
 
         if(isMinigameSet()){
