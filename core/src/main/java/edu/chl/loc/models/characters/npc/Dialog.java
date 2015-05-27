@@ -1,6 +1,6 @@
 package edu.chl.loc.models.characters.npc;
 
-import edu.chl.loc.utilities.FileUtilities;
+import edu.chl.loc.models.utilities.FileUtilities;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
