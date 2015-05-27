@@ -58,6 +58,7 @@ public class Stats {
         if (hec >= GAME_WON_LIMIT) {
             gameWon();
         }
+        addPlayerStat("Högskolepoäng", hec);
     }
 
     public double getHec(){
