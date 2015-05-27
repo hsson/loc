@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import edu.chl.loc.models.characters.AbstractCharacter;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.view.core.GameView;
-import edu.chl.loc.view.core.IView;
+import edu.chl.loc.view.IView;
 
 import java.util.HashMap;
 import java.util.Map;

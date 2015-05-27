@@ -2,11 +2,10 @@ package edu.chl.loc.view.items;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import edu.chl.loc.models.items.AbstractItem;
 import edu.chl.loc.models.map.ItemTile;
 import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.view.core.GameView;
-import edu.chl.loc.view.core.IView;
+import edu.chl.loc.view.IView;
 
 /**
  * Created by kevin on 15-05-03.

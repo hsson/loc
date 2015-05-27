@@ -3,8 +3,6 @@ package edu.chl.loc.view.map;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.chl.loc.models.characters.npc.AbstractNPC;
-import edu.chl.loc.models.core.GameModel;
-import edu.chl.loc.models.core.IGameModel;
 import edu.chl.loc.models.items.AbstractItem;
 import edu.chl.loc.models.map.GameMap;
 import edu.chl.loc.models.map.ILayer;
@@ -12,8 +10,7 @@ import edu.chl.loc.models.map.ItemTile;
 import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.view.characters.CharacterView;
 import edu.chl.loc.view.characters.NPCTextureFactory;
-import edu.chl.loc.view.core.GameView;
-import edu.chl.loc.view.core.IView;
+import edu.chl.loc.view.IView;
 import edu.chl.loc.view.items.ItemTextureFactory;
 import edu.chl.loc.view.items.ItemView;
 
