@@ -26,6 +26,7 @@ public interface IGameModel {
     Stats getStats();
     double getHec();
     String getActiveSpeakerName();
+    void addHec(double hec);
 
 
 }
