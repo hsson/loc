@@ -1,4 +1,4 @@
-package edu.chl.loc.view.core;
+package edu.chl.loc.view;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

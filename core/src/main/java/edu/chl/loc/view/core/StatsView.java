@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.core.Stats;
 import edu.chl.loc.models.core.StatsWindow;
+import edu.chl.loc.view.IView;
 import edu.chl.loc.view.utilities.RenderUtilities;
 
 /**
@@ -16,7 +17,7 @@ import edu.chl.loc.view.utilities.RenderUtilities;
  * @version 1.0.1
  * @since 2015-05-13
  */
-public class StatsView implements IView{
+public class StatsView implements IView {
     private Stats stats;
     private StatsWindow statsWindow;
     private ShapeRenderer shapeRenderer;

@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.menu.GameMenu;
 import edu.chl.loc.models.menu.IMenuOption;
 import edu.chl.loc.view.core.GameView;
-import edu.chl.loc.view.core.IView;
+import edu.chl.loc.view.IView;
 import edu.chl.loc.view.utilities.RenderUtilities;
 
 import java.util.List;
