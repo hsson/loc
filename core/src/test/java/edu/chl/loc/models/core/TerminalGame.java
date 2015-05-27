@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class TerminalGame {
 
-    private final GameModel gameModel;
+    private final IGameModel gameModel;
 
     private final int boardSize = 10;
 
@@ -44,7 +44,7 @@ public class TerminalGame {
                 map.addTile(groundLayer, new Tile(new Position2D(x, y), Math.random() < 0.05));
             }
         }
-        Position2D playerPos = GameModel.getPlayer().getPosition();
+        Position2D playerPos = gameModel.getPlayer().getPosition();
         map.getTile(groundLayer, playerPos).setIsCollidable(false);
     }
 
@@ -53,7 +53,7 @@ public class TerminalGame {
             drawGame();
             System.out.println("Move in any direction (w,a,s,d).");
             System.out.print("> ");
-            Player p = GameModel.getPlayer();
+            Player p = gameModel.getPlayer();
             switch (scanner.nextLine().toCharArray()[0]) {
                 case 's':
                     // down is NORTH because of reversed y-axis
@@ -98,7 +98,7 @@ public class TerminalGame {
             for (int x = 0; x < boardSize; x++) {
                 for (ILayer l : map.getLayers()) {
                  ITile t = map.getTile(l, new Position2D(x, y));
-                    if (GameModel.getPlayer().getPosition().equals(new Position2D(x, y))) {
+                    if (gameModel.getPlayer().getPosition().equals(new Position2D(x, y))) {
                         System.out.print("p");
                     } else if (t.isCollidable()) {
                         System.out.print("#");
