@@ -5,28 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import edu.chl.loc.controller.GameController;
 import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.minigame.IMinigameHandlerListener;
 import edu.chl.loc.minigame.MinigameHandler;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.core.IGameModel;
-import edu.chl.loc.models.items.ItemScore;
-import edu.chl.loc.models.map.ILayer;
-import edu.chl.loc.models.map.ItemTile;
-import edu.chl.loc.models.map.Layer;
-import edu.chl.loc.models.map.Tile;
-import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.utilities.SetupUtilities;
 import edu.chl.loc.view.core.GameView;
-
-import java.util.Set;
 
 /**
  * @author Alexander Håkansson

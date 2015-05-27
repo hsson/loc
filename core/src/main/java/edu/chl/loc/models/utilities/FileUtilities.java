@@ -108,13 +108,4 @@ public class FileUtilities {
 
     }
 
-    //Testing to print shizzle
-    public static void printShizzle(List<List<String>> list){
-        for(int i = 0; i<list.size(); i++){
-            for(int j = 0; j<list.get(i).size(); j++){
-                System.out.println("Word is " +list.get(i).get(j));
-            } System.out.println("XXXXXXX");
-        }
-        System.out.println("Size of teh list is " + list.size());
-    }
 }
