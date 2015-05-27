@@ -1,6 +1,7 @@
 package edu.chl.loc.models.menu;
 
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.core.IGameModel;
 
 /**
  * @author Alexander Håkansson
@@ -9,9 +10,9 @@ import edu.chl.loc.models.core.GameModel;
  */
 public class StatsOption implements IMenuOption {
 
-    private final GameModel model;
+    private final IGameModel model;
 
-    public StatsOption(GameModel model) {
+    public StatsOption(IGameModel model) {
         this.model = model;
     }
 

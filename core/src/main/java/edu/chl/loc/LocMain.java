@@ -16,6 +16,7 @@ import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.minigame.IMinigameHandlerListener;
 import edu.chl.loc.minigame.MinigameHandler;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.core.IGameModel;
 import edu.chl.loc.models.items.ItemScore;
 import edu.chl.loc.models.map.ILayer;
 import edu.chl.loc.models.map.ItemTile;
@@ -34,7 +35,7 @@ import java.util.Set;
 public class LocMain extends Game implements IMinigameHandlerListener {
     private float delta;
 
-    private GameModel model;
+    private IGameModel model;
     private GameController controller;
     private GameView view;
 
