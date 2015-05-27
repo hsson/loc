@@ -10,18 +10,16 @@ import edu.chl.loc.models.utilities.Position2D;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**@author Maxim Goretskyy
- * Created by maxim on 15-04-30.
- * Revised by Alexander Karlsson
+/**
+ * @author Maxim Goretskyy
+ * @author Alexander Karlsson
  */
 public class NPCFactoryTest {
 
-
-
-
     @Test
     public void testBuildItemNPC() {
-        NPCFactory.setInventory(new Inventory());
+        NPCFactory.reset();
+        NPCFactory.setInventory(new Inventory(), new Inventory());
         AbstractNPC firstNPC = NPCFactory.build(new Position2D(4,4));
         Assert.assertEquals("The created NPC should be an ItemNPC", firstNPC.getClass(), ItemNPC.class);
 
@@ -29,6 +27,7 @@ public class NPCFactoryTest {
 
     @Test
     public void testBuildMinigameNPC() {
+        NPCFactory.reset();
         NPCFactory.setMinigame(new IMinigame() {
             @Override
             public Screen getView() {
@@ -67,56 +66,51 @@ public class NPCFactoryTest {
     }
     @Test
     public void testBuildStandardNPC() {
+        NPCFactory.reset();
         AbstractNPC thirdNPC = NPCFactory.build(new Position2D(4,4));
         Assert.assertEquals("The created NPC should be a StandardNPC", thirdNPC.getClass(), StandardNPC.class);
     }
 
-    @Test
+    @Test(expected = CannotSetThisValueException.class)
     public void testAddInvAndMinigame(){
-        NPCFactory.setInventory(new Inventory());
-        try {
+        NPCFactory.reset();
+        NPCFactory.setInventory(new Inventory(), new Inventory());
+        NPCFactory.setMinigame(new IMinigame() {
+            @Override
+            public Screen getView() {
+                return null;
+            }
 
-            NPCFactory.setMinigame(new IMinigame() {
-                @Override
-                public Screen getView() {
-                    return null;
-                }
+            @Override
+            public InputProcessor getController() {
+                return null;
+            }
 
-                @Override
-                public InputProcessor getController() {
-                    return null;
-                }
+            @Override
+            public void setListener(IMinigameListener listener) {
 
-                @Override
-                public void setListener(IMinigameListener listener) {
+            }
 
-                }
+            @Override
+            public char getGrade() {
+                return 'U';
+            }
 
-                @Override
-                public char getGrade() {
-                    return  'U';
-                }
+            @Override
+            public void reset() {
 
-                @Override
-                public void reset() {
+            }
 
-                }
-
-                @Override
-                public String getName() {
-                    return null;
-                }
-            });
-        }catch(CannotSetThisValueException ex){
-            NPCFactory.reset();
-            Assert.assertEquals(ex.getMessage(), "Cannot set minigame when inventory is set");
-
-        }
-
+            @Override
+            public String getName() {
+                return null;
+            }
+        });
     }
 
-    @Test
+    @Test(expected=CannotSetThisValueException.class)
     public void testAddMinigameAndInv(){
+        NPCFactory.reset();
         NPCFactory.setMinigame(new IMinigame() {
             @Override
             public Screen getView() {
@@ -148,12 +142,7 @@ public class NPCFactoryTest {
                 return null;
             }
         });
-        try {
-            NPCFactory.setInventory(new Inventory());
-        }catch(CannotSetThisValueException ex){
-            NPCFactory.reset();
-            Assert.assertEquals(ex.getMessage(), "Cannot set inventory when minigame is set");
-        }
+        NPCFactory.setInventory(new Inventory(), new Inventory());
 
     }
 
