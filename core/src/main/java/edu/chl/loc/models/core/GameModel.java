@@ -190,22 +190,22 @@ public class GameModel implements IGameWonListener, IGameModel{
 
         if (shouldPlayerMove(collisionLayer, groundLayer, nextPos)) {
             player.move();
-            incStepsTaken();
+            incStat("Antal steg", 1.0);
             // Pickup item if one exists
             pickupItem(itemLayer, nextPos);
         }
     }
 
-    private void incStepsTaken() {
+    private void incStat(String identifier, double value) {
 
-        Integer stepsTaken = (Integer) stats.getPlayerStat("Antal steg");
-        if (stepsTaken == null) {
-            stepsTaken = 1;
+        Double prevValue = (Double) stats.getPlayerStat(identifier);
+        if (prevValue == null) {
+            prevValue = value;
         } else {
-            stepsTaken++;
+            prevValue += value;
         }
 
-        stats.addPlayerStat("Antal steg", stepsTaken);
+        stats.addPlayerStat(identifier, prevValue);
     }
 
     public void pickupItem(ILayer itemLayer, Position2D nextPlayerPos) {
@@ -216,7 +216,7 @@ public class GameModel implements IGameWonListener, IGameModel{
             if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
                 ItemTile itemTile = (ItemTile) tempTile; //safe to convert because only itemTile have items
                 doItemAction(itemTile);
-                stats.addPlayerStat("Plockade föremål", 1.0);
+                incStat("Plockade föremål", 1.0);
             }
         }
     }
