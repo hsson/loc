@@ -7,12 +7,13 @@ import edu.chl.loc.models.menu.GameMenu;
 import edu.chl.loc.models.utilities.Position2D;
 
 /**
- * Created by maxim on 15-05-27.
+ * @author Maxim Goretskyy
+ * revised by Kevin Hoogendijk
  */
 public interface IGameModel {
-    public Player getPlayer();
-    public GameMap getGameMap();
-    public void addPlayerStat(String key, double value);
+    Player getPlayer();
+    GameMap getGameMap();
+    void addPlayerStat(String key, Object value);
     GameMenu getGameMenu();
     boolean isDialogActive();
     boolean isStatsActive();

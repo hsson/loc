@@ -14,6 +14,7 @@ import edu.chl.loc.models.utilities.Position2D;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author Alexander Håkansson
@@ -90,7 +91,7 @@ public class GameModel implements IGameWonListener, IGameModel{
         this.gameMap = map;
     }
 
-    public void addPlayerStat(String key, double value){
+    public void addPlayerStat(String key, Object value){
         stats.addPlayerStat(key, value);
     }
 
