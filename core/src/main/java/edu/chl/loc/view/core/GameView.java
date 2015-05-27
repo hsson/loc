@@ -83,7 +83,7 @@ public class GameView implements Screen{
         this.model = model;
         this.player  = model.getPlayer();
         this.playerView = new CharacterView(model.getPlayer(), PLAYER_TEXTURE);
-        this.gameMapView = new GameMapView(this);
+        this.gameMapView = new GameMapView(model.getGameMap());
         this.dialogView = new DialogView();
         this.gameMenuView = new GameMenuView(model.getGameMenu());
         this.statsView = new StatsView(model.getStatsWindow());
