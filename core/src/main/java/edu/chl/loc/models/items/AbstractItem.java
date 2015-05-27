@@ -2,6 +2,7 @@ package edu.chl.loc.models.items;
 
 
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.core.IGameModel;
 
 /**
  * A class to represent items in different places
@@ -70,7 +71,7 @@ public abstract class AbstractItem{
      * Whatever the item is supposed to do happens in this method
      * It has access to the whole game
      */
-    public abstract void use(GameModel state);
+    public abstract void use(IGameModel state);
 
     @Override
     public boolean equals(Object o){
