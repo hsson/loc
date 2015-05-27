@@ -6,6 +6,7 @@ import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.core.IGameModel;
 import edu.chl.loc.models.items.AbstractItem;
+import edu.chl.loc.models.map.GameMap;
 import edu.chl.loc.models.map.ILayer;
 import edu.chl.loc.models.map.ItemTile;
 import edu.chl.loc.models.map.Layer;
@@ -26,17 +27,12 @@ import java.util.Set;
  * Revised by Alexander Karlsson
  */
 public class GameMapView implements IView {
-
-    private final GameView gameView;
-    private final IGameModel gameModel;
-
     private Set<CharacterView> npcViews;
     private Set<ItemView> itemViews;
+    private GameMap gameMap;
 
-    public GameMapView(final GameView gameView) {
-        this.gameView = gameView;
-        this.gameModel = gameView.getGameModel();
-
+    public GameMapView(GameMap gameMap) {
+        this.gameMap = gameMap;
         createNPCViews();
         createItemViews();
     }
@@ -47,7 +43,7 @@ public class GameMapView implements IView {
     private void createNPCViews() {
         npcViews = new HashSet<CharacterView>();
 
-        for (AbstractNPC npc : gameModel.getGameMap().getAllNPCs()) {
+        for (AbstractNPC npc : gameMap.getAllNPCs()) {
             Texture npcTexture = NPCTextureFactory.build(npc);
             npcViews.add(new CharacterView(npc, npcTexture));
         }
@@ -57,8 +53,8 @@ public class GameMapView implements IView {
         itemViews = new HashSet<ItemView>();
         ILayer itemLayer = new Layer("items");
 
-        if (gameModel.getGameMap().layerExists(itemLayer)) {
-            for (ItemTile itemTile : gameModel.getGameMap().getItemTiles(new Layer("items"))) {
+        if (gameMap.layerExists(itemLayer)) {
+            for (ItemTile itemTile : gameMap.getItemTiles(new Layer("items"))) {
                 if (itemTile.hasItem()) {
                     AbstractItem item = itemTile.getItem();
                     Texture texture = ItemTextureFactory.build(item);
