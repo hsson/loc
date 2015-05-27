@@ -2,10 +2,7 @@ package edu.chl.loc.models.core;
 
 import edu.chl.loc.minigame.IMinigame;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Kevin Hoogendijk
@@ -53,16 +50,25 @@ public class Stats {
     }
 
     public void addHec(double addition){
-        hec += addition;
+        Double hec = (Double) getPlayerStat("Högskolepoäng");
+        if (hec == null) {
+            hec = addition;
+        } else {
+            hec += addition;
+        }
 
         if (hec >= GAME_WON_LIMIT) {
             gameWon();
         }
+
         addPlayerStat("Högskolepoäng", hec);
     }
 
     public double getHec(){
-        return hec;
+        if(getPlayerStat("Högskolepoäng") == null)
+            return 0.0;
+        else
+            return (Double) getPlayerStat("Högskolepoäng");
     }
 
     public void addMinigameScore(IMinigame minigame){
