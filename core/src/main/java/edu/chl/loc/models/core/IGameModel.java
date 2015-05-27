@@ -1,5 +1,6 @@
 package edu.chl.loc.models.core;
 
+import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.map.GameMap;
@@ -28,6 +29,8 @@ public interface IGameModel {
     double getHec();
     String getActiveSpeakerName();
     void addHec(double hec);
+    void setGameMap(GameMap map);
+    void addMinigameStat(IMinigame minigame);
 
 
 }
