@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.core.IGameModel;
 import edu.chl.loc.models.map.ITile;
 import edu.chl.loc.models.map.Layer;
 import edu.chl.loc.view.characters.CharacterView;
@@ -43,7 +44,7 @@ public class GameView implements Screen{
     public static final Texture PLAYER_TEXTURE = new Texture(Gdx.files.internal("player-sheet.png"));
 
     private static SpriteBatch batch = new SpriteBatch();//Will be used by other views
-    private GameModel model;
+    private IGameModel model;
     private IView playerView;
     private IView gameMapView;
     private DialogView dialogView;
@@ -56,7 +57,7 @@ public class GameView implements Screen{
     private TiledMap tiledMap = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
     private OrthogonalTiledMapRenderer tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
-    private final Player player = GameModel.getPlayer();
+    private final Player player;
 
     private final BitmapFont font = new BitmapFont();
 
@@ -78,9 +79,10 @@ public class GameView implements Screen{
      * Basic constructor with all necessary values
      * @param model The loc gamemodel
      */
-    public GameView(GameModel model){
+    public GameView(IGameModel model){
         this.model = model;
-        this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
+        this.player  = model.getPlayer();
+        this.playerView = new CharacterView(model.getPlayer(), PLAYER_TEXTURE);
         this.gameMapView = new GameMapView(this);
         this.dialogView = new DialogView();
         this.gameMenuView = new GameMenuView(model.getGameMenu());
@@ -114,7 +116,7 @@ public class GameView implements Screen{
      * Returns the gamemodel this view represents
      * @return The gamemodel
      */
-    public GameModel getGameModel() {
+    public IGameModel getGameModel() {
         return this.model;
     }
 

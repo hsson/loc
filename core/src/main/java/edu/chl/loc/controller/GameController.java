@@ -7,6 +7,7 @@ import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.core.IGameModel;
 import edu.chl.loc.models.core.StatsWindow;
 import edu.chl.loc.models.map.GameMap;
 import edu.chl.loc.models.menu.GameMenu;
@@ -20,7 +21,7 @@ import edu.chl.loc.models.menu.GameMenu;
  */
 public class GameController implements InputProcessor {
 
-    private final GameModel model;
+    private final IGameModel model;
     private Player player;
     private GameMap gameMap; //todo make gamemap static inside gamemodel?
     private static final String[] NOTHING_TO_INTERACT_WITH_STRING = {"Är du go i huvvet eller?", "Här finns det inget du kan prata med"};
@@ -30,7 +31,7 @@ public class GameController implements InputProcessor {
      *
      * @param model The model you want to control
      */
-    public GameController(GameModel model) {
+    public GameController(IGameModel model) {
         this.model = model;
         this.player = model.getPlayer();
         this.gameMap = model.getGameMap();

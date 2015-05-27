@@ -22,7 +22,7 @@ import java.util.Map;
  * revised by Maxim Goretskyy
  * Revised by Kevin Hoogendijk
  */
-public class GameModel implements IGameWonListener {
+public class GameModel implements IGameWonListener, IGameModel{
 
     // Player default values
     public static final Position2D STARTING_POS = new Position2D(0, 0);
@@ -73,7 +73,7 @@ public class GameModel implements IGameWonListener {
      *
      * @return The player
      */
-    public static Player getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 

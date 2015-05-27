@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.core.GameModel;
+import edu.chl.loc.models.core.IGameModel;
 import edu.chl.loc.models.items.AbstractItem;
 import edu.chl.loc.models.map.ILayer;
 import edu.chl.loc.models.map.ItemTile;
@@ -27,7 +28,7 @@ import java.util.Set;
 public class GameMapView implements IView {
 
     private final GameView gameView;
-    private final GameModel gameModel;
+    private final IGameModel gameModel;
 
     private Set<CharacterView> npcViews;
     private Set<ItemView> itemViews;
