@@ -32,7 +32,6 @@ import java.util.Set;
  * Revised by Alexander Karlsson
  */
 public class LocMain extends Game implements IMinigameHandlerListener {
-	private float elapsed;
     private float delta;
 
     private GameModel model;
@@ -63,7 +62,6 @@ public class LocMain extends Game implements IMinigameHandlerListener {
 	@Override
 	public void render () {
         delta = Gdx.graphics.getDeltaTime();
-		elapsed += delta;
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
