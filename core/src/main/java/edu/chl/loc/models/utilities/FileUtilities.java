@@ -1,4 +1,4 @@
-package edu.chl.loc.utilities;
+package edu.chl.loc.models.utilities;
 
 
 import edu.chl.loc.minigame.BeerChug.BeerChug;
