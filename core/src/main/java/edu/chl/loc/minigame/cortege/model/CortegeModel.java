@@ -47,7 +47,7 @@ public class CortegeModel{
         toolBox.height = 64;
         toolBox.y = 20;
         score = 0;
-        MAX_TIME_PER_ROUND = System.currentTimeMillis() + 60000; //1 minute in milliseconds
+        MAX_TIME_PER_ROUND = System.currentTimeMillis() + 20000; //1 minute in milliseconds
         currentTime = System.currentTimeMillis();
         spawnItem();
         isPlaying= true;
@@ -180,11 +180,11 @@ public class CortegeModel{
 
     public char getGrade(){
         int score = getScore();
-        if(score >= 230){
+        if(score >= 50){
             return '5';
-        }else if(score >= 175){
+        }else if(score >= 30){
             return '4';
-        }else if(score >= 100){
+        }else if(score >= 15){
             return '3';
         }
         return 'U';
