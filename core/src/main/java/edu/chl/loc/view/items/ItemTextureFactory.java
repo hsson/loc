@@ -2,7 +2,7 @@ package edu.chl.loc.view.items;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import edu.chl.loc.models.items.AbstractItem;
+import edu.chl.loc.model.items.AbstractItem;
 
 import java.util.Locale;
 

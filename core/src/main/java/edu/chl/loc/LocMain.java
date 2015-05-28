@@ -9,8 +9,8 @@ import edu.chl.loc.controller.GameController;
 import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.minigame.IMinigameHandlerListener;
 import edu.chl.loc.minigame.MinigameHandler;
-import edu.chl.loc.models.core.GameModel;
-import edu.chl.loc.models.core.IGameModel;
+import edu.chl.loc.model.core.GameModel;
+import edu.chl.loc.model.core.IGameModel;
 import edu.chl.loc.utilities.SetupUtilities;
 import edu.chl.loc.view.core.GameView;
 

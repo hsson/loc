@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import edu.chl.loc.models.characters.AbstractCharacter;
-import edu.chl.loc.models.characters.utilities.Direction;
+import edu.chl.loc.model.characters.AbstractCharacter;
+import edu.chl.loc.model.characters.utilities.Direction;
 import edu.chl.loc.view.IView;
 import edu.chl.loc.view.core.GameView;
 
