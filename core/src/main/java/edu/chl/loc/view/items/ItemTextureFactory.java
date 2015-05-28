@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import edu.chl.loc.models.items.AbstractItem;
 
+import java.util.Locale;
+
 /**
  * @author Alexander Håkansson
  * @version 1.0.0
@@ -19,7 +21,7 @@ public class ItemTextureFactory {
 
     public static Texture build(AbstractItem item) {
 
-        if (item.getItemName().toLowerCase().equals("pripps blå")) {
+        if (item.getItemName().toLowerCase(Locale.ENGLISH).equals("pripps blå")) {
             return new Texture(Gdx.files.internal("items/pripps.png"));
         }
 

@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.characters.npc.MinigameNPC;
 
+import java.util.Locale;
+
 /**
  * @author Alexander Håkansson
  * @version 1.0.0
@@ -25,7 +27,7 @@ public class NPCTextureFactory {
         // This could determine which texture to return
         // based on attributes of the NPC. Such as the name.
 
-        if (npc.getName().toLowerCase().trim().equals("poya")) {
+        if (npc.getName().toLowerCase(Locale.ENGLISH).trim().equals("poya")) {
             return poyaTexture;
         } else if (npc.getClass() == MinigameNPC.class) {
             return minigameNPCTexture;
