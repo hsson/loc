@@ -1,8 +1,6 @@
 package edu.chl.loc.models.items;
 
-import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.core.IGameModel;
-import edu.chl.loc.models.core.Stats;
 
 /**
  * Created by Maxim on 15-04-14.

@@ -15,8 +15,8 @@ import edu.chl.loc.models.characters.utilities.Direction;
 import edu.chl.loc.models.characters.utilities.Gender;
 import edu.chl.loc.models.items.ItemScore;
 import edu.chl.loc.models.map.*;
-import edu.chl.loc.models.utilities.Position2D;
 import edu.chl.loc.models.utilities.FileUtilities;
+import edu.chl.loc.models.utilities.Position2D;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

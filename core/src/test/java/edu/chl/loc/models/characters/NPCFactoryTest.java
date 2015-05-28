@@ -2,10 +2,10 @@ package edu.chl.loc.models.characters;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.minigame.IMinigameListener;
 import edu.chl.loc.models.characters.npc.*;
 import edu.chl.loc.models.items.Inventory;
-import edu.chl.loc.minigame.IMinigame;
 import edu.chl.loc.models.utilities.Position2D;
 import org.junit.Assert;
 import org.junit.Test;

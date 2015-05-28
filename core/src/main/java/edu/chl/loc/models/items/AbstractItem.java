@@ -1,7 +1,6 @@
 package edu.chl.loc.models.items;
 
 
-import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.core.IGameModel;
 
 /**

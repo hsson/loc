@@ -7,7 +7,6 @@ import edu.chl.loc.models.characters.Player;
 import edu.chl.loc.models.characters.npc.AbstractNPC;
 import edu.chl.loc.models.characters.npc.Dialog;
 import edu.chl.loc.models.characters.utilities.Direction;
-import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.core.IGameModel;
 import edu.chl.loc.models.core.StatsWindow;
 import edu.chl.loc.models.map.GameMap;

@@ -1,6 +1,5 @@
 package edu.chl.loc.models.characters;
 
-import com.badlogic.gdx.Game;
 import edu.chl.loc.models.characters.npc.ItemNPC;
 import edu.chl.loc.models.characters.npc.NPCFactory;
 import edu.chl.loc.models.core.GameModel;

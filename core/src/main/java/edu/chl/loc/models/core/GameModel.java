@@ -14,7 +14,6 @@ import edu.chl.loc.models.utilities.Position2D;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author Alexander Håkansson
