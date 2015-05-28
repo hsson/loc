@@ -213,7 +213,7 @@ public class GameModel implements IGameWonListener, IGameModel{
 
             ITile tempTile = gameMap.getTile(itemLayer, nextPlayerPos);
 
-            if (tempTile.hasItem()) { //todo discuss to use instanceof later or getClass, will need when we have minigameTile
+            if (tempTile.hasItem()) {
                 ItemTile itemTile = (ItemTile) tempTile; //safe to convert because only itemTile have items
                 doItemAction(itemTile);
                 incStat("Plockade föremål", 1.0);
