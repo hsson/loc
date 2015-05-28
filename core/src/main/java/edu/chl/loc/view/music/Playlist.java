@@ -1,8 +1,9 @@
 package edu.chl.loc.view.music;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -13,20 +14,37 @@ import java.util.Random;
  * Revised by Alexander Karlsson
  */
 public class Playlist implements Music.OnCompletionListener {
-    List<Music> songs;
+    List<Music> songs = new ArrayList<Music>();
     private boolean looping;
     private boolean random;
     private int currentSong = 0;
     private Random randomizer = new Random();
+    private boolean fistTime = true;
 
-    public Playlist(boolean looping, boolean random, Music... songs) {
-        this.looping = looping;
-        this.random = random;
-        this.songs = Arrays.asList(songs);
+    private static Playlist instance = null;
 
-        if (random) {
-            currentSong = randomizer.nextInt(this.songs.size());
+    // Music tracks
+    private static final Music musicNyan = Gdx.audio.newMusic(Gdx.files.internal("music/nyan.mp3"));
+    private static final Music musicRickroll = Gdx.audio.newMusic(Gdx.files.internal("music/rickroll.mp3"));
+    private static final Music musicSax = Gdx.audio.newMusic(Gdx.files.internal("music/sax.mp3"));
+    private static final Music musicTrololo = Gdx.audio.newMusic(Gdx.files.internal("music/trololo.mp3"));
+    private static final Music marioLevels = Gdx.audio.newMusic(Gdx.files.internal("music/marioLevels.mp3"));
+
+    public Playlist() {
+        // Singleton
+    }
+
+    public synchronized static Playlist getInstance() {
+        if (instance == null) {
+            instance = new Playlist();
+            instance.songs.add(musicNyan);
+            instance.songs.add(musicRickroll);
+            instance.songs.add(musicSax);
+            instance.songs.add(musicTrololo);
+            instance.songs.add(marioLevels);
         }
+
+        return instance;
     }
 
     /**
@@ -50,9 +68,24 @@ public class Playlist implements Music.OnCompletionListener {
     }
 
     public void play() {
+        if (fistTime && random) {
+            currentSong = randomizer.nextInt(this.songs.size());
+            fistTime = false;
+        }
+
         Music song = songs.get(currentSong);
         song.setOnCompletionListener(this);
         song.play();
+    }
+
+    /**
+     * Skips to next song.
+     */
+    public void next() {
+        if (songs.get(currentSong).isPlaying()) {
+            songs.get(currentSong).stop();
+        }
+        onCompletion(songs.get(currentSong));
     }
 
     /**
@@ -73,8 +106,12 @@ public class Playlist implements Music.OnCompletionListener {
             currentSong++;
         }
 
-        if (currentSong == songs.size() && looping) {
+        if (currentSong == songs.size()) {
             currentSong = 0;
+
+            if (!looping) {
+                return;
+            }
         }
 
         play();

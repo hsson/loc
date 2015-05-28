@@ -37,7 +37,7 @@ public class CapsGameView implements Screen {
     private static final int BEER_CUP_Y_POS = 20;
     private static final float CAP_FLIGHT_TIME = 1.5f;
     private static final float GRAVITATIONAL_CONSTANT = 9.82f;
-    private static final float THROWING_ANGLE = 45.0f*((float)Math.PI/180f);
+    private static final float THROWING_ANGLE = (float)Math.PI/4.0f;//45 degrees in radians
     private static final int LEVEL_TEXT_X_POS = 475;
     private static final int LEVEL_TEXT_Y_POS = 550;
 
@@ -151,9 +151,9 @@ public class CapsGameView implements Screen {
      */
     private void drawCrossHair(){
         //Calculate x value
-        float xValue = (camera.viewportWidth * model.getAimPosition()) - crossHair.getWidth()/2;
+        float xValue = (camera.viewportWidth * model.getAimPosition()) - (float)crossHair.getWidth()/2.0f;
         //Middle of crosshair should be on top of the beercup
-        float yValue = getThrowHeight() - crossHair.getHeight()/2;
+        float yValue = getThrowHeight() - (float)crossHair.getHeight()/2.0f;
 
         batch.draw(crossHair, xValue, yValue);
     }
@@ -196,7 +196,7 @@ public class CapsGameView implements Screen {
         yValue *= SCREEN_HEIGHT;
         yValue += getThrowHeight();
 
-        batch.draw(cap, (float)xValue-cap.getWidth()/2, (float)yValue-cap.getHeight()/2);
+        batch.draw(cap, (float)xValue-(float)cap.getWidth()/2.0f, (float)yValue-(float)cap.getHeight()/2.0f);
 
         if(timePassed >= CAP_FLIGHT_TIME){
             drawHitOrMiss();

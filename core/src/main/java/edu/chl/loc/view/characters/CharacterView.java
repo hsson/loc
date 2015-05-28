@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import edu.chl.loc.models.characters.AbstractCharacter;
-import edu.chl.loc.models.characters.utilities.Direction;
+import edu.chl.loc.model.characters.AbstractCharacter;
+import edu.chl.loc.model.characters.utilities.Direction;
+import edu.chl.loc.view.IView;
 import edu.chl.loc.view.core.GameView;
-import edu.chl.loc.view.core.IView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,8 +21,6 @@ import java.util.Map;
 public class CharacterView implements IView {
     private AbstractCharacter absCharacter;
     private Texture charTexture;
-    private SpriteBatch spriteBatch;
-
     private static final int CELL_W = 32;
     private static final int CELL_H = 64;
 

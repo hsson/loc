@@ -1,7 +1,5 @@
 package edu.chl.loc.minigame.cortege.model;
 
-import edu.chl.loc.minigame.cortege.utilities.ToolType;
-
 import java.awt.*;
 
 /**
@@ -23,5 +21,26 @@ public class Tool extends Rectangle {
 
     public ToolType getType(){
         return this.type;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        if(o == null){
+            return false;
+        }
+        if(!this.getClass().equals(o.getClass())) {
+            return false;
+        }
+        Tool temp = (Tool)o;
+        return temp.getType() == this.getType() && Math.abs(temp.getX()-this.getX()) < 0.0000001 &&
+                Math.abs(temp.getY() - this.getY()) < 0.0000001;
+    }
+
+    @Override
+    public int hashCode(){
+        return 31*97*getType().hashCode();
     }
 }

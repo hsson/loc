@@ -1,17 +1,17 @@
 package edu.chl.loc.controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import edu.chl.loc.models.characters.Player;
-import edu.chl.loc.models.characters.npc.AbstractNPC;
-import edu.chl.loc.models.characters.npc.Dialog;
-import edu.chl.loc.models.characters.utilities.Direction;
-import edu.chl.loc.models.core.GameModel;
-import edu.chl.loc.models.core.StatsWindow;
-import edu.chl.loc.models.map.GameMap;
-import edu.chl.loc.models.map.Layer;
-import edu.chl.loc.models.menu.GameMenu;
-import edu.chl.loc.models.utilities.Position2D;
+import edu.chl.loc.model.characters.Player;
+import edu.chl.loc.model.characters.npc.AbstractNPC;
+import edu.chl.loc.model.characters.npc.Dialog;
+import edu.chl.loc.model.characters.utilities.Direction;
+import edu.chl.loc.model.core.IGameModel;
+import edu.chl.loc.model.core.StatsWindow;
+import edu.chl.loc.model.map.GameMap;
+import edu.chl.loc.model.menu.GameMenu;
+import edu.chl.loc.view.music.Playlist;
 
 /**
  * @author Alexander Håkansson
@@ -22,73 +22,93 @@ import edu.chl.loc.models.utilities.Position2D;
  */
 public class GameController implements InputProcessor {
 
-    private final GameModel model;
+    private final IGameModel model;
     private Player player;
-    private GameMap gameMap; //todo make gamemap static inside gamemodel?
-    private static final String[] NOTHING_TO_INTERACT_WITH_STRING = {"Sorry but there is nothing here to interact with", "Or you are just stupid"};
+    private GameMap gameMap;
+    private static final String[] NOTHING_TO_INTERACT_WITH_STRING = {"Är du go i huvvet eller?", "Här finns det inget du kan prata med"};
     private static final Dialog NOTHING_TO_INTERACT_WITH_DIALOG = new Dialog(NOTHING_TO_INTERACT_WITH_STRING, false);
 
     /**
-     *
+     * Constructs a standard controller for a Loc game model
      * @param model The model you want to control
      */
-    public GameController(GameModel model) {
+    public GameController(IGameModel model) {
         this.model = model;
         this.player = model.getPlayer();
         this.gameMap = model.getGameMap();
     }
 
+    /**
+     * Updates the Loc game model based on keyboard inputs
+     * @param keycode The key pressed
+     * @return True if the input was processed, false if not
+     */
     @Override
     public boolean keyDown(int keycode) {// assuming smooth movement will be here?
-        if(model.getGameMenu().isMenuOpen()) {
-            handleMenu(keycode);
-        } else if (model.isDialogActive()) {
-            handleDialog(keycode);
-        } else if (model.isStatsActive()) {
-            handleStats(keycode);
-        } else {
-            handleCharacter(keycode);
+
+        if (keycode == Input.Keys.E) {
+            Playlist.getInstance().next();
         }
-        return true;
+
+        if (keycode == Input.Keys.F) {
+            boolean fullscreen = Gdx.graphics.isFullscreen();
+            Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width,
+                    Gdx.graphics.getDesktopDisplayMode().height, !fullscreen);
+        }
+
+        if(model.getGameMenu().isMenuOpen()) {
+            return handleMenu(keycode);
+        } else if (model.isDialogActive()) {
+            return handleDialog(keycode);
+        } else if (model.isStatsActive()) {
+            return handleStats(keycode);
+        } else {
+            return handleCharacter(keycode);
+        }
     }
 
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean keyTyped(char character) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean scrolled(int amount) {
-        return false;
+        return false;//Not used
     }
 
-    public void handleDialog(int keycode) {
+    /**
+     * Processes the inputs while a dialog is active
+     * @param keycode The key pressed
+     * @return Whether or not the key press was handled
+     */
+    public boolean handleDialog(int keycode) {
         Dialog dialog = model.getActiveDialog();
         if(dialog.isLastString()){
             switch (keycode) {
@@ -99,63 +119,91 @@ public class GameController implements InputProcessor {
                     if(dialog.getOptionSelected()){
                         try {
                             AbstractNPC npc = gameMap.getNPCAtPosition(player.getNextPosition());
-                            npc.doAction();
+                            if(model.getActiveDialog().equals(npc.getDialog()))
+                                npc.doAction();
                         }catch(IllegalArgumentException e){
                             //Do nothing if no npc is present
                         }
                     }
-                    break;
+                    return true;
                 case Input.Keys.UP:
                     dialog.setOptionSelected(true);
-                    break;
+                    return true;
                 case Input.Keys.DOWN:
                     dialog.setOptionSelected(false);
-                    break;
+                    return true;
+                default:
+                    return false;
             }
         } else {
             switch (keycode) {
                 case Input.Keys.SPACE:
                 case Input.Keys.ENTER:
                     dialog.setNextString();
-                    break;
+                    return true;
+                default:
+                    return false;
             }
         }
     }
 
-    private void handleMenu(int keycode) {
+    /**
+     * Handles input while the mune is active
+     * @param keycode The key pressed
+     * @return Whether or not the input was processed
+     */
+    private boolean handleMenu(int keycode) {
         GameMenu menu = model.getGameMenu();
         switch (keycode) {
             case Input.Keys.UP:
                 menu.decSelection();
-                break;
+                return true;
             case Input.Keys.DOWN:
                 menu.incSelection();
-                break;
+                return true;
             case Input.Keys.ENTER:
                 menu.getSelectedOption().choose();
-                break;
+                return true;
+            case Input.Keys.ESCAPE:
+                menu.toggleOpen();
+                return true;
+            default:
+                return false;
         }
     }
 
-    public void handleStats(int keycode){
+    /**
+     * Processes the inputs while the stats view is active
+     * @param keycode The key pressed
+     * @return Whether or not the key press was handled
+     */
+    public boolean handleStats(int keycode){
         StatsWindow statsWindow = model.getStatsWindow();
         switch (keycode){
+            case Input.Keys.ESCAPE:
             case Input.Keys.ENTER:
             case Input.Keys.SPACE:
                 model.setIsStatsActive(false);
-                break;
+                return true;
             case Input.Keys.W:
             case Input.Keys.UP:
                 statsWindow.scrollUp();
-                break;
+                return true;
             case Input.Keys.S:
             case Input.Keys.DOWN:
                 statsWindow.scrollDown();
-                break;
+                return true;
+            default:
+                return false;
         }
     }
 
-    public void handleCharacter(int keycode){
+    /**
+     * Processes the inputs and moves the character
+     * @param keycode The key pressed
+     * @return Whether or not the key press was handled
+     */
+    public boolean handleCharacter(int keycode){
         GameMenu menu = model.getGameMenu();
         chooseDirection(keycode);
         switch(keycode) {
@@ -168,37 +216,45 @@ public class GameController implements InputProcessor {
             case Input.Keys.DOWN:
             case Input.Keys.UP:
                 model.moveCharacter(player.getNextPosition());//sends information about next position to model
-                break;
+                return true;
             case Input.Keys.SPACE:
             case Input.Keys.ENTER:
                 try{
                     AbstractNPC npc = gameMap.getNPCAtPosition(player.getNextPosition());
                     npc.setDirection(player.getDirection().getOpposite());
-                    model.setActiveDialog(npc.getDialog());
-                    model.setActiveSpeakerName(npc.getName());
-                    model.setIsDialogActive(true);
+                    if(!model.isDialogActive()) {
+                        model.setActiveDialog(npc.getDialog());
+                        model.setActiveSpeakerName(npc.getName());
+                        model.setIsDialogActive(true);
+                    }
                 }catch(IllegalArgumentException e){
                     model.setActiveDialog(NOTHING_TO_INTERACT_WITH_DIALOG);
                     model.setActiveSpeakerName("");
                     model.setIsDialogActive(true);
                 }
-                break;
+                return true;
             case Input.Keys.ESCAPE:
                 menu.toggleOpen();
-                break;
+                return true;
+            default:
+                return false;
         }
     }
 
     private void addTimesTurned() {
-        Double timesTurned = (Double) model.getStats().getPlayerStat("Times turned");
+        Double timesTurned = (Double) model.getStats().getPlayerStat("Antal svängningar");
         if (timesTurned == null) {
             timesTurned = 1.0;
         } else {
             timesTurned++;
         }
-        model.addPlayerStat("Times turned", timesTurned);
+        model.addPlayerStat("Antal svängningar", timesTurned);
     }
 
+    /**
+     * Gives the character his proper direction based on key press
+     * @param keycode The key pressed
+     */
     public void chooseDirection(int keycode){
         switch(keycode){
             case  Input.Keys.A:
@@ -220,6 +276,9 @@ public class GameController implements InputProcessor {
             case  Input.Keys.DOWN:
                 if(player.getDirection()!=Direction.SOUTH){ addTimesTurned(); }
                 player.setDirection(Direction.SOUTH);
+                break;
+            default:
+                //Do nothing if invalid key is entered
                 break;
         }
     }

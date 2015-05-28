@@ -1,22 +1,16 @@
 package edu.chl.loc.view.characters;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import edu.chl.loc.models.characters.npc.Dialog;
-import edu.chl.loc.models.utilities.Position2D;
+import edu.chl.loc.model.characters.npc.Dialog;
+import edu.chl.loc.view.IView;
 import edu.chl.loc.view.core.GameView;
-import edu.chl.loc.view.core.IView;
 import edu.chl.loc.view.utilities.RenderUtilities;
-
-import java.awt.geom.Rectangle2D;
 
 /**
  * @author Kevin Hoogendijk
@@ -63,8 +57,8 @@ public class DialogView implements IView {
     public void renderYesNoText(SpriteBatch spriteBatch){
         spriteBatch.begin();
         font.setColor(Color.BLUE);
-        font.draw(spriteBatch, "YES", yesNoRect.getX() + yesNoRect.getWidth() / 2, yesNoRect.getY() + yesNoRect.getHeight() * 0.6f);
-        font.draw(spriteBatch, "NO", yesNoRect.getX() + yesNoRect.getWidth() / 2, yesNoRect.getY() + yesNoRect.getHeight() * 0.3f);
+        font.draw(spriteBatch, "JA", yesNoRect.getX() + yesNoRect.getWidth() / 2, yesNoRect.getY() + yesNoRect.getHeight() * 0.6f);
+        font.draw(spriteBatch, "NEJ", yesNoRect.getX() + yesNoRect.getWidth() / 2, yesNoRect.getY() + yesNoRect.getHeight() * 0.3f);
         spriteBatch.end();
     }
 

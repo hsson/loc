@@ -2,7 +2,6 @@ package edu.chl.loc.view.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,11 +14,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import edu.chl.loc.models.characters.Player;
-import edu.chl.loc.models.characters.npc.Dialog;
-import edu.chl.loc.models.core.GameModel;
-import edu.chl.loc.models.map.ITile;
-import edu.chl.loc.models.map.Layer;
+import edu.chl.loc.model.characters.Player;
+import edu.chl.loc.model.core.IGameModel;
+import edu.chl.loc.model.map.ITile;
+import edu.chl.loc.model.map.Layer;
+import edu.chl.loc.view.IView;
 import edu.chl.loc.view.characters.CharacterView;
 import edu.chl.loc.view.characters.DialogView;
 import edu.chl.loc.view.map.GameMapView;
@@ -43,14 +42,12 @@ public class GameView implements Screen{
     public static final Texture PLAYER_TEXTURE = new Texture(Gdx.files.internal("player-sheet.png"));
 
     private static SpriteBatch batch = new SpriteBatch();//Will be used by other views
-    private GameModel model;
+    private IGameModel model;
     private IView playerView;
     private IView gameMapView;
     private DialogView dialogView;
     private GameMenuView gameMenuView;
     private StatsView statsView;
-
-    private Dialog lastDialog;
 
     private static OrthographicCamera camera = new OrthographicCamera();
     private static Viewport viewport = new FitViewport(RES_X, RES_Y, camera);
@@ -58,16 +55,9 @@ public class GameView implements Screen{
     private TiledMap tiledMap = new TmxMapLoader().load(Gdx.files.internal("maps/johanneberg.tmx").path());
     private OrthogonalTiledMapRenderer tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
-    private final Player player = GameModel.getPlayer();
+    private final Player player;
 
     private final BitmapFont font = new BitmapFont();
-
-    // Music tracks
-    private static final Music musicNyan = Gdx.audio.newMusic(Gdx.files.internal("music/nyan.mp3"));
-    private static final Music musicRickroll = Gdx.audio.newMusic(Gdx.files.internal("music/rickroll.mp3"));
-    private static final Music musicSax = Gdx.audio.newMusic(Gdx.files.internal("music/sax.mp3"));
-    private static final Music musicTrololo = Gdx.audio.newMusic(Gdx.files.internal("music/trololo.mp3"));
-    private static final Music marioLevels = Gdx.audio.newMusic(Gdx.files.internal("music/marioLevels.mp3"));
 
     private Playlist gameMusic;
 
@@ -80,10 +70,11 @@ public class GameView implements Screen{
      * Basic constructor with all necessary values
      * @param model The loc gamemodel
      */
-    public GameView(GameModel model){
+    public GameView(IGameModel model){
         this.model = model;
-        this.playerView = new CharacterView(GameModel.getPlayer(), PLAYER_TEXTURE);
-        this.gameMapView = new GameMapView(this);
+        this.player  = model.getPlayer();
+        this.playerView = new CharacterView(model.getPlayer(), PLAYER_TEXTURE);
+        this.gameMapView = new GameMapView(model.getGameMap());
         this.dialogView = new DialogView();
         this.gameMenuView = new GameMenuView(model.getGameMenu());
         this.statsView = new StatsView(model.getStatsWindow());
@@ -92,7 +83,9 @@ public class GameView implements Screen{
         camera = new OrthographicCamera();
         viewport = new FitViewport(RES_X, RES_Y, camera);
 
-        this.gameMusic = new Playlist(true, true, musicNyan, musicRickroll, musicSax, musicTrololo, marioLevels);
+        this.gameMusic = Playlist.getInstance();
+        this.gameMusic.setLooping(true);
+        this.gameMusic.setRandom(true);
     }
 
     /**
@@ -116,7 +109,7 @@ public class GameView implements Screen{
      * Returns the gamemodel this view represents
      * @return The gamemodel
      */
-    public GameModel getGameModel() {
+    public IGameModel getGameModel() {
         return this.model;
     }
 
@@ -144,7 +137,7 @@ public class GameView implements Screen{
         gameMapView.render(deltaTime, GameView.batch);
         playerView.render(deltaTime, GameView.batch);
 
-        font.draw(batch, model.getHec() + " hec", viewportOrigo.x + 16, viewportOrigo.y - 16);
+        font.draw(batch, model.getHec() + " HP", viewportOrigo.x + 16, viewportOrigo.y - 16);
         GameView.batch.end();
 
         TiledMapTileLayer rooflayer = (TiledMapTileLayer) tiledMap.getLayers().get("buildingRoof");
@@ -198,12 +191,12 @@ public class GameView implements Screen{
 
     @Override
     public void pause() {
-        //TODO implement this shit
+        // Never used
     }
 
     @Override
     public void resume() {
-        //TODO implement this shit
+        // Never used
     }
 
     @Override
