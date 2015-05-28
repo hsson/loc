@@ -2,8 +2,8 @@ package edu.chl.loc.view.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import edu.chl.loc.models.characters.npc.AbstractNPC;
-import edu.chl.loc.models.characters.npc.MinigameNPC;
+import edu.chl.loc.model.characters.npc.AbstractNPC;
+import edu.chl.loc.model.characters.npc.MinigameNPC;
 
 import java.util.Locale;
 

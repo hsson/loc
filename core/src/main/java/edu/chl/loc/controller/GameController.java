@@ -3,14 +3,14 @@ package edu.chl.loc.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import edu.chl.loc.models.characters.Player;
-import edu.chl.loc.models.characters.npc.AbstractNPC;
-import edu.chl.loc.models.characters.npc.Dialog;
-import edu.chl.loc.models.characters.utilities.Direction;
-import edu.chl.loc.models.core.IGameModel;
-import edu.chl.loc.models.core.StatsWindow;
-import edu.chl.loc.models.map.GameMap;
-import edu.chl.loc.models.menu.GameMenu;
+import edu.chl.loc.model.characters.Player;
+import edu.chl.loc.model.characters.npc.AbstractNPC;
+import edu.chl.loc.model.characters.npc.Dialog;
+import edu.chl.loc.model.characters.utilities.Direction;
+import edu.chl.loc.model.core.IGameModel;
+import edu.chl.loc.model.core.StatsWindow;
+import edu.chl.loc.model.map.GameMap;
+import edu.chl.loc.model.menu.GameMenu;
 import edu.chl.loc.view.music.Playlist;
 
 /**
