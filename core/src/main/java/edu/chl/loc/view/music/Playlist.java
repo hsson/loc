@@ -2,6 +2,7 @@ package edu.chl.loc.view.music;
 
 import com.badlogic.gdx.audio.Music;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -13,20 +14,25 @@ import java.util.Random;
  * Revised by Alexander Karlsson
  */
 public class Playlist implements Music.OnCompletionListener {
-    List<Music> songs;
+    List<Music> songs = new ArrayList<Music>();
     private boolean looping;
     private boolean random;
     private int currentSong = 0;
     private Random randomizer = new Random();
+    private boolean fistTime = true;
 
-    public Playlist(boolean looping, boolean random, Music... songs) {
-        this.looping = looping;
-        this.random = random;
-        this.songs = Arrays.asList(songs);
+    private static Playlist instance = null;
 
-        if (random) {
-            currentSong = randomizer.nextInt(this.songs.size());
+    public Playlist() {
+        // Singleton
+    }
+
+    public static Playlist getInstance() {
+        if (instance == null) {
+            instance = new Playlist();
         }
+
+        return instance;
     }
 
     /**
@@ -50,9 +56,21 @@ public class Playlist implements Music.OnCompletionListener {
     }
 
     public void play() {
+        if (fistTime && random) {
+            currentSong = randomizer.nextInt(this.songs.size());
+            fistTime = false;
+        }
+
         Music song = songs.get(currentSong);
         song.setOnCompletionListener(this);
         song.play();
+    }
+
+    /**
+     * Skips to next song.
+     */
+    public void next() {
+        onCompletion(songs.get(currentSong));
     }
 
     /**
