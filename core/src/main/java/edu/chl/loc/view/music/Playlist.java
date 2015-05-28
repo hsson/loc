@@ -83,6 +83,9 @@ public class Playlist implements Music.OnCompletionListener {
      * Skips to next song.
      */
     public void next() {
+        if (songs.get(currentSong).isPlaying()) {
+            songs.get(currentSong).stop();
+        }
         onCompletion(songs.get(currentSong));
     }
 
