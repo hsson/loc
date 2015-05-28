@@ -29,7 +29,7 @@ public class GameController implements InputProcessor {
     private static final Dialog NOTHING_TO_INTERACT_WITH_DIALOG = new Dialog(NOTHING_TO_INTERACT_WITH_STRING, false);
 
     /**
-     *
+     * Constructs a standard controller for a Loc game model
      * @param model The model you want to control
      */
     public GameController(IGameModel model) {
@@ -38,6 +38,11 @@ public class GameController implements InputProcessor {
         this.gameMap = model.getGameMap();
     }
 
+    /**
+     * Updates the Loc game model based on keyboard inputs
+     * @param keycode The key pressed
+     * @return True if the input was processed, false if not
+     */
     @Override
     public boolean keyDown(int keycode) {// assuming smooth movement will be here?
 
@@ -59,39 +64,44 @@ public class GameController implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean keyTyped(char character) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        return false;
+        return false;//Not used
     }
 
     @Override
     public boolean scrolled(int amount) {
-        return false;
+        return false;//Not used
     }
 
+    /**
+     * Processes the inputs while a dialog is active
+     * @param keycode The key pressed
+     * @return Whether or not the key press was handled
+     */
     public boolean handleDialog(int keycode) {
         Dialog dialog = model.getActiveDialog();
         if(dialog.isLastString()){
@@ -130,6 +140,11 @@ public class GameController implements InputProcessor {
         }
     }
 
+    /**
+     * Handles input while the mune is active
+     * @param keycode The key pressed
+     * @return Whether or not the input was processed
+     */
     private boolean handleMenu(int keycode) {
         GameMenu menu = model.getGameMenu();
         switch (keycode) {
@@ -147,6 +162,11 @@ public class GameController implements InputProcessor {
         }
     }
 
+    /**
+     * Processes the inputs while the stats view is active
+     * @param keycode The key pressed
+     * @return Whether or not the key press was handled
+     */
     public boolean handleStats(int keycode){
         StatsWindow statsWindow = model.getStatsWindow();
         switch (keycode){
@@ -168,6 +188,11 @@ public class GameController implements InputProcessor {
         }
     }
 
+    /**
+     * Processes the inputs and moves the character
+     * @param keycode The key pressed
+     * @return Whether or not the key press was handled
+     */
     public boolean handleCharacter(int keycode){
         GameMenu menu = model.getGameMenu();
         chooseDirection(keycode);
@@ -214,6 +239,10 @@ public class GameController implements InputProcessor {
         model.addPlayerStat("Antal svängningar", timesTurned);
     }
 
+    /**
+     * Gives the character his proper direction based on key press
+     * @param keycode The key pressed
+     */
     public void chooseDirection(int keycode){
         switch(keycode){
             case  Input.Keys.A:
