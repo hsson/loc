@@ -22,6 +22,6 @@ public class GameUtilitiesTest {
         Position2D pos1 = new Position2D(0,0);
         Position2D pos2 = new Position2D(5,5);
         double distance = Math.sqrt(50);
-        Assert.assertTrue("The distance is not correct", distance == GameUtilities.calculateDistance(pos1, pos2));
+        Assert.assertTrue("The distance is not correct", Math.abs(distance - GameUtilities.calculateDistance(pos1, pos2))<0.0000001);
     }
 }

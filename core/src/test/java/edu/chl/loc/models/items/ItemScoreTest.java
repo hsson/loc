@@ -9,7 +9,7 @@ import org.junit.Test;
  * Created by maxim on 15-05-10.
  */
 public class ItemScoreTest {
-
+    private final double MARGIN = 0.0000001;
     @Test
     public void testingCopy(){
         ItemScore firstItem = new ItemScore("PrippsBlå", 3);
@@ -20,7 +20,7 @@ public class ItemScoreTest {
                 copyFirstItem.getItemName().equals(firstItem.getItemName()));
 
         Assert.assertTrue("Both copy and real item should give same amount of hec",
-                copyFirstItem.getHec() == firstItem.getHec());
+                Math.abs(copyFirstItem.getHec() - firstItem.getHec())< MARGIN);
     }
     @Test
     public void testUsingItemScore(){
