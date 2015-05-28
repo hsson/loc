@@ -29,7 +29,7 @@ public class ItemScoreTest {
         ItemScore item = new ItemScore("PrippsBlå", 5);
         item.use(model);
 
-        Assert.assertTrue("Model should have 5 hec", model.getHec() == 5);
+        Assert.assertTrue("Model should have 5 hec", Math.abs(model.getHec()- 5)<MARGIN);
     }
 
     @Test
