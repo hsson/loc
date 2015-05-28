@@ -236,6 +236,9 @@ public class GameController implements InputProcessor {
                 if(player.getDirection()!=Direction.SOUTH){ addTimesTurned(); }
                 player.setDirection(Direction.SOUTH);
                 break;
+            default:
+                //Do nothing if invalid key is entered
+                break;
         }
     }
 }
