@@ -190,12 +190,12 @@ public class GameView implements Screen{
 
     @Override
     public void pause() {
-        //TODO implement this shit
+        // Never used
     }
 
     @Override
     public void resume() {
-        //TODO implement this shit
+        // Never used
     }
 
     @Override
