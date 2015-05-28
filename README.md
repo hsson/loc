@@ -1,5 +1,18 @@
-###Setup for Intellij
-Edit the Run Configuration (Shift + Alt + F10)
-- Set Main class to edu.chl.loc.java.LocMainDesktop
-- Set Working direktory to Assets
-- Set the module to "legend-of-chalmers-dekstop"
+The Legend of Chalmers
+======================
+The Legend of Chalmers is a game developed at Chalmers University of Technology
+as part of the course "Object-Oriented Programming Project". The game uses the
+MVC design pattern to achieve modulariy and extensibility.
+
+##Launching
+###UNIX
+´´´ shell
+cd bin
+chmod +x start
+./start
+´´´
+###Windows
+´´´ shell
+cd bin
+start.bat
+´´´
