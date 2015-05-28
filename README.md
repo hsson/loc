@@ -6,13 +6,13 @@ MVC design pattern to achieve modulariy and extensibility.
 
 ##Launching
 ###UNIX
-´´´
+```
 cd bin
 chmod +x start
 ./start
-´´´
+```
 ###Windows
-´´´
+```
 cd bin
 start.bat
-´´´
+```
