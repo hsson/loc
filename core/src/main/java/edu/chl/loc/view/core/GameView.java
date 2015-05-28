@@ -85,6 +85,8 @@ public class GameView implements Screen{
         viewport = new FitViewport(RES_X, RES_Y, camera);
 
         this.gameMusic = Playlist.getInstance();
+        this.gameMusic.setLooping(true);
+        this.gameMusic.setRandom(true);
     }
 
     /**
