@@ -107,8 +107,12 @@ public class Playlist implements Music.OnCompletionListener {
             currentSong++;
         }
 
-        if (currentSong == songs.size() && looping) {
+        if (currentSong == songs.size()) {
             currentSong = 0;
+
+            if (!looping) {
+                return;
+            }
         }
 
         play();
