@@ -1,5 +1,6 @@
 package edu.chl.loc.controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import edu.chl.loc.models.characters.Player;
@@ -48,6 +49,12 @@ public class GameController implements InputProcessor {
 
         if (keycode == Input.Keys.E) {
             Playlist.getInstance().next();
+        }
+
+        if (keycode == Input.Keys.F11) {
+            boolean fullscreen = Gdx.graphics.isFullscreen();
+            Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width,
+                    Gdx.graphics.getDesktopDisplayMode().height, !fullscreen);
         }
 
         if(model.getGameMenu().isMenuOpen()) {
