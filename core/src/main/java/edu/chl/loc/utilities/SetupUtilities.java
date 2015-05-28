@@ -45,8 +45,7 @@ public class SetupUtilities {
         try {
             npcList = FileUtilities.readFile("NPCs.loc");
         } catch (FileNotFoundException e) {
-            System.err.println("Could not start game, non existent file");
-            System.exit(1);
+            throw new RuntimeException("Could not start game, non existent file");
         }
         for(List<String> npcProperty: npcList){
             int id = Integer.parseInt(npcProperty.get(0));
