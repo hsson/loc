@@ -120,7 +120,8 @@ public class GameController implements InputProcessor {
                     if(dialog.getOptionSelected()){
                         try {
                             AbstractNPC npc = gameMap.getNPCAtPosition(player.getNextPosition());
-                            npc.doAction();
+                            if(model.getActiveDialog().equals(npc.getDialog()))
+                                npc.doAction();
                         }catch(IllegalArgumentException e){
                             //Do nothing if no npc is present
                         }
@@ -219,9 +220,11 @@ public class GameController implements InputProcessor {
                 try{
                     AbstractNPC npc = gameMap.getNPCAtPosition(player.getNextPosition());
                     npc.setDirection(player.getDirection().getOpposite());
-                    model.setActiveDialog(npc.getDialog());
-                    model.setActiveSpeakerName(npc.getName());
-                    model.setIsDialogActive(true);
+                    if(!model.isDialogActive()) {
+                        model.setActiveDialog(npc.getDialog());
+                        model.setActiveSpeakerName(npc.getName());
+                        model.setIsDialogActive(true);
+                    }
                 }catch(IllegalArgumentException e){
                     model.setActiveDialog(NOTHING_TO_INTERACT_WITH_DIALOG);
                     model.setActiveSpeakerName("");
