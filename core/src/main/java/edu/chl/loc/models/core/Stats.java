@@ -11,11 +11,12 @@ import java.util.*;
  */
 public class Stats {
 
-    private double hec = 0;
     private Map<String, Object> playerStats = new HashMap<String, Object>();
     private Set<IGameWonListener> listeners = new HashSet<IGameWonListener>();
 
     private static final double GAME_WON_LIMIT = 300.0;
+
+    private boolean hasWon = false;
 
     public void addPlayerStat(String key, Object value){
         playerStats.put(key, value);
@@ -28,8 +29,11 @@ public class Stats {
     }
 
     private void gameWon() {
-        for (IGameWonListener l : listeners) {
-            l.gameWon();
+        if (!hasWon) {
+            hasWon = true;
+            for (IGameWonListener l : listeners) {
+                l.gameWon();
+            }
         }
     }
 
