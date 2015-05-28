@@ -166,6 +166,7 @@ public class GameController implements InputProcessor {
                 return true;
             case Input.Keys.ESCAPE:
                 menu.toggleOpen();
+                return true;
             default:
                 return false;
         }
