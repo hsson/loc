@@ -1,5 +1,6 @@
 package edu.chl.loc.view.music;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 import java.util.ArrayList;
@@ -23,6 +24,13 @@ public class Playlist implements Music.OnCompletionListener {
 
     private static Playlist instance = null;
 
+    // Music tracks
+    private static final Music musicNyan = Gdx.audio.newMusic(Gdx.files.internal("music/nyan.mp3"));
+    private static final Music musicRickroll = Gdx.audio.newMusic(Gdx.files.internal("music/rickroll.mp3"));
+    private static final Music musicSax = Gdx.audio.newMusic(Gdx.files.internal("music/sax.mp3"));
+    private static final Music musicTrololo = Gdx.audio.newMusic(Gdx.files.internal("music/trololo.mp3"));
+    private static final Music marioLevels = Gdx.audio.newMusic(Gdx.files.internal("music/marioLevels.mp3"));
+
     public Playlist() {
         // Singleton
     }
@@ -30,6 +38,11 @@ public class Playlist implements Music.OnCompletionListener {
     public static Playlist getInstance() {
         if (instance == null) {
             instance = new Playlist();
+            instance.songs.add(musicNyan);
+            instance.songs.add(musicRickroll);
+            instance.songs.add(musicSax);
+            instance.songs.add(musicTrololo);
+            instance.songs.add(marioLevels);
         }
 
         return instance;
