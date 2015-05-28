@@ -18,8 +18,6 @@ public class ItemNPCTest {
 
     ItemNPC itemNPC;
     Inventory inv;
-    ItemNPC itemNPCTwo;
-    IGameModel model;
     Inventory playerInv;
 
 
@@ -30,11 +28,6 @@ public class ItemNPCTest {
         inv.addItem(new ItemScore("PrippsBlå", 3));
         NPCFactory.setInventory(inv, playerInv);
         itemNPC = (ItemNPC)NPCFactory.build(new Position2D(4,4));
-
-        NPCFactory.setInventory(inv, playerInv);
-        itemNPCTwo = (ItemNPC)NPCFactory.build(new Position2D(4,4));
-
-        model = new GameModel();
     }
 
 
