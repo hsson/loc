@@ -34,7 +34,7 @@ public class Playlist implements Music.OnCompletionListener {
         // Singleton
     }
 
-    public static Playlist getInstance() {
+    public synchronized static Playlist getInstance() {
         if (instance == null) {
             instance = new Playlist();
             instance.songs.add(musicNyan);

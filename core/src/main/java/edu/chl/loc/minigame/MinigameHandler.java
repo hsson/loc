@@ -19,7 +19,7 @@ public class MinigameHandler implements IMinigameListener{
         listeners = new HashSet<IMinigameHandlerListener>();
     }
 
-    public static MinigameHandler getInstance() {
+    public synchronized static MinigameHandler getInstance() {
         if (instance == null) {
             instance = new MinigameHandler();
         }
