@@ -25,8 +25,6 @@ public class LocMain extends Game implements IMinigameHandlerListener {
     private GameController controller;
     private GameView view;
 
-    public static final boolean START_FULLSCREEN = true;
-
 	@Override
 	public void create () {
         model = new GameModel();
@@ -37,10 +35,6 @@ public class LocMain extends Game implements IMinigameHandlerListener {
         MinigameHandler handler = MinigameHandler.getInstance();
         handler.registerListener(this);
         Gdx.input.setInputProcessor(controller);
-        Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width,
-                Gdx.graphics.getDesktopDisplayMode().height, START_FULLSCREEN);
-
-
 
         setScreen(view);
     }
