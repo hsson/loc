@@ -26,7 +26,7 @@ import java.util.Objects;
 public class GameModel implements IGameWonListener, IGameModel{
 
     // Player default values
-    public static final Position2D STARTING_POS = new Position2D(0, 0);
+    public static final Position2D STARTING_POS = new Position2D(44, 39);
     public static final String PLAYER_DEFAULT_NAME = "Emil";
     public static final Gender PLAYER_DEFAULT_GENDER = Gender.MALE;
     public static final long STARTTIME = new Date().getTime();
