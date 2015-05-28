@@ -8,9 +8,9 @@ import edu.chl.loc.models.map.GameMap;
 import edu.chl.loc.models.map.ILayer;
 import edu.chl.loc.models.map.ItemTile;
 import edu.chl.loc.models.map.Layer;
+import edu.chl.loc.view.IView;
 import edu.chl.loc.view.characters.CharacterView;
 import edu.chl.loc.view.characters.NPCTextureFactory;
-import edu.chl.loc.view.IView;
 import edu.chl.loc.view.items.ItemTextureFactory;
 import edu.chl.loc.view.items.ItemView;
 

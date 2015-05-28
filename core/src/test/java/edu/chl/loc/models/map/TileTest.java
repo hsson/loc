@@ -1,6 +1,5 @@
 package edu.chl.loc.models.map;
 
-import edu.chl.loc.models.items.ItemScore;
 import edu.chl.loc.models.utilities.Position2D;
 import org.junit.Assert;
 import org.junit.Test;

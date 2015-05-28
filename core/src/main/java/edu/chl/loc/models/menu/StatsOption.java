@@ -1,6 +1,5 @@
 package edu.chl.loc.models.menu;
 
-import edu.chl.loc.models.core.GameModel;
 import edu.chl.loc.models.core.IGameModel;
 
 /**

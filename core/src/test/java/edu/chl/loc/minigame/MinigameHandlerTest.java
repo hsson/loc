@@ -3,8 +3,6 @@ package edu.chl.loc.minigame;
 import org.junit.Assert;
 import org.junit.Test;
 
-import javax.swing.*;
-
 /**
  * @author Alexander Håkansson
  * @version 1.0.0

@@ -2,7 +2,10 @@ package edu.chl.loc.models.core;
 
 import edu.chl.loc.minigame.IMinigame;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Kevin Hoogendijk
