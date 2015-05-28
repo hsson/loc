@@ -189,9 +189,9 @@ public class CortegeModel{
         }
         return 'U';
     }
-    public double getTimeLeft(){
+    public int getTimeLeft(){
         if(isPlaying()){ //update time if you are playing
-            return (MAX_TIME_PER_ROUND - currentTime)/1000;
+            return (int)(MAX_TIME_PER_ROUND - currentTime)/1000;
         }
         return 0; //if you arent playing the timer is at 0
 
