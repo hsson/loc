@@ -11,6 +11,7 @@ import edu.chl.loc.models.core.IGameModel;
 import edu.chl.loc.models.core.StatsWindow;
 import edu.chl.loc.models.map.GameMap;
 import edu.chl.loc.models.menu.GameMenu;
+import edu.chl.loc.view.music.Playlist;
 
 /**
  * @author Alexander Håkansson
@@ -39,6 +40,11 @@ public class GameController implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {// assuming smooth movement will be here?
+
+        if (keycode == Input.Keys.E) {
+            Playlist.getInstance().next();
+        }
+
         if(model.getGameMenu().isMenuOpen()) {
             return handleMenu(keycode);
         } else if (model.isDialogActive()) {
