@@ -60,13 +60,6 @@ public class GameView implements Screen{
 
     private final BitmapFont font = new BitmapFont();
 
-    // Music tracks
-    private static final Music musicNyan = Gdx.audio.newMusic(Gdx.files.internal("music/nyan.mp3"));
-    private static final Music musicRickroll = Gdx.audio.newMusic(Gdx.files.internal("music/rickroll.mp3"));
-    private static final Music musicSax = Gdx.audio.newMusic(Gdx.files.internal("music/sax.mp3"));
-    private static final Music musicTrololo = Gdx.audio.newMusic(Gdx.files.internal("music/trololo.mp3"));
-    private static final Music marioLevels = Gdx.audio.newMusic(Gdx.files.internal("music/marioLevels.mp3"));
-
     private Playlist gameMusic;
 
     // ground, groundDetail and building layer
@@ -91,7 +84,7 @@ public class GameView implements Screen{
         camera = new OrthographicCamera();
         viewport = new FitViewport(RES_X, RES_Y, camera);
 
-        this.gameMusic = new Playlist(true, true, musicNyan, musicRickroll, musicSax, musicTrololo, marioLevels);
+        this.gameMusic = Playlist.getInstance();
     }
 
     /**
