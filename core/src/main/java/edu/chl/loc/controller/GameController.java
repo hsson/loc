@@ -50,7 +50,7 @@ public class GameController implements InputProcessor {
             Playlist.getInstance().next();
         }
 
-        if (keycode == Input.Keys.F11) {
+        if (keycode == Input.Keys.F) {
             boolean fullscreen = Gdx.graphics.isFullscreen();
             Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width,
                     Gdx.graphics.getDesktopDisplayMode().height, !fullscreen);
