@@ -20,8 +20,8 @@ import java.util.List;
  * @version 1.0
  */
 public class Caps implements IMinigame, PropertyChangeListener{
-    CapsGameModel model;
-    List<IMinigameListener> listenerList;
+    private CapsGameModel model;
+    private List<IMinigameListener> listenerList;
 
     public Caps(){
         this.model = new CapsGameModel();

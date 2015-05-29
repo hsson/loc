@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class BeerChug implements IMinigame, PropertyChangeListener {
     private BottleBeerChug model;
-    List<IMinigameListener> listenerList;
+    private List<IMinigameListener> listenerList;
 
     public BeerChug(){
         model = new BottleBeerChug();
